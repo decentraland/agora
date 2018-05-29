@@ -1,0 +1,16 @@
+{
+  "languages": {
+    "en": "Inglés",
+    "es": "Español"
+  },
+  "global": {
+    "domain": "Dominio",
+    "domains": "Dominios"
+  },
+  "domains_page": {
+    "title": "Página de dominios"
+  },
+  "domain_detail_page": {
+    "title": "Página de detalles del dominio"
+  }
+}
