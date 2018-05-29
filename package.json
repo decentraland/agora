@@ -1,7 +1,7 @@
 {
-  "name": "decentraland-dapp-boilerplate",
+  "name": "agora",
   "version": "0.1.0",
-  "description": "Decentraland's Dapps Boilerplate",
+  "description": "A place for the Decentraland community to vote on important topics",
   "main": "src/server.js",
   "scripts": {
     "lint": "tslint -p src/tsconfig.json --fix",
@@ -63,4 +63,3 @@
     "typescript": "^2.8.3"
   }
 }
-
