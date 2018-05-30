@@ -1,8 +1,7 @@
 import * as bodyParser from 'body-parser'
-import { env } from 'decentraland-commons'
-import { contracts, eth } from 'decentraland-eth'
 import * as express from 'express'
-import { DomainRouter } from './Domain'
+import { env } from 'decentraland-commons'
+import { PollRouter } from './Poll'
 import { TranslationRouter } from './Translation'
 import { db } from './database'
 
@@ -29,7 +28,7 @@ if (env.isDevelopment()) {
   })
 }
 
-new DomainRouter(app).mount()
+new PollRouter(app).mount()
 new TranslationRouter(app).mount()
 
 /* Start the server only if run directly */
@@ -40,22 +39,6 @@ if (require.main === module) {
 async function startServer() {
   console.log('Connecting database')
   await db.connect()
-
-  console.log('Connecting to Ethereum node')
-  await eth
-    .connect({
-      contracts: [
-        new contracts.LANDRegistry(env.get('LAND_REGISTRY_CONTRACT_ADDRESS')) // Example use
-      ],
-      provider: env.get('RPC_URL') // defaults to localhost
-    })
-    .catch(error =>
-      console.error(
-        '\nCould not connect to the Ethereum node. Some endpoints may not work correctly.',
-        '\nMake sure you have a node running on port 8545.',
-        `\nError: "${error.message}"\n`
-      )
-    )
 
   return app.listen(SERVER_PORT, () =>
     console.log('Server running on port', SERVER_PORT)
