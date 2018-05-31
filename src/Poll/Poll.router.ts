@@ -1,14 +1,20 @@
-/* import { server } from 'decentraland-server' // used to handle requests */
-/* import * as express from 'express' // used to type req variables */
+import { server } from 'decentraland-server'
+import { utils } from 'decentraland-commons'
 
-/* import {
-  Poll,
-  PollAttributes // used to type return values
-} from './Poll.model' */
-import { Router } from '../lib'
+import { Router, blacklist } from '../lib'
+import { Poll } from './Poll.model'
+import { PollAttributes } from './Poll.types'
 
 export class PollRouter extends Router {
   mount() {
-    return undefined
+    /**
+     * Returns all polls
+     */
+    this.app.get('/api/polls', server.handleRequest(this.getPolls))
+  }
+
+  async getPolls(): Promise<PollAttributes[]> {
+    const polls = await Poll.find()
+    return utils.mapOmit(polls, blacklist.poll)
   }
 }

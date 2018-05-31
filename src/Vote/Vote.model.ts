@@ -1,8 +1,6 @@
 import { Model } from 'decentraland-server'
+import { VoteAttributes } from './Vote.types'
 
-export interface VoteAttributes {}
-
-export class Vote extends Model {
+export class Vote extends Model<VoteAttributes> {
   static tableName = 'votes'
-  static columnNames = ['id', 'created_at', 'updated_at']
 }

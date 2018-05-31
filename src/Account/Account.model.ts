@@ -1,8 +1,6 @@
 import { Model } from 'decentraland-server'
+import { AccountAttributes } from './Account.types'
 
-export interface AccountAttributes {}
-
-export class Account extends Model {
+export class Account extends Model<AccountAttributes> {
   static tableName = 'accounts'
-  static columnNames = ['id', 'created_at', 'updated_at']
 }

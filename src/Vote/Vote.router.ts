@@ -1,11 +1,9 @@
 /* import { server } from 'decentraland-server' // used to handle requests */
 /* import * as express from 'express' // used to type req variables */
 
-/* import {
-  Vote,
-  VoteAttributes // used to type return values
-} from './Vote.model' */
-import { Router } from '../lib'
+import { Router /* ,blacklist */ } from '../lib'
+/* import { Vote } from './Vote.model' */
+/* import { VoteAttributes } from './Vote.types' // used to type return values */
 
 export class VoteRouter extends Router {
   mount() {

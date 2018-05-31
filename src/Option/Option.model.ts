@@ -1,8 +1,6 @@
 import { Model } from 'decentraland-server'
+import { OptionAttributes } from './Option.types'
 
-export interface OptionAttributes {}
-
-export class Option extends Model {
+export class Option extends Model<OptionAttributes> {
   static tableName = 'options'
-  static columnNames = ['id', 'created_at', 'updated_at']
 }
