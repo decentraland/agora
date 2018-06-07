@@ -10,11 +10,7 @@ export default class HomePage extends React.PureComponent {
         <h1>Home Page</h1>
 
         <div>
-          <Link to={locations.domains()}>{t('global.domains')}</Link>
-        </div>
-
-        <div>
-          <Link to={locations.domainDetail(1)}>{t('global.domain')} 1</Link>
+          <Link to={locations.pollDetail(1)}>{t('global.poll')} 1</Link>
         </div>
       </div>
     )

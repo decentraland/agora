@@ -1,16 +1,13 @@
 {
   "languages": {
-    "en": "Inglés",
-    "es": "Español"
+    "en": "English",
+    "es": "Spanish"
   },
   "global": {
-    "domains": "Dominios",
-    "domain": "Dominio"
+    "polls": "Encuestas",
+    "poll": "Encuesta"
   },
-  "domains_page": {
-    "title": "Página de dominios"
-  },
-  "domain_detail_page": {
-    "title": "Página de detalles del dominio"
+  "poll_detail_page": {
+    "title": "Detalle de Encuesta"
   }
 }

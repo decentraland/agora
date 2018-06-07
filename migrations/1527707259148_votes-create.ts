@@ -5,7 +5,7 @@ import { Option } from '../src/Option'
 
 const tableName = Vote.tableName
 
-exports.up = (pgm: MigrationBuilder) => {
+export const up = (pgm: MigrationBuilder) => {
   pgm.createTable(
     tableName,
     {
@@ -30,8 +30,12 @@ exports.up = (pgm: MigrationBuilder) => {
     },
     { ifNotExists: true, comment: null }
   )
+
+  pgm.createIndex(tableName, ['address', 'poll_id', 'option_id'], {
+    unique: true
+  })
 }
 
-exports.down = (pgm: MigrationBuilder) => {
+export const down = (pgm: MigrationBuilder) => {
   pgm.dropTable(tableName, {})
 }

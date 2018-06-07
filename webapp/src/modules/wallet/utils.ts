@@ -19,14 +19,14 @@ export async function connectEthereumWallet(
     })
     eth.wallet.getAccount() // throws on empty accounts
   } catch (error) {
-    if (retries >= 6) {
+    if (retries >= 3) {
       console.warn(
         `Error trying to connect to Ethereum for the ${retries}th time`,
         error
       )
       throw error
     }
-    await utils.sleep(150)
+    await utils.sleep(100)
     return connectEthereumWallet(options, retries + 1)
   }
 }
@@ -44,9 +44,10 @@ function getWallets(
   const { LedgerWallet, NodeWallet } = wallets
   const { address, derivationPath = '' } = options
 
-  return isMobile() || retries < 3
+  return isMobile() || retries < 2
     ? [new NodeWallet(address)]
-    : [new LedgerWallet(address, derivationPath)]
+    : [new NodeWallet(address)]
+  // : [new LedgerWallet(address, derivationPath)]
 }
 
 export function isLedgerWallet() {

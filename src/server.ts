@@ -2,6 +2,7 @@ import * as bodyParser from 'body-parser'
 import * as express from 'express'
 import { env } from 'decentraland-commons'
 import { PollRouter } from './Poll'
+import { VoteRouter } from './Vote'
 import { TranslationRouter } from './Translation'
 import { db } from './database'
 
@@ -29,6 +30,7 @@ if (env.isDevelopment()) {
 }
 
 new PollRouter(app).mount()
+new VoteRouter(app).mount()
 new TranslationRouter(app).mount()
 
 /* Start the server only if run directly */

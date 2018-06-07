@@ -1,18 +1,27 @@
 import { MigrationBuilder } from 'node-pg-migrate'
 import { Account } from '../src/Account'
+import { Token } from '../src/Token'
 
 const tableName = Account.tableName
 
-exports.up = (pgm: MigrationBuilder) => {
+export const up = (pgm: MigrationBuilder) => {
   pgm.createTable(
     tableName,
     {
-      address: { type: 'TEXT', primaryKey: true, notNull: true, comment: null }
+      address: { type: 'TEXT', primaryKey: true, notNull: true, comment: null },
+      token_id: {
+        type: 'INT',
+        primaryKey: true,
+        notNull: true,
+        references: Token.tableName,
+        comment: null
+      },
+      balance: { type: 'TEXT', notNull: true, default: '0', comment: null }
     },
     { ifNotExists: true, comment: null }
   )
 }
 
-exports.down = (pgm: MigrationBuilder) => {
+export const down = (pgm: MigrationBuilder) => {
   pgm.dropTable(tableName, {})
 }

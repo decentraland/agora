@@ -14,12 +14,8 @@ interface Response {
 }
 
 export class API {
-  fetchDomains() {
-    return this.request('get', '/domains', {})
-  }
-
-  fetchDomain(id: string) {
-    return this.request('get', `/domains/${id}`, {})
+  fetchPoll(id: string) {
+    return this.request('get', `/polls/${id}`, {})
   }
 
   fetchTranslations(locale: string) {

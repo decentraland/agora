@@ -1,5 +1,5 @@
 export interface VoteAttributes {
-  id: number
+  id?: number
   address: string
   poll_id: number
   option_id: number

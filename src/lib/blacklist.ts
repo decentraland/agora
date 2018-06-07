@@ -1,5 +1,6 @@
 const timestamps = ['created_at', 'updated_at']
 
 export const blacklist = Object.freeze({
-  poll: [...timestamps]
+  poll: [...timestamps],
+  token: []
 })
