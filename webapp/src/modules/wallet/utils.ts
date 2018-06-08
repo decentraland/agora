@@ -32,9 +32,7 @@ export async function connectEthereumWallet(
 }
 
 function getContracts(): Contract[] {
-  const { LANDRegistry } = contracts
-
-  return [new LANDRegistry(env.get('REACT_APP_LAND_REGISTRY_CONTRACT_ADDRESS'))]
+  return []
 }
 
 function getWallets(

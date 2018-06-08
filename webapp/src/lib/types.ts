@@ -1,5 +1,7 @@
+import { db } from 'decentraland-server'
+
 export interface Model {
-  id: number | string
+  id: db.PrimaryKey
 }
 
 export interface ModelById<T extends Model> {

@@ -34,7 +34,7 @@ export const pollReducer: Reducer<PollState> = (
           ...state.data,
           [poll.id]: {
             ...poll,
-            token_id: token.id,
+            token_address: token.address,
             vote_ids: votes.map(vote => vote.id),
             option_ids: options.map(option => option.id)
           }

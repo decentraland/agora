@@ -4,10 +4,10 @@ import { OptionAttributes } from '../Option'
 
 export interface PollAttributes {
   id?: number
-  name: string
-  body?: string
+  title: string
+  description?: string
   balance: string // bigint
-  token_id: number
+  token_address: string
   submitter: string
   closes_at: number
   token?: TokenAttributes

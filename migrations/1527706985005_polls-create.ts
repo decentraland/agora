@@ -9,10 +9,10 @@ export const up = (pgm: MigrationBuilder) => {
     tableName,
     {
       id: { type: 'INT', primaryKey: true, notNull: true, comment: null },
-      name: { type: 'TEXT', notNull: true, comment: null },
-      body: 'TEXT',
-      token_id: {
-        type: 'INT',
+      title: { type: 'TEXT', notNull: true, comment: null },
+      description: 'TEXT',
+      token_address: {
+        type: 'TEXT',
         references: Token.tableName,
         notNull: true,
         comment: null

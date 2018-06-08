@@ -3,4 +3,5 @@ import { AccountAttributes } from './Account.types'
 
 export class Account extends Model<AccountAttributes> {
   static tableName = 'accounts'
+  static withTimestamps = false
 }

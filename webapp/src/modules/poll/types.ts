@@ -16,16 +16,15 @@ export type FetchDomainRequest = ReturnType<typeof actions.fetchPollRequest>
 
 export interface Poll {
   id: string
-  name: string
-  body?: string
+  title: string
+  description?: string
   balance: number
-  token_id: number
   submitter: string
   closes_at: number
 }
 
 export interface PollWithPointers extends Poll {
-  token_id: number
+  token_address: string
   vote_ids: string[]
   option_ids: string[]
 }

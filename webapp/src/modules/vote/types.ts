@@ -8,7 +8,7 @@ export interface Vote {
   address: string
   poll_id: number
   option_id: number
-  signed_message: string
+  message: string
   signature: string
 }
 

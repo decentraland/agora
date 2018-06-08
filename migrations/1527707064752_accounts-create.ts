@@ -8,10 +8,10 @@ export const up = (pgm: MigrationBuilder) => {
   pgm.createTable(
     tableName,
     {
-      address: { type: 'TEXT', primaryKey: true, notNull: true, comment: null },
-      token_id: {
-        type: 'INT',
-        primaryKey: true,
+      id: { type: 'INT', primaryKey: true, notNull: true, comment: null },
+      address: { type: 'TEXT', notNull: true, comment: null },
+      token_address: {
+        type: 'TEXT',
         notNull: true,
         references: Token.tableName,
         comment: null
@@ -20,6 +20,8 @@ export const up = (pgm: MigrationBuilder) => {
     },
     { ifNotExists: true, comment: null }
   )
+
+  pgm.createIndex(tableName, ['address', 'token_address'], { unique: true })
 }
 
 export const down = (pgm: MigrationBuilder) => {

@@ -1,4 +1,5 @@
 import * as React from 'react'
+import { utils } from 'decentraland-commons'
 import { PollDetailPageProps } from 'components/PollDetailPage/types'
 import { t } from 'modules/translation/utils'
 import { Option } from 'modules/option/types'
@@ -56,7 +57,14 @@ export default class PollDetailPage extends React.PureComponent<
           'Loading'
         ) : (
           <React.Fragment>
-            {t('global.poll')}: {poll.id}
+            <h4>Poll</h4>
+            <pre>
+              {JSON.stringify(
+                utils.omit(poll, ['token', 'options', 'votes']),
+                null,
+                2
+              )}
+            </pre>
             <h4>Token</h4>
             <pre>{JSON.stringify(poll.token, null, 2)}</pre>
             <h4>Options</h4>

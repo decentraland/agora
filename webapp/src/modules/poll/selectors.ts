@@ -34,9 +34,9 @@ export const getPolls = createSelector<
       const poll = polls[pollId]
 
       const fullPoll: PollWithAssociations = {
-        ...utils.omit<Poll>(poll, ['option_ids', 'token_id', 'vote_ids']),
+        ...utils.omit<Poll>(poll, ['option_ids', 'token_address', 'vote_ids']),
         options: poll.option_ids.map(optionIds => options[optionIds]),
-        token: tokens[poll.token_id],
+        token: tokens[poll.token_address],
         votes: poll.vote_ids.map(voteId => votes[voteId])
       }
 

@@ -5,7 +5,7 @@ import { ModelById } from 'lib/types'
 
 export interface Option {
   id: string
-  name: string
+  value: string
   poll_id: number
 }
 

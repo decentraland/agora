@@ -35,22 +35,22 @@ export class VoteRouter extends Router {
     const address = signedMessage.getAddress()
 
     const vote = new Vote({
-      address: address,
+      address,
       poll_id: Number(pollId),
       option_id: Number(optionId),
-      signed_message: message,
-      signature: signature,
-      created_at: new Date(timestamp)
+      message,
+      signature
     })
-    await vote.insert()
 
     const account = new Account({
       address,
-      balance,
-      token_id: poll.token_id
+      token_address: poll.token_address,
+      balance
     })
-    await account.insert()
 
-    return vote.attributes.id
+    account.upsert({ target: ['address', 'token_address'] })
+    vote.upsert({ target: ['address', 'poll_id'] })
+
+    return vote.get('id')
   }
 }

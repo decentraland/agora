@@ -7,14 +7,17 @@ export const up = (pgm: MigrationBuilder) => {
   pgm.createTable(
     tableName,
     {
-      id: { type: 'INT', primaryKey: true, notNull: true, comment: null },
+      address: { type: 'TEXT', primaryKey: true, notNull: true, comment: null },
       name: { type: 'TEXT', notNull: true, comment: null },
-      address: { type: 'TEXT', notNull: true, comment: null }
+      symbol: { type: 'TEXT', notNull: true, comment: null }
     },
     { ifNotExists: true, comment: null }
   )
+
+  pgm.createIndex(tableName, 'symbol', { unique: true })
 }
 
 export const down = (pgm: MigrationBuilder) => {
   pgm.dropTable(tableName, {})
+  pgm.dropIndex(tableName, 'symbol')
 }
