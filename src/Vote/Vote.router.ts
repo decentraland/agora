@@ -39,7 +39,9 @@ export class VoteRouter extends Router {
       poll_id: Number(pollId),
       option_id: Number(optionId),
       message,
-      signature
+      signature,
+      created_at: new Date(timestamp),
+      updated_at: new Date(timestamp)
     })
 
     const account = new Account({

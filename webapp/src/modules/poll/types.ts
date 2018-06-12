@@ -6,13 +6,18 @@ import { Token } from 'modules/token/types'
 import { Vote } from 'modules/vote/types'
 import { ModelById, Overwrite } from 'lib/types'
 
+export const FETCH_POLLS_REQUEST = '[Request] Fetch Polls'
+export const FETCH_POLLS_SUCCESS = '[Success] Fetch Polls'
+export const FETCH_POLLS_FAILURE = '[Failure] Fetch Polls'
+
 export const FETCH_POLL_REQUEST = '[Request] Fetch Poll'
 export const FETCH_POLL_SUCCESS = '[Success] Fetch Poll'
 export const FETCH_POLL_FAILURE = '[Failure] Fetch Poll'
 
 // Interface and type definitions
 
-export type FetchDomainRequest = ReturnType<typeof actions.fetchPollRequest>
+export type FetchPollsRequest = ReturnType<typeof actions.fetchPollsRequest>
+export type FetchPollRequest = ReturnType<typeof actions.fetchPollRequest>
 
 export interface Poll {
   id: string

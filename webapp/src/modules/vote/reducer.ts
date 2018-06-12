@@ -1,7 +1,11 @@
 import { Reducer } from 'redux'
 import { VoteState, Vote } from 'modules/vote/types'
 import { loadingReducer } from 'modules/loading/reducer'
-import { FETCH_POLL_SUCCESS, PollActions } from 'modules/poll/types'
+import {
+  FETCH_POLL_REQUEST,
+  FETCH_POLL_SUCCESS,
+  PollActions
+} from 'modules/poll/types'
 import { toObjectById } from 'lib/utils'
 
 const INITIAL_STATE: VoteState = {
@@ -15,6 +19,12 @@ export const voteReducer: Reducer<VoteState> = (
   action: PollActions
 ): VoteState => {
   switch (action.type) {
+    case FETCH_POLL_REQUEST: {
+      return {
+        ...state,
+        loading: loadingReducer(state.loading, action)
+      }
+    }
     case FETCH_POLL_SUCCESS: {
       const { votes } = action.payload
 

@@ -14,6 +14,10 @@ interface Response {
 }
 
 export class API {
+  fetchPolls() {
+    return this.request('get', '/polls', {})
+  }
+
   fetchPoll(id: string) {
     return this.request('get', `/polls/${id}`, {})
   }

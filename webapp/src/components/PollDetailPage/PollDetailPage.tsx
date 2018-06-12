@@ -1,5 +1,7 @@
 import * as React from 'react'
+import { Link } from 'react-router-dom'
 import { utils } from 'decentraland-commons'
+import { locations } from 'locations'
 import { PollDetailPageProps } from 'components/PollDetailPage/types'
 import { t } from 'modules/translation/utils'
 import { Option } from 'modules/option/types'
@@ -52,6 +54,9 @@ export default class PollDetailPage extends React.PureComponent<
     return (
       <div className="PollDetailPage">
         <h1>{t('poll_detail_page.title')}</h1>
+        <p>
+          <Link to={locations.polls()}>List</Link>
+        </p>
 
         {isLoading || !poll ? (
           'Loading'

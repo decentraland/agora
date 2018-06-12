@@ -1,10 +1,7 @@
-export interface Locations {
-  [key: string]: (...args: any[]) => string
-}
-
-export const locations: Locations = {
+export const locations = {
   root: () => '/',
+  polls: () => '/',
 
   poll: () => '/polls/:id',
-  pollDetail: id => `/polls/${id}`
+  pollDetail: (id: string | number) => `/polls/${id}`
 }

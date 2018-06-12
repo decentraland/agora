@@ -11,12 +11,15 @@ export function isMobile() {
   )
 }
 
-export function toObjectById<T extends Model>(values: T[]): ModelById<T> {
+export function toObjectById<T extends Model>(
+  values: T[],
+  currentValues: ModelById<T> = {}
+): ModelById<T> {
   return values.reduce(
     (valueHash, value) => ({
       ...valueHash,
       [value.id]: value
     }),
-    {}
+    currentValues
   )
 }

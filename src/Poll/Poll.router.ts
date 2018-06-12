@@ -21,7 +21,7 @@ export class PollRouter extends Router {
   }
 
   async getPolls(): Promise<PollAttributes[]> {
-    const polls = await Poll.find<PollAttributes>()
+    const polls = await Poll.findWithPointers()
     return utils.mapOmit(polls, blacklist.poll)
   }
 

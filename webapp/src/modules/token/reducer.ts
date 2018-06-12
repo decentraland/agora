@@ -1,7 +1,11 @@
 import { Reducer } from 'redux'
 import { TokenState } from 'modules/token/types'
 import { loadingReducer } from 'modules/loading/reducer'
-import { FETCH_POLL_SUCCESS, PollActions } from 'modules/poll/types'
+import {
+  FETCH_POLL_REQUEST,
+  FETCH_POLL_SUCCESS,
+  PollActions
+} from 'modules/poll/types'
 
 const INITIAL_STATE: TokenState = {
   data: {},
@@ -14,6 +18,12 @@ export const tokenReducer: Reducer<TokenState> = (
   action: PollActions
 ): TokenState => {
   switch (action.type) {
+    case FETCH_POLL_REQUEST: {
+      return {
+        ...state,
+        loading: loadingReducer(state.loading, action)
+      }
+    }
     case FETCH_POLL_SUCCESS: {
       const { token } = action.payload
 
@@ -22,7 +32,7 @@ export const tokenReducer: Reducer<TokenState> = (
         error: null,
         data: {
           ...state.data,
-          [token.id]: { ...token }
+          [token.address]: { ...token }
         }
       }
     }

@@ -58,6 +58,7 @@
     "mocha": "^4.0.1",
     "pluralize": "^7.0.0",
     "prettier": "^1.10.2",
+    "relo": "^1.0.0",
     "ts-node": "^6.0.3",
     "tslint": "^5.10.0",
     "tslint-language-service": "^0.9.9",

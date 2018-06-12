@@ -1,19 +1,37 @@
 import { call, put, takeLatest } from 'redux-saga/effects'
-import { fetchPollFailure, fetchPollSuccess } from 'modules/poll/actions'
 import {
+  fetchPollsSuccess,
+  fetchPollsFailure,
+  fetchPollSuccess,
+  fetchPollFailure
+} from 'modules/poll/actions'
+import {
+  FETCH_POLLS_REQUEST,
   FETCH_POLL_REQUEST,
-  FetchDomainRequest,
-  PollWithAssociations,
+  FetchPollRequest,
   Poll,
-  PollResponse
+  PollResponse,
+  FetchPollsRequest,
+  PollWithPointers
 } from 'modules/poll/types'
 import { api } from 'lib/api'
 
 export function* pollSaga() {
+  yield takeLatest(FETCH_POLLS_REQUEST, handlePollsRequest)
   yield takeLatest(FETCH_POLL_REQUEST, handlePollRequest)
 }
 
-function* handlePollRequest(action: FetchDomainRequest) {
+function* handlePollsRequest(action: FetchPollsRequest) {
+  try {
+    const polls: PollWithPointers[] = yield call(() => api.fetchPolls())
+
+    yield put(fetchPollsSuccess(polls))
+  } catch (error) {
+    yield put(fetchPollsFailure(error.message))
+  }
+}
+
+function* handlePollRequest(action: FetchPollRequest) {
   const id = action.payload.id
   try {
     const pollResponse: PollResponse = yield call(() => api.fetchPoll(id))

@@ -7,6 +7,9 @@
     "polls": "Polls",
     "poll": "Poll"
   },
+  "polls_page": {
+    "title": "Polls List"
+  },
   "poll_detail_page": {
     "title": "Poll Detail Page"
   }

@@ -1,4 +1,4 @@
 export interface WalletProps {
-  children: JSX.Element | null
+  children: React.ReactNode | null
   onConnect: Function
 }
