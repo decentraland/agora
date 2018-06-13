@@ -10,15 +10,18 @@ export const CONNECT_WALLET_FAILURE = '[Failure] Connect Wallet'
 
 // Interface and type definitions
 
+export type WalletActions = ActionType<typeof actions>
+
 export interface Wallet {
   type: string
   network: string
   address: string
   locale?: string
   derivationPath?: string
+  balances: {
+    [symbol: string]: number
+  }
 }
-
-export type WalletActions = ActionType<typeof actions>
 
 export type WalletState = {
   data: Partial<Wallet>

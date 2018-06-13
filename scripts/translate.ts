@@ -13,6 +13,8 @@ import {
   TranslationCache
 } from '../src/Translation'
 
+// TODO: Import latest changes (this script + spec). Remember sort in spec
+
 interface RemoteTranslation {
   locale: string
   key: string

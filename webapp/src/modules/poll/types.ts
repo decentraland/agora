@@ -19,6 +19,8 @@ export const FETCH_POLL_FAILURE = '[Failure] Fetch Poll'
 export type FetchPollsRequest = ReturnType<typeof actions.fetchPollsRequest>
 export type FetchPollRequest = ReturnType<typeof actions.fetchPollRequest>
 
+export type PollActions = ActionType<typeof actions>
+
 export interface Poll {
   id: string
   title: string
@@ -45,8 +47,6 @@ export interface PollResponse
       PollWithAssociations,
       { balance: string; closes_at: string }
     > {}
-
-export type PollActions = ActionType<typeof actions>
 
 export type PollState = {
   data: ModelById<PollWithPointers>

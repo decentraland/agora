@@ -3,5 +3,8 @@ export const locations = {
   polls: () => '/',
 
   poll: () => '/polls/:id',
-  pollDetail: (id: string | number) => `/polls/${id}`
+  pollDetail: (id: string) => `/polls/${id}`,
+
+  vote: () => '/polls/:id/vote',
+  voteDetail: (id: string) => `/polls/${id}/vote`
 }

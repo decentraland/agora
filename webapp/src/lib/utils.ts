@@ -1,4 +1,6 @@
 import { Model, ModelById } from 'lib/types'
+import * as dateFnsDistanceInWordsToNow from 'date-fns/distance_in_words_to_now'
+import { getCurrentLocale } from 'modules/translation/utils'
 
 export function isMobile() {
   // WARN: Super naive mobile device check.
@@ -22,4 +24,11 @@ export function toObjectById<T extends Model>(
     }),
     currentValues
   )
+}
+
+export function distanceInWordsToNow(date: number) {
+  return dateFnsDistanceInWordsToNow(date, {
+    addSuffix: true,
+    locale: getCurrentLocale()
+  })
 }

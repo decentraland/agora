@@ -1,6 +1,7 @@
 import * as bodyParser from 'body-parser'
 import * as express from 'express'
 import { env } from 'decentraland-commons'
+import { OptionRouter } from './Option'
 import { PollRouter } from './Poll'
 import { VoteRouter } from './Vote'
 import { TranslationRouter } from './Translation'
@@ -30,6 +31,7 @@ if (env.isDevelopment()) {
 }
 
 new PollRouter(app).mount()
+new OptionRouter(app).mount()
 new VoteRouter(app).mount()
 new TranslationRouter(app).mount()
 

@@ -15,9 +15,7 @@ import { Vote } from 'modules/vote/types'
 
 export const fetchPollsRequest = () => action(FETCH_POLLS_REQUEST, {})
 export const fetchPollsSuccess = (polls: PollWithPointers[]) =>
-  action(FETCH_POLLS_SUCCESS, {
-    polls
-  })
+  action(FETCH_POLLS_SUCCESS, { polls })
 export const fetchPollsFailure = (error: string) =>
   action(FETCH_POLLS_FAILURE, { error })
 
@@ -28,12 +26,6 @@ export const fetchPollSuccess = (
   token: Token,
   votes: Vote[],
   options: Option[]
-) =>
-  action(FETCH_POLL_SUCCESS, {
-    poll,
-    token,
-    votes,
-    options
-  })
+) => action(FETCH_POLL_SUCCESS, { poll, token, votes, options })
 export const fetchPollFailure = (error: string) =>
   action(FETCH_POLL_FAILURE, { error })

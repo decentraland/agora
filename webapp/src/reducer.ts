@@ -10,6 +10,7 @@ import { translationReducer as translation } from 'modules/translation/reducer'
 import { voteReducer as vote } from 'modules/vote/reducer'
 import { walletReducer as wallet } from 'modules/wallet/reducer'
 
+// TODO: Consider spliting individual reducers into { data, loading, error }
 export const rootReducer = combineReducers<RootState>({
   option,
   poll,

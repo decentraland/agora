@@ -8,9 +8,9 @@ export const up = (pgm: MigrationBuilder) => {
   pgm.createTable(
     tableName,
     {
-      id: { type: 'INT', primaryKey: true, notNull: true, comment: null },
+      id: { type: 'TEXT', primaryKey: true, notNull: true, comment: null },
       value: { type: 'TEXT', notNull: true, comment: null },
-      poll_id: { type: 'INT', references: Poll.tableName, comment: null },
+      poll_id: { type: 'TEXT', references: Poll.tableName, comment: null },
       created_at: { type: 'TIMESTAMP', notNull: true, comment: null },
       updated_at: { type: 'TIMESTAMP', comment: null }
     },

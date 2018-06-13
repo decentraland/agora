@@ -5,17 +5,31 @@ import * as express from 'express'
 import { Router } from '../lib'
 import { Vote } from './Vote.model'
 import { Account } from '../Account'
-import { Poll, PollAttributes } from '../Poll'
+import { Poll } from '../Poll'
 
 export class VoteRouter extends Router {
   mount() {
+    /**
+     * Returns the votes for a poll
+     */
+    this.app.get(
+      '/api/polls/:id/votes',
+      server.handleRequest(this.getPollVotes)
+    )
+
     /**
      * Creates a new vote, returns the new id
      */
     this.app.post('/api/votes', server.handleRequest(this.createVote))
   }
 
-  async createVote(req: express.Request): Promise<number> {
+  async getPollVotes(req: express.Request) {
+    const pollId = server.extractFromReq(req, 'id')
+    return Vote.findByPollId(pollId)
+  }
+
+  async createVote(req: express.Request): Promise<string> {
+    const id = server.extractFromReq(req, 'id')
     const message = server.extractFromReq(req, 'message')
     const signature = server.extractFromReq(req, 'signature')
 
@@ -27,31 +41,37 @@ export class VoteRouter extends Router {
       'Timestamp'
     ])
 
-    const poll = await Poll.findOne<PollAttributes>(pollId)
-    if (!poll) {
-      throw new Error(`Poll not found for id ${pollId}`)
-    }
+    const poll = new Poll()
+    await poll.retreive({ id: pollId })
+
+    if (poll.isEmpty()) throw new Error(`Poll not found for id ${pollId}`)
+    if (poll.isExpired()) throw new Error('Poll already expired')
 
     const address = signedMessage.getAddress()
 
     const vote = new Vote({
+      id,
       address,
-      poll_id: Number(pollId),
-      option_id: Number(optionId),
+      poll_id: pollId,
+      option_id: optionId,
       message,
       signature,
-      created_at: new Date(timestamp),
-      updated_at: new Date(timestamp)
+      created_at: new Date(Number(timestamp)),
+      updated_at: new Date(Number(timestamp))
     })
 
     const account = new Account({
       address,
-      token_address: poll.token_address,
+      token_address: poll.get('token_address'),
       balance
     })
 
-    account.upsert({ target: ['address', 'token_address'] })
-    vote.upsert({ target: ['address', 'poll_id'] })
+    try {
+      await account.upsert({ target: ['address', 'token_address'] })
+      await vote.upsert({ target: ['address', 'poll_id'] })
+    } catch (error) {
+      console.log('---------------->', error)
+    }
 
     return vote.get('id')
   }

@@ -14,14 +14,14 @@ export type FetchTranslationRequest = ReturnType<
   typeof actions.fetchTranslationsRequest
 >
 
+export type TranslationActions = ActionType<typeof actions>
+
 export interface Translation {
   [locale: string]: TranslationKeys
 }
 export interface TranslationKeys {
   [key: string]: string
 }
-
-export type TranslationActions = ActionType<typeof actions>
 
 export type TranslationState = {
   data: Translation

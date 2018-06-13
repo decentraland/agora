@@ -16,6 +16,8 @@ export type FetchTransactionRequest = ReturnType<
   typeof actions.fetchTransactionRequest
 >
 
+export type TransactionActions = ActionType<typeof actions>
+
 export enum TransactionStatus {
   Pending = 'pending',
   Confirmed = 'confirmed',
@@ -49,8 +51,6 @@ export enum NetworkName {
   mainnet = 'mainnet',
   ropsten = 'ropsten'
 }
-
-export type TransactionActions = ActionType<typeof actions>
 
 export type TransactionState = {
   data: Transaction[]

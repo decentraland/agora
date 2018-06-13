@@ -8,9 +8,10 @@ import {
   FETCH_POLL_FAILURE,
   PollActions,
   PollState,
-  PollWithPointers,
-  Poll
+  PollWithPointers
 } from 'modules/poll/types'
+import { FETCH_POLL_OPTIONS_SUCCESS, OptionActions } from 'modules/option/types'
+import { FETCH_POLL_VOTES_SUCCESS, VoteActions } from 'modules/vote/types'
 import { loadingReducer } from 'modules/loading/reducer'
 import { toObjectById } from 'lib/utils'
 
@@ -22,7 +23,7 @@ const INITIAL_STATE: PollState = {
 
 export const pollReducer: Reducer<PollState> = (
   state = INITIAL_STATE,
-  action: PollActions
+  action: PollActions | OptionActions | VoteActions
 ): PollState => {
   switch (action.type) {
     case FETCH_POLLS_REQUEST:
@@ -42,7 +43,7 @@ export const pollReducer: Reducer<PollState> = (
       }
     }
     case FETCH_POLL_SUCCESS: {
-      const { poll, token, votes, options } = action.payload
+      const { poll, votes, options } = action.payload
 
       return {
         loading: loadingReducer(state.loading, action),
@@ -52,8 +53,41 @@ export const pollReducer: Reducer<PollState> = (
           [poll.id]: {
             ...state.data[poll.id],
             ...poll,
-            token_address: token.address,
             vote_ids: votes.map(vote => vote.id),
+            option_ids: options.map(option => option.id)
+          }
+        }
+      }
+    }
+    case FETCH_POLL_VOTES_SUCCESS: {
+      const { votes, pollId } = action.payload
+
+      return {
+        loading: loadingReducer(state.loading, action),
+        error: null,
+        data: {
+          ...state.data,
+          [pollId]: {
+            option_ids: [],
+            ...state.data[pollId],
+            id: pollId,
+            vote_ids: votes.map(vote => vote.id)
+          }
+        }
+      }
+    }
+    case FETCH_POLL_OPTIONS_SUCCESS: {
+      const { options, pollId } = action.payload
+
+      return {
+        loading: loadingReducer(state.loading, action),
+        error: null,
+        data: {
+          ...state.data,
+          [pollId]: {
+            vote_ids: [],
+            ...state.data[pollId],
+            id: pollId,
             option_ids: options.map(option => option.id)
           }
         }

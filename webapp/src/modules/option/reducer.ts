@@ -1,5 +1,12 @@
 import { Reducer } from 'redux'
-import { OptionState, Option } from 'modules/option/types'
+import {
+  FETCH_POLL_OPTIONS_SUCCESS,
+  Option,
+  OptionState,
+  OptionActions,
+  FETCH_POLL_OPTIONS_REQUEST,
+  FETCH_POLL_OPTIONS_FAILURE
+} from 'modules/option/types'
 import { loadingReducer } from 'modules/loading/reducer'
 import {
   FETCH_POLL_REQUEST,
@@ -16,15 +23,17 @@ const INITIAL_STATE: OptionState = {
 
 export const optionReducer: Reducer<OptionState> = (
   state = INITIAL_STATE,
-  action: PollActions
+  action: OptionActions | PollActions
 ): OptionState => {
   switch (action.type) {
+    case FETCH_POLL_OPTIONS_REQUEST:
     case FETCH_POLL_REQUEST: {
       return {
         ...state,
         loading: loadingReducer(state.loading, action)
       }
     }
+    case FETCH_POLL_OPTIONS_SUCCESS:
     case FETCH_POLL_SUCCESS: {
       const { options } = action.payload
 
@@ -35,6 +44,13 @@ export const optionReducer: Reducer<OptionState> = (
           ...state.data,
           ...toObjectById<Option>(options)
         }
+      }
+    }
+    case FETCH_POLL_OPTIONS_FAILURE: {
+      return {
+        ...state,
+        loading: loadingReducer(state.loading, action),
+        error: action.payload.error
       }
     }
     default:

@@ -32,7 +32,9 @@ export async function connectEthereumWallet(
 }
 
 function getContracts(): Contract[] {
-  return []
+  return [
+    new contracts.MANAToken(env.get('REACT_APP_MANA_TOKEN_CONTRACT_ADDRESS')) // TODO: Should this be dynamic via token addresses ?
+  ]
 }
 
 function getWallets(
@@ -44,8 +46,7 @@ function getWallets(
 
   return isMobile() || retries < 2
     ? [new NodeWallet(address)]
-    : [new NodeWallet(address)]
-  // : [new LedgerWallet(address, derivationPath)]
+    : [new LedgerWallet(address, derivationPath)]
 }
 
 export function isLedgerWallet() {

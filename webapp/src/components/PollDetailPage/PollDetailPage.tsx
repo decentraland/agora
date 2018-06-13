@@ -1,10 +1,11 @@
 import * as React from 'react'
 import { Link } from 'react-router-dom'
-import { utils } from 'decentraland-commons'
 import { locations } from 'locations'
 import { PollDetailPageProps } from 'components/PollDetailPage/types'
-import { t } from 'modules/translation/utils'
 import { Option } from 'modules/option/types'
+import { distanceInWordsToNow } from 'lib/utils'
+import { t } from 'modules/translation/utils'
+import { getVoteOptionValue } from 'modules/option/utils'
 
 export default class PollDetailPage extends React.PureComponent<
   PollDetailPageProps
@@ -50,6 +51,7 @@ export default class PollDetailPage extends React.PureComponent<
 
   render() {
     const { poll, isLoading } = this.props
+    const currentResult = this.getCurrentResult()
 
     return (
       <div className="PollDetailPage">
@@ -62,22 +64,43 @@ export default class PollDetailPage extends React.PureComponent<
           'Loading'
         ) : (
           <React.Fragment>
-            <h4>Poll</h4>
-            <pre>
-              {JSON.stringify(
-                utils.omit(poll, ['token', 'options', 'votes']),
-                null,
-                2
-              )}
-            </pre>
+            <h2>Poll</h2>
+
+            <p>
+              {poll.title}
+              <br />
+              {poll.description}
+              <br />
+              {poll.balance} MANA
+              <br />
+              {distanceInWordsToNow(poll.closes_at)}
+            </p>
             <h4>Token</h4>
-            <pre>{JSON.stringify(poll.token, null, 2)}</pre>
-            <h4>Options</h4>
-            <pre>{JSON.stringify(poll.options, null, 2)}</pre>
-            <h4>Votes</h4>
-            <pre>{JSON.stringify(poll.votes, null, 2)}</pre>
+            {poll.token ? (
+              <p>
+                {poll.token.symbol}: {poll.token.address}
+              </p>
+            ) : null}
+            <h4>Options {poll.options.length}</h4>
+            <ul>
+              {poll.options.map(option => (
+                <li key={option.id}>{option.value}</li>
+              ))}
+            </ul>
+            <h4>Votes {poll.votes.length}</h4>
+            <ul>
+              {poll.votes.map(vote => (
+                <li key={vote.id}>
+                  {vote.address}: {getVoteOptionValue(poll.options, vote)}
+                </li>
+              ))}
+            </ul>
             <h4>Current Result</h4>
-            <pre>{JSON.stringify(this.getCurrentResult(), null, 2)}</pre>
+            <p>{currentResult ? currentResult.value : null}</p>
+            <br />
+            <div>
+              <Link to={locations.voteDetail(poll.id)}>VOTE</Link>
+            </div>
           </React.Fragment>
         )}
       </div>

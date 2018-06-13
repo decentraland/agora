@@ -1,8 +1,9 @@
 import axios, { AxiosResponse, AxiosError, AxiosRequestConfig } from 'axios'
-import { env } from 'decentraland-commons'
+import { env, Log } from 'decentraland-commons'
 
 const httpClient = axios.create()
 const URL = env.get('REACT_APP_API_URL', '')
+const log = new Log('API')
 
 export interface APIParam {
   [key: string]: any
@@ -22,8 +23,20 @@ export class API {
     return this.request('get', `/polls/${id}`, {})
   }
 
+  fetchPollOptions(id: string) {
+    return this.request('get', `/polls/${id}/options`, {})
+  }
+
+  fetchPollVotes(id: string) {
+    return this.request('get', `/polls/${id}/votes`, {})
+  }
+
   fetchTranslations(locale: string) {
     return this.request('get', `/translations/${locale}`, {})
+  }
+
+  createVote(message: string, signature: string, id?: string) {
+    return this.request('post', '/votes', { message, signature, id })
   }
 
   request(method: string, path: string, params?: APIParam) {
@@ -39,6 +52,8 @@ export class API {
         options.data = params
       }
     }
+
+    log.info(options.url)
 
     return httpClient
       .request(options)

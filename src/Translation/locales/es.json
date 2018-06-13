@@ -9,5 +9,11 @@
   },
   "poll_detail_page": {
     "title": "Detalle de Encuesta"
+  },
+  "polls_page": {
+    "title": "Lista de Encuestas"
+  },
+  "vote_page": {
+    "title": "Emitir su voto"
   }
 }

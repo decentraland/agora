@@ -12,5 +12,8 @@
   },
   "poll_detail_page": {
     "title": "Poll Detail Page"
+  },
+  "vote_page": {
+    "title": "Cast your vote"
   }
 }

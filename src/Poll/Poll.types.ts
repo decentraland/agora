@@ -3,7 +3,7 @@ import { VoteAttributes } from '../Vote'
 import { OptionAttributes } from '../Option'
 
 interface Poll {
-  id?: number
+  id?: string
   title: string
   description?: string
   balance: string // bigint

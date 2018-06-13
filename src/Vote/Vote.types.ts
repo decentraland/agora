@@ -1,8 +1,8 @@
 export interface VoteAttributes {
-  id?: number
+  id?: string
   address: string
-  poll_id: number
-  option_id: number
+  poll_id: string
+  option_id: string
   message: string
   signature: string
   created_at?: Date

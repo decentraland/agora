@@ -1,5 +1,5 @@
 export interface OptionAttributes {
-  id?: number
+  id?: string
   value: string
   poll_id: number
   created_at?: Date

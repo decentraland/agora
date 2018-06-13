@@ -1,5 +1,5 @@
 export interface Model extends Object {
-  id: string | number
+  id: string
 }
 
 export interface ModelById<T extends Model> {

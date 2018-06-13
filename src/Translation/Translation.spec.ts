@@ -15,7 +15,7 @@ describe('Translation locales', async function() {
       it(`should have the same keys as the default locale. ${locale} = ${DEFAULT_LOCALE}`, async function() {
         const translations = await translation.fetch(locale)
         const keys = Object.keys(translations)
-        expect(keys).to.deep.equal(mainKeys)
+        expect(keys.sort()).to.deep.equal(mainKeys.sort())
       })
     }
   }

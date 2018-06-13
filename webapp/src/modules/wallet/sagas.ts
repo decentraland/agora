@@ -5,7 +5,7 @@ import {
   connectWalletSuccess,
   connectWalletFailure
 } from 'modules/wallet/actions'
-import { getWallet } from 'modules/wallet/selectors'
+import { getData as getWallet } from 'modules/wallet/selectors'
 import { connectEthereumWallet } from 'modules/wallet/utils'
 import { watchLoadingTransactions } from 'modules/transaction/actions'
 import { Network } from 'decentraland-eth/dist/ethereum/eth'
@@ -31,12 +31,16 @@ function* handleConnectWalletRequest(action = {}) {
     address = address.toLowerCase()
 
     const network: Network = yield call(eth.getNetwork)
+    const manaTokenContract = eth.getContract('MANAToken')
+
+    const mana = yield call(() => manaTokenContract.balanceOf(address))
 
     const wallet: Wallet = {
+      address,
       network: network.name,
       type: eth.wallet.type,
       derivationPath: eth.wallet.derivationPath,
-      address
+      balances: { mana }
     }
     yield handleConnectWalletSuccess()
     yield put(connectWalletSuccess(wallet))

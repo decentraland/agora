@@ -1,5 +1,5 @@
 export interface AccountAttributes {
-  id?: number
+  id?: string
   address: string
   token_address: string
   balance: string

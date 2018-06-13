@@ -8,7 +8,7 @@ export const up = (pgm: MigrationBuilder) => {
   pgm.createTable(
     tableName,
     {
-      id: { type: 'INT', primaryKey: true, notNull: true, comment: null },
+      id: { type: 'TEXT', primaryKey: true, notNull: true, comment: null },
       title: { type: 'TEXT', notNull: true, comment: null },
       description: 'TEXT',
       token_address: {

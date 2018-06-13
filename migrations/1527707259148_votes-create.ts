@@ -9,16 +9,16 @@ export const up = (pgm: MigrationBuilder) => {
   pgm.createTable(
     tableName,
     {
-      id: { type: 'INT', primaryKey: true, notNull: true, comment: null },
+      id: { type: 'TEXT', primaryKey: true, notNull: true, comment: null },
       address: { type: 'TEXT', notNull: true, comment: null },
       poll_id: {
-        type: 'INT',
+        type: 'TEXT',
         references: Poll.tableName,
         notNull: true,
         comment: null
       },
       option_id: {
-        type: 'INT',
+        type: 'TEXT',
         references: Option.tableName,
         notNull: true,
         comment: null

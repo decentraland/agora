@@ -7,6 +7,7 @@ import Wallet from 'components/Wallet'
 import Page from 'components/Page'
 import HomePage from 'components/HomePage'
 import PollDetailPage from 'components/PollDetailPage'
+import VotePage from 'components/VotePage'
 
 export default class Routes extends React.Component {
   renderRoutes() {
@@ -18,6 +19,7 @@ export default class Routes extends React.Component {
           path={locations.poll()}
           component={PollDetailPage}
         />
+        <Route exact={true} path={locations.vote()} component={VotePage} />
         <Redirect to={locations.root()} />
       </Switch>
     )
