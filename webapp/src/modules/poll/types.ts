@@ -24,8 +24,8 @@ export type PollActions = ActionType<typeof actions>
 export interface Poll {
   id: string
   title: string
-  description?: string
   balance: number
+  description?: string
   submitter: string
   closes_at: number
 }

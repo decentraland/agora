@@ -11,7 +11,11 @@ import {
   PollWithPointers
 } from 'modules/poll/types'
 import { FETCH_POLL_OPTIONS_SUCCESS, OptionActions } from 'modules/option/types'
-import { FETCH_POLL_VOTES_SUCCESS, VoteActions } from 'modules/vote/types'
+import {
+  FETCH_POLL_VOTES_SUCCESS,
+  CREATE_VOTE_SUCCESS,
+  VoteActions
+} from 'modules/vote/types'
 import { loadingReducer } from 'modules/loading/reducer'
 import { toObjectById } from 'lib/utils'
 
@@ -89,6 +93,22 @@ export const pollReducer: Reducer<PollState> = (
             ...state.data[pollId],
             id: pollId,
             option_ids: options.map(option => option.id)
+          }
+        }
+      }
+    }
+    case CREATE_VOTE_SUCCESS: {
+      const { wallet, vote } = action.payload
+      const currentPoll = state.data[vote.poll_id]
+
+      return {
+        loading: loadingReducer(state.loading, action),
+        error: null,
+        data: {
+          ...state.data,
+          [vote.poll_id]: {
+            ...currentPoll,
+            balance: currentPoll.balance + wallet.balances.mana // TODO: Poll symbol
           }
         }
       }

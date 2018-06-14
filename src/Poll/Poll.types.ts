@@ -7,7 +7,7 @@ interface Poll {
   id?: string
   title: string
   description?: string
-  balance: string // bigint
+  balance: string // DECIMAL
   token_address: string
   submitter: string
   closes_at: number

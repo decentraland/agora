@@ -9,6 +9,7 @@ import {
   Vote,
   NewVote
 } from 'modules/vote/types'
+import { Wallet } from 'modules/wallet/types'
 
 export const fetchVotesByPollIdRequest = (pollId: string) =>
   action(FETCH_POLL_VOTES_REQUEST, { pollId })
@@ -19,7 +20,7 @@ export const fetchVotesByPollIdFailure = (error: string) =>
 
 export const createVoteRequest = (newVote: NewVote) =>
   action(CREATE_VOTE_REQUEST, { newVote })
-export const createVoteSuccess = (vote: Vote) =>
-  action(CREATE_VOTE_SUCCESS, { vote })
+export const createVoteSuccess = (vote: Vote, wallet: Wallet) =>
+  action(CREATE_VOTE_SUCCESS, { vote, wallet })
 export const createVoteFailure = (error: string) =>
   action(CREATE_VOTE_FAILURE, { error })

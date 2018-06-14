@@ -16,7 +16,7 @@ export const up = (pgm: MigrationBuilder) => {
         references: Token.tableName,
         comment: null
       },
-      balance: { type: 'TEXT', notNull: true, default: '0', comment: null }
+      balance: { type: 'DECIMAL', notNull: true, default: '0', comment: null }
     },
     { ifNotExists: true, comment: null }
   )

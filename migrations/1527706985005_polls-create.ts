@@ -17,7 +17,7 @@ export const up = (pgm: MigrationBuilder) => {
         notNull: true,
         comment: null
       },
-      balance: { type: 'BIGINT', notNull: true, default: 0, comment: null },
+      balance: { type: 'DECIMAL', notNull: true, default: 0, comment: null },
       submitter: { type: 'TEXT', notNull: true, comment: null },
       closes_at: { type: 'BIGINT', notNull: true, comment: null },
       created_at: { type: 'TIMESTAMP', notNull: true, comment: null },

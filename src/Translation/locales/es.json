@@ -13,7 +13,8 @@
   "poll_detail_page": {
     "title": "Detalle de Encuesta",
     "closes_at": "Termina {time_in_words}",
-    "finished_at": "Terminada en {date}"
+    "finished_at": "Terminada en {date}",
+    "tie": "Empate"
   },
   "vote_page": {
     "title": "Emitir su voto"

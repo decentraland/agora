@@ -1,7 +1,7 @@
 import * as React from 'react'
 import { Link } from 'react-router-dom'
 import { locations } from 'locations'
-import { PollDetailPageProps } from 'components/PollDetailPage/types'
+import { PollDetailPageProps, Tally } from 'components/PollDetailPage/types'
 import { Option } from 'modules/option/types'
 import { distanceInWordsToNow } from 'lib/utils'
 import { getVoteOptionValue } from 'modules/option/utils'
@@ -20,13 +20,11 @@ export default class PollDetailPage extends React.PureComponent<
     onFetchPoll(match.params.id)
   }
 
-  getCurrentResult(): Option | null {
+  getCurrentResults(): Option[] {
     const { poll } = this.props
-    if (!poll) return null
+    if (!poll || poll.votes.length === 0) return []
 
-    const tally: {
-      optionId?: { votes: number; option: Option }
-    } = poll.options.reduce(
+    const tally: Tally = poll.options.reduce(
       (tally, option) => ({ ...tally, [option.id]: { votes: 0, option } }),
       {}
     )
@@ -35,24 +33,26 @@ export default class PollDetailPage extends React.PureComponent<
       tally[vote.option_id].votes += 1
     }
 
-    let currentResult: Option | null = null
-    let maxVotes = 0
+    let currentResults: Option[] = []
+    let maxVotes = -1
 
     for (const optionId in tally) {
       const result = tally[optionId]
 
-      if (result.votes >= maxVotes) {
-        currentResult = result.option
+      if (result.votes === maxVotes) {
+        currentResults.push(result.option)
+      } else if (result.votes > maxVotes) {
+        currentResults = [result.option]
         maxVotes = result.votes
       }
     }
 
-    return currentResult
+    return currentResults
   }
 
   render() {
-    const { poll, isLoading } = this.props
-    const currentResult = this.getCurrentResult()
+    const { poll, currentVote, isLoading } = this.props
+    const currentResults = this.getCurrentResults()
 
     return (
       <div className="PollDetailPage">
@@ -107,13 +107,31 @@ export default class PollDetailPage extends React.PureComponent<
               ))}
             </ul>
 
+            <h4>Your Vote</h4>
+            <p>
+              {currentVote
+                ? getVoteOptionValue(poll.options, currentVote)
+                : null}
+            </p>
+
             <h4>Current Result</h4>
-            <p>{currentResult ? currentResult.value : null}</p>
+            <p>
+              {currentResults.length > 0 ? (
+                <React.Fragment>
+                  {currentResults.length > 1
+                    ? `${t('poll_detail_page.tie')}`
+                    : null}
+                  {currentResults.map(result => result.value)}
+                </React.Fragment>
+              ) : null}
+            </p>
             <br />
 
-            <div>
-              <Link to={locations.voteDetail(poll.id)}>VOTE</Link>
-            </div>
+            {isFinished(poll) ? null : (
+              <div>
+                <Link to={locations.voteDetail(poll.id)}>VOTE</Link>
+              </div>
+            )}
           </React.Fragment>
         )}
       </div>

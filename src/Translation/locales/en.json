@@ -13,7 +13,8 @@
   "poll_detail_page": {
     "title": "Poll Detail Page",
     "closes_at": "Finishes {time_in_words}",
-    "finished_at": "Finished at {date}"
+    "finished_at": "Finished at {date}",
+    "tie": "Tie"
   },
   "vote_page": {
     "title": "Cast your vote"

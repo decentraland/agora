@@ -15,8 +15,8 @@ export class Poll extends UUIDModel<PollAttributes> {
               ${ModelQueries.jsonAgg('v', 'id')} as vote_ids,
               ${ModelQueries.jsonAgg('o', 'id')} as option_ids
         FROM ${raw(this.tableName)} p
-        LEFT JOIN ${raw(Vote.tableName)} v ON v.poll_id = p.id
-        LEFT JOIN ${raw(Option.tableName)} o ON o.poll_id = p.id
+          LEFT JOIN ${raw(Vote.tableName)} v ON v.poll_id = p.id
+          LEFT JOIN ${raw(Option.tableName)} o ON o.poll_id = p.id
         GROUP BY p.id`)
   }
 
@@ -28,9 +28,9 @@ export class Poll extends UUIDModel<PollAttributes> {
             ${ModelQueries.jsonAgg('v')} as votes,
             ${ModelQueries.jsonAgg('o')} as options
         FROM ${raw(this.tableName)} p
-        JOIN ${raw(Token.tableName)} t ON t.address = p.token_address
-        LEFT JOIN ${raw(Vote.tableName)} v ON v.poll_id = p.id
-        LEFT JOIN ${raw(Option.tableName)} o ON o.poll_id = p.id
+          JOIN ${raw(Token.tableName)} t ON t.address = p.token_address
+          LEFT JOIN ${raw(Vote.tableName)} v ON v.poll_id = p.id
+          LEFT JOIN ${raw(Option.tableName)} o ON o.poll_id = p.id
         WHERE p.id = ${id}
         GROUP BY p.id, t.address`)
     return rows[0]
@@ -38,14 +38,8 @@ export class Poll extends UUIDModel<PollAttributes> {
 
   static async updateBalances(): Promise<void> {
     this.query(SQL`
-      UPDATE ${SQL.raw(this.tableName)}
-        SET balance = (${PollQueries.sumBalance()})`)
-  }
-
-  static async sumBalance(): Promise<number> {
-    // prettier-ignore
-    const rows = await this.query<{ balance: string }>(PollQueries.sumBalance())
-    return Number(rows[0].balance)
+      UPDATE ${SQL.raw(this.tableName)} p
+        SET balance = (${PollQueries.sumBalance('p')})`)
   }
 
   isFinished() {

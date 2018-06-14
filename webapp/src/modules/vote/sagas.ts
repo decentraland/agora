@@ -65,7 +65,7 @@ Timestamp: ${now}
       signature
     }
 
-    yield put(createVoteSuccess(vote))
+    yield put(createVoteSuccess(vote, wallet))
     yield put(push(locations.pollDetail(newVote.poll_id)))
   } catch (error) {
     yield put(createVoteFailure(error.message))
