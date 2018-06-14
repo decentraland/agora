@@ -17,6 +17,7 @@
     "watch:build:tsc": "tsc -p src/tsconfig.json --watch",
     "pretranslate": "npm run build:scripts",
     "translate": "./scripts/translate.ts && prettier ./src/Translation/locales/*.json --write",
+    "premonitor-balances": "npm run build:tsc",
     "monitor-balances": "./scripts/monitorBalances.ts",
     "start": "npm run build:tsc && cd src && node server.js"
   },

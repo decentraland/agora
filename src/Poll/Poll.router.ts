@@ -27,7 +27,7 @@ export class PollRouter extends Router {
 
   async getPoll(req: express.Request) {
     const id = server.extractFromReq(req, 'id')
-    const poll = await Poll.findByIdWithVotes(id)
+    const poll = await Poll.findByIdWithAssociations(id)
     return utils.omit(poll, blacklist.poll)
   }
 }

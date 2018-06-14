@@ -45,7 +45,7 @@ export class VoteRouter extends Router {
     await poll.retreive({ id: pollId })
 
     if (poll.isEmpty()) throw new Error(`Poll not found for id ${pollId}`)
-    if (poll.isExpired()) throw new Error('Poll already expired')
+    if (poll.isFinished()) throw new Error('Poll already finished')
 
     const address = signedMessage.getAddress()
 
@@ -66,12 +66,8 @@ export class VoteRouter extends Router {
       balance
     })
 
-    try {
-      await account.upsert({ target: ['address', 'token_address'] })
-      await vote.upsert({ target: ['address', 'poll_id'] })
-    } catch (error) {
-      console.log('---------------->', error)
-    }
+    await account.upsert({ target: ['address', 'token_address'] })
+    await vote.upsert({ target: ['address', 'poll_id'] })
 
     return vote.get('id')
   }

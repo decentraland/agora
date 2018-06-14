@@ -7,11 +7,13 @@
     "polls": "Encuestas",
     "poll": "Encuesta"
   },
-  "poll_detail_page": {
-    "title": "Detalle de Encuesta"
-  },
   "polls_page": {
     "title": "Lista de Encuestas"
+  },
+  "poll_detail_page": {
+    "title": "Detalle de Encuesta",
+    "closes_at": "Termina {time_in_words}",
+    "finished_at": "Terminada en {date}"
   },
   "vote_page": {
     "title": "Emitir su voto"

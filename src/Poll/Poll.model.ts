@@ -4,7 +4,7 @@ import { PollQueries } from './Poll.queries'
 import { Token } from '../Token'
 import { Vote } from '../Vote'
 import { Option } from '../Option'
-import { UUIDModel } from '../lib'
+import { UUIDModel, ModelQueries } from '../lib'
 
 export class Poll extends UUIDModel<PollAttributes> {
   static tableName = 'polls'
@@ -12,43 +12,43 @@ export class Poll extends UUIDModel<PollAttributes> {
   static async findWithPointers(): Promise<PollWithPointers[]> {
     return this.query<PollWithPointers>(SQL`
       SELECT p.*,
-              ${PollQueries.jsonAgg('v', 'id')} as vote_ids,
-              ${PollQueries.jsonAgg('o', 'id')} as option_ids
+              ${ModelQueries.jsonAgg('v', 'id')} as vote_ids,
+              ${ModelQueries.jsonAgg('o', 'id')} as option_ids
         FROM ${raw(this.tableName)} p
         LEFT JOIN ${raw(Vote.tableName)} v ON v.poll_id = p.id
         LEFT JOIN ${raw(Option.tableName)} o ON o.poll_id = p.id
-        GROUP BY p.id
-    `)
+        GROUP BY p.id`)
   }
 
-  static async findWithVotes() {
-    return this.query<PollAttributes>(SQL`
-      SELECT p.*,
-            ${PollQueries.jsonAgg('v')} as votes,
-        FROM ${raw(this.tableName)} p
-        LEFT JOIN ${raw(Vote.tableName)} v ON v.poll_id = p.id
-        GROUP BY p.id
-    `)
-  }
-
-  static async findByIdWithVotes(id: string) {
+  static async findByIdWithAssociations(id: string) {
     // prettier-ignore
     const rows = await this.query<PollAttributes>(SQL`
       SELECT p.*,
             row_to_json(t.*) as token,
-            ${PollQueries.jsonAgg('v')} as votes,
-            ${PollQueries.jsonAgg('o')} as options
+            ${ModelQueries.jsonAgg('v')} as votes,
+            ${ModelQueries.jsonAgg('o')} as options
         FROM ${raw(this.tableName)} p
         JOIN ${raw(Token.tableName)} t ON t.address = p.token_address
         LEFT JOIN ${raw(Vote.tableName)} v ON v.poll_id = p.id
         LEFT JOIN ${raw(Option.tableName)} o ON o.poll_id = p.id
         WHERE p.id = ${id}
-        GROUP BY p.id, t.address
-    `)
+        GROUP BY p.id, t.address`)
     return rows[0]
   }
 
-  isExpired() {
+  static async updateBalances(): Promise<void> {
+    this.query(SQL`
+      UPDATE ${SQL.raw(this.tableName)}
+        SET balance = (${PollQueries.sumBalance()})`)
+  }
+
+  static async sumBalance(): Promise<number> {
+    // prettier-ignore
+    const rows = await this.query<{ balance: string }>(PollQueries.sumBalance())
+    return Number(rows[0].balance)
+  }
+
+  isFinished() {
     return this.get('closes_at') < Date.now()
   }
 }

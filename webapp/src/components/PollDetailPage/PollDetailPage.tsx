@@ -4,8 +4,9 @@ import { locations } from 'locations'
 import { PollDetailPageProps } from 'components/PollDetailPage/types'
 import { Option } from 'modules/option/types'
 import { distanceInWordsToNow } from 'lib/utils'
-import { t } from 'modules/translation/utils'
 import { getVoteOptionValue } from 'modules/option/utils'
+import { isFinished } from 'modules/poll/utils'
+import { t } from 'modules/translation/utils'
 
 export default class PollDetailPage extends React.PureComponent<
   PollDetailPageProps
@@ -66,27 +67,37 @@ export default class PollDetailPage extends React.PureComponent<
           <React.Fragment>
             <h2>Poll</h2>
 
-            <p>
+            <div>
               {poll.title}
               <br />
               {poll.description}
               <br />
               {poll.balance} MANA
               <br />
-              {distanceInWordsToNow(poll.closes_at)}
-            </p>
+              {/* prettier-ignore */
+              isFinished(poll)
+                ? t('poll_detail_page.finished_at', {
+                  date: new Date(poll.closes_at).toLocaleString()
+                })
+                : t('poll_detail_page.closes_at', {
+                  time_in_words: distanceInWordsToNow(poll.closes_at)
+                })}
+            </div>
+
             <h4>Token</h4>
             {poll.token ? (
               <p>
                 {poll.token.symbol}: {poll.token.address}
               </p>
             ) : null}
+
             <h4>Options {poll.options.length}</h4>
             <ul>
               {poll.options.map(option => (
                 <li key={option.id}>{option.value}</li>
               ))}
             </ul>
+
             <h4>Votes {poll.votes.length}</h4>
             <ul>
               {poll.votes.map(vote => (
@@ -95,9 +106,11 @@ export default class PollDetailPage extends React.PureComponent<
                 </li>
               ))}
             </ul>
+
             <h4>Current Result</h4>
             <p>{currentResult ? currentResult.value : null}</p>
             <br />
+
             <div>
               <Link to={locations.voteDetail(poll.id)}>VOTE</Link>
             </div>

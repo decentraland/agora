@@ -30,18 +30,18 @@ export async function main() {
   const tokens = await Token.find<TokenAttributes>()
 
   for (const token of tokens) {
-    const TokenContract = Object.create(new contracts.ERC20Token(token.address))
-    TokenContract.getContractName = () => token.name
-    tokenContracts[token.address] = TokenContract
+    const tokenContract = Object.create(new contracts.ERC20Token(token.address))
+    tokenContract.getContractName = () => token.name
+    tokenContracts[token.address] = tokenContract
   }
 
-  log.info(`Connecting to Ethereum node with tokens ${tokens.map(t => t.name)}`)
-  await eth.connect({
-    contracts: Object.values(tokenContracts),
-    provider: env.get('RPC_URL')
-  })
-
   try {
+    log.info(`Connecting to Ethereum Node with ${tokens.map(t => t.name)}`)
+    await eth.connect({
+      contracts: Object.values(tokenContracts),
+      provider: env.get('RPC_URL')
+    })
+
     const delay = env.get('MONITOR_BALANCES_DELAY', '5000')
     log.info(`Using ${delay}ms as delay between updates`)
     await monitorBalances(Number(delay))
@@ -58,7 +58,7 @@ async function monitorBalances(delay: number) {
   await updateAccountBalances()
 
   log.info('Updating Poll balances')
-  await updatePollBalances()
+  await Poll.updateBalances()
 
   setTimeout(() => monitorBalances(delay), delay)
 }
@@ -74,37 +74,16 @@ async function updateAccountBalances() {
       continue
     }
 
-    const balance = await contract.balanceOf(address)
-    account.balance = balance.toString()
+    const contractBalance = await contract.balanceOf(address)
+    const balance = eth.utils.fromWei(contractBalance).toString()
+
+    account.balance = balance
     log.info(`Updating Account ${account.address} with balance ${balance}`)
 
     await Account.update<AccountAttributes>(
       { balance: account.balance },
       { address, token_address }
     )
-  }
-}
-
-async function updatePollBalances() {
-  const polls = await Poll.findWithVotes()
-  const accounts = await Account.find<AccountAttributes>()
-
-  for (const poll of polls) {
-    const balance = poll.votes.reduce((total, vote) => {
-      const account = accounts.find(
-        account =>
-          account.token_address === poll.token_address &&
-          account.address === vote.address
-      )
-      return total + Number(account.balance)
-    }, 0)
-
-    if (typeof balance === 'number') {
-      log.info(`Updating balance of poll ${poll.id} with ${balance}`)
-      await Poll.update({ id: poll.id }, { balance: balance.toString() })
-    } else {
-      log.info(`Could not update balance of poll ${poll.id}`)
-    }
   }
 }
 

@@ -1,3 +1,4 @@
+import { env } from 'decentraland-commons'
 import { db } from '../src/database'
 import { Token } from '../src/Token'
 import { Account } from '../src/Account'
@@ -7,20 +8,17 @@ import { Vote } from '../src/Vote'
 import { loadEnv } from './utils'
 
 async function seed() {
+  const token_address = env.get('MANA_TOKEN_CONTRACT_ADDRESS')
+
   console.log('Connecting database')
   await db.connect()
 
   console.log('Inserting tokens')
   await Promise.all([
     Token.insert({
-      address: '0xdeadbeef',
+      address: token_address,
       name: 'MANAToken',
       symbol: 'MANA'
-    }),
-    Token.insert({
-      address: '0xbeefdead',
-      name: 'ZANAXToken',
-      symbol: 'ZANAX'
     })
   ])
 
@@ -28,18 +26,18 @@ async function seed() {
   await Promise.all([
     Account.insert({
       address: '0x66788F71Bf33EcBd263a57E5F371cCDCaFfc519e',
-      token_address: '0xdeadbeef',
-      balance: '10'
+      balance: '10',
+      token_address
     }),
     Account.insert({
       address: '0x38b5ca83896C7C6Bf4C6178b7458cAAD5412A37A',
-      token_address: '0xdeadbeef',
-      balance: '25'
+      balance: '25',
+      token_address
     }),
     Account.insert({
       address: '0x1d9aa2025b67f0f21d1603ce521bda7869098f8a',
-      token_address: '0xdeadbeef',
-      balance: '15'
+      balance: '15',
+      token_address
     })
   ])
 
@@ -48,9 +46,9 @@ async function seed() {
     Poll.insert({
       title: 'Should we support an auction model natively in the Marketplace?',
       balance: '50',
-      token_address: '0xdeadbeef',
       submitter: '0x1d9aa2025b67f0f21d1603ce521bda7869098f8a',
-      closes_at: '1537897526681'
+      closes_at: '1537897526681',
+      token_address
     })
   ])
   const poll = (await Poll.find())[0]
