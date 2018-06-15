@@ -6,12 +6,12 @@ export class UUIDModel<T> extends Model<T> {
     row: U,
     onConflict: db.OnConflict<U>
   ) {
-    row.id = uuidv4()
+    row.id = row.id || uuidv4()
     return super.upsert(row, onConflict)
   }
 
   static async insert<U extends db.QueryPart>(row: U) {
-    row.id = uuidv4()
+    row.id = row.id || uuidv4()
     return super.insert(row)
   }
 }

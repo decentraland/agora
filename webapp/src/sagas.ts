@@ -1,5 +1,6 @@
 import { all } from 'redux-saga/effects'
 
+import { locationSaga } from 'modules/location/sagas'
 import { optionSaga } from 'modules/option/sagas'
 import { pollSaga } from 'modules/poll/sagas'
 import { voteSaga } from 'modules/vote/sagas'
@@ -9,6 +10,7 @@ import { walletSaga } from 'modules/wallet/sagas'
 
 export function* rootSaga() {
   yield all([
+    locationSaga(),
     optionSaga(),
     pollSaga(),
     voteSaga(),

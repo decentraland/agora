@@ -4,6 +4,7 @@ import { loadingReducer } from 'modules/loading/reducer'
 import {
   FETCH_POLL_REQUEST,
   FETCH_POLL_SUCCESS,
+  FETCH_POLL_FAILURE,
   PollActions
 } from 'modules/poll/types'
 
@@ -34,6 +35,13 @@ export const tokenReducer: Reducer<TokenState> = (
           ...state.data,
           [token.address]: { ...token }
         }
+      }
+    }
+    case FETCH_POLL_FAILURE: {
+      return {
+        ...state,
+        loading: loadingReducer(state.loading, action),
+        error: action.payload.error
       }
     }
     default:

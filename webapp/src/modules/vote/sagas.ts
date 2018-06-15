@@ -53,14 +53,13 @@ Timestamp: ${now}
     const { message, signature } = yield call(() => eth.sign(payload))
     // TODO: We might want to fire an action here to update the optimistic vote
 
-    const voteId: string = yield call(() =>
+    const receiptId: string = yield call(() =>
       api.createVote(message, signature, newVote.id)
     )
-    if (!voteId) throw new Error('An error occurred trying to vote')
+    if (!receiptId) console.warn('[WARN] Receipt could not be created')
 
     const vote: Vote = {
       ...newVote,
-      id: voteId,
       message,
       signature
     }

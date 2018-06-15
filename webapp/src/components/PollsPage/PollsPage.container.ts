@@ -1,6 +1,5 @@
-import { Dispatch } from 'redux'
 import { connect } from 'react-redux'
-import { RootState } from 'types'
+import { RootState, RootDispatch } from 'types'
 import { PollActions } from 'modules/poll/types'
 import { fetchPollsRequest } from 'modules/poll/actions'
 import { getPolls, isLoading } from 'modules/poll/selectors'
@@ -17,7 +16,7 @@ const mapState = (
   polls: getPolls(state)
 })
 
-const mapDispatch = (dispatch: Dispatch<PollActions>) => ({
+const mapDispatch = (dispatch: RootDispatch<PollActions>) => ({
   onFetchPolls: () => dispatch(fetchPollsRequest())
 })
 

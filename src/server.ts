@@ -3,6 +3,7 @@ import * as express from 'express'
 import { env } from 'decentraland-commons'
 import { OptionRouter } from './Option'
 import { PollRouter } from './Poll'
+import { ReceiptRouter } from './Receipt'
 import { VoteRouter } from './Vote'
 import { TranslationRouter } from './Translation'
 import { db } from './database'
@@ -33,6 +34,7 @@ if (env.isDevelopment()) {
 new PollRouter(app).mount()
 new OptionRouter(app).mount()
 new VoteRouter(app).mount()
+new ReceiptRouter(app).mount()
 new TranslationRouter(app).mount()
 
 /* Start the server only if run directly */

@@ -14,7 +14,8 @@
     "title": "Detalle de Encuesta",
     "closes_at": "Termina {time_in_words}",
     "finished_at": "Terminada en {date}",
-    "tie": "Empate"
+    "tie": "EMPATE",
+    "vote": "VOTAR"
   },
   "vote_page": {
     "title": "Emitir su voto"

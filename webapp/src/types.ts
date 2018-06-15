@@ -1,5 +1,5 @@
 import { AnyAction } from 'redux'
-import { Store, Dispatch } from 'react-redux'
+import { Store } from 'react-redux'
 import { RouterState, RouterAction } from 'react-router-redux'
 
 import { OptionState } from 'modules/option/types'
@@ -30,6 +30,10 @@ export type RootAction =
 
 export type RootStore = Store<RootState>
 
+export interface RootDispatch<A = RootAction> {
+  (action: A): A
+}
+
 export type RootMiddleware = (
   store: RootStore
-) => (next: Dispatch<AnyAction>) => (action: AnyAction) => any
+) => (next: RootDispatch) => (action: AnyAction) => any

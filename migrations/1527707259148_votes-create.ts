@@ -34,6 +34,8 @@ export const up = (pgm: MigrationBuilder) => {
   pgm.createIndex(tableName, ['address', 'poll_id'], {
     unique: true
   })
+
+  pgm.createIndex(tableName, 'poll_id')
 }
 
 export const down = (pgm: MigrationBuilder) => {

@@ -18,11 +18,21 @@ export default class VotePage extends React.PureComponent<
   }
 
   componentWillMount() {
-    const { onFetchPollVotes, onFetchPollOptions, match } = this.props
+    const {
+      isConnected,
+      onNavigate,
+      onFetchPollVotes,
+      onFetchPollOptions,
+      match
+    } = this.props
     const pollId = match.params.id
 
-    onFetchPollOptions(pollId)
-    onFetchPollVotes(pollId)
+    if (isConnected) {
+      onFetchPollOptions(pollId)
+      onFetchPollVotes(pollId)
+    } else {
+      onNavigate(locations.pollDetail(pollId))
+    }
   }
 
   selectOption = (event: React.FormEvent<HTMLInputElement>) => {

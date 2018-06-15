@@ -31,11 +31,12 @@ export const pollReducer: Reducer<PollState> = (
 ): PollState => {
   switch (action.type) {
     case FETCH_POLLS_REQUEST:
-    case FETCH_POLL_REQUEST:
+    case FETCH_POLL_REQUEST: {
       return {
         ...state,
         loading: loadingReducer(state.loading, action)
       }
+    }
     case FETCH_POLLS_SUCCESS: {
       return {
         loading: loadingReducer(state.loading, action),
@@ -114,12 +115,13 @@ export const pollReducer: Reducer<PollState> = (
       }
     }
     case FETCH_POLLS_FAILURE:
-    case FETCH_POLL_FAILURE:
+    case FETCH_POLL_FAILURE: {
       return {
         ...state,
         loading: loadingReducer(state.loading, action),
         error: action.payload.error
       }
+    }
     default:
       return state
   }

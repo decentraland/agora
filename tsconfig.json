@@ -13,6 +13,7 @@
     "stripInternal": true,
     "pretty": true,
     "forceConsistentCasingInFileNames": true,
+    "strictNullChecks": true,
     "noUnusedParameters": true,
     "noUnusedLocals": true,
     "lib": ["es2017"],

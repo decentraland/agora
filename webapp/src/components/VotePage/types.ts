@@ -15,9 +15,11 @@ export interface VotePageProps {
   options: Option[] | null
   currentVote: Vote | null
   isLoading: boolean
+  isConnected: boolean
   onFetchPollOptions: Function
   onFetchPollVotes: Function
   onCreateVote: Function
+  onNavigate: Function
 }
 
 export interface VotePageState {

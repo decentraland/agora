@@ -1,22 +1,23 @@
-import { Dispatch } from 'redux'
 import { connect } from 'react-redux'
-import { RootState } from 'types'
-import { PollActions } from 'modules/poll/types'
-import { Wallet } from 'modules/wallet/types'
-import { NewVote } from 'modules/vote/types'
+import { RootDispatch, RootState } from 'types'
 import { fetchOptionsByPollIdRequest } from 'modules/option/actions'
 import {
   fetchVotesByPollIdRequest,
   createVoteRequest
 } from 'modules/vote/actions'
+import { navigateTo } from 'modules/location/actions'
 import { getPolls } from 'modules/poll/selectors'
-import { getData as getWallet } from 'modules/wallet/selectors'
+import { getData as getWallet, isConnected } from 'modules/wallet/selectors'
 import { isLoading as isVoteLoading } from 'modules/vote/selectors'
 import { isLoading as isOptionLoading } from 'modules/option/selectors'
-import { findWalletVote } from 'modules/vote/utils'
+import { Wallet } from 'modules/wallet/types'
+import { NewVote, VoteActions } from 'modules/vote/types'
+import { LocationActions } from 'modules/location/types'
 import { VotePageProps } from 'components/VotePage/types'
+import { findWalletVote } from 'modules/vote/utils'
 
 import VotePage from './VotePage'
+import { OptionActions } from 'modules/option/types'
 
 const mapState = (state: RootState, ownProps: VotePageProps): VotePageProps => {
   const pollId = ownProps.match.params.id
@@ -42,14 +43,18 @@ const mapState = (state: RootState, ownProps: VotePageProps): VotePageProps => {
     votes,
     options,
     currentVote,
-    isLoading
+    isLoading,
+    isConnected: isConnected(state)
   }
 }
 
-const mapDispatch = (dispatch: Dispatch<PollActions>) => ({
+const mapDispatch = (
+  dispatch: RootDispatch<VoteActions | OptionActions | LocationActions>
+) => ({
   onFetchPollOptions: (id: string) => dispatch(fetchOptionsByPollIdRequest(id)),
   onFetchPollVotes: (id: string) => dispatch(fetchVotesByPollIdRequest(id)),
-  onCreateVote: (newVote: NewVote) => dispatch(createVoteRequest(newVote))
+  onCreateVote: (newVote: NewVote) => dispatch(createVoteRequest(newVote)),
+  onNavigate: (url: string) => dispatch(navigateTo(url))
 })
 
 export default connect<VotePageProps>(mapState, mapDispatch)(VotePage)

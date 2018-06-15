@@ -6,9 +6,17 @@ import { Router } from '../lib'
 import { Vote } from './Vote.model'
 import { Account } from '../Account'
 import { Poll } from '../Poll'
+import { Receipt } from '../Receipt'
+import { Option } from '../Option'
+import { CastVoteOption } from './Vote.types'
 
 export class VoteRouter extends Router {
   mount() {
+    /**
+     * Returns a full vote by id
+     */
+    this.app.get('/api/votes/:id', server.handleRequest(this.getVote))
+
     /**
      * Returns the votes for a poll
      */
@@ -23,12 +31,17 @@ export class VoteRouter extends Router {
     this.app.post('/api/votes', server.handleRequest(this.createVote))
   }
 
+  async getVote(req: express.Request) {
+    const id = server.extractFromReq(req, 'id')
+    return Vote.findCastVoteById(id)
+  }
+
   async getPollVotes(req: express.Request) {
     const pollId = server.extractFromReq(req, 'id')
     return Vote.findByPollId(pollId)
   }
 
-  async createVote(req: express.Request): Promise<string> {
+  async createVote(req: express.Request): Promise<string | undefined> {
     const id = server.extractFromReq(req, 'id')
     const message = server.extractFromReq(req, 'message')
     const signature = server.extractFromReq(req, 'signature')
@@ -69,6 +82,20 @@ export class VoteRouter extends Router {
     await account.upsert({ target: ['address', 'token_address'] })
     await vote.upsert({ target: ['address', 'poll_id'] })
 
-    return vote.get('id')
+    if (vote.get('id') !== id) {
+      throw new Error(`Something went wrong inserting vote ${id}`)
+    }
+
+    const option = await Option.findOne(optionId)
+    const castVote: CastVoteOption = {
+      ...vote.getAll(),
+      id,
+      option
+    }
+    const receipt = await Receipt.createFromVote(castVote)
+
+    if (receipt) {
+      return receipt.id
+    }
   }
 }

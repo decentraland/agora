@@ -1,6 +1,5 @@
-import { Dispatch } from 'redux'
 import { connect } from 'react-redux'
-import { RootState } from 'types'
+import { RootState, RootDispatch } from 'types'
 import { getLocale, isConnecting } from 'modules/wallet/selectors'
 import { getData } from 'modules/translation/selectors'
 import { fetchTranslationsRequest } from 'modules/translation/actions'
@@ -29,7 +28,7 @@ const mapState = (
   }
 }
 
-const mapDispatch = (dispatch: Dispatch<TranslationActions>) => ({
+const mapDispatch = (dispatch: RootDispatch<TranslationActions>) => ({
   onFetchTranslations: (locale: string) =>
     dispatch(fetchTranslationsRequest(locale))
 })

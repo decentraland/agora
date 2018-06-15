@@ -12,7 +12,10 @@ export interface PollDetailPageProps {
   poll: PollWithAssociations | null
   currentVote: Vote | null
   isLoading: boolean
+  hasError: boolean
+  isConnected: boolean
   onFetchPoll: Function
+  onNavigate: Function
 }
 
 export interface Tally {

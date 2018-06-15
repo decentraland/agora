@@ -14,10 +14,23 @@ export default class PollDetailPage extends React.PureComponent<
   static defaultProps = {
     poll: null
   }
+  navigatingAway: boolean
+
+  constructor(props: PollDetailPageProps) {
+    super(props)
+    this.navigatingAway = false
+  }
 
   componentWillMount() {
     const { onFetchPoll, match } = this.props
     onFetchPoll(match.params.id)
+  }
+
+  componentWillReceiveProps(nextProps: PollDetailPageProps) {
+    if (nextProps.hasError && !this.navigatingAway) {
+      this.props.onNavigate(locations.polls())
+      this.navigatingAway = true
+    }
   }
 
   getCurrentResults(): Option[] {
@@ -51,7 +64,7 @@ export default class PollDetailPage extends React.PureComponent<
   }
 
   render() {
-    const { poll, currentVote, isLoading } = this.props
+    const { poll, currentVote, isConnected, isLoading } = this.props
     const currentResults = this.getCurrentResults()
 
     return (
@@ -127,9 +140,11 @@ export default class PollDetailPage extends React.PureComponent<
             </p>
             <br />
 
-            {isFinished(poll) ? null : (
+            {!isConnected || isFinished(poll) ? null : (
               <div>
-                <Link to={locations.voteDetail(poll.id)}>VOTE</Link>
+                <Link to={locations.voteDetail(poll.id)}>
+                  {t('poll_detail_page.vote')}
+                </Link>
               </div>
             )}
           </React.Fragment>

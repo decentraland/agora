@@ -19,5 +19,4 @@ export const up = (pgm: MigrationBuilder) => {
 
 export const down = (pgm: MigrationBuilder) => {
   pgm.dropTable(tableName, {})
-  pgm.dropIndex(tableName, 'symbol')
 }

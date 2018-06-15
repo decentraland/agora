@@ -11,6 +11,7 @@ import { loadingReducer } from 'modules/loading/reducer'
 import {
   FETCH_POLL_REQUEST,
   FETCH_POLL_SUCCESS,
+  FETCH_POLL_FAILURE,
   PollActions
 } from 'modules/poll/types'
 import { toObjectById } from 'lib/utils'
@@ -46,7 +47,8 @@ export const optionReducer: Reducer<OptionState> = (
         }
       }
     }
-    case FETCH_POLL_OPTIONS_FAILURE: {
+    case FETCH_POLL_OPTIONS_FAILURE:
+    case FETCH_POLL_FAILURE: {
       return {
         ...state,
         loading: loadingReducer(state.loading, action),
