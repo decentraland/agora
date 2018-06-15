@@ -14,7 +14,7 @@ export function resolvePath(destination: string) {
 }
 
 export function getDirname() {
-  return path.dirname(require.main.filename)
+  return path.dirname(require.main ? require.main.filename : __dirname)
 }
 
 export function parseCLICoords(coord: string) {

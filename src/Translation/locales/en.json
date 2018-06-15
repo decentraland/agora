@@ -1,23 +1,23 @@
 {
+  "global": {
+    "poll": "Poll",
+    "polls": "Polls"
+  },
   "languages": {
     "en": "English",
     "es": "Spanish"
   },
-  "global": {
-    "polls": "Polls",
-    "poll": "Poll"
+  "vote_page": {
+    "title": "Cast your vote"
   },
   "polls_page": {
     "title": "Polls List"
   },
   "poll_detail_page": {
+    "tie": "TIE",
+    "vote": "VOTE",
     "title": "Poll Detail Page",
     "closes_at": "Finishes {time_in_words}",
-    "finished_at": "Finished at {date}",
-    "tie": "TIE",
-    "vote": "VOTE"
-  },
-  "vote_page": {
-    "title": "Cast your vote"
+    "finished_at": "Finished at {date}"
   }
 }
