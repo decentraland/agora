@@ -27,7 +27,7 @@ jobs:
           name: (backend) Build
           command: npm run build:ci
           environment:
-            CONNECTION_STRING: 'postgres://agora@agora:5432/agora'
+            CONNECTION_STRING: 'postgres://agora@localhost:5432/agora'
       - restore_cache:
           keys:
           - frontend-dependencies-{{ checksum "webapp/package-lock.json" }}
