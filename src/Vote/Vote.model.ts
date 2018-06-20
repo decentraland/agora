@@ -1,11 +1,10 @@
-import { SQL, raw } from 'decentraland-server'
+import { Model, SQL, raw } from 'decentraland-server'
 import { VoteAttributes, CastVote } from './Vote.types'
 import { Poll } from '../Poll'
 import { Option } from '../Option'
 import { Token } from '../Token'
-import { UUIDModel } from '../lib'
 
-export class Vote extends UUIDModel<VoteAttributes> {
+export class Vote extends Model<VoteAttributes> {
   static tableName = 'votes'
 
   static async findCastVoteById(id: string) {

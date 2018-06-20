@@ -19,6 +19,7 @@ export default class VotePage extends React.PureComponent<
 
   componentWillMount() {
     const {
+      poll,
       isConnected,
       onNavigate,
       onFetchPollVotes,
@@ -27,7 +28,7 @@ export default class VotePage extends React.PureComponent<
     } = this.props
     const pollId = match.params.id
 
-    if (isConnected) {
+    if (poll && isConnected) {
       onFetchPollOptions(pollId)
       onFetchPollVotes(pollId)
     } else {

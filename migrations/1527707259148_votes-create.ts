@@ -9,16 +9,22 @@ export const up = (pgm: MigrationBuilder) => {
   pgm.createTable(
     tableName,
     {
-      id: { type: 'TEXT', primaryKey: true, notNull: true, comment: null },
+      id: {
+        type: 'UUID',
+        default: pgm.func('uuid_generate_v4()'),
+        primaryKey: true,
+        notNull: true,
+        comment: null
+      },
       address: { type: 'TEXT', notNull: true, comment: null },
       poll_id: {
-        type: 'TEXT',
+        type: 'UUID',
         references: Poll.tableName,
         notNull: true,
         comment: null
       },
       option_id: {
-        type: 'TEXT',
+        type: 'UUID',
         references: Option.tableName,
         notNull: true,
         comment: null

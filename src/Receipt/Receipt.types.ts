@@ -7,4 +7,5 @@ export interface ReceiptAttributes {
   account_address: string
   option_value: string
   vote_id: string
+  nonce?: number // Added by default by the DB, serial
 }
