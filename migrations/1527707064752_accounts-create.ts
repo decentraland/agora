@@ -8,7 +8,13 @@ export const up = (pgm: MigrationBuilder) => {
   pgm.createTable(
     tableName,
     {
-      id: { type: 'TEXT', primaryKey: true, notNull: true, comment: null },
+      id: {
+        type: 'UUID',
+        default: pgm.func('uuid_generate_v4()'),
+        primaryKey: true,
+        notNull: true,
+        comment: null
+      },
       address: { type: 'TEXT', notNull: true, comment: null },
       token_address: {
         type: 'TEXT',

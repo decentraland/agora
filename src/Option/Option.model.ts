@@ -1,8 +1,7 @@
-import { SQL } from 'decentraland-server'
+import { Model, SQL } from 'decentraland-server'
 import { OptionAttributes } from './Option.types'
-import { UUIDModel } from '../lib'
 
-export class Option extends UUIDModel<OptionAttributes> {
+export class Option extends Model<OptionAttributes> {
   static tableName = 'options'
 
   static async findByPollId(id: string) {

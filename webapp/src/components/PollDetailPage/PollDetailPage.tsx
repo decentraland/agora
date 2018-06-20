@@ -132,9 +132,9 @@ export default class PollDetailPage extends React.PureComponent<
               {currentResults.length > 0 ? (
                 <React.Fragment>
                   {currentResults.length > 1
-                    ? `${t('poll_detail_page.tie')}`
+                    ? `${t('poll_detail_page.tie')} `
                     : null}
-                  {currentResults.map(result => result.value)}
+                  {currentResults.map(result => result.value).join(', ')}
                 </React.Fragment>
               ) : null}
             </p>

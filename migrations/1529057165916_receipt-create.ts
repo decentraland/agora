@@ -1,6 +1,5 @@
 import { MigrationBuilder } from 'node-pg-migrate'
 import { Receipt } from '../src/Receipt'
-import { Vote } from '../src/Vote'
 
 const tableName = Receipt.tableName
 
@@ -8,7 +7,12 @@ export const up = (pgm: MigrationBuilder) => {
   pgm.createTable(
     tableName,
     {
-      id: { type: 'TEXT', primaryKey: true, comment: null },
+      id: {
+        type: 'UUID',
+        default: pgm.func('uuid_generate_v4()'),
+        primaryKey: true,
+        comment: null
+      },
       server_signature: { type: 'TEXT', notNull: true, comment: null },
       server_message: { type: 'TEXT', notNull: true, comment: null },
       account_message: { type: 'TEXT', notNull: true, comment: null },
@@ -16,11 +20,11 @@ export const up = (pgm: MigrationBuilder) => {
       account_address: { type: 'TEXT', notNull: true, comment: null },
       option_value: { type: 'TEXT', notNull: true, comment: null },
       vote_id: {
-        type: 'TEXT',
-        references: Vote.tableName,
+        type: 'UUID',
         notNull: true,
         comment: null
       },
+      nonce: { type: 'SERIAL', comment: null },
       created_at: { type: 'TIMESTAMP', notNull: true, comment: null },
       updated_at: { type: 'TIMESTAMP', comment: null }
     },

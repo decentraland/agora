@@ -1,12 +1,12 @@
-import { SQL, raw } from 'decentraland-server'
+import { Model, SQL, raw } from 'decentraland-server'
 import { PollAttributes, PollWithPointers } from './Poll.types'
 import { PollQueries } from './Poll.queries'
 import { Token } from '../Token'
 import { Vote } from '../Vote'
 import { Option } from '../Option'
-import { UUIDModel, ModelQueries } from '../lib'
+import { ModelQueries } from '../lib'
 
-export class Poll extends UUIDModel<PollAttributes> {
+export class Poll extends Model<PollAttributes> {
   static tableName = 'polls'
 
   static async findWithPointers(): Promise<PollWithPointers[]> {

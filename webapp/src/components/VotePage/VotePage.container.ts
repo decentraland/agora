@@ -22,10 +22,10 @@ import { OptionActions } from 'modules/option/types'
 const mapState = (state: RootState, ownProps: VotePageProps): VotePageProps => {
   const pollId = ownProps.match.params.id
   const isLoading = isVoteLoading(state) || isOptionLoading(state)
-  const polls = getPolls(state)
-  const poll = polls[pollId]
   const wallet = getWallet(state) as Wallet
+  const polls = getPolls(state)
 
+  const poll = polls[pollId] || null
   let votes = null
   let options = null
   let currentVote = null
@@ -39,6 +39,7 @@ const mapState = (state: RootState, ownProps: VotePageProps): VotePageProps => {
   return {
     ...ownProps,
     pollId,
+    poll,
     wallet,
     votes,
     options,
