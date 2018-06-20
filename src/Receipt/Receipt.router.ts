@@ -10,18 +10,18 @@ export class ReceiptRouter extends Router {
     /**
      * Returns all receipts
      */
-    this.app.get('/api/receipts', server.handleRequest(this.getReceipts))
+    this.app.get('/receipts', server.handleRequest(this.getReceipts))
 
     /**
      * Returns a receipt by id
      */
-    this.app.get('/api/receipts/:id', server.handleRequest(this.getReceipt))
+    this.app.get('/receipts/:id', server.handleRequest(this.getReceipt))
 
     /**
      * Returns account receipts
      */
     this.app.get(
-      '/api/accounts/:address/receipts',
+      '/accounts/:address/receipts',
       server.handleRequest(this.getAccountReceipts)
     )
   }

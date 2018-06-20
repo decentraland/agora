@@ -15,20 +15,17 @@ export class VoteRouter extends Router {
     /**
      * Returns a full vote by id
      */
-    this.app.get('/api/votes/:id', server.handleRequest(this.getVote))
+    this.app.get('/votes/:id', server.handleRequest(this.getVote))
 
     /**
      * Returns the votes for a poll
      */
-    this.app.get(
-      '/api/polls/:id/votes',
-      server.handleRequest(this.getPollVotes)
-    )
+    this.app.get('/polls/:id/votes', server.handleRequest(this.getPollVotes))
 
     /**
      * Creates a new vote, returns the new id
      */
-    this.app.post('/api/votes', server.handleRequest(this.createVote))
+    this.app.post('/votes', server.handleRequest(this.createVote))
   }
 
   async getVote(req: express.Request) {

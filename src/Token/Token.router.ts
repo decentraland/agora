@@ -10,7 +10,7 @@ export class TokenRouter extends Router {
     /**
      * Returns all tokens
      */
-    this.app.get('/api/tokens', server.handleRequest(this.getTokens))
+    this.app.get('/tokens', server.handleRequest(this.getTokens))
   }
 
   async getTokens(): Promise<TokenAttributes[]> {

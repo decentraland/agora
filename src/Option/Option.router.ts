@@ -9,10 +9,7 @@ export class OptionRouter extends Router {
     /**
      * Returns the votes for a poll
      */
-    this.app.get(
-      '/api/polls/:id/options',
-      server.handleRequest(this.getPollVotes)
-    )
+    this.app.get('/polls/:id/options', server.handleRequest(this.getPollVotes))
   }
 
   async getPollVotes(req: express.Request): Promise<any> {

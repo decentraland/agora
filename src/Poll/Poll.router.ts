@@ -11,13 +11,13 @@ export class PollRouter extends Router {
     /**
      * Returns all polls
      */
-    this.app.get('/api/polls', server.handleRequest(this.getPolls))
+    this.app.get('/polls', server.handleRequest(this.getPolls))
 
     /**
      * Return a poll by id
      * @param {string} id
      */
-    this.app.get('/api/polls/:id', server.handleRequest(this.getPoll))
+    this.app.get('/polls/:id', server.handleRequest(this.getPoll))
   }
 
   async getPolls(): Promise<PollAttributes[]> {
