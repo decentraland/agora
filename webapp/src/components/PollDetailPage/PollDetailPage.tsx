@@ -43,7 +43,7 @@ export default class PollDetailPage extends React.PureComponent<
     )
 
     for (const vote of poll.votes) {
-      tally[vote.option_id].votes += 1
+      tally[vote.option_id].votes += vote.account_balance
     }
 
     let currentResults: Option[] = []
