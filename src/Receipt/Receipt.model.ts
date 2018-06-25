@@ -1,36 +1,21 @@
 import { eth } from 'decentraland-eth'
 import { env } from 'decentraland-commons'
-import { Model, db } from 'decentraland-server'
+import { db } from 'decentraland-server'
 import { ReceiptAttributes } from './Receipt.types'
 import { CastVoteOption } from '../Vote'
+import { ModelWithCallbacks } from '../lib'
 
 interface Signature {
   message: string
   signature: string
 }
 
-export class Receipt extends Model<ReceiptAttributes> {
+export class Receipt extends ModelWithCallbacks<ReceiptAttributes> {
   static tableName = 'receipts'
 
   // Delegate the nonce to the database
-  static async upsert<U extends db.QueryPart>(
-    row: U,
-    onConflict: db.OnConflict<U>
-  ) {
-    return super.upsert(this.nullifyNonce(row), onConflict)
-  }
-
-  // Delegate the nonce to the database
-  static async insert<U extends db.QueryPart>(row: U) {
-    return super.insert(this.nullifyNonce(row))
-  }
-
-  // Delegate the nonce to the database
-  static update<U extends db.QueryPart = any, P extends db.QueryPart = any>(
-    changes: Partial<U>,
-    conditions: Partial<P>
-  ) {
-    return super.update(this.nullifyNonce(changes), conditions)
+  static beforeModify<U extends db.QueryPart = ReceiptAttributes>(row: U) {
+    return this.deleteNonce(row)
   }
 
   static async createFromVote(
@@ -52,8 +37,7 @@ export class Receipt extends Model<ReceiptAttributes> {
 
       receipt.assign(attributes)
 
-      const { id } = await receipt.insert()
-      receipt.set('id', id)
+      await receipt.create()
 
       return receipt.getAll()
     }
@@ -63,7 +47,7 @@ export class Receipt extends Model<ReceiptAttributes> {
     return this.find<ReceiptAttributes>({ account_address: accountAddress })
   }
 
-  private static nullifyNonce<U>(row: U): U {
+  private static deleteNonce<U>(row: U): U {
     const attributes = Object.assign({}, row)
     delete attributes['nonce']
     return attributes
