@@ -46,7 +46,8 @@ export default class VotePage extends React.PureComponent<
 
     const newVote: NewVote = {
       id: uuidv4(),
-      address: wallet.address,
+      account_address: wallet.address,
+      account_balance: wallet.balances.mana, // TODO: Use token
       poll_id: pollId,
       option_id: selectedOptionId
     }

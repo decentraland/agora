@@ -43,7 +43,7 @@ export class Receipt extends Model<ReceiptAttributes> {
       const attributes: ReceiptAttributes = {
         account_message: vote.message,
         account_signature: vote.signature,
-        account_address: vote.address,
+        account_address: vote.account_address,
         server_message: signResult.message,
         server_signature: signResult.signature,
         option_value: vote.option.value,
@@ -80,7 +80,7 @@ export class Receipt extends Model<ReceiptAttributes> {
 
     const message = eth.utils.toHex(
       `This is the vote for the user with address: ${
-        vote.address
+        vote.account_address
       }. The vote to cast is: ${vote.option.value}. Date: ${new Date()}`
     )
     const signature = eth.utils.localSign(message, serverKey)

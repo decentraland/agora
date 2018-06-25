@@ -115,7 +115,9 @@ export default class PollDetailPage extends React.PureComponent<
             <ul>
               {poll.votes.map(vote => (
                 <li key={vote.id}>
-                  {vote.address}: {getVoteOptionValue(poll.options, vote)}
+                  {vote.account_address}:{' '}
+                  {getVoteOptionValue(poll.options, vote)} Balance:{' '}
+                  {vote.account_balance}
                 </li>
               ))}
             </ul>

@@ -25,18 +25,13 @@ async function seed() {
   console.log('Inserting accounts')
   await Promise.all([
     Account.insert({
-      address: '0x66788F71Bf33EcBd263a57E5F371cCDCaFfc519e',
+      address: '0x66788f71bf33ecbd263a57e5f371ccdcaffc519e',
       balance: '10',
       token_address: tokenAddress
     }),
     Account.insert({
-      address: '0x38b5ca83896C7C6Bf4C6178b7458cAAD5412A37A',
+      address: '0x38b5ca83896c7c6bf4c6178b7458caad5412a37a',
       balance: '25',
-      token_address: tokenAddress
-    }),
-    Account.insert({
-      address: '0x66788f71bf33ecbd263a57e5f371ccdcaffc519e',
-      balance: '15',
       token_address: tokenAddress
     })
   ])
@@ -64,25 +59,20 @@ async function seed() {
   console.log('Inserting votes')
   await Promise.all([
     Vote.insert({
-      address: '0x66788F71Bf33EcBd263a57E5F371cCDCaFfc519e',
+      account_address: '0x66788f71bf33ecbd263a57e5f371ccdcaffc519e',
+      account_balance: '10',
       poll_id: poll.id,
       option_id: options[0].id,
       message: 'signed1',
       signature: 'signature1'
     }),
     Vote.insert({
-      address: '0x38b5ca83896C7C6Bf4C6178b7458cAAD5412A37A',
+      account_address: '0x38b5ca83896c7c6bf4c6178b7458caad5412a37a',
+      account_balance: '25',
       poll_id: poll.id,
       option_id: options[1].id,
       message: 'signed2',
       signature: 'signature2'
-    }),
-    Vote.insert({
-      address: '0x1d9aa2025b67f0f21d1603ce521bda7869098f8a',
-      poll_id: poll.id,
-      option_id: options[1].id,
-      message: 'signed3',
-      signature: 'signature3'
     })
   ])
 

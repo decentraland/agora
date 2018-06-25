@@ -7,6 +7,7 @@ import { Token, TokenAttributes } from '../src/Token'
 import { Account, AccountAttributes } from '../src/Account'
 import { loadEnv } from './utils'
 import { Poll } from '../src/Poll'
+import { Vote, VoteAttributes } from '../src/Vote'
 
 const log = new Log('monitor')
 
@@ -83,6 +84,10 @@ async function updateAccountBalances() {
     await Account.update<AccountAttributes>(
       { balance: account.balance },
       { address, token_address }
+    )
+    await Vote.update<VoteAttributes>(
+      { account_balance: account.balance },
+      { account_address: address }
     )
   }
 }

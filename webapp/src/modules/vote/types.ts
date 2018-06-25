@@ -22,7 +22,8 @@ export type VoteActions = ActionType<typeof actions>
 
 export interface Vote {
   id: string
-  address: string
+  account_address: string
+  account_balance: number
   poll_id: string
   option_id: string
   message: string

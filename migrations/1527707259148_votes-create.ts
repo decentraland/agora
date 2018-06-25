@@ -1,5 +1,6 @@
 import { MigrationBuilder } from 'node-pg-migrate'
 import { Vote } from '../src/Vote'
+import { Account } from '../src/Account'
 import { Poll } from '../src/Poll'
 import { Option } from '../src/Option'
 
@@ -16,7 +17,18 @@ export const up = (pgm: MigrationBuilder) => {
         notNull: true,
         comment: null
       },
-      address: { type: 'TEXT', notNull: true, comment: null },
+      account_address: {
+        type: 'TEXT',
+        references: Account.tableName,
+        notNull: true,
+        comment: null
+      },
+      account_balance: {
+        type: 'DECIMAL',
+        notNull: true,
+        default: '0',
+        comment: null
+      },
       poll_id: {
         type: 'UUID',
         references: Poll.tableName,
@@ -37,7 +49,7 @@ export const up = (pgm: MigrationBuilder) => {
     { ifNotExists: true, comment: null }
   )
 
-  pgm.createIndex(tableName, ['address', 'poll_id'], {
+  pgm.createIndex(tableName, ['account_address', 'poll_id'], {
     unique: true
   })
 

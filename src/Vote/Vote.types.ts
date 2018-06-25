@@ -5,7 +5,8 @@ import { Omit } from '../lib/types'
 
 export interface VoteAttributes {
   id?: string
-  address: string
+  account_address: string
+  account_balance: string // DECIMAL
   poll_id: string
   option_id: string
   message: string

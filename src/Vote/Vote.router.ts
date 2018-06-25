@@ -61,7 +61,8 @@ export class VoteRouter extends Router {
 
     const vote = new Vote({
       id,
-      address,
+      account_balance: balance,
+      account_address: address,
       poll_id: pollId,
       option_id: optionId,
       message,
@@ -77,7 +78,7 @@ export class VoteRouter extends Router {
     })
 
     await account.upsert({ target: ['address', 'token_address'] })
-    await vote.upsert({ target: ['address', 'poll_id'] })
+    await vote.upsert({ target: ['account_address', 'poll_id'] })
 
     if (vote.get('id') !== id) {
       throw new Error(`Something went wrong inserting vote ${id}`)
