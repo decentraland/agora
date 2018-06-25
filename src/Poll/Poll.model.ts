@@ -6,6 +6,7 @@ import { Vote } from '../Vote'
 import { Option } from '../Option'
 import { ModelQueries } from '../lib'
 
+// If the Poll model starts to receive external inserts, we should lowercase the submitter
 export class Poll extends Model<PollAttributes> {
   static tableName = 'polls'
 

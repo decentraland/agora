@@ -57,7 +57,7 @@ export class VoteRouter extends Router {
     if (poll.isEmpty()) throw new Error(`Poll not found for id ${pollId}`)
     if (poll.isFinished()) throw new Error('Poll already finished')
 
-    const address = signedMessage.getAddress()
+    const address = signedMessage.getAddress().toLowerCase()
 
     const vote = new Vote({
       id,
