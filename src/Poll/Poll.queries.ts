@@ -9,7 +9,7 @@ export const PollQueries = Object.freeze({
     SQL`SELECT SUM(a.balance) balance
       FROM ${raw(Poll.tableName)} _p
         LEFT JOIN ${raw(Vote.tableName)} v ON v.poll_id = p.id
-        LEFT JOIN ${raw(Account.tableName)} a ON a.token_address = p.token_address AND a.address = v.address
+        LEFT JOIN ${raw(Account.tableName)} a ON a.token_address = p.token_address AND a.address = v.account_address
       WHERE _p.id = ${raw(tablenName)}.id
       GROUP BY p.id`
 })
