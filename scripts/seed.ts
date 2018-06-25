@@ -8,15 +8,15 @@ import { Vote } from '../src/Vote'
 import { loadEnv } from './utils'
 
 async function seed() {
-  const tokenAddress = env.get('MANA_TOKEN_CONTRACT_ADDRESS')
+  const tokenAddress = env.get('MANA_TOKEN_CONTRACT_ADDRESS', '')
 
   console.log('Connecting database')
   await db.connect()
 
   console.log('Inserting tokens')
   await Promise.all([
-    Token.insert({
-      address: tokenAddress,
+    Token.create({
+      address: tokenAddress.toLowerCase(),
       name: 'MANAToken',
       symbol: 'MANA'
     })
@@ -24,17 +24,17 @@ async function seed() {
 
   console.log('Inserting accounts')
   await Promise.all([
-    Account.insert({
+    Account.create({
       address: '0x66788F71Bf33EcBd263a57E5F371cCDCaFfc519e',
       balance: '10',
       token_address: tokenAddress
     }),
-    Account.insert({
+    Account.create({
       address: '0x38b5ca83896C7C6Bf4C6178b7458cAAD5412A37A',
       balance: '25',
       token_address: tokenAddress
     }),
-    Account.insert({
+    Account.create({
       address: '0x66788f71bf33ecbd263a57e5f371ccdcaffc519e',
       balance: '15',
       token_address: tokenAddress
@@ -43,7 +43,7 @@ async function seed() {
 
   console.log('Inserting polls')
   await Promise.all([
-    Poll.insert({
+    Poll.create({
       title: 'Should we support an auction model natively in the Marketplace?',
       balance: '50',
       submitter: '0x66788f71bf33ecbd263a57e5f371ccdcaffc519e',
@@ -55,29 +55,29 @@ async function seed() {
 
   console.log('Inserting options')
   await Promise.all([
-    Option.insert({ value: 'YES', poll_id: poll.id }),
-    Option.insert({ value: 'NO', poll_id: poll.id })
+    Option.create({ value: 'YES', poll_id: poll.id }),
+    Option.create({ value: 'NO', poll_id: poll.id })
   ])
 
   const options = await Option.find()
 
   console.log('Inserting votes')
   await Promise.all([
-    Vote.insert({
+    Vote.create({
       address: '0x66788F71Bf33EcBd263a57E5F371cCDCaFfc519e',
       poll_id: poll.id,
       option_id: options[0].id,
       message: 'signed1',
       signature: 'signature1'
     }),
-    Vote.insert({
+    Vote.create({
       address: '0x38b5ca83896C7C6Bf4C6178b7458cAAD5412A37A',
       poll_id: poll.id,
       option_id: options[1].id,
       message: 'signed2',
       signature: 'signature2'
     }),
-    Vote.insert({
+    Vote.create({
       address: '0x1d9aa2025b67f0f21d1603ce521bda7869098f8a',
       poll_id: poll.id,
       option_id: options[1].id,
