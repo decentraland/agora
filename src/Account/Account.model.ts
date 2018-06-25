@@ -7,8 +7,8 @@ export class Account extends ModelWithCallbacks<AccountAttributes> {
   static withTimestamps = false
 
   static beforeModify<U extends db.QueryPart = AccountAttributes>(row: U) {
-    return Object.assign({}, row, {
-      address: row['address'] && row['address'].toLowerCase()
-    })
+    return row['address']
+      ? Object.assign({}, row, { address: row['address'].toLowerCase() })
+      : row
   }
 }

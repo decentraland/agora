@@ -1,8 +1,7 @@
 import { Model, SQL, raw } from 'decentraland-server'
 import { PollAttributes, PollWithPointers } from './Poll.types'
-import { PollQueries } from './Poll.queries'
 import { Token } from '../Token'
-import { Vote } from '../Vote'
+import { Vote, VoteQueries } from '../Vote'
 import { Option } from '../Option'
 import { ModelQueries } from '../lib'
 
@@ -38,9 +37,8 @@ export class Poll extends Model<PollAttributes> {
   }
 
   static async updateBalances(): Promise<void> {
-    this.query(SQL`
-      UPDATE ${SQL.raw(this.tableName)} p
-        SET balance = (${PollQueries.sumBalance('p')})`)
+    await this.query(SQL`UPDATE ${SQL.raw(this.tableName)}
+        SET balance = COALESCE((${VoteQueries.sumAccountBalanceForPollSubquery()}), 0)`)
   }
 
   isFinished() {
