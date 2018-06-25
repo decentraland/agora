@@ -1,6 +1,5 @@
 import { MigrationBuilder } from 'node-pg-migrate'
 import { Vote } from '../src/Vote'
-import { Account } from '../src/Account'
 import { Poll } from '../src/Poll'
 import { Option } from '../src/Option'
 
@@ -17,12 +16,7 @@ export const up = (pgm: MigrationBuilder) => {
         notNull: true,
         comment: null
       },
-      account_address: {
-        type: 'TEXT',
-        references: Account.tableName,
-        notNull: true,
-        comment: null
-      },
+      account_address: { type: 'TEXT', notNull: true, comment: null },
       account_balance: {
         type: 'DECIMAL',
         notNull: true,
