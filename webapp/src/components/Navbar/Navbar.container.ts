@@ -13,8 +13,8 @@ import { locations } from 'locations'
 
 const mapState = (state: RootState): any => {
   const wallet = getWallet(state) as Wallet
+
   return {
-    mana: wallet.balances.mana,
     address: wallet.address,
     isConnected: isConnected(state),
     isConnecting: isConnecting(state),
