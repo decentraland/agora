@@ -1,4 +1,5 @@
 import { Model, ModelById } from 'lib/types'
+import * as dateFnsFormat from 'date-fns/format'
 import * as dateFnsDistanceInWordsToNow from 'date-fns/distance_in_words_to_now'
 import { getCurrentLocale } from 'modules/translation/utils'
 
@@ -26,9 +27,19 @@ export function toObjectById<T extends Model>(
   )
 }
 
-export function distanceInWordsToNow(date: number) {
+export function distanceInWordsToNow(date: number | string, addSuffix = true) {
   return dateFnsDistanceInWordsToNow(date, {
-    addSuffix: true,
+    addSuffix,
     locale: getCurrentLocale()
   })
+}
+
+export function formatDate(date: string, format = 'MMMM Do, YYYY - hh:MMa') {
+  return dateFnsFormat(date, format, {
+    locale: getCurrentLocale()
+  })
+}
+
+export function formatNumber(amount: number = 0, digits: number = 2) {
+  return parseFloat((+amount).toFixed(digits)).toLocaleString()
 }

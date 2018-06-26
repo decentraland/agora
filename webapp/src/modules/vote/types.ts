@@ -28,10 +28,20 @@ export interface Vote {
   option_id: string
   message: string
   signature: string
+  updated_at: string
+  created_at: string
 }
 
 export interface NewVote
-  extends Overwrite<Vote, { message?: string; signature?: string }> {}
+  extends Overwrite<
+      Vote,
+      {
+        message?: string
+        signature?: string
+        updated_at?: string
+        created_at?: string
+      }
+    > {}
 
 export type VoteState = {
   data: ModelById<Vote>

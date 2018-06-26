@@ -4,8 +4,10 @@ import * as uuidv4 from 'uuid/v4'
 import { locations } from 'locations'
 import { VotePageProps, VotePageState } from 'components/VotePage/types'
 import { NewVote } from 'modules/vote/types'
+import { Loader, Header, Radio, Mana, Button } from 'decentraland-ui'
+import './VotePage.css'
+import { formatNumber } from 'lib/utils'
 import { t } from 'modules/translation/utils'
-import { getVoteOptionValue } from 'modules/option/utils'
 
 export default class VotePage extends React.PureComponent<
   VotePageProps,
@@ -57,75 +59,61 @@ export default class VotePage extends React.PureComponent<
   }
 
   render() {
-    const {
-      pollId,
-      wallet,
-      options,
-      votes,
-      currentVote,
-      isLoading
-    } = this.props
+    const { pollId, poll, wallet, options, votes, isLoading } = this.props
     const { selectedOptionId } = this.state
 
     // TODO: Replace `.mana` for the poll token symbol
 
     return (
       <div className="VotePage">
-        <h1>{t('vote_page.title')}</h1>
-        <p>
-          <Link to={locations.polls()}>List</Link>
-        </p>
-
-        {isLoading || !options || !votes ? (
-          'Loading'
+        {isLoading || !options || !votes || !poll ? (
+          <Loader active size="massive" />
         ) : (
           <React.Fragment>
-            <h2>Poll</h2>
+            <Header className="title" size="large">
+              {poll.title}
+            </Header>
+            {poll.description ? <Header sub>{poll.description}</Header> : null}
+            <form
+              action="/votes"
+              method="POST"
+              onSubmit={this.createVote}
+              className="options"
+            >
+              {options.map((option, index) => (
+                <Radio
+                  id={`option-${option.id}`}
+                  key={option.id}
+                  name="vote-option"
+                  label={option.value}
+                  value={option.id}
+                  checked={option.id === selectedOptionId}
+                  onChange={this.selectOption}
+                />
+              ))}
 
-            <form action="/votes" method="POST" onSubmit={this.createVote}>
-              <h4>Options {options.length}</h4>
-              <ul>
-                {options.map((option, index) => (
-                  <li key={option.id}>
-                    <input
-                      type="radio"
-                      id={`option-${option.id}`}
-                      name="vote-option"
-                      value={option.id}
-                      checked={option.id === selectedOptionId}
-                      onChange={this.selectOption}
-                    />
-                    <label htmlFor={`option-${option.id}`}>
-                      {option.value}
-                    </label>
-                  </li>
-                ))}
-              </ul>
-
-              <h4>Votes {votes.length}</h4>
-              <pre>
-                {currentVote ? (
-                  <React.Fragment>
-                    Your vote: {getVoteOptionValue(options, currentVote)}
-                  </React.Fragment>
-                ) : null}
-              </pre>
               {wallet.balances.mana ? (
-                <pre>Voting with {wallet.balances.mana} MANA</pre>
+                <div className="voting-with">
+                  <Header sub>{t('vote_page.voting_with')}</Header>
+                  <Mana size="large">{formatNumber(wallet.balances.mana)}</Mana>
+                </div>
               ) : null}
 
-              <br />
-              <div>
-                <input
+              <div className="vote">
+                <Button
+                  primary
                   type="submit"
-                  value="VOTE NOW"
                   disabled={selectedOptionId === '' || !wallet.balances.mana}
-                />
+                >
+                  {t('vote_page.vote')}
+                </Button>
                 &nbsp;
-                <Link to={locations.pollDetail(pollId)}>CANCEL</Link>
+                <Link to={locations.pollDetail(pollId)}>
+                  <Button>{t('vote_page.cancel')}</Button>
+                </Link>
                 {wallet.balances.mana ? null : (
-                  <div>
-                    <small>You don't have any MANA</small>
+                  <div className="no-mana">
+                    <small>{t('vote_page.no_mana')}</small>
                   </div>
                 )}
               </div>

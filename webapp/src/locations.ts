@@ -8,3 +8,5 @@ export const locations = {
   vote: () => '/polls/:id/vote',
   voteDetail: (id: string) => `/polls/${id}/vote`
 }
+
+export const STATIC_PAGES: string[] = []

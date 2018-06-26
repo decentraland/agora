@@ -15,6 +15,7 @@ import {
   PollWithPointers
 } from 'modules/poll/types'
 import { api } from 'lib/api'
+import { Token } from 'modules/token/types'
 
 export function* pollSaga() {
   yield takeLatest(FETCH_POLLS_REQUEST, handlePollsRequest)
@@ -44,7 +45,7 @@ function* handlePollRequest(action: FetchPollRequest) {
       balance: Number(pollAttributes.balance)
     }
 
-    yield put(fetchPollSuccess(poll, token, votes, options))
+    yield put(fetchPollSuccess(poll, token as Token, votes, options))
   } catch (error) {
     yield put(fetchPollFailure(error.message))
   }

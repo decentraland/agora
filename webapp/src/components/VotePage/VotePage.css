@@ -1,0 +1,28 @@
+.VotePage .ui.header.title {
+  font-size: 40px;
+}
+
+.VotePage .options {
+  margin-top: 3.5em;
+}
+
+.VotePage .voting-with {
+  margin-top: 3.5em;
+}
+
+.VotePage .vote {
+  margin-top: 3.5em;
+}
+
+.VotePage .vote .ui.button {
+  min-width: 200px;
+}
+
+.VotePage .vote .ui.button.primary {
+  margin-right: 1em;
+}
+
+.VotePage .no-mana {
+  margin-top: 1em;
+  color: var(--secondary-text);
+}

@@ -37,7 +37,7 @@ export interface PollWithPointers extends Poll {
 }
 
 export interface PollWithAssociations extends Poll {
-  token: Token
+  token?: Token
   votes: Vote[]
   options: Option[]
 }
