@@ -1,6 +1,5 @@
 export interface TokenAttributes {
-  id?: string
-  name: string
   address: string
+  name: string
   symbol: string
 }
