@@ -1,8 +1,11 @@
 import { RootState } from 'types'
 import { STATIC_PAGES } from 'locations'
 
+export const hasRouter = (state: RootState) => !!state.router
+
 export const getLocation = (state: RootState) =>
   hasRouter(state) && state.router.location
+
 export const getPathname = (state: RootState) => {
   if (!hasRouter(state)) {
     return null
@@ -24,7 +27,7 @@ export const getPathAction = (state: RootState) => {
   }
   return pathname.split('/').pop()
 }
-export const hasRouter = (state: RootState) => !!state.router
+
 export const isStaticPage = (state: RootState) => {
   const pathname = getPathname(state)
   if (!pathname) {
