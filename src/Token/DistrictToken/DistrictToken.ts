@@ -9,6 +9,10 @@ const DISTRICT_TOKEN: TokenAttributes = Object.freeze({
 })
 
 export class DistrictToken extends Token {
+  constructor() {
+    super({ ...DISTRICT_TOKEN })
+  }
+
   static getAddress() {
     return DISTRICT_TOKEN.address
   }
@@ -31,9 +35,5 @@ export class DistrictToken extends Token {
 
   static findOne<_ = any>(..._: any[]) {
     return super.findOne(DistrictToken.getAddress())
-  }
-
-  constructor() {
-    super({ ...DISTRICT_TOKEN })
   }
 }
