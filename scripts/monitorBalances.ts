@@ -3,7 +3,7 @@
 import { Log, env } from 'decentraland-commons'
 import { contracts, eth } from 'decentraland-eth'
 import { db } from '../src/database'
-import { Token, TokenAttributes } from '../src/Token'
+import { Token, TokenAttributes, DistrictToken } from '../src/Token'
 import { Account, AccountAttributes } from '../src/Account'
 import { loadEnv } from './utils'
 import { Poll } from '../src/Poll'
@@ -31,6 +31,8 @@ export async function main() {
   const tokens = await Token.find<TokenAttributes>()
 
   for (const token of tokens) {
+    if (DistrictToken.isValid(token)) continue
+
     const tokenContract = Object.create(new contracts.ERC20Token(token.address))
     tokenContract.getContractName = () => token.name
     tokenContracts[token.address] = tokenContract
@@ -71,6 +73,8 @@ async function updateAccountBalances() {
   for (const account of accounts) {
     const { address, token_address } = account
     const contract = tokenContracts[token_address]
+
+    if (DistrictToken.isAddress(token_address)) continue
     if (!contract) {
       log.info(`No contract for address ${token_address} in account ${address}`)
       continue
