@@ -14,7 +14,11 @@ export class DistrictToken extends Token {
   }
 
   static isValid(token: TokenAttributes): boolean {
-    return token.address === this.getAddress()
+    return this.isAddress(token.address)
+  }
+
+  static isAddress(address: string): boolean {
+    return address === this.getAddress()
   }
 
   static find<U extends db.QueryPart = any>(

@@ -73,6 +73,8 @@ async function updateAccountBalances() {
   for (const account of accounts) {
     const { address, token_address } = account
     const contract = tokenContracts[token_address]
+
+    if (DistrictToken.isAddress(token_address)) continue
     if (!contract) {
       log.info(`No contract for address ${token_address} in account ${address}`)
       continue
