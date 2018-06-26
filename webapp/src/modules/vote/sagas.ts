@@ -17,6 +17,8 @@ import {
 } from 'modules/vote/types'
 import { Wallet } from 'modules/wallet/types'
 import { getData as getWallet } from 'modules/wallet/selectors'
+import { getPolls } from 'modules/poll/selectors'
+import { getData as getOptions } from 'modules/option/selectors'
 import { api } from 'lib/api'
 
 export function* voteSaga() {
@@ -40,12 +42,22 @@ function* handleVoteRequest(action: CreateVoteRequest) {
   try {
     const newVote = action.payload.newVote
     const wallet: Wallet = yield select(getWallet)
+
+    const polls: ReturnType<typeof getPolls> = yield select(getPolls)
+    const poll = polls[newVote.poll_id]
+
+    const options: ReturnType<typeof getOptions> = yield select(getOptions)
+    const option = options[newVote.option_id]
+
     const now = Date.now()
 
     // TODO: Balance by poll symbol
+    // TODO: Token by token.symbol
     const payload = `
-Poll Id: ${newVote.poll_id}
-Option Id: ${newVote.option_id}
+Poll Id: ${poll.id}
+Poll Title: ${poll.title}
+Option Id: ${option.id}
+Option Value: ${option.value}
 Current Balance: ${wallet.balances.mana}
 Token: MANA
 Timestamp: ${now}
