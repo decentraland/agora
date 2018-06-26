@@ -1,23 +1,34 @@
 {
   "global": {
     "poll": "Encuesta",
-    "polls": "Centro"
+    "polls": "Encuestas"
   },
   "languages": {
     "en": "Inglés",
     "es": "Español"
   },
   "vote_page": {
-    "title": "Emitir su voto"
+    "vote": "Votar",
+    "cancel": "Cancelar",
+    "no_mana": "No tienes suficiente MANA",
+    "voting_with": "Votando con"
   },
   "polls_page": {
-    "title": "Lista de Encuestas"
+    "title": "Encuestas",
+    "table": {
+      "title": "Título",
+      "submitter": "Autor",
+      "balance": "Balance",
+      "votes": "Votos"
+    }
   },
   "poll_detail_page": {
-    "tie": "EMPATE",
-    "vote": "VOTAR",
-    "title": "Página de detalles de la encuesta",
-    "closes_at": "Termina {time_in_words}",
-    "finished_at": "Terminado en {date}"
+    "votes": "Votos",
+    "when": "Fecha",
+    "address": "Dirección",
+    "amount": "Cantidad",
+    "vote": "Voto",
+    "cast_vote": "Emitir voto",
+    "you_voted": "Has votado {option}"
   }
 }

@@ -73,7 +73,9 @@ Timestamp: ${now}
     const vote: Vote = {
       ...newVote,
       message,
-      signature
+      signature,
+      created_at: new Date(now).toISOString(),
+      updated_at: new Date(now).toISOString()
     }
 
     yield put(createVoteSuccess(vote, wallet))

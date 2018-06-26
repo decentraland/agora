@@ -8,16 +8,27 @@
     "es": "Spanish"
   },
   "vote_page": {
-    "title": "Cast your vote"
+    "vote": "Vote now",
+    "cancel": "Cancel",
+    "no_mana": "You don't have any MANA",
+    "voting_with": "Voting with"
   },
   "polls_page": {
-    "title": "Polls List"
+    "title": "Polls",
+    "table": {
+      "title": "Title",
+      "submitter": "Submitter",
+      "balance": "Balance",
+      "votes": "Votes"
+    }
   },
   "poll_detail_page": {
-    "tie": "TIE",
-    "vote": "VOTE",
-    "title": "Poll Detail Page",
-    "closes_at": "Finishes {time_in_words}",
-    "finished_at": "Finished at {date}"
+    "votes": "Votes",
+    "when": "When",
+    "address": "Address",
+    "amount": "Amount",
+    "vote": "Vote",
+    "cast_vote": "Cast your vote",
+    "you_voted": "You voted {option}"
   }
 }

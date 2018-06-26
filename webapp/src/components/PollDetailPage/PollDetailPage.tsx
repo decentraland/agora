@@ -1,12 +1,27 @@
 import * as React from 'react'
 import { Link } from 'react-router-dom'
 import { locations } from 'locations'
-import { PollDetailPageProps, Tally } from 'components/PollDetailPage/types'
-import { Option } from 'modules/option/types'
-import { distanceInWordsToNow } from 'lib/utils'
+import {
+  PollDetailPageProps,
+  Tally,
+  Result
+} from 'components/PollDetailPage/types'
+import { distanceInWordsToNow, formatDate, formatNumber } from 'lib/utils'
 import { getVoteOptionValue } from 'modules/option/utils'
 import { isFinished } from 'modules/poll/utils'
 import { t } from 'modules/translation/utils'
+import {
+  Button,
+  Loader,
+  Header,
+  Stats,
+  Mana,
+  Table,
+  Blockie,
+  Address
+} from 'decentraland-ui'
+import './PollDetailPage.css'
+import PollProgress from 'components/PollProgress'
 
 export default class PollDetailPage extends React.PureComponent<
   PollDetailPageProps
@@ -33,12 +48,21 @@ export default class PollDetailPage extends React.PureComponent<
     }
   }
 
-  getCurrentResults(): Option[] {
+  getCurrentResults(): Result[] {
     const { poll } = this.props
     if (!poll || poll.votes.length === 0) return []
 
     const tally: Tally = poll.options.reduce(
-      (tally, option) => ({ ...tally, [option.id]: { votes: 0, option } }),
+      (tally, option) => ({
+        ...tally,
+        [option.id]: {
+          votes: 0,
+          option,
+          winner: false,
+          percentage: 0,
+          token: poll.token
+        }
+      }),
       {}
     )
 
@@ -46,110 +70,133 @@ export default class PollDetailPage extends React.PureComponent<
       tally[vote.option_id].votes += vote.account_balance
     }
 
-    let currentResults: Option[] = []
+    let currentResults: Result[] = []
     let maxVotes = -1
+    let totalVotes = 0
 
     for (const optionId in tally) {
       const result = tally[optionId]
+      currentResults.push(result)
+      maxVotes = maxVotes > result.votes ? maxVotes : result.votes
+      totalVotes += result.votes
+    }
 
-      if (result.votes === maxVotes) {
-        currentResults.push(result.option)
-      } else if (result.votes > maxVotes) {
-        currentResults = [result.option]
-        maxVotes = result.votes
-      }
+    const winners = currentResults.filter(result => result.votes === maxVotes)
+    if (winners.length === 1) {
+      winners[0].winner = true
     }
 
     return currentResults
+      .map(result => ({
+        ...result,
+        percentage: +(result.votes / totalVotes * 100).toFixed(1)
+      }))
+      .sort((a, b) => (a.votes > b.votes ? -1 : 1))
   }
 
   render() {
     const { poll, currentVote, isConnected, isLoading } = this.props
     const currentResults = this.getCurrentResults()
-
     return (
       <div className="PollDetailPage">
-        <h1>{t('poll_detail_page.title')}</h1>
-        <p>
-          <Link to={locations.polls()}>List</Link>
-        </p>
-
         {isLoading || !poll ? (
-          'Loading'
+          <Loader active size="massive" />
         ) : (
-          <React.Fragment>
-            <h2>Poll</h2>
-
-            <div>
+          <>
+            <Header className="title" size="large">
               {poll.title}
-              <br />
-              {poll.description}
-              <br />
-              {poll.balance} MANA
-              <br />
-              {/* prettier-ignore */
-              isFinished(poll)
-                ? t('poll_detail_page.finished_at', {
-                  date: new Date(poll.closes_at).toLocaleString()
-                })
-                : t('poll_detail_page.closes_at', {
-                  time_in_words: distanceInWordsToNow(poll.closes_at)
-                })}
+            </Header>
+            {poll.description ? <Header sub>{poll.description}</Header> : null}
+            <div className="stats">
+              <Stats title="Token">
+                {poll.token ? (
+                  <Mana data-balloon={poll.token.address} data-balloon-pos="up">
+                    {poll.token.symbol}
+                  </Mana>
+                ) : null}
+              </Stats>
+              <Stats title="Total Voted">
+                <Mana>{formatNumber(poll.balance)}</Mana>
+              </Stats>
+              <Stats title="Total Votes">
+                <Header>{poll.votes.length}</Header>
+              </Stats>
+              <Stats title="Parcial Results">
+                <Header>{isFinished(poll) ? 'No' : 'Yes'}</Header>
+              </Stats>
+              <Stats title="Time Left">
+                <Header>{distanceInWordsToNow(poll.closes_at, false)}</Header>
+              </Stats>
             </div>
 
-            <h4>Token</h4>
-            {poll.token ? (
-              <p>
-                {poll.token.symbol}: {poll.token.address}
-              </p>
-            ) : null}
-
-            <h4>Options {poll.options.length}</h4>
-            <ul>
-              {poll.options.map(option => (
-                <li key={option.id}>{option.value}</li>
-              ))}
-            </ul>
-
-            <h4>Votes {poll.votes.length}</h4>
-            <ul>
-              {poll.votes.map(vote => (
-                <li key={vote.id}>
-                  {vote.account_address}:{' '}
-                  {getVoteOptionValue(poll.options, vote)} Balance:{' '}
-                  {vote.account_balance}
-                </li>
-              ))}
-            </ul>
-
-            <h4>Your Vote</h4>
-            <p>
-              {currentVote
-                ? getVoteOptionValue(poll.options, currentVote)
-                : null}
-            </p>
-
-            <h4>Current Result</h4>
-            <p>
-              {currentResults.length > 0 ? (
-                <React.Fragment>
-                  {currentResults.length > 1
-                    ? `${t('poll_detail_page.tie')} `
-                    : null}
-                  {currentResults.map(result => result.value).join(', ')}
-                </React.Fragment>
-              ) : null}
-            </p>
-            <br />
-
-            {!isConnected || isFinished(poll) ? null : (
-              <div>
+            <div className="vote">
+              {!isConnected || isFinished(poll) ? null : (
                 <Link to={locations.voteDetail(poll.id)}>
-                  {t('poll_detail_page.vote')}
+                  <Button primary>{t('poll_detail_page.cast_vote')}</Button>
                 </Link>
-              </div>
-            )}
-          </React.Fragment>
+              )}
+
+              {currentVote ? (
+                <span className="your-vote">
+                  {t('poll_detail_page.you_voted', {
+                    option: getVoteOptionValue(poll.options, currentVote)
+                  })},{' '}
+                  <span className="time-ago">
+                    {distanceInWordsToNow(currentVote.updated_at)}.
+                  </span>
+                </span>
+              ) : null}
+            </div>
+
+            <div className="progress">
+              <PollProgress
+                results={currentResults}
+                isDocked={!isFinished(poll)}
+              />
+            </div>
+
+            <div className="votes">
+              <Header>{t('poll_detail_page.votes')}</Header>
+              <Table basic>
+                <Table.Header>
+                  <Table.Row>
+                    <Table.HeaderCell>
+                      {t('poll_detail_page.when')}
+                    </Table.HeaderCell>
+                    <Table.HeaderCell>
+                      {t('poll_detail_page.address')}
+                    </Table.HeaderCell>
+                    <Table.HeaderCell>
+                      {t('poll_detail_page.amount')}
+                    </Table.HeaderCell>
+                    <Table.HeaderCell>
+                      {t('poll_detail_page.vote')}
+                    </Table.HeaderCell>
+                  </Table.Row>
+                </Table.Header>
+
+                <Table.Body>
+                  {poll.votes.map((vote, index) => (
+                    <Table.Row key={vote.id}>
+                      <Table.Cell>{formatDate(vote.updated_at)}</Table.Cell>
+                      <Table.Cell>
+                        <Blockie scale={3} seed={vote.account_address}>
+                          &nbsp;<Address value={vote.account_address} />
+                        </Blockie>
+                      </Table.Cell>
+                      <Table.Cell>
+                        <Mana size="small" black />
+                        {formatNumber(vote.account_balance)}
+                      </Table.Cell>
+                      <Table.Cell>
+                        {getVoteOptionValue(poll.options, vote)}
+                      </Table.Cell>
+                    </Table.Row>
+                  ))}
+                </Table.Body>
+              </Table>
+            </div>
+          </>
         )}
       </div>
     )
