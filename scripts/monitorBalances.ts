@@ -43,15 +43,15 @@ export async function main() {
       provider: env.get('RPC_URL')
     })
 
-    const delay = env.get('MONITOR_BALANCES_DELAY', '5000')
+    const delay = env.get('MONITOR_BALANCES_DELAY', '10000')
     log.info(`Using ${delay}ms as delay between updates`)
     await monitorBalances(Number(delay))
   } catch (error) {
     log.info('Whoops, something went wrong')
     log.info(error)
-  }
 
-  process.exit()
+    process.exit()
+  }
 }
 
 async function monitorBalances(delay: number) {
@@ -61,6 +61,7 @@ async function monitorBalances(delay: number) {
   log.info('Updating Poll balances')
   await Poll.updateBalances()
 
+  log.info(`Sleeping for ${delay}ms`)
   setTimeout(() => monitorBalances(delay), delay)
 }
 
@@ -78,17 +79,17 @@ async function updateAccountBalances() {
     const contractBalance = await contract.balanceOf(address)
     const balance = eth.utils.fromWei(contractBalance).toString()
 
-    account.balance = balance
-    log.info(`Updating Account ${account.address} with balance ${balance}`)
-
-    await Account.update<AccountAttributes>(
-      { balance: account.balance },
-      { address, token_address }
-    )
-    await Vote.update<VoteAttributes>(
-      { account_balance: account.balance },
-      { account_address: address }
-    )
+    log.info(`Updating Accounts and votes ${address} with balance ${balance}`)
+    await Promise.all([
+      Account.update<AccountAttributes>(
+        { balance },
+        { address, token_address }
+      ),
+      Vote.update<VoteAttributes>(
+        { account_balance: balance },
+        { account_address: address }
+      )
+    ])
   }
 }
 
