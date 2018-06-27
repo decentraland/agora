@@ -1,5 +1,5 @@
-import { getType, getStatus, removeLast } from './utils'
 import { LoadingState, LoadingActions } from 'modules/loading/types'
+import { removeLast, getType, getStatus } from 'modules/loading/utils'
 
 const INITIAL_STATE: LoadingState = []
 

@@ -31,4 +31,5 @@ export const fetchTransactionFailure = (
     error
   })
 
-export const watchLoadingTransactions = () => action(WATCH_LOADING_TRANSACTIONS)
+export const watchLoadingTransactions = () =>
+  action(WATCH_LOADING_TRANSACTIONS, {})

@@ -6,7 +6,7 @@ import {
 } from 'modules/transaction/utils'
 import { getAddress } from 'modules/wallet/selectors'
 
-export const createTransactionMiddleware = (): any => {
+export const createTransactionMiddleware = () => {
   const middleware: RootMiddleware = store => next => action => {
     if (isTransactionAction(action)) {
       const address = getAddress(store.getState())

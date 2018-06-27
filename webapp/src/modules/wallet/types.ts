@@ -10,6 +10,9 @@ export const CONNECT_WALLET_FAILURE = '[Failure] Connect Wallet'
 
 // Interface and type definitions
 
+export type ConnectWalletSuccess = ReturnType<
+  typeof actions.connectWalletSuccess
+>
 export type WalletActions = ActionType<typeof actions>
 
 export interface Wallet {
