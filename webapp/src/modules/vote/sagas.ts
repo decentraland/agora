@@ -56,6 +56,7 @@ function* handleVoteRequest(action: CreateVoteRequest) {
     const payload = `
 Poll Id: ${poll.id}
 Poll Title: ${poll.title}
+Poll Description: ${poll.description}
 Option Id: ${option.id}
 Option Value: ${option.value}
 Current Balance: ${wallet.balances.mana}
