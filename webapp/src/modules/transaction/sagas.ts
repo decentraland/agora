@@ -18,7 +18,7 @@ export function* transactionSaga() {
   yield takeEvery(WATCH_LOADING_TRANSACTIONS, handleWatchLoadingTransactions)
 }
 
-const watchIndex = {
+const watchIndex: { [hash: string]: boolean } = {
   // hash: true
 }
 

@@ -80,7 +80,7 @@ export default class VotePage extends React.PureComponent<
               onSubmit={this.createVote}
               className="options"
             >
-              {options.map((option, index) => (
+              {options.map(option => (
                 <Radio
                   id={`option-${option.id}`}
                   key={option.id}

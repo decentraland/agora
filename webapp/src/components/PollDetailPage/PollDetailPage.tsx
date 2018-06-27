@@ -176,7 +176,7 @@ export default class PollDetailPage extends React.PureComponent<
                 </Table.Header>
 
                 <Table.Body>
-                  {poll.votes.map((vote, index) => (
+                  {poll.votes.map(vote => (
                     <Table.Row key={vote.id}>
                       <Table.Cell>{formatDate(vote.updated_at)}</Table.Cell>
                       <Table.Cell>

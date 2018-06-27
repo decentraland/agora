@@ -99,5 +99,5 @@ async function updateAccountBalances() {
 
 if (require.main === module) {
   loadEnv()
-  main()
+  main().catch(error => console.error(error))
 }

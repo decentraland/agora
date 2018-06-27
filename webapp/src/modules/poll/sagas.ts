@@ -11,8 +11,7 @@ import {
   FetchPollRequest,
   Poll,
   PollResponse,
-  PollWithAssociations,
-  FetchPollsRequest
+  PollWithAssociations
 } from 'modules/poll/types'
 import { api } from 'lib/api'
 
@@ -21,7 +20,7 @@ export function* pollSaga() {
   yield takeLatest(FETCH_POLL_REQUEST, handlePollRequest)
 }
 
-function* handlePollsRequest(action: FetchPollsRequest) {
+function* handlePollsRequest() {
   try {
     const polls: PollWithAssociations[] = yield call(() => api.fetchPolls())
 
