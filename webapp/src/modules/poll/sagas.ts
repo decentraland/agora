@@ -11,11 +11,10 @@ import {
   FetchPollRequest,
   Poll,
   PollResponse,
-  FetchPollsRequest,
-  PollWithPointers
+  PollWithAssociations,
+  FetchPollsRequest
 } from 'modules/poll/types'
 import { api } from 'lib/api'
-import { Token } from 'modules/token/types'
 
 export function* pollSaga() {
   yield takeLatest(FETCH_POLLS_REQUEST, handlePollsRequest)
@@ -24,7 +23,7 @@ export function* pollSaga() {
 
 function* handlePollsRequest(action: FetchPollsRequest) {
   try {
-    const polls: PollWithPointers[] = yield call(() => api.fetchPolls())
+    const polls: PollWithAssociations[] = yield call(() => api.fetchPolls())
 
     yield put(fetchPollsSuccess(polls))
   } catch (error) {
@@ -45,7 +44,7 @@ function* handlePollRequest(action: FetchPollRequest) {
       balance: Number(pollAttributes.balance)
     }
 
-    yield put(fetchPollSuccess(poll, token as Token, votes, options))
+    yield put(fetchPollSuccess(poll, token, votes, options))
   } catch (error) {
     yield put(fetchPollFailure(error.message))
   }

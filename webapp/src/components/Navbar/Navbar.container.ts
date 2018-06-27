@@ -1,4 +1,5 @@
 import { connect } from 'react-redux'
+import { Navbar } from 'decentraland-ui'
 import { RootState, RootDispatch } from 'types'
 import { Wallet } from 'modules/wallet/types'
 import {
@@ -6,7 +7,6 @@ import {
   isConnected,
   isConnecting
 } from 'modules/wallet/selectors'
-import { Navbar } from 'decentraland-ui'
 import { isModalPage } from 'modules/location/selectors'
 import { push, goBack, RouterAction } from 'react-router-redux'
 import { locations } from 'locations'

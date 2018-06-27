@@ -1,6 +1,6 @@
 import { Model, SQL, raw } from 'decentraland-server'
 import { PollAttributes, PollWithPointers } from './Poll.types'
-import { Token } from '../Token'
+import { PollQueries } from './Poll.queries'
 import { Vote, VoteQueries } from '../Vote'
 import { Option } from '../Option'
 import { ModelQueries } from '../lib'
@@ -20,19 +20,14 @@ export class Poll extends Model<PollAttributes> {
         GROUP BY p.id`)
   }
 
+  static async findWithAssociations() {
+    return this.query<PollAttributes>(PollQueries.findWithAssociations())
+  }
+
   static async findByIdWithAssociations(id: string) {
-    // prettier-ignore
-    const rows = await this.query<PollAttributes>(SQL`
-      SELECT p.*,
-            row_to_json(t.*) as token,
-            ${ModelQueries.jsonAgg('v')} as votes,
-            ${ModelQueries.jsonAgg('o')} as options
-        FROM ${raw(this.tableName)} p
-          JOIN ${raw(Token.tableName)} t ON t.address = p.token_address
-          LEFT JOIN ${raw(Vote.tableName)} v ON v.poll_id = p.id
-          LEFT JOIN ${raw(Option.tableName)} o ON o.poll_id = p.id
-        WHERE p.id = ${id}
-        GROUP BY p.id, t.address`)
+    const rows = await this.query<PollAttributes>(
+      PollQueries.findWithAssociations(SQL`WHERE p.id = ${id}`)
+    )
     return rows[0]
   }
 
