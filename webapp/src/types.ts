@@ -1,13 +1,13 @@
-import { AnyAction } from 'redux'
+import { MiddlewareAPI, AnyAction } from 'redux'
 import { Store } from 'react-redux'
 import { RouterState, RouterAction } from 'react-router-redux'
 
-import { OptionState } from 'modules/option/types'
+import { OptionState, OptionActions } from 'modules/option/types'
 import { PollState, PollActions } from 'modules/poll/types'
 import { TokenState } from 'modules/token/types'
 import { TransactionState, TransactionActions } from 'modules/transaction/types'
 import { TranslationState, TranslationActions } from 'modules/translation/types'
-import { VoteState } from 'modules/vote/types'
+import { VoteState, VoteActions } from 'modules/vote/types'
 import { WalletState, WalletActions } from 'modules/wallet/types'
 
 export type RootState = {
@@ -24,6 +24,8 @@ export type RootState = {
 export type RootAction =
   | RouterAction
   | PollActions
+  | OptionActions
+  | VoteActions
   | TransactionActions
   | TranslationActions
   | WalletActions
@@ -35,5 +37,5 @@ export interface RootDispatch<A = RootAction> {
 }
 
 export type RootMiddleware = (
-  store: RootStore
-) => (next: RootDispatch) => (action: AnyAction) => any
+  store: MiddlewareAPI<any>
+) => (next: RootDispatch<AnyAction>) => (action: AnyAction) => any

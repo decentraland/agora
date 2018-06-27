@@ -17,6 +17,7 @@ export type FetchPollVotesRequest = ReturnType<
   typeof actions.fetchVotesByPollIdRequest
 >
 export type CreateVoteRequest = ReturnType<typeof actions.createVoteRequest>
+export type CreateVoteSuccess = ReturnType<typeof actions.createVoteSuccess>
 
 export type VoteActions = ActionType<typeof actions>
 

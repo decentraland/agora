@@ -12,6 +12,7 @@
     "@types/react-router-dom": "^4.2.6",
     "@types/react-router-redux": "^5.0.14",
     "@types/redux-logger": "^3.0.6",
+    "@types/segment-analytics": "0.0.28",
     "@types/uuid": "^3.4.3",
     "autoprefixer": "7.1.6",
     "axios": "^0.17.0",
@@ -128,5 +129,9 @@
   "eslintConfig": {
     "extends": "react-app"
   },
-  "prettier": { "printWidth": 80, "singleQuote": true, "semi": false }
+  "prettier": {
+    "printWidth": 80,
+    "singleQuote": true,
+    "semi": false
+  }
 }

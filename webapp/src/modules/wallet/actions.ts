@@ -6,7 +6,7 @@ import {
   Wallet
 } from 'modules/wallet/types'
 
-export const connectWalletRequest = () => action(CONNECT_WALLET_REQUEST)
+export const connectWalletRequest = () => action(CONNECT_WALLET_REQUEST, {})
 
 export const connectWalletSuccess = (wallet: Wallet) =>
   action(CONNECT_WALLET_SUCCESS, { wallet })

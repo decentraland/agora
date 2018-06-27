@@ -6,6 +6,8 @@ import createHistory from 'history/createBrowserHistory'
 import createSagasMiddleware from 'redux-saga'
 
 import { createTransactionMiddleware } from './modules/transaction/middleware'
+import { createAnalyticsMiddleware } from 'modules/analytics/middleware'
+
 import { rootReducer } from './reducer'
 import { rootSaga } from './sagas'
 
@@ -21,12 +23,16 @@ const loggerMiddleware = createLogger({
   predicate: (_: any, action) =>
     env.isDevelopment() || action.type.includes('Failure')
 })
+const analyticsMiddleware = createAnalyticsMiddleware(
+  env.get('REACT_APP_SEGMENT_API_KEY')
+)
 const transactionMiddleware = createTransactionMiddleware()
 
 const middleware = applyMiddleware(
   historyMiddleware,
   sagasMiddleware,
   loggerMiddleware,
+  analyticsMiddleware,
   transactionMiddleware
 )
 const enhancer = composeEnhancers(middleware)
