@@ -1,4 +1,4 @@
-import { AccountBalanceAttributes } from './Account.types'
+import { AccountBalanceAttributes } from './AccountBalance.types'
 import { ModelWithCallbacks } from '../lib'
 import { db } from 'decentraland-server'
 
