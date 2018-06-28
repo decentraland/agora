@@ -50,8 +50,6 @@ function* handleVoteRequest(action: CreateVoteRequest) {
     const options: ReturnType<typeof getOptions> = yield select(getOptions)
     const option = options[newVote.option_id]
 
-    const now = Date.now()
-
     const payload = `
 Poll Id: ${poll.id}
 Poll Title: ${poll.title}
@@ -60,7 +58,7 @@ Option Id: ${option.id}
 Option Value: ${option.value}
 Current Balance: ${getBalanceInPoll(wallet, poll)}
 Token: ${poll.token.symbol}
-Timestamp: ${now}
+Timestamp: ${newVote.timestamp}
     `
     const { message, signature } = yield call(() => eth.sign(payload))
     // TODO: We might want to fire an action here to update the optimistic vote
@@ -73,9 +71,7 @@ Timestamp: ${now}
     const vote: Vote = {
       ...newVote,
       message,
-      signature,
-      created_at: new Date(now).toISOString(),
-      updated_at: new Date(now).toISOString()
+      signature
     }
 
     yield put(createVoteSuccess(vote, wallet))

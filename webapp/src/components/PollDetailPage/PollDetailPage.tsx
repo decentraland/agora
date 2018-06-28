@@ -148,7 +148,7 @@ export default class PollDetailPage extends React.PureComponent<
                     option: getVoteOptionValue(poll.options, currentVote)
                   })},{' '}
                   <span className="time-ago">
-                    {distanceInWordsToNow(currentVote.updated_at)}.
+                    {distanceInWordsToNow(currentVote.timestamp)}.
                   </span>
                 </span>
               ) : null}
@@ -184,7 +184,7 @@ export default class PollDetailPage extends React.PureComponent<
                 <Table.Body>
                   {poll.votes.map(vote => (
                     <Table.Row key={vote.id}>
-                      <Table.Cell>{formatDate(vote.updated_at)}</Table.Cell>
+                      <Table.Cell>{formatDate(vote.timestamp)}</Table.Cell>
                       <Table.Cell>
                         <Blockie scale={3} seed={vote.account_address}>
                           &nbsp;<Address value={vote.account_address} />

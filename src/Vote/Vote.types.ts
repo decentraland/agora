@@ -9,6 +9,7 @@ export interface VoteAttributes {
   account_balance: string // DECIMAL
   poll_id: string
   option_id: string
+  timestamp: string // DECIMAL
   message: string
   signature: string
   created_at?: Date

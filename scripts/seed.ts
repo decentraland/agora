@@ -68,6 +68,7 @@ async function seed() {
       account_balance: '10',
       poll_id: poll.id,
       option_id: options[0].id,
+      timestamp: Date.now(),
       message: 'signed1',
       signature: 'signature1'
     }),
@@ -76,6 +77,7 @@ async function seed() {
       account_balance: '25',
       poll_id: poll.id,
       option_id: options[1].id,
+      timestamp: Date.now(),
       message: 'signed2',
       signature: 'signature2'
     }),
@@ -84,6 +86,7 @@ async function seed() {
       account_balance: '15',
       poll_id: poll.id,
       option_id: options[1].id,
+      timestamp: Date.now(),
       message: 'signed3',
       signature: 'signature3'
     })
