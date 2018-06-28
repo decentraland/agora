@@ -1,13 +1,13 @@
 import { connect } from 'react-redux'
 import { RootDispatch, RootState } from 'types'
 import { navigateTo } from 'modules/location/actions'
-import { getPolls } from 'modules/poll/selectors'
-import { getData as getWallet, isConnected } from 'modules/wallet/selectors'
-import { isLoading as isVoteLoading } from 'modules/vote/selectors'
-import { isLoading as isOptionLoading } from 'modules/option/selectors'
+import { getPolls, isLoading as isPollLoading } from 'modules/poll/selectors'
+import { getWallet, isConnected } from 'modules/wallet/selectors'
 import { fetchPollRequest } from 'modules/poll/actions'
+import { createVoteRequest } from 'modules/vote/actions'
 import { PollActions } from 'modules/poll/types'
 import { Wallet } from 'modules/wallet/types'
+import { VoteActions, NewVote } from 'modules/vote/types'
 import { LocationActions } from 'modules/location/types'
 import { VotePageProps } from 'components/VotePage/types'
 import { findWalletVote } from 'modules/vote/utils'
@@ -16,25 +16,18 @@ import VotePage from './VotePage'
 
 const mapState = (state: RootState, ownProps: VotePageProps): VotePageProps => {
   const pollId = ownProps.match.params.id
-  const isLoading = isVoteLoading(state) || isOptionLoading(state)
+  const isLoading = isPollLoading(state)
   const wallet = getWallet(state) as Wallet
   const polls = getPolls(state)
 
   const poll = polls[pollId] || null
-  let options = null
-  let currentVote = null
-
-  if (poll) {
-    options = poll.options
-    currentVote = findWalletVote(wallet, poll.votes)
-  }
+  const currentVote = poll ? findWalletVote(wallet, poll.votes) : null
 
   return {
     ...ownProps,
     pollId,
     poll,
     wallet,
-    options,
     currentVote,
     isLoading,
     isConnected: isConnected(state)
@@ -42,9 +35,10 @@ const mapState = (state: RootState, ownProps: VotePageProps): VotePageProps => {
 }
 
 const mapDispatch = (
-  dispatch: RootDispatch<PollActions | LocationActions>
+  dispatch: RootDispatch<PollActions | VoteActions | LocationActions>
 ) => ({
   onFetchPoll: (id: string) => dispatch(fetchPollRequest(id)),
+  onCreateVote: (newVote: NewVote) => dispatch(createVoteRequest(newVote)),
   onNavigate: (url: string) => dispatch(navigateTo(url))
 })
 

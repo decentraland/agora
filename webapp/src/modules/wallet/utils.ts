@@ -1,6 +1,8 @@
-import { eth, contracts, wallets, Contract } from 'decentraland-eth'
+import { eth, wallets, Contract } from 'decentraland-eth'
 import { env, utils } from 'decentraland-commons'
 import { isMobile } from 'lib/utils'
+import { Wallet } from 'modules/wallet/types'
+import { Poll } from 'modules/poll/types'
 
 interface ConnectOptions {
   address: string
@@ -32,9 +34,7 @@ export async function connectEthereumWallet(
 }
 
 function getContracts(): Contract[] {
-  return [
-    new contracts.MANAToken(env.get('REACT_APP_MANA_TOKEN_CONTRACT_ADDRESS')) // TODO: Should this be dynamic via token addresses ?
-  ]
+  return []
 }
 
 function getWallets(
@@ -51,4 +51,8 @@ function getWallets(
 
 export function isLedgerWallet() {
   return eth.wallet instanceof wallets.LedgerWallet
+}
+
+export function getBalanceInPoll(wallet: Wallet, poll: Poll) {
+  return wallet.balances[poll.token_address]
 }

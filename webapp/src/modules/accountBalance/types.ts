@@ -1,6 +1,7 @@
 import { ActionType } from 'typesafe-actions'
 import { LoadingState } from 'modules/loading/types'
-import * as actions from 'modules/account/actions'
+import * as actions from 'modules/accountBalance/actions'
+import { ModelByAddress } from 'lib/types'
 
 export const FETCH_ACCOUNT_BALANCES_REQUEST = '[Request] Fetch Account Balances'
 export const FETCH_ACCOUNT_BALANCES_SUCCESS = '[Success] Fetch Account Balances'
@@ -12,7 +13,7 @@ export type FetchAccountBalancesRequest = ReturnType<
   typeof actions.fetchAccountBalancesRequest
 >
 
-export type AccountActions = ActionType<typeof actions>
+export type AccountBalanceActions = ActionType<typeof actions>
 
 export interface AccountBalance {
   address: string
@@ -20,17 +21,8 @@ export interface AccountBalance {
   balance: number
 }
 
-export interface Account {
-  address: string
-  tokens: {
-    [address: string]: number
-  }
-}
-
-export type AccountState = {
-  data: {
-    [address: string]: Account
-  }
+export type AccountBalanceState = {
+  data: ModelByAddress<AccountBalance>
   loading: LoadingState
   error: string | null
 }

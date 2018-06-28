@@ -4,7 +4,7 @@ import {
   FETCH_ACCOUNT_BALANCES_SUCCESS,
   FETCH_ACCOUNT_BALANCES_FAILURE,
   AccountBalance
-} from 'modules/account/types'
+} from 'modules/accountBalance/types'
 
 export const fetchAccountBalancesRequest = (address: string) =>
   action(FETCH_ACCOUNT_BALANCES_REQUEST, { address })

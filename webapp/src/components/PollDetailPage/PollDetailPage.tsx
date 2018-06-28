@@ -37,8 +37,8 @@ export default class PollDetailPage extends React.PureComponent<
   }
 
   componentWillMount() {
-    const { onFetchPoll, match } = this.props
-    onFetchPoll(match.params.id)
+    const { onFetchPoll, pollId } = this.props
+    onFetchPoll(pollId)
   }
 
   componentWillReceiveProps(nextProps: PollDetailPageProps) {
@@ -102,21 +102,27 @@ export default class PollDetailPage extends React.PureComponent<
         {isLoading || !poll ? (
           <Loader active size="massive" />
         ) : (
-          <>
+          <React.Fragment>
             <Header className="title" size="large">
               {poll.title}
             </Header>
             {poll.description ? <Header sub>{poll.description}</Header> : null}
             <div className="stats">
               <Stats title="Token">
-                {poll.token ? (
+                {poll.token.symbol === 'MANA' ? (
                   <Mana data-balloon={poll.token.address} data-balloon-pos="up">
                     {poll.token.symbol}
                   </Mana>
-                ) : null}
+                ) : (
+                  <Header>{poll.token.symbol}</Header>
+                )}
               </Stats>
               <Stats title="Total Voted">
-                <Mana>{formatNumber(poll.balance)}</Mana>
+                {poll.token.symbol === 'MANA' ? (
+                  <Mana>{formatNumber(poll.balance)}</Mana>
+                ) : (
+                  <Header>{formatNumber(poll.balance)}</Header>
+                )}
               </Stats>
               <Stats title="Total Votes">
                 <Header>{poll.votes.length}</Header>
@@ -196,7 +202,7 @@ export default class PollDetailPage extends React.PureComponent<
                 </Table.Body>
               </Table>
             </div>
-          </>
+          </React.Fragment>
         )}
       </div>
     )

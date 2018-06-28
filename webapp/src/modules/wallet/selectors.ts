@@ -1,6 +1,13 @@
+import { createSelector } from 'reselect'
 import { RootState } from 'types'
-import { CONNECT_WALLET_REQUEST, WalletState } from 'modules/wallet/types'
+import {
+  CONNECT_WALLET_REQUEST,
+  WalletState,
+  Wallet
+} from 'modules/wallet/types'
+import { AccountBalanceState } from 'modules/accountBalance/types'
 import { isLoadingType } from 'modules/loading/selectors'
+import { getData as getAccountBalances } from 'modules/accountBalance/selectors'
 
 export const getState: (state: RootState) => WalletState = state => state.wallet
 export const getData: (state: RootState) => WalletState['data'] = state =>
@@ -27,3 +34,21 @@ export const isConnected: (state: RootState) => boolean = state =>
 
 export const isConnecting: (state: RootState) => boolean = state =>
   isLoadingType(getLoading(state), CONNECT_WALLET_REQUEST)
+
+export const getWallet = createSelector<
+  RootState,
+  WalletState['data'],
+  AccountBalanceState['data'],
+  Partial<Wallet>
+>(getData, getAccountBalances, (wallet, accountBalances) => {
+  const balances = {}
+
+  for (const accountBalance of Object.values(accountBalances)) {
+    balances[accountBalance.token_address] = accountBalance.balance
+  }
+
+  return {
+    ...wallet,
+    balances
+  }
+})

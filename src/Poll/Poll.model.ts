@@ -21,7 +21,9 @@ export class Poll extends Model<PollAttributes> {
   }
 
   static async findWithAssociations() {
-    return this.query<PollAttributes>(PollQueries.findWithAssociations())
+    return this.query<PollAttributes>(SQL`
+      ${PollQueries.findWithAssociations()}
+      ORDER BY p.created_at`)
   }
 
   static async findByIdWithAssociations(id: string) {

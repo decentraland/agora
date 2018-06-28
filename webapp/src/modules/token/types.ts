@@ -1,15 +1,16 @@
 import { LoadingState } from 'modules/loading/types'
+import { ModelByAddress } from 'lib/types'
 
 // Interface and type definitions
 
 export interface Token {
-  symbol: string
   address: string
+  symbol: string
   name: string
 }
 
 export type TokenState = {
-  data: { [address: string]: Token }
+  data: ModelByAddress<Token>
   loading: LoadingState
   error: string | null
 }

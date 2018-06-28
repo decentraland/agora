@@ -16,20 +16,22 @@ export type ConnectWalletSuccess = ReturnType<
 
 export type WalletActions = ActionType<typeof actions>
 
-export interface Wallet {
+export interface BaseWallet {
   type: string
   network: string
   address: string
   locale?: string
   derivationPath?: string
-  manaBalance: number
+}
+
+export interface Wallet extends BaseWallet {
   balances: {
-    [symbol: string]: number
+    [address: string]: number
   }
 }
 
 export type WalletState = {
-  data: Partial<Wallet>
+  data: Partial<BaseWallet>
   loading: LoadingState
   error: string | null
 }

@@ -3,19 +3,19 @@ import {
   fetchAccountBalancesRequest,
   fetchAccountBalancesSuccess,
   fetchAccountBalancesFailure
-} from 'modules/account/actions'
+} from 'modules/accountBalance/actions'
 import {
   FETCH_ACCOUNT_BALANCES_REQUEST,
   FetchAccountBalancesRequest,
   AccountBalance
-} from 'modules/account/types'
+} from 'modules/accountBalance/types'
 import {
   CONNECT_WALLET_SUCCESS,
   ConnectWalletSuccess
 } from 'modules/wallet/types'
 import { api } from 'lib/api'
 
-export function* accountSaga() {
+export function* accountBalanceSaga() {
   yield takeLatest(CONNECT_WALLET_SUCCESS, handleWalletSuccess)
   yield takeLatest(FETCH_ACCOUNT_BALANCES_REQUEST, handleAccountsRequest)
 }

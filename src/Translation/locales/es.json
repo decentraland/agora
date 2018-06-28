@@ -10,7 +10,7 @@
   "vote_page": {
     "vote": "Votar",
     "cancel": "Cancelar",
-    "no_mana": "No tienes suficiente MANA",
+    "no_balance": "No tienes suficiente {symbol}",
     "voting_with": "Votando con"
   },
   "polls_page": {
