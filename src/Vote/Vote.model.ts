@@ -19,11 +19,4 @@ export class Vote extends Model<VoteAttributes> {
         JOIN ${raw(Token.tableName)} t ON t.address = p.token_address
       WHERE v.id = ${id}`)
   }
-
-  static async findByPollId(pollId: string) {
-    return this.query<VoteAttributes>(SQL`
-      SELECT *
-        FROM ${SQL.raw(this.tableName)}
-        WHERE poll_id = ${pollId}`)
-  }
 }

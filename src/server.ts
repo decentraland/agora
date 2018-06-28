@@ -1,6 +1,7 @@
 import * as bodyParser from 'body-parser'
 import * as express from 'express'
 import { env } from 'decentraland-commons'
+import { AccountBalanceRouter } from './AccountBalance'
 import { OptionRouter } from './Option'
 import { PollRouter } from './Poll'
 import { ReceiptRouter } from './Receipt'
@@ -31,6 +32,7 @@ if (env.isDevelopment()) {
   })
 }
 
+new AccountBalanceRouter(app).mount()
 new PollRouter(app).mount()
 new OptionRouter(app).mount()
 new VoteRouter(app).mount()

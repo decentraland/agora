@@ -40,6 +40,7 @@ function* handleConnectWalletRequest() {
       network: network.name,
       type: eth.wallet.type,
       derivationPath: eth.wallet.derivationPath,
+      manaBalance: mana,
       balances: { mana }
     }
     yield handleConnectWalletSuccess()

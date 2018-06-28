@@ -1,4 +1,4 @@
-import { Model, ModelById } from 'lib/types'
+import { Model, ModelById, DataByKey } from 'lib/types'
 import * as dateFnsFormat from 'date-fns/format'
 import * as dateFnsDistanceInWordsToNow from 'date-fns/distance_in_words_to_now'
 import { getCurrentLocale } from 'modules/translation/utils'
@@ -18,10 +18,18 @@ export function toObjectById<T extends Model>(
   values: T[],
   currentValues: ModelById<T> = {}
 ): ModelById<T> {
+  return toObjectByKey<T>(values, currentValues, 'id')
+}
+
+export function toObjectByKey<T extends Object>(
+  values: T[],
+  currentValues: DataByKey<T> = {},
+  key: keyof T
+): DataByKey<T> {
   return values.reduce(
     (valueHash, value) => ({
       ...valueHash,
-      [value.id]: value
+      [value[key].toString()]: value
     }),
     currentValues
   )

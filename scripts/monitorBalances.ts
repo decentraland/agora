@@ -4,7 +4,7 @@ import { Log, env } from 'decentraland-commons'
 import { contracts, eth } from 'decentraland-eth'
 import { db } from '../src/database'
 import { Token, TokenAttributes, DistrictToken } from '../src/Token'
-import { Account, AccountAttributes } from '../src/Account'
+import { AccountBalance, AccountBalanceAttributes } from '../src/AccountBalance'
 import { loadEnv } from './utils'
 import { Poll } from '../src/Poll'
 import { Vote, VoteAttributes } from '../src/Vote'
@@ -68,7 +68,7 @@ async function monitorBalances(delay: number) {
 }
 
 async function updateAccountBalances() {
-  const accounts = await Account.find<AccountAttributes>()
+  const accounts = await AccountBalance.find<AccountBalanceAttributes>()
 
   for (const account of accounts) {
     const { address, token_address } = account
@@ -85,7 +85,7 @@ async function updateAccountBalances() {
 
     log.info(`Updating Accounts and votes ${address} with balance ${balance}`)
     await Promise.all([
-      Account.update<AccountAttributes>(
+      AccountBalance.update<AccountBalanceAttributes>(
         { balance },
         { address, token_address }
       ),

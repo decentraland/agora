@@ -13,13 +13,11 @@ export interface VotePageProps {
   pollId: string
   poll: Poll | null
   wallet: Wallet
-  votes: Vote[] | null
   options: Option[] | null
   currentVote: Vote | null
   isLoading: boolean
   isConnected: boolean
-  onFetchPollOptions: Function
-  onFetchPollVotes: Function
+  onFetchPoll: Function
   onCreateVote: Function
   onNavigate: Function
 }

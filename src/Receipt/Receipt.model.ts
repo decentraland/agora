@@ -43,10 +43,6 @@ export class Receipt extends ModelWithCallbacks<ReceiptAttributes> {
     }
   }
 
-  static async findByAccountAddress(accountAddress: string) {
-    return this.find<ReceiptAttributes>({ account_address: accountAddress })
-  }
-
   private static deleteNonce<U>(row: U): U {
     const attributes = Object.assign({}, row)
     delete attributes['nonce']

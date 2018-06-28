@@ -5,7 +5,7 @@ import { cli } from 'decentraland-server'
 import { Log } from 'decentraland-commons'
 
 import { db } from '../src/database'
-import { Account } from '../src/Account'
+import { AccountBalance } from '../src/AccountBalance'
 import { DistrictToken } from '../src/Token'
 import { loadEnv, runpsql } from './utils'
 
@@ -13,7 +13,7 @@ const log = new Log('init-db')
 
 export async function initializeDatabase() {
   const shouldContinue = await cli.confirm(
-    `Careful! this will DROP 'projects' and upsert 'accounts' and a district token.
+    `Careful! this will DROP 'projects' and upsert 'account_balances' and a district token.
 Do you wish to continue?`
   )
   if (!shouldContinue) return process.exit()
@@ -54,7 +54,7 @@ async function upsertDistrictAccountsFromContributions() {
     const address = districtEntry.address.toLowerCase()
 
     log.info(`Upserting ${address}`)
-    const account = new Account({
+    const account = new AccountBalance({
       address,
       token_address: token.get('address'),
       balance: '1'

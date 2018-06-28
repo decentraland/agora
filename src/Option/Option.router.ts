@@ -3,6 +3,7 @@ import * as express from 'express'
 
 import { Router } from '../lib'
 import { Option } from './Option.model'
+import { OptionAttributes } from './Option.types'
 
 export class OptionRouter extends Router {
   mount() {
@@ -12,8 +13,8 @@ export class OptionRouter extends Router {
     this.app.get('/polls/:id/options', server.handleRequest(this.getPollVotes))
   }
 
-  async getPollVotes(req: express.Request): Promise<any> {
+  async getPollVotes(req: express.Request) {
     const pollId = server.extractFromReq(req, 'id')
-    return Option.findByPollId(pollId)
+    return Option.find<OptionAttributes>({ poll_id: Number(pollId) })
   }
 }

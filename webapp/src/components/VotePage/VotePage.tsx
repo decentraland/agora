@@ -20,19 +20,11 @@ export default class VotePage extends React.PureComponent<
   }
 
   componentWillMount() {
-    const {
-      poll,
-      isConnected,
-      onNavigate,
-      onFetchPollVotes,
-      onFetchPollOptions,
-      match
-    } = this.props
+    const { isConnected, onNavigate, onFetchPoll, match } = this.props
     const pollId = match.params.id
 
-    if (poll && isConnected) {
-      onFetchPollOptions(pollId)
-      onFetchPollVotes(pollId)
+    if (isConnected) {
+      onFetchPoll(pollId)
     } else {
       onNavigate(locations.pollDetail(pollId))
     }
@@ -58,15 +50,24 @@ export default class VotePage extends React.PureComponent<
     event.preventDefault()
   }
 
+  getSelectedOptionId() {
+    const { currentVote } = this.props
+    let { selectedOptionId } = this.state
+
+    return currentVote && selectedOptionId === ''
+      ? currentVote.option_id
+      : selectedOptionId
+  }
+
   render() {
-    const { pollId, poll, wallet, options, votes, isLoading } = this.props
-    const { selectedOptionId } = this.state
+    const { pollId, poll, wallet, options, currentVote, isLoading } = this.props
+    const selectedOptionId = this.getSelectedOptionId()
 
     // TODO: Replace `.mana` for the poll token symbol
 
     return (
       <div className="VotePage">
-        {isLoading || !options || !votes || !poll ? (
+        {isLoading || !options || !currentVote || !poll ? (
           <Loader active size="massive" />
         ) : (
           <React.Fragment>
@@ -87,7 +88,7 @@ export default class VotePage extends React.PureComponent<
                   name="vote-option"
                   label={option.value}
                   value={option.id}
-                  checked={option.id === selectedOptionId}
+                  checked={selectedOptionId === option.id}
                   onChange={this.selectOption}
                 />
               ))}

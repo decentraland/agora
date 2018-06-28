@@ -13,6 +13,7 @@ export const CONNECT_WALLET_FAILURE = '[Failure] Connect Wallet'
 export type ConnectWalletSuccess = ReturnType<
   typeof actions.connectWalletSuccess
 >
+
 export type WalletActions = ActionType<typeof actions>
 
 export interface Wallet {
@@ -21,6 +22,7 @@ export interface Wallet {
   address: string
   locale?: string
   derivationPath?: string
+  manaBalance: number
   balances: {
     [symbol: string]: number
   }
