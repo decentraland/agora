@@ -90,12 +90,10 @@ async function upsertDistrictAccountsFromContributions() {
 
 async function upsertToken(project: Project) {
   if (!project.lookup) return null
-
   const name = project.name
-  const id = project.lookup.replace(',', '-')
 
   log.info(`Upserting Token for ${name}`)
-  const token = new DistrictToken(name, id)
+  const token = new DistrictToken(name)
   await token.upsert({ target: ['address'] })
 
   return token
