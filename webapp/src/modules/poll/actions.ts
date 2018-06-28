@@ -7,14 +7,14 @@ import {
   FETCH_POLL_SUCCESS,
   FETCH_POLL_FAILURE,
   Poll,
-  PollWithPointers
+  PollWithAssociations
 } from 'modules/poll/types'
 import { Token } from 'modules/token/types'
 import { Option } from 'modules/option/types'
 import { Vote } from 'modules/vote/types'
 
 export const fetchPollsRequest = () => action(FETCH_POLLS_REQUEST, {})
-export const fetchPollsSuccess = (polls: PollWithPointers[]) =>
+export const fetchPollsSuccess = (polls: PollWithAssociations[]) =>
   action(FETCH_POLLS_SUCCESS, { polls })
 export const fetchPollsFailure = (error: string) =>
   action(FETCH_POLLS_FAILURE, { error })

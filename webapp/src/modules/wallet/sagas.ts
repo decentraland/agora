@@ -14,7 +14,7 @@ export function* walletSaga() {
   yield takeEvery(CONNECT_WALLET_REQUEST, handleConnectWalletRequest)
 }
 
-function* handleConnectWalletRequest(action = {}) {
+function* handleConnectWalletRequest() {
   try {
     if (!eth.isConnected()) {
       const { address, derivationPath } = yield select(getWallet)

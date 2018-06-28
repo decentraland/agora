@@ -7,8 +7,7 @@ import {
   FETCH_POLL_SUCCESS,
   FETCH_POLL_FAILURE,
   PollActions,
-  PollState,
-  PollWithPointers
+  PollState
 } from 'modules/poll/types'
 import { FETCH_POLL_OPTIONS_SUCCESS, OptionActions } from 'modules/option/types'
 import {
@@ -17,7 +16,7 @@ import {
   VoteActions
 } from 'modules/vote/types'
 import { loadingReducer } from 'modules/loading/reducer'
-import { toObjectById } from 'lib/utils'
+import { buildPoll } from 'modules/poll/utils'
 
 const INITIAL_STATE: PollState = {
   data: {},
@@ -41,14 +40,22 @@ export const pollReducer: Reducer<PollState> = (
       return {
         loading: loadingReducer(state.loading, action),
         error: null,
-        data: {
-          ...state.data,
-          ...toObjectById<PollWithPointers>(action.payload.polls, state.data)
-        }
+        data: action.payload.polls.reduce(
+          (polls, pollWithAssociations) => {
+            const { token, votes, options, ...poll } = pollWithAssociations
+
+            polls[poll.id] = {
+              ...state.data[poll.id],
+              ...buildPoll(poll, token, votes, options)
+            }
+            return polls
+          },
+          { ...state.data }
+        )
       }
     }
     case FETCH_POLL_SUCCESS: {
-      const { poll, votes, options } = action.payload
+      const { poll, token, votes, options } = action.payload
 
       return {
         loading: loadingReducer(state.loading, action),
@@ -57,9 +64,7 @@ export const pollReducer: Reducer<PollState> = (
           ...state.data,
           [poll.id]: {
             ...state.data[poll.id],
-            ...poll,
-            vote_ids: votes.map(vote => vote.id),
-            option_ids: options.map(option => option.id)
+            ...buildPoll(poll, token, votes, options)
           }
         }
       }

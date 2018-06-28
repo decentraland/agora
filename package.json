@@ -4,8 +4,8 @@
   "description": "A place for the Decentraland community to vote on important topics",
   "main": "src/server.js",
   "scripts": {
-    "lint": "tslint -p src/tsconfig.json --fix",
-    "lint:fix": "tslint -p src/tsconfig.json",
+    "lint": "tslint -p src/tsconfig.json && tslint -p scripts/tsconfig.json",
+    "lint:fix": "tslint -p src/tsconfig.json --fix",
     "test": "npx mocha -r ts-node/register -r specs/specs_setup.ts specs/setup.ts src/**{/**,/}/*.spec.ts",
     "test:watch": "npm run test -- --watch",
     "migrate": "./scripts/migrate.ts",

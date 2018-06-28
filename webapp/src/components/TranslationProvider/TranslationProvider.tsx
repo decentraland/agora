@@ -1,9 +1,9 @@
 import * as React from 'react'
 
+import { Loader } from 'decentraland-ui'
 import TranslationSetup from './TranslationSetup'
 import { I18nProvider, addAvailableLocaleData } from 'modules/translation/utils'
 import { TranslationProviderProps } from 'components/TranslationProvider/types'
-import { Loader } from 'decentraland-ui'
 
 export default class TranslationProvider extends React.PureComponent<
   TranslationProviderProps

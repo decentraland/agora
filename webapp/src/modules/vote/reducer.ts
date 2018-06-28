@@ -1,21 +1,24 @@
 import { Reducer } from 'redux'
 import {
-  VoteState,
-  Vote,
-  VoteActions,
   FETCH_POLL_VOTES_FAILURE,
   FETCH_POLL_VOTES_SUCCESS,
   FETCH_POLL_VOTES_REQUEST,
   CREATE_VOTE_REQUEST,
   CREATE_VOTE_SUCCESS,
-  CREATE_VOTE_FAILURE
+  CREATE_VOTE_FAILURE,
+  VoteState,
+  Vote,
+  VoteActions
 } from 'modules/vote/types'
 import { loadingReducer } from 'modules/loading/reducer'
 import {
+  FETCH_POLLS_REQUEST,
+  FETCH_POLLS_SUCCESS,
+  FETCH_POLLS_FAILURE,
   FETCH_POLL_REQUEST,
   FETCH_POLL_SUCCESS,
-  PollActions,
-  FETCH_POLL_FAILURE
+  FETCH_POLL_FAILURE,
+  PollActions
 } from 'modules/poll/types'
 import { toObjectById } from 'lib/utils'
 
@@ -32,10 +35,24 @@ export const voteReducer: Reducer<VoteState> = (
   switch (action.type) {
     case CREATE_VOTE_REQUEST:
     case FETCH_POLL_VOTES_REQUEST:
+    case FETCH_POLLS_REQUEST:
     case FETCH_POLL_REQUEST: {
       return {
         ...state,
         loading: loadingReducer(state.loading, action)
+      }
+    }
+    case FETCH_POLLS_SUCCESS: {
+      const data = { ...state.data }
+
+      for (const poll of action.payload.polls) {
+        Object.assign(data, toObjectById<Vote>(poll.votes))
+      }
+
+      return {
+        loading: loadingReducer(state.loading, action),
+        error: null,
+        data
       }
     }
     case FETCH_POLL_VOTES_SUCCESS:
@@ -63,8 +80,9 @@ export const voteReducer: Reducer<VoteState> = (
       }
     }
     case CREATE_VOTE_FAILURE:
-    case FETCH_POLL_FAILURE:
-    case FETCH_POLL_VOTES_FAILURE: {
+    case FETCH_POLL_VOTES_FAILURE:
+    case FETCH_POLLS_FAILURE:
+    case FETCH_POLL_FAILURE: {
       return {
         ...state,
         loading: loadingReducer(state.loading, action),
