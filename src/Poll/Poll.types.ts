@@ -1,7 +1,7 @@
 import { TokenAttributes } from '../Token'
 import { VoteAttributes } from '../Vote'
 import { OptionAttributes } from '../Option'
-import { AccountAttributes } from '../Account'
+import { AccountBalanceAttributes } from '../AccountBalance'
 
 interface Poll {
   id?: string
@@ -19,7 +19,7 @@ export interface PollAttributes extends Poll {
   token?: TokenAttributes
   votes?: VoteAttributes[]
   options?: OptionAttributes[]
-  accounts?: AccountAttributes[]
+  accounts?: AccountBalanceAttributes[]
 }
 
 export interface PollWithPointers extends Poll {

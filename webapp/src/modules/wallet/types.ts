@@ -13,21 +13,25 @@ export const CONNECT_WALLET_FAILURE = '[Failure] Connect Wallet'
 export type ConnectWalletSuccess = ReturnType<
   typeof actions.connectWalletSuccess
 >
+
 export type WalletActions = ActionType<typeof actions>
 
-export interface Wallet {
+export interface BaseWallet {
   type: string
   network: string
   address: string
   locale?: string
   derivationPath?: string
+}
+
+export interface Wallet extends BaseWallet {
   balances: {
-    [symbol: string]: number
+    [address: string]: number
   }
 }
 
 export type WalletState = {
-  data: Partial<Wallet>
+  data: Partial<BaseWallet>
   loading: LoadingState
   error: string | null
 }

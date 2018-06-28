@@ -39,6 +39,10 @@ export class API {
     return this.request('post', '/votes', { message, signature, id })
   }
 
+  fetchAccountBalances(address: string) {
+    return this.request('get', `/accountBalances/${address}`, {})
+  }
+
   request(method: string, path: string, params?: APIParam) {
     let options: AxiosRequestConfig = {
       method,

@@ -4,11 +4,11 @@ import * as express from 'express'
 
 import { Router } from '../lib'
 import { Vote } from './Vote.model'
-import { Account } from '../Account'
+import { CastVoteOption } from './Vote.types'
+import { AccountBalance } from '../AccountBalance'
 import { Poll } from '../Poll'
 import { Receipt } from '../Receipt'
 import { Option } from '../Option'
-import { CastVoteOption } from './Vote.types'
 
 export class VoteRouter extends Router {
   mount() {
@@ -35,7 +35,7 @@ export class VoteRouter extends Router {
 
   async getPollVotes(req: express.Request) {
     const pollId = server.extractFromReq(req, 'id')
-    return Vote.findByPollId(pollId)
+    return Vote.find({ poll_id: pollId })
   }
 
   async createVote(req: express.Request): Promise<string | undefined> {
@@ -71,7 +71,7 @@ export class VoteRouter extends Router {
       updated_at: new Date(Number(timestamp))
     })
 
-    const account = new Account({
+    const account = new AccountBalance({
       address,
       token_address: poll.get('token_address'),
       balance

@@ -1,3 +1,7 @@
 .PollsPage .ui.header.title {
   font-size: 40px;
 }
+
+.PollsPage .symbol {
+  padding-right: 0.3em;
+}

@@ -1,4 +1,4 @@
-export interface AccountAttributes {
+export interface AccountBalanceAttributes {
   id?: string
   address: string
   token_address: string

@@ -1,8 +1,8 @@
 import { MigrationBuilder } from 'node-pg-migrate'
-import { Account } from '../src/Account'
+import { AccountBalance } from '../src/AccountBalance'
 import { Token } from '../src/Token'
 
-const tableName = Account.tableName
+const tableName = AccountBalance.tableName
 
 export const up = (pgm: MigrationBuilder) => {
   pgm.createTable(

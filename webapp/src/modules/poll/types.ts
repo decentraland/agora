@@ -26,12 +26,12 @@ export interface Poll {
   title: string
   balance: number
   description?: string
+  token_address: string
   submitter: string
   closes_at: number
 }
 
 export interface PollWithPointers extends Poll {
-  token_address: string
   vote_ids: string[]
   option_ids: string[]
 }

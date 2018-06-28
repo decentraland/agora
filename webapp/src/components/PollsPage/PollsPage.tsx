@@ -4,7 +4,6 @@ import { Header, Loader, Table, Blockie, Address, Mana } from 'decentraland-ui'
 import { locations } from 'locations'
 import { PollsPageProps } from 'components/PollsPage/types'
 import { t } from 'modules/translation/utils'
-import { PollWithAssociations } from 'modules/poll/types'
 import { formatNumber } from 'lib/utils'
 import './PollsPage.css'
 
@@ -54,12 +53,14 @@ export default class PollsPage extends React.PureComponent<PollsPageProps> {
                     </Blockie>
                   </Table.Cell>
                   <Table.Cell>
-                    <Mana size="small" black />
+                    {poll.token.symbol === 'MANA' ? (
+                      <Mana size="small" black />
+                    ) : (
+                      <span className="symbol">{poll.token.symbol}</span>
+                    )}
                     {formatNumber(poll.balance)}
                   </Table.Cell>
-                  <Table.Cell>
-                    {(poll as PollWithAssociations).votes.length}
-                  </Table.Cell>
+                  <Table.Cell>{poll.votes.length}</Table.Cell>
                 </Table.Row>
               ))}
             </Table.Body>

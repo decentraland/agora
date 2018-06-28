@@ -17,6 +17,7 @@ import {
 } from 'modules/vote/types'
 import { loadingReducer } from 'modules/loading/reducer'
 import { buildPoll } from 'modules/poll/utils'
+import { getBalanceInPoll } from 'modules/wallet/utils'
 
 const INITIAL_STATE: PollState = {
   data: {},
@@ -114,7 +115,7 @@ export const pollReducer: Reducer<PollState> = (
           ...state.data,
           [vote.poll_id]: {
             ...currentPoll,
-            balance: currentPoll.balance + wallet.balances.mana // TODO: Poll symbol
+            balance: currentPoll.balance + getBalanceInPoll(wallet, currentPoll)
           }
         }
       }

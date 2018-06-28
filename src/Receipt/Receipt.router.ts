@@ -37,6 +37,6 @@ export class ReceiptRouter extends Router {
 
   async getAccountReceipts(req: express.Request) {
     const address = server.extractFromReq(req, 'address')
-    return Receipt.findByAccountAddress(address)
+    return Receipt.find<ReceiptAttributes>({ account_address: address })
   }
 }

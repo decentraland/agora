@@ -1,8 +1,7 @@
-import { ModelById } from 'lib/types'
-import { Poll } from 'modules/poll/types'
+import { getPolls } from 'modules/poll/selectors'
 
 export interface PollsPageProps {
-  polls: ModelById<Poll>
   isLoading: boolean
+  polls: ReturnType<typeof getPolls>
   onFetchPolls: Function
 }

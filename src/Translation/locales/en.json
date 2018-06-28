@@ -10,7 +10,7 @@
   "vote_page": {
     "vote": "Vote now",
     "cancel": "Cancel",
-    "no_mana": "You don't have any MANA",
+    "no_balance": "You don't have any {symbol}",
     "voting_with": "Voting with"
   },
   "polls_page": {

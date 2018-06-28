@@ -1,7 +1,6 @@
 import { match } from 'react-router'
-import { Poll } from 'modules/poll/types'
+import { PollWithAssociations } from 'modules/poll/types'
 import { Vote } from 'modules/vote/types'
-import { Option } from 'modules/option/types'
 import { Wallet } from 'modules/wallet/types'
 
 export interface URLParams {
@@ -11,15 +10,12 @@ export interface URLParams {
 export interface VotePageProps {
   match: match<URLParams>
   pollId: string
-  poll: Poll | null
+  poll: PollWithAssociations | null
   wallet: Wallet
-  votes: Vote[] | null
-  options: Option[] | null
   currentVote: Vote | null
   isLoading: boolean
   isConnected: boolean
-  onFetchPollOptions: Function
-  onFetchPollVotes: Function
+  onFetchPoll: Function
   onCreateVote: Function
   onNavigate: Function
 }

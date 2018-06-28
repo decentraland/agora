@@ -16,9 +16,10 @@ import {
   CreateVoteRequest
 } from 'modules/vote/types'
 import { Wallet } from 'modules/wallet/types'
-import { getData as getWallet } from 'modules/wallet/selectors'
+import { getWallet } from 'modules/wallet/selectors'
 import { getPolls } from 'modules/poll/selectors'
 import { getData as getOptions } from 'modules/option/selectors'
+import { getBalanceInPoll } from 'modules/wallet/utils'
 import { api } from 'lib/api'
 
 export function* voteSaga() {
@@ -51,16 +52,14 @@ function* handleVoteRequest(action: CreateVoteRequest) {
 
     const now = Date.now()
 
-    // TODO: Balance by poll symbol
-    // TODO: Token by token.symbol
     const payload = `
 Poll Id: ${poll.id}
 Poll Title: ${poll.title}
-Poll Description: ${poll.description}
+Poll Description: ${poll.description || ''}
 Option Id: ${option.id}
 Option Value: ${option.value}
-Current Balance: ${wallet.balances.mana}
-Token: MANA
+Current Balance: ${getBalanceInPoll(wallet, poll)}
+Token: ${poll.token.symbol}
 Timestamp: ${now}
     `
     const { message, signature } = yield call(() => eth.sign(payload))

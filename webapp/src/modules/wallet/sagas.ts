@@ -1,11 +1,11 @@
 import { call, select, takeEvery, put } from 'redux-saga/effects'
 import { eth } from 'decentraland-eth'
-import { CONNECT_WALLET_REQUEST, Wallet } from 'modules/wallet/types'
+import { CONNECT_WALLET_REQUEST, BaseWallet } from 'modules/wallet/types'
 import {
   connectWalletSuccess,
   connectWalletFailure
 } from 'modules/wallet/actions'
-import { getData as getWallet } from 'modules/wallet/selectors'
+import { getData } from 'modules/wallet/selectors'
 import { connectEthereumWallet } from 'modules/wallet/utils'
 import { watchLoadingTransactions } from 'modules/transaction/actions'
 import { Network } from 'decentraland-eth/dist/ethereum/eth'
@@ -17,7 +17,7 @@ export function* walletSaga() {
 function* handleConnectWalletRequest() {
   try {
     if (!eth.isConnected()) {
-      const { address, derivationPath } = yield select(getWallet)
+      const { address, derivationPath } = yield select(getData)
 
       yield call(() =>
         connectEthereumWallet({
@@ -31,17 +31,14 @@ function* handleConnectWalletRequest() {
     address = address.toLowerCase()
 
     const network: Network = yield call(eth.getNetwork)
-    const manaTokenContract = eth.getContract('MANAToken')
 
-    const mana = yield call(() => manaTokenContract.balanceOf(address))
-
-    const wallet: Wallet = {
+    const wallet: BaseWallet = {
       address,
       network: network.name,
       type: eth.wallet.type,
-      derivationPath: eth.wallet.derivationPath,
-      balances: { mana }
+      derivationPath: eth.wallet.derivationPath
     }
+
     yield handleConnectWalletSuccess()
     yield put(connectWalletSuccess(wallet))
   } catch (error) {
