@@ -1,7 +1,7 @@
 #!/usr/bin/env ts-node
 
 import { execSync } from 'child_process'
-import { cli } from 'decentraland-server'
+import { cli, SQL } from 'decentraland-server'
 import { Log } from 'decentraland-commons'
 
 import { db } from '../src/database'
@@ -9,11 +9,34 @@ import { AccountBalance } from '../src/AccountBalance'
 import { DistrictToken } from '../src/Token'
 import { loadEnv, runpsql } from './utils'
 
+interface Project {
+  id: string
+  name: string
+  desc: string
+  link: string
+  public: boolean
+  parcels: number
+  priority: number
+  lookup: string
+  disabled: boolean
+}
+
+interface DistrictEntry {
+  id: number
+  address: string
+  project_id: string
+  lands: number
+  userTimestamp: string
+  action: string
+  project: Project
+}
+
 const log = new Log('init-db')
 
 export async function initializeDatabase() {
   const shouldContinue = await cli.confirm(
-    `Careful! this will DROP 'projects' and upsert 'account_balances' and a district token.
+    `Careful! this will DROP 'projects' and 'district_entries,
+  upsert 'account_balances' and a district token.
 Do you wish to continue?`
   )
   if (!shouldContinue) return process.exit()
@@ -27,6 +50,9 @@ Do you wish to continue?`
   log.info('Restoring district_entries')
   execSync(runpsql('../dumps/districts.20180105.sql'))
 
+  log.info('Restoring projects')
+  execSync(runpsql('../dumps/projects.20180105.sql'))
+
   log.info('Upserting district accounts')
   await upsertDistrictAccountsFromContributions()
 
@@ -37,20 +63,19 @@ Do you wish to continue?`
   process.exit()
 }
 
-async function dropDumps() {
-  return db.query('DROP TABLE IF EXISTS district_entries;')
-}
-
 async function upsertDistrictAccountsFromContributions() {
-  log.info('Upserting DistrictToken')
-  const token = new DistrictToken()
-  await token.upsert({ target: ['address'] })
-
-  const districtEntries = await db.query('SELECT * FROM district_entries')
+  const districtEntries: DistrictEntry[] = await db.query(
+    SQL`SELECT d.*, row_to_json(p.*) as project
+      FROM district_entries d
+        JOIN projects p ON p.id = d.project_id`
+  )
 
   log.info(`Normalizing ${districtEntries.length} district_entries.`)
 
   for (const districtEntry of districtEntries) {
+    const token = await upsertToken(districtEntry.project)
+    if (!token) continue
+
     const address = districtEntry.address.toLowerCase()
 
     log.info(`Upserting ${address}`)
@@ -63,6 +88,25 @@ async function upsertDistrictAccountsFromContributions() {
   }
 }
 
+async function upsertToken(project: Project) {
+  if (!project.lookup) return null
+
+  const name = project.name
+  const id = project.lookup.replace(',', '-')
+
+  log.info(`Upserting Token for ${name}`)
+  const token = new DistrictToken(name, id)
+  await token.upsert({ target: ['address'] })
+
+  return token
+}
+
+async function dropDumps() {
+  return db.query(SQL`
+    DROP TABLE IF EXISTS district_entries;
+    DROP TABLE IF EXISTS projects;
+  `)
+}
 if (require.main === module) {
   loadEnv()
   initializeDatabase().catch(console.error)

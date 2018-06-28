@@ -1,20 +1,19 @@
-import { db } from 'decentraland-server'
 import { Token } from '../Token.model'
 import { TokenAttributes } from '../Token.types'
 
 const DISTRICT_TOKEN: TokenAttributes = Object.freeze({
-  address: 'district_token_address',
+  address: 'district-token-address',
   name: 'DistrictToken',
   symbol: 'DT'
 })
 
 export class DistrictToken extends Token {
-  constructor() {
-    super({ ...DISTRICT_TOKEN })
-  }
-
-  static getAddress() {
-    return DISTRICT_TOKEN.address
+  constructor(name: string, id: string) {
+    super({
+      address: `${DISTRICT_TOKEN.address}-${id}`,
+      name,
+      symbol: `${DISTRICT_TOKEN.symbol}-${id}`
+    })
   }
 
   static isValid(token: TokenAttributes): boolean {
@@ -22,18 +21,6 @@ export class DistrictToken extends Token {
   }
 
   static isAddress(address: string): boolean {
-    return address === this.getAddress()
-  }
-
-  static find<U extends db.QueryPart = any>(
-    conditions?: Partial<U>,
-    ...args: any[]
-  ): Promise<U[]> {
-    conditions = Object.assign({}, conditions, DISTRICT_TOKEN)
-    return super.find(conditions, ...args)
-  }
-
-  static findOne<_ = any>(..._: any[]) {
-    return super.findOne(DistrictToken.getAddress())
+    return address.search(DISTRICT_TOKEN.address) !== -1
   }
 }
