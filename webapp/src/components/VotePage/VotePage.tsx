@@ -46,7 +46,8 @@ export default class VotePage extends React.PureComponent<
         account_address: wallet.address,
         account_balance: getBalanceInPoll(wallet, poll),
         poll_id: pollId,
-        option_id: selectedOptionId
+        option_id: selectedOptionId,
+        timestamp: Date.now()
       }
 
       onCreateVote(newVote)

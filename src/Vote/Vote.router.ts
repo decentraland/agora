@@ -65,6 +65,7 @@ export class VoteRouter extends Router {
       account_address: address,
       poll_id: pollId,
       option_id: optionId,
+      timestamp,
       message,
       signature,
       created_at: new Date(Number(timestamp)),
