@@ -58,10 +58,7 @@ export const optionReducer: Reducer<OptionState> = (
       return {
         loading: loadingReducer(state.loading, action),
         error: null,
-        data: {
-          ...state.data,
-          ...toObjectById<Option>(options)
-        }
+        data: toObjectById<Option>(options, state.data)
       }
     }
     case FETCH_POLL_OPTIONS_FAILURE:

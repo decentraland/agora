@@ -15,6 +15,10 @@ interface Response {
 }
 
 export class API {
+  fetchTokens() {
+    return this.request('get', '/tokens', {})
+  }
+
   fetchPolls() {
     return this.request('get', '/polls', {})
   }

@@ -44,7 +44,7 @@ export const getWallet = createSelector<
   const balances = {}
 
   for (const accountBalance of Object.values(accountBalances)) {
-    balances[accountBalance.token_address] = accountBalance.balance
+    balances[accountBalance.token_address] = Number(accountBalance.balance)
   }
 
   return {

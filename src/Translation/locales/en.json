@@ -7,6 +7,9 @@
     "en": "English",
     "es": "Spanish"
   },
+  "navbar": {
+    "connecting": "Connecting wallet..."
+  },
   "vote_page": {
     "vote": "Vote now",
     "cancel": "Cancel",

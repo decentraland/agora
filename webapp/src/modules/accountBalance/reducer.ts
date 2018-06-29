@@ -6,7 +6,9 @@ import {
   AccountBalanceState,
   AccountBalanceActions
 } from 'modules/accountBalance/types'
+import { COMPUTE_BALANCES_SUCCESS, WalletActions } from 'modules/wallet/types'
 import { loadingReducer } from 'modules/loading/reducer'
+import { buildId } from 'modules/accountBalance/utils'
 
 const INITIAL_STATE: AccountBalanceState = {
   data: {},
@@ -16,7 +18,7 @@ const INITIAL_STATE: AccountBalanceState = {
 
 export const accountBalanceReducer: Reducer<AccountBalanceState> = (
   state = INITIAL_STATE,
-  action: AccountBalanceActions
+  action: WalletActions | AccountBalanceActions
 ): AccountBalanceState => {
   switch (action.type) {
     case FETCH_ACCOUNT_BALANCES_REQUEST: {
@@ -29,7 +31,7 @@ export const accountBalanceReducer: Reducer<AccountBalanceState> = (
       let data = { ...state.data }
 
       for (const accountBalance of action.payload.accountBalances) {
-        data[accountBalance.address] = { ...accountBalance }
+        data[buildId(accountBalance)] = { ...accountBalance }
       }
 
       return {
@@ -37,6 +39,27 @@ export const accountBalanceReducer: Reducer<AccountBalanceState> = (
         error: null,
         data
       }
+    }
+    case COMPUTE_BALANCES_SUCCESS: {
+      const { address, balances } = action.payload
+      const data = { ...state.data }
+
+      for (const tokenAddress in balances) {
+        const id = buildId({
+          address,
+          token_address: tokenAddress
+        })
+
+        const current = state.data[id]
+        data[id] = {
+          id: current ? current.id : id,
+          address,
+          token_address: tokenAddress,
+          balance: balances[tokenAddress]
+        }
+      }
+
+      return { ...state, data }
     }
     case FETCH_ACCOUNT_BALANCES_FAILURE: {
       return {
