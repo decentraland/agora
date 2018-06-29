@@ -6,7 +6,6 @@ import { AccountBalanceState } from 'modules/accountBalance/types'
 import { OptionState, OptionActions } from 'modules/option/types'
 import { PollState, PollActions } from 'modules/poll/types'
 import { TokenState } from 'modules/token/types'
-import { TransactionState, TransactionActions } from 'modules/transaction/types'
 import { TranslationState, TranslationActions } from 'modules/translation/types'
 import { VoteState, VoteActions } from 'modules/vote/types'
 import { WalletState, WalletActions } from 'modules/wallet/types'
@@ -17,7 +16,6 @@ export type RootState = {
   option: OptionState
   poll: PollState
   token: TokenState
-  transaction: TransactionState
   translation: TranslationState
   vote: VoteState
   wallet: WalletState
@@ -28,7 +26,6 @@ export type RootAction =
   | PollActions
   | OptionActions
   | VoteActions
-  | TransactionActions
   | TranslationActions
   | WalletActions
 

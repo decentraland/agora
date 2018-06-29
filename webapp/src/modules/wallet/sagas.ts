@@ -17,7 +17,6 @@ import { fetchTokensRequest } from 'modules/token/actions'
 import { getData, getAddress } from 'modules/wallet/selectors'
 import { getContractTokens } from 'modules/token/selectors'
 import { connectEthereumWallet } from 'modules/wallet/utils'
-import { watchLoadingTransactions } from 'modules/transaction/actions'
 import { Network } from 'decentraland-eth/dist/ethereum/eth'
 
 export function* walletSaga() {
@@ -77,9 +76,7 @@ function* handleComputeBalancesRequest() {
     yield call(() => eth.setContracts(tokenContracts))
 
     for (const tokenContract of tokenContracts) {
-      const balance = yield call(() =>
-        tokenContract.balanceOf(walletAddress)
-      )
+      const balance = yield call(() => tokenContract.balanceOf(walletAddress))
       balances[tokenContract.address] = eth.utils.fromWei(balance.toNumber())
     }
 
@@ -92,5 +89,4 @@ function* handleComputeBalancesRequest() {
 function* handleConnectWalletSuccess(address: string) {
   yield put(fetchTokensRequest())
   yield put(fetchAccountBalancesRequest(address))
-  yield put(watchLoadingTransactions())
 }

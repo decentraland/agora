@@ -6,7 +6,6 @@ import { accountBalanceReducer as accountBalance } from 'modules/accountBalance/
 import { optionReducer as option } from 'modules/option/reducer'
 import { pollReducer as poll } from 'modules/poll/reducer'
 import { tokenReducer as token } from 'modules/token/reducer'
-import { transactionReducer as transaction } from 'modules/transaction/reducer'
 import { translationReducer as translation } from 'modules/translation/reducer'
 import { voteReducer as vote } from 'modules/vote/reducer'
 import { walletReducer as wallet } from 'modules/wallet/reducer'
@@ -17,7 +16,6 @@ export const rootReducer = combineReducers<RootState>({
   option,
   poll,
   token,
-  transaction,
   translation,
   router,
   vote,
