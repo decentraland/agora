@@ -12,10 +12,13 @@ import { t } from 'modules/translation/utils'
 const mapState = (state: RootState): any => {
   const wallet = getWallet(state) as Wallet
   const isWalletConnected = isConnected(state)
+  const manaAddress = env.get('REACT_APP_MANA_TOKEN_CONTRACT_ADDRESS', '')
 
-  const mana = isWalletConnected
-    ? wallet.balances[env.get('REACT_APP_MANA_TOKEN_CONTRACT_ADDRESS', '')]
-    : null
+  let mana: null | string = null
+
+  if (isWalletConnected && wallet.balances[manaAddress] != null) {
+    mana = wallet.balances[manaAddress].toLocaleString()
+  }
 
   return {
     mana,

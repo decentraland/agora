@@ -62,10 +62,7 @@ export const voteReducer: Reducer<VoteState> = (
       return {
         loading: loadingReducer(state.loading, action),
         error: null,
-        data: {
-          ...state.data,
-          ...toObjectById<Vote>(votes)
-        }
+        data: toObjectById<Vote>(votes)
       }
     }
     case CREATE_VOTE_SUCCESS: {
