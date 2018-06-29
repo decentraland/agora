@@ -1,28 +1,35 @@
-.VotePage .ui.header.title {
-  font-size: 40px;
-}
-
 .VotePage .options {
-  margin-top: 3.5em;
+  margin-top: 40px;
 }
 
 .VotePage .voting-with {
-  margin-top: 3.5em;
+  margin-top: 40px;
+  display: block;
 }
 
 .VotePage .vote {
-  margin-top: 3.5em;
-}
-
-.VotePage .vote .ui.button {
-  min-width: 200px;
-}
-
-.VotePage .vote .ui.button.primary {
-  margin-right: 1em;
+  margin-top: 40px;
 }
 
 .VotePage .no-balance {
-  margin-top: 1em;
+  margin-top: 16px;
   color: var(--secondary-text);
+}
+
+@media (min-width: 768px) {
+  .VotePage .vote .ui.button {
+    min-width: 200px;
+  }
+}
+
+@media (max-width: 768px) {
+  .VotePage .vote {
+    display: flex;
+    flex-flow: row nowrap;
+    margin-bottom: 16px;
+  }
+
+  .VotePage .vote .ui.button {
+    flex: 1 0 auto;
+  }
 }

@@ -1,6 +1,6 @@
 import * as React from 'react'
 import { Link } from 'react-router-dom'
-import { Loader, Header, Radio, Mana, Button } from 'decentraland-ui'
+import { Loader, Header, Radio, Mana, Button, Stats } from 'decentraland-ui'
 import * as uuidv4 from 'uuid/v4'
 import { locations } from 'locations'
 import { VotePageProps, VotePageState } from 'components/VotePage/types'
@@ -82,9 +82,7 @@ export default class VotePage extends React.PureComponent<
 
     return (
       <div className="VotePage">
-        <Header className="title" size="large">
-          {poll.title}
-        </Header>
+        <Header size="large">{poll.title}</Header>
         {poll.description ? <Header sub>{poll.description}</Header> : null}
         <form
           action="/votes"
@@ -105,10 +103,9 @@ export default class VotePage extends React.PureComponent<
           ))}
 
           {balance ? (
-            <div className="voting-with">
-              <Header sub>{t('vote_page.voting_with')}</Header>
-              <Mana size="large">{formatNumber(balance)}</Mana>
-            </div>
+            <Stats title={t('vote_page.voting_with')} className="voting-with">
+              <Mana>{formatNumber(balance)}</Mana>
+            </Stats>
           ) : null}
 
           <div className="vote">
@@ -120,13 +117,15 @@ export default class VotePage extends React.PureComponent<
               {t('vote_page.vote')}
             </Button>
             &nbsp;
-            <Link to={locations.pollDetail(pollId)}>
-              <Button>{t('vote_page.cancel')}</Button>
+            <Link className="ui button" to={locations.pollDetail(pollId)}>
+              {t('vote_page.cancel')}
             </Link>
             {balance ? null : (
               <div className="no-balance">
                 <small>
-                  {t('vote_page.no_balance', { symbol: poll.token.symbol })}
+                  {t('vote_page.no_balance', {
+                    symbol: poll.token.symbol
+                  })}
                 </small>
               </div>
             )}
