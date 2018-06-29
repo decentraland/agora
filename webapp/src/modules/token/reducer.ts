@@ -1,11 +1,11 @@
 import { Reducer } from 'redux'
-import { TokenState } from 'modules/token/types'
 import { loadingReducer } from 'modules/loading/reducer'
 import {
   FETCH_TOKENS_REQUEST,
   FETCH_TOKENS_SUCCESS,
   FETCH_TOKENS_FAILURE,
   TokenActions,
+  TokenState,
   Token
 } from 'modules/token/types'
 import {
