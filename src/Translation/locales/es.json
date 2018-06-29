@@ -17,12 +17,17 @@
     "title": "Encuestas",
     "table": {
       "title": "Título",
-      "submitter": "Autor",
       "balance": "Balance",
       "votes": "Votos"
     }
   },
   "poll_detail_page": {
+    "stats": {
+      "token": "Token",
+      "total_voted": "Tokens usados",
+      "total_votes": "Votos",
+      "time_left": "Tiempo disponible"
+    },
     "votes": "Votos",
     "when": "Fecha",
     "address": "Dirección",
