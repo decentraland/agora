@@ -108,7 +108,7 @@ export default class PollDetailPage extends React.PureComponent<
             </Header>
             {poll.description ? <Header sub>{poll.description}</Header> : null}
             <div className="stats">
-              <Stats title="Token">
+              <Stats title={t('poll_detail_page.stats.token')}>
                 {poll.token.symbol === 'MANA' ? (
                   <Mana data-balloon={poll.token.address} data-balloon-pos="up">
                     {poll.token.symbol}
@@ -117,20 +117,17 @@ export default class PollDetailPage extends React.PureComponent<
                   <Header>{poll.token.symbol}</Header>
                 )}
               </Stats>
-              <Stats title="Total Voted">
+              <Stats title={t('poll_detail_page.stats.total_voted')}>
                 {poll.token.symbol === 'MANA' ? (
                   <Mana>{formatNumber(poll.balance)}</Mana>
                 ) : (
                   <Header>{formatNumber(poll.balance)}</Header>
                 )}
               </Stats>
-              <Stats title="Total Votes">
+              <Stats title={t('poll_detail_page.stats.total_votes')}>
                 <Header>{poll.votes.length}</Header>
               </Stats>
-              <Stats title="Parcial Results">
-                <Header>{isFinished(poll) ? 'No' : 'Yes'}</Header>
-              </Stats>
-              <Stats title="Time Left">
+              <Stats title={t('poll_detail_page.stats.time_left')}>
                 <Header>{distanceInWordsToNow(poll.closes_at, false)}</Header>
               </Stats>
             </div>
