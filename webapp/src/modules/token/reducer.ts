@@ -2,6 +2,13 @@ import { Reducer } from 'redux'
 import { TokenState } from 'modules/token/types'
 import { loadingReducer } from 'modules/loading/reducer'
 import {
+  FETCH_TOKENS_REQUEST,
+  FETCH_TOKENS_SUCCESS,
+  FETCH_TOKENS_FAILURE,
+  TokenActions,
+  Token
+} from 'modules/token/types'
+import {
   FETCH_POLLS_REQUEST,
   FETCH_POLLS_SUCCESS,
   FETCH_POLLS_FAILURE,
@@ -10,6 +17,7 @@ import {
   FETCH_POLL_FAILURE,
   PollActions
 } from 'modules/poll/types'
+import { toObjectByKey } from 'lib/utils'
 
 const INITIAL_STATE: TokenState = {
   data: {},
@@ -19,14 +27,22 @@ const INITIAL_STATE: TokenState = {
 
 export const tokenReducer: Reducer<TokenState> = (
   state = INITIAL_STATE,
-  action: PollActions
+  action: TokenActions | PollActions
 ): TokenState => {
   switch (action.type) {
+    case FETCH_TOKENS_REQUEST:
     case FETCH_POLLS_REQUEST:
     case FETCH_POLL_REQUEST: {
       return {
         ...state,
         loading: loadingReducer(state.loading, action)
+      }
+    }
+    case FETCH_TOKENS_SUCCESS: {
+      return {
+        loading: loadingReducer(state.loading, action),
+        error: null,
+        data: toObjectByKey<Token>(action.payload.tokens, state.data, 'address')
       }
     }
     case FETCH_POLLS_SUCCESS: {
@@ -56,6 +72,7 @@ export const tokenReducer: Reducer<TokenState> = (
         }
       }
     }
+    case FETCH_TOKENS_FAILURE:
     case FETCH_POLLS_FAILURE:
     case FETCH_POLL_FAILURE: {
       return {
