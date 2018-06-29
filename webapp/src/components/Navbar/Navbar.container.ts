@@ -16,7 +16,6 @@ const mapState = (state: RootState): any => {
   const mana = isWalletConnected
     ? wallet.balances[env.get('REACT_APP_MANA_TOKEN_CONTRACT_ADDRESS', '')]
     : null
-
   return {
     mana,
     address: wallet.address,
