@@ -27,6 +27,7 @@ export type BigNumber = {
 }
 export interface ERC20Token extends contracts.ERC20Token {
   balanceOf(address: string): Promise<BigNumber>
+  decimals(): Promise<BigNumber>
 }
 
 export interface BaseWallet {

@@ -77,7 +77,12 @@ function* handleComputeBalancesRequest() {
 
     for (const tokenContract of tokenContracts) {
       const balance = yield call(() => tokenContract.balanceOf(walletAddress))
-      balances[tokenContract.address] = eth.utils.fromWei(balance.toNumber())
+      const decimals = yield call(() => tokenContract.decimals())
+
+      balances[tokenContract.address] =
+        decimals.toNumber() >= 18
+          ? eth.utils.fromWei(balance.toNumber())
+          : balance.toNumber()
     }
 
     yield put(computeBalancesSuccess(walletAddress, balances))

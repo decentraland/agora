@@ -14,10 +14,14 @@ const mapState = (state: RootState): any => {
   const isWalletConnected = isConnected(state)
   const manaAddress = env.get('REACT_APP_MANA_TOKEN_CONTRACT_ADDRESS', '')
 
-  let mana: null | string = null
+  let mana: string | null = null
 
-  if (isWalletConnected && wallet.balances[manaAddress] != null) {
-    mana = wallet.balances[manaAddress].toLocaleString()
+  if (isWalletConnected) {
+    const balance: number | undefined = wallet.balances[manaAddress]
+
+    if (balance) {
+      mana = balance.toLocaleString()
+    }
   }
 
   return {
