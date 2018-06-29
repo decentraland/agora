@@ -28,7 +28,7 @@ export async function connectEthereumWallet(
       )
       throw error
     }
-    await utils.sleep(100)
+    await utils.sleep(50)
     return connectEthereumWallet(options, retries + 1)
   }
 }

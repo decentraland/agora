@@ -6,6 +6,7 @@ import {
   AccountBalanceState,
   AccountBalanceActions
 } from 'modules/accountBalance/types'
+import { COMPUTE_BALANCES_SUCCESS, WalletActions } from 'modules/wallet/types'
 import { loadingReducer } from 'modules/loading/reducer'
 
 const INITIAL_STATE: AccountBalanceState = {
@@ -16,7 +17,7 @@ const INITIAL_STATE: AccountBalanceState = {
 
 export const accountBalanceReducer: Reducer<AccountBalanceState> = (
   state = INITIAL_STATE,
-  action: AccountBalanceActions
+  action: WalletActions | AccountBalanceActions
 ): AccountBalanceState => {
   switch (action.type) {
     case FETCH_ACCOUNT_BALANCES_REQUEST: {
@@ -35,6 +36,24 @@ export const accountBalanceReducer: Reducer<AccountBalanceState> = (
       return {
         loading: loadingReducer(state.loading, action),
         error: null,
+        data
+      }
+    }
+    case COMPUTE_BALANCES_SUCCESS: {
+      let data = { ...state.data }
+
+      const { address, balances } = action.payload
+
+      for (const tokenAddress in balances) {
+        data[address] = {
+          address,
+          token_address: tokenAddress,
+          balance: balances[tokenAddress]
+        }
+      }
+
+      return {
+        ...state,
         data
       }
     }

@@ -1,5 +1,7 @@
+import { createSelector } from 'reselect'
 import { RootState } from 'types'
 import { TokenState } from 'modules/token/types'
+import { isDistrictTokenAddress } from 'modules/token/district_token/utils'
 
 export const getState: (state: RootState) => TokenState = state => state.token
 
@@ -11,3 +13,16 @@ export const isLoading: (state: RootState) => boolean = state =>
 
 export const getError: (state: RootState) => TokenState['error'] = state =>
   getState(state).error
+
+export const getContractTokens = createSelector<
+  RootState,
+  TokenState['data'],
+  TokenState['data']
+>(getData, tokens =>
+  Object.keys(tokens)
+    .filter(address => !isDistrictTokenAddress(address))
+    .reduce((contractTokens, address) => {
+      contractTokens[address] = tokens[address]
+      return contractTokens
+    }, {})
+)

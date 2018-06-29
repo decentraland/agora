@@ -1,20 +1,16 @@
 import { call, put, takeLatest } from 'redux-saga/effects'
+import { fetchTokensSuccess, fetchTokensFailure } from 'modules/token/actions'
 import {
-  fetchTokensRequest,
-  fetchTokensSuccess,
-  fetchTokensFailure
-} from 'modules/token/actions'
-import { FETCH_TOKENS_REQUEST, Token } from 'modules/token/types'
-import { CONNECT_WALLET_SUCCESS } from 'modules/wallet/types'
+  FETCH_TOKENS_REQUEST,
+  FETCH_TOKENS_SUCCESS,
+  Token
+} from 'modules/token/types'
+import { computeBalancesRequest } from 'modules/wallet/actions'
 import { api } from 'lib/api'
 
 export function* tokenSaga() {
-  yield takeLatest(CONNECT_WALLET_SUCCESS, handleWalletSuccess)
   yield takeLatest(FETCH_TOKENS_REQUEST, handleTokensRequest)
-}
-
-function* handleWalletSuccess() {
-  yield put(fetchTokensRequest())
+  yield takeLatest(FETCH_TOKENS_SUCCESS, handleTokensSuccess)
 }
 
 function* handleTokensRequest() {
@@ -24,4 +20,8 @@ function* handleTokensRequest() {
   } catch (error) {
     yield put(fetchTokensFailure(error.message))
   }
+}
+
+function* handleTokensSuccess() {
+  yield put(computeBalancesRequest())
 }
