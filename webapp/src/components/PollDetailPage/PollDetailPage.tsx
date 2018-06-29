@@ -97,22 +97,23 @@ export default class PollDetailPage extends React.PureComponent<
   render() {
     const { poll, currentVote, isConnected, isLoading } = this.props
     const currentResults = this.getCurrentResults()
+    const noVotes = poll && poll.votes.length === 0
     return (
       <div className="PollDetailPage">
         {isLoading || !poll ? (
           <Loader active size="massive" />
         ) : (
           <React.Fragment>
-            <Header className="title" size="large">
-              {poll.title}
-            </Header>
-            {poll.description ? <Header sub>{poll.description}</Header> : null}
+            <Header size="large">{poll.title}</Header>
+            {poll.description ? (
+              <Header sub className="description">
+                {poll.description}
+              </Header>
+            ) : null}
             <div className="stats">
               <Stats title={t('poll_detail_page.stats.token')}>
                 {poll.token.symbol === 'MANA' ? (
-                  <Mana data-balloon={poll.token.address} data-balloon-pos="up">
-                    {poll.token.symbol}
-                  </Mana>
+                  <Mana>{poll.token.symbol}</Mana>
                 ) : (
                   <Header>{poll.token.symbol}</Header>
                 )}
@@ -158,47 +159,49 @@ export default class PollDetailPage extends React.PureComponent<
               />
             </div>
 
-            <div className="votes">
-              <Header>{t('poll_detail_page.votes')}</Header>
-              <Table basic>
-                <Table.Header>
-                  <Table.Row>
-                    <Table.HeaderCell>
-                      {t('poll_detail_page.when')}
-                    </Table.HeaderCell>
-                    <Table.HeaderCell>
-                      {t('poll_detail_page.address')}
-                    </Table.HeaderCell>
-                    <Table.HeaderCell>
-                      {t('poll_detail_page.amount')}
-                    </Table.HeaderCell>
-                    <Table.HeaderCell>
-                      {t('poll_detail_page.vote')}
-                    </Table.HeaderCell>
-                  </Table.Row>
-                </Table.Header>
-
-                <Table.Body>
-                  {poll.votes.map(vote => (
-                    <Table.Row key={vote.id}>
-                      <Table.Cell>{formatDate(vote.timestamp)}</Table.Cell>
-                      <Table.Cell>
-                        <Blockie scale={3} seed={vote.account_address}>
-                          &nbsp;<Address value={vote.account_address} />
-                        </Blockie>
-                      </Table.Cell>
-                      <Table.Cell>
-                        <Mana size="small" black />
-                        {formatNumber(vote.account_balance)}
-                      </Table.Cell>
-                      <Table.Cell>
-                        {getVoteOptionValue(poll.options, vote)}
-                      </Table.Cell>
+            {noVotes ? null : (
+              <div className="votes">
+                <Header>{t('poll_detail_page.votes')}</Header>
+                <Table basic>
+                  <Table.Header>
+                    <Table.Row>
+                      <Table.HeaderCell>
+                        {t('poll_detail_page.when')}
+                      </Table.HeaderCell>
+                      <Table.HeaderCell>
+                        {t('poll_detail_page.address')}
+                      </Table.HeaderCell>
+                      <Table.HeaderCell>
+                        {t('poll_detail_page.amount')}
+                      </Table.HeaderCell>
+                      <Table.HeaderCell>
+                        {t('poll_detail_page.vote')}
+                      </Table.HeaderCell>
                     </Table.Row>
-                  ))}
-                </Table.Body>
-              </Table>
-            </div>
+                  </Table.Header>
+
+                  <Table.Body>
+                    {poll.votes.map(vote => (
+                      <Table.Row key={vote.id}>
+                        <Table.Cell>{formatDate(vote.timestamp)}</Table.Cell>
+                        <Table.Cell>
+                          <Blockie scale={3} seed={vote.account_address}>
+                            &nbsp;<Address value={vote.account_address} />
+                          </Blockie>
+                        </Table.Cell>
+                        <Table.Cell>
+                          <Mana size="small" black />
+                          {formatNumber(vote.account_balance)}
+                        </Table.Cell>
+                        <Table.Cell>
+                          {getVoteOptionValue(poll.options, vote)}
+                        </Table.Cell>
+                      </Table.Row>
+                    ))}
+                  </Table.Body>
+                </Table>
+              </div>
+            )}
           </React.Fragment>
         )}
       </div>

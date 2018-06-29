@@ -9,8 +9,12 @@ import { isModalPage } from 'modules/location/selectors'
 
 const mapState = (state: RootState): any => {
   const wallet = getWallet(state) as Wallet
-
+  let mana
+  if (wallet && wallet.balances && wallet.balances.mana) {
+    mana = wallet.balances.mana
+  }
   return {
+    mana,
     address: wallet.address,
     isConnected: isConnected(state),
     isConnecting: isConnecting(state),

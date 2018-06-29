@@ -17,9 +17,7 @@ export default class PollsPage extends React.PureComponent<PollsPageProps> {
 
     return (
       <div className="PollsPage">
-        <Header className="title" size="large">
-          {t('polls_page.title')}
-        </Header>
+        <Header size="large">{t('polls_page.title')}</Header>
         {isLoading ? (
           <Loader active size="massive" />
         ) : (
