@@ -25,7 +25,7 @@ export function buildPoll(
   }
 }
 
-export const isDCLPoll = (poll: PollWithAssociations) => isDCLToken(poll.token)
-
 export const isDCLToken = (token: Token) =>
   token.symbol === 'MANA' || token.symbol === 'LAND'
+
+export const isDCLPoll = (poll: PollWithAssociations) => isDCLToken(poll.token)
