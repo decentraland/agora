@@ -22,6 +22,7 @@ import {
 } from 'decentraland-ui'
 import './PollDetailPage.css'
 import PollProgress from 'components/PollProgress'
+import OptionOrb from 'components/OptionOrb'
 
 export default class PollDetailPage extends React.PureComponent<
   PollDetailPageProps
@@ -86,12 +87,11 @@ export default class PollDetailPage extends React.PureComponent<
       winners[0].winner = true
     }
 
-    return currentResults
-      .map(result => ({
-        ...result,
-        percentage: +(result.votes / totalVotes * 100).toFixed(1)
-      }))
-      .sort((a, b) => (a.votes > b.votes ? -1 : 1))
+    return currentResults.map(result => ({
+      ...result,
+      percentage: +(result.votes / totalVotes * 100).toFixed(1)
+    }))
+    //.sort((a, b) => (a.votes > b.votes ? -1 : 1))
   }
 
   render() {
@@ -133,30 +133,36 @@ export default class PollDetailPage extends React.PureComponent<
               </Stats>
             </div>
 
-            <div className="vote">
-              {!isConnected || isFinished(poll) ? null : (
-                <Link to={locations.voteDetail(poll.id)}>
-                  <Button primary>{t('poll_detail_page.cast_vote')}</Button>
-                </Link>
-              )}
+            <div className="row main">
+              <div className="progress">
+                <PollProgress results={currentResults} />
+              </div>
 
+              {!isConnected || isFinished(poll) ? null : (
+                <div className="vote">
+                  <Link to={locations.voteDetail(poll.id)}>
+                    <Button primary>{t('poll_detail_page.cast_vote')}</Button>
+                  </Link>
+                </div>
+              )}
+            </div>
+
+            <div className="row sub">
+              <div className="options">
+                {currentResults.map((result, index) => (
+                  <OptionOrb position={index}>{result.option.value}</OptionOrb>
+                ))}
+              </div>
               {currentVote ? (
                 <span className="your-vote">
                   {t('poll_detail_page.you_voted', {
                     option: getVoteOptionValue(poll.options, currentVote)
-                  })},{' '}
+                  })}.{' '}
                   <span className="time-ago">
                     {distanceInWordsToNow(currentVote.timestamp)}.
                   </span>
                 </span>
               ) : null}
-            </div>
-
-            <div className="progress">
-              <PollProgress
-                results={currentResults}
-                isDocked={!isFinished(poll)}
-              />
             </div>
 
             {noVotes ? null : (

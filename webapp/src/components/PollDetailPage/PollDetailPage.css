@@ -1,25 +1,50 @@
 .PollDetailPage .ui.header.sub.description {
-  margin-bottom: 40px;
+  margin-bottom: 48px;
+}
+
+.PollDetailPage > .stats {
+  margin-bottom: 48px;
+}
+
+.PollDetailPage .row {
+  display: flex;
 }
 
 .PollDetailPage .vote {
-  margin-top: 40px;
   display: flex;
   flex-flow: row nowrap;
   align-items: center;
+  margin-left: 80px;
 }
 
 .PollDetailPage .progress {
-  margin-top: 1.5em;
+  flex: 1 0 auto;
 }
 
-.PollDetailPage .vote .your-vote {
+.PollDetailPage .your-vote {
   display: inline-block;
   margin-left: 1em;
+  text-transform: uppercase;
+  font-size: 12px;
+  color: var(--dark-blue-grey);
+  font-weight: bold;
 }
 
-.PollDetailPage .vote .your-vote .time-ago {
+.PollDetailPage .main.row {
+  margin-bottom: 18px;
+}
+
+.PollDetailPage .sub.row {
+  justify-content: space-between;
+}
+
+.PollDetailPage .options {
+  display: flex;
+}
+
+.PollDetailPage .your-vote .time-ago {
   color: var(--secondary-text);
+  text-transform: uppercase;
 }
 
 .PollDetailPage .votes {

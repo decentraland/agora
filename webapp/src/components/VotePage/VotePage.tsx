@@ -103,7 +103,7 @@ export default class VotePage extends React.PureComponent<
           ))}
 
           {balance ? (
-            <Stats title={t('vote_page.voting_with')} className="voting-with">
+            <Stats title={t('vote_page.voting_power')} className="voting-with">
               <Mana>{formatNumber(balance)}</Mana>
             </Stats>
           ) : null}
@@ -123,7 +123,7 @@ export default class VotePage extends React.PureComponent<
             {balance ? null : (
               <div className="no-balance">
                 <small>
-                  {t('vote_page.no_balance', {
+                  {t('vote_page.no_voting_power', {
                     symbol: poll.token.symbol
                   })}
                 </small>
