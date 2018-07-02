@@ -1,6 +1,7 @@
 import * as React from 'react'
 import './PollProgress.css'
 import { OptionProps, PollProgressProps } from 'components/PollProgress/types'
+import { isDCLToken } from 'modules/poll/utils'
 
 class PollOption extends React.PureComponent<OptionProps> {
   render() {
@@ -9,12 +10,21 @@ class PollOption extends React.PureComponent<OptionProps> {
     if (winner) {
       classes += ' winner'
     }
+
+    const balloon =
+      token && isDCLToken(token)
+        ? {
+            'data-balloon': `${votes.toLocaleString()} ${
+              token ? token.symbol : ''
+            }`,
+            'data-balloon-pos': 'up'
+          }
+        : {}
     return (
       <div
         className={classes}
         style={winner ? undefined : { width: `${percentage}%` }}
-        data-balloon={`${votes.toLocaleString()} ${token ? token.symbol : ''}`}
-        data-balloon-pos="up"
+        {...balloon}
       >
         <div className="mask">
           <div className="bg" />

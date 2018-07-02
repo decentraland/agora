@@ -17,17 +17,19 @@
     "voting_power": "Poder de voto"
   },
   "polls_page": {
-    "title": "Encuestas",
+    "decentraland_polls": "Encuestas de Decentraland",
+    "district_plan_acceptance": "Planes de Distritos",
     "table": {
       "title": "Título",
       "balance": "Balance",
+      "total_voted": "Total Votado",
       "votes": "Votos"
     }
   },
   "poll_detail_page": {
     "stats": {
       "token": "Token",
-      "total_voted": "Tokens usados",
+      "total_voted": "Total Votado",
       "total_votes": "Votos",
       "time_left": "Tiempo disponible"
     },

@@ -8,7 +8,7 @@ import {
 } from 'components/PollDetailPage/types'
 import { distanceInWordsToNow, formatDate, formatNumber } from 'lib/utils'
 import { getVoteOptionValue } from 'modules/option/utils'
-import { isFinished } from 'modules/poll/utils'
+import { isFinished, isDCLPoll } from 'modules/poll/utils'
 import { t } from 'modules/translation/utils'
 import {
   Button,
@@ -116,7 +116,7 @@ export default class PollDetailPage extends React.PureComponent<
               </Header>
             ) : null}
             <div className="stats">
-              {poll.token.symbol === 'MANA' || poll.token.symbol === 'LAND' ? (
+              {isDCLPoll(poll) ? (
                 <Stats title={t('poll_detail_page.stats.token')}>
                   {poll.token.symbol === 'MANA' ? (
                     <Mana>{poll.token.symbol}</Mana>
