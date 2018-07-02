@@ -2,14 +2,13 @@ import * as React from 'react'
 import { connect } from 'react-redux'
 import { push, goBack, RouterAction } from 'react-router-redux'
 import { env } from 'decentraland-commons'
-import { Navbar } from 'decentraland-ui'
+import { Navbar, Menu } from 'decentraland-ui'
 import { locations } from 'locations'
 import { RootState, RootDispatch } from 'types'
 import { Wallet } from 'modules/wallet/types'
 import { getWallet, isConnected, isConnecting } from 'modules/wallet/selectors'
 import { isModalPage } from 'modules/location/selectors'
 import { t } from 'modules/translation/utils'
-import { Menu } from 'decentraland-ui'
 
 const mapState = (state: RootState): any => {
   const wallet = getWallet(state) as Wallet
