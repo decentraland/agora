@@ -1,0 +1,37 @@
+.OptionOrb {
+  display: flex;
+  align-items: center;
+  margin-right: 18px;
+}
+
+.OptionOrb .orb {
+  display: inline-block;
+  width: 16px;
+  height: 16px;
+  border-radius: 16px;
+  margin-right: 8px;
+}
+
+.OptionOrb .label {
+  font-weight: bold;
+}
+
+.OptionOrb.color-0 .orb {
+  background: var(--pale-strawberry);
+}
+
+.OptionOrb.color-1 .orb {
+  background: var(--fuchsia);
+}
+
+.OptionOrb.color-2 .orb {
+  background: var(--purple);
+}
+
+.OptionOrb.color-3 .orb {
+  background: var(--light-blue);
+}
+
+.OptionOrb.color-4 .orb {
+  background: var(--sunrise);
+}

@@ -4,7 +4,6 @@ import { Token } from 'modules/token/types'
 
 export type PollProgressProps = {
   results: Result[]
-  isDocked?: boolean
 }
 
 export type OptionProps = {

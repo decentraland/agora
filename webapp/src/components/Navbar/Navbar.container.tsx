@@ -1,7 +1,8 @@
+import * as React from 'react'
 import { connect } from 'react-redux'
 import { push, goBack, RouterAction } from 'react-router-redux'
 import { env } from 'decentraland-commons'
-import { Navbar } from 'decentraland-ui'
+import { Navbar, Menu } from 'decentraland-ui'
 import { locations } from 'locations'
 import { RootState, RootDispatch } from 'types'
 import { Wallet } from 'modules/wallet/types'
@@ -30,7 +31,7 @@ const mapState = (state: RootState): any => {
     isConnected: isWalletConnected,
     isConnecting: isConnecting(state),
     isModal: isModalPage(state),
-    connectingMenuItem: t('navbar.connecting')
+    connectingMenuItem: <Menu.Item>{t('navbar.connecting')}</Menu.Item>
   }
 }
 

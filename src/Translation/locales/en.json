@@ -13,8 +13,8 @@
   "vote_page": {
     "vote": "Vote now",
     "cancel": "Cancel",
-    "no_balance": "You don't have any {symbol}",
-    "voting_with": "Voting with"
+    "no_voting_power": "You don't have any voting power",
+    "voting_power": "Voting power"
   },
   "polls_page": {
     "title": "Polls",
