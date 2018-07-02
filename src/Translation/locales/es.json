@@ -31,7 +31,8 @@
       "token": "Token",
       "total_voted": "Total Votado",
       "total_votes": "Votos",
-      "time_left": "Tiempo disponible"
+      "time_left": "Tiempo disponible",
+      "finished": "Finalizada"
     },
     "votes": "Votos",
     "when": "Fecha",

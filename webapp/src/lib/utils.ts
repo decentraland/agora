@@ -42,10 +42,7 @@ export function distanceInWordsToNow(date: number | string, addSuffix = true) {
   })
 }
 
-export function formatDate(
-  date: number | string,
-  format = 'MMMM Do, YYYY - hh:MMa'
-) {
+export function formatDate(date: number | string, format = 'MMMM Do, YYYY') {
   return dateFnsFormat(date, format, {
     locale: getCurrentLocale()
   })

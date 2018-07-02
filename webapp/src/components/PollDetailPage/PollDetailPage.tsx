@@ -135,9 +135,15 @@ export default class PollDetailPage extends React.PureComponent<
               <Stats title={t('poll_detail_page.stats.total_votes')}>
                 <Header>{poll.votes.length}</Header>
               </Stats>
-              <Stats title={t('poll_detail_page.stats.time_left')}>
-                <Header>{distanceInWordsToNow(poll.closes_at, false)}</Header>
-              </Stats>
+              {isFinished(poll) ? (
+                <Stats title={t('poll_detail_page.stats.finished')}>
+                  <Header>{formatDate(poll.closes_at)}</Header>
+                </Stats>
+              ) : (
+                <Stats title={t('poll_detail_page.stats.time_left')}>
+                  <Header>{distanceInWordsToNow(poll.closes_at, false)}</Header>
+                </Stats>
+              )}
             </div>
 
             <Responsive minWidth={Responsive.onlyTablet.minWidth}>
