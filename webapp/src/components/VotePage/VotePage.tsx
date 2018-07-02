@@ -108,9 +108,16 @@ export default class VotePage extends React.PureComponent<
           ))}
 
           {balance ? (
-            <Stats title={t('vote_page.contributions')} className="voting-with">
+            <Stats
+              title={
+                poll.token.symbol === 'MANA'
+                  ? t('vote_page.voting_width')
+                  : t('vote_page.contributions')
+              }
+              className="voting-with"
+            >
               {poll.token.symbol === 'MANA' ? (
-                <Mana>{}</Mana>
+                <Mana>{formatNumber(balance)}</Mana>
               ) : (
                 <Header>{formatNumber(balance)}</Header>
               )}
