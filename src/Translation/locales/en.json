@@ -13,8 +13,8 @@
   "vote_page": {
     "vote": "Vote now",
     "cancel": "Cancel",
-    "no_voting_power": "You don't have any voting power",
-    "voting_power": "Voting power"
+    "no_contributions": "You don't have any contributions",
+    "contributions": "Contributions"
   },
   "polls_page": {
     "decentraland_polls": "Decentraland Polls",
@@ -23,7 +23,8 @@
       "title": "Title",
       "balance": "Balance",
       "total_voted": "Total Voted",
-      "votes": "Votes"
+      "votes": "Votes",
+      "contributions": "Contributions"
     }
   },
   "poll_detail_page": {

@@ -21,7 +21,7 @@ class PollOption extends React.PureComponent<OptionProps> {
 
     const nonSymbolBalloon = {
       'data-balloon': `${votes.toLocaleString()} ${t(
-        'vote_page.voting_power'
+        'vote_page.contributions'
       ).toLocaleLowerCase()}`,
       'data-balloon-pos': 'up'
     }

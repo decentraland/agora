@@ -26,6 +26,7 @@ import './PollDetailPage.css'
 import PollProgress from 'components/PollProgress'
 import OptionBar from 'components/OptionBar'
 import OptionOrb from 'components/OptionOrb'
+import { getBalanceInPoll } from 'modules/wallet/utils'
 
 export default class PollDetailPage extends React.PureComponent<
   PollDetailPageProps
@@ -101,7 +102,7 @@ export default class PollDetailPage extends React.PureComponent<
   }
 
   render() {
-    const { poll, currentVote, isConnected, isLoading } = this.props
+    const { wallet, poll, currentVote, isConnected, isLoading } = this.props
     const currentResults = this.getCurrentResults()
     const noVotes = poll && poll.votes.length === 0
     return (
@@ -109,7 +110,7 @@ export default class PollDetailPage extends React.PureComponent<
         {isLoading || !poll ? (
           <Loader active size="massive" />
         ) : (
-          <React.Fragment>
+          <>
             <Header size="large">{poll.title}</Header>
             {poll.description ? (
               <Header sub className="description">
@@ -125,7 +126,14 @@ export default class PollDetailPage extends React.PureComponent<
                     <Header>{poll.token.symbol}</Header>
                   )}
                 </Stats>
-              ) : null}
+              ) : (
+                <Stats
+                  title={t('vote_page.contributions')}
+                  className="voting-with"
+                >
+                  <Header>{getBalanceInPoll(wallet, poll) || 0}</Header>
+                </Stats>
+              )}
               <Stats title={t('poll_detail_page.stats.total_voted')}>
                 {poll.token.symbol === 'MANA' ? (
                   <Mana>{formatNumber(poll.balance)}</Mana>
@@ -259,7 +267,7 @@ export default class PollDetailPage extends React.PureComponent<
                 </Table>
               </div>
             )}
-          </React.Fragment>
+          </>
         )}
       </div>
     )

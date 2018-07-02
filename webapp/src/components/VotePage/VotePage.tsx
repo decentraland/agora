@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom'
 import { Loader, Header, Radio, Mana, Button, Stats } from 'decentraland-ui'
 import * as uuidv4 from 'uuid/v4'
 import { locations } from 'locations'
+import Linkify from 'react-linkify'
 import { VotePageProps, VotePageState } from 'components/VotePage/types'
 import { NewVote } from 'modules/vote/types'
 import { formatNumber } from 'lib/utils'
@@ -83,7 +84,11 @@ export default class VotePage extends React.PureComponent<
     return (
       <div className="VotePage">
         <Header size="large">{poll.title}</Header>
-        {poll.description ? <Header sub>{poll.description}</Header> : null}
+        {poll.description ? (
+          <Header sub>
+            <Linkify>{poll.description}</Linkify>
+          </Header>
+        ) : null}
         <form
           action="/votes"
           method="POST"
@@ -103,8 +108,12 @@ export default class VotePage extends React.PureComponent<
           ))}
 
           {balance ? (
-            <Stats title={t('vote_page.voting_power')} className="voting-with">
-              <Mana>{formatNumber(balance)}</Mana>
+            <Stats title={t('vote_page.contributions')} className="voting-with">
+              {poll.token.symbol === 'MANA' ? (
+                <Mana>{}</Mana>
+              ) : (
+                <Header>{formatNumber(balance)}</Header>
+              )}
             </Stats>
           ) : null}
 
@@ -123,7 +132,7 @@ export default class VotePage extends React.PureComponent<
             {balance ? null : (
               <div className="no-balance">
                 <small>
-                  {t('vote_page.no_voting_power', {
+                  {t('vote_page.no_contributions', {
                     symbol: poll.token.symbol
                   })}
                 </small>
