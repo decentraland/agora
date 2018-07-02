@@ -139,9 +139,11 @@ export default class VotePage extends React.PureComponent<
             {balance ? null : (
               <div className="no-balance">
                 <small>
-                  {t('vote_page.no_contributions', {
-                    symbol: poll.token.symbol
-                  })}
+                  {poll.token.symbol === 'MANA'
+                    ? t('vote_page.no_balance', {
+                        symbol: poll.token.symbol
+                      })
+                    : t('vote_page.no_contributions')}
                 </small>
               </div>
             )}
