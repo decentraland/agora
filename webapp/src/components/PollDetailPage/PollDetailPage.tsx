@@ -51,7 +51,7 @@ export default class PollDetailPage extends React.PureComponent<
 
   getCurrentResults(): Result[] {
     const { poll } = this.props
-    if (!poll || poll.votes.length === 0) return []
+    if (!poll) return []
 
     const tally: Tally = poll.options.reduce(
       (tally, option) => ({
@@ -83,13 +83,20 @@ export default class PollDetailPage extends React.PureComponent<
     }
 
     const winners = currentResults.filter(result => result.votes === maxVotes)
-    if (winners.length === 1) {
-      winners[0].winner = true
-    }
+    // if (winners.length === 1) {
+    //   winners[0].winner = true
+    // }
+
+    winners.forEach(option => {
+      option.winner = true
+    })
 
     return currentResults.map(result => ({
       ...result,
-      percentage: +(result.votes / totalVotes * 100).toFixed(1)
+      percentage: +(totalVotes > 0
+        ? result.votes / totalVotes * 100
+        : 0
+      ).toFixed(1)
     }))
     // .sort((a, b) => (a.votes > b.votes ? -1 : 1))
   }
