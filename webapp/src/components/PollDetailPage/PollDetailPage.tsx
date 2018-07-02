@@ -91,7 +91,7 @@ export default class PollDetailPage extends React.PureComponent<
       ...result,
       percentage: +(result.votes / totalVotes * 100).toFixed(1)
     }))
-    //.sort((a, b) => (a.votes > b.votes ? -1 : 1))
+    // .sort((a, b) => (a.votes > b.votes ? -1 : 1))
   }
 
   render() {
