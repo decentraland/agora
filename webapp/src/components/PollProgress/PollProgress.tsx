@@ -1,6 +1,8 @@
 import * as React from 'react'
 import './PollProgress.css'
 import { OptionProps, PollProgressProps } from 'components/PollProgress/types'
+import { isDCLToken } from 'modules/poll/utils'
+import { t } from 'modules/translation/utils'
 
 class PollOption extends React.PureComponent<OptionProps> {
   render() {
@@ -9,12 +11,28 @@ class PollOption extends React.PureComponent<OptionProps> {
     if (winner) {
       classes += ' winner'
     }
+
+    const hasSymbol = token && isDCLToken(token)
+
+    const symbolBallon = {
+      'data-balloon': `${votes.toLocaleString()} ${token ? token.symbol : ''}`,
+      'data-balloon-pos': 'up'
+    }
+
+    const nonSymbolBalloon = {
+      'data-balloon': `${votes.toLocaleString()} ${t(
+        'vote_page.voting_power'
+      ).toLocaleLowerCase()}`,
+      'data-balloon-pos': 'up'
+    }
+
+    const balloon = hasSymbol ? symbolBallon : nonSymbolBalloon
+
     return (
       <div
         className={classes}
         style={winner ? undefined : { width: `${percentage}%` }}
-        data-balloon={`${votes.toLocaleString()} ${token ? token.symbol : ''}`}
-        data-balloon-pos="up"
+        {...balloon}
       >
         <div className="mask">
           <div className="bg" />

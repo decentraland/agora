@@ -17,10 +17,12 @@
     "voting_power": "Voting power"
   },
   "polls_page": {
-    "title": "Polls",
+    "decentraland_polls": "Decentraland Polls",
+    "district_plan_acceptance": "District Plan Acceptance",
     "table": {
       "title": "Title",
       "balance": "Balance",
+      "total_voted": "Total Voted",
       "votes": "Votes"
     }
   },
