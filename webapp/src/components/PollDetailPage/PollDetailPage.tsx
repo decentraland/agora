@@ -83,10 +83,6 @@ export default class PollDetailPage extends React.PureComponent<
     }
 
     const winners = currentResults.filter(result => result.votes === maxVotes)
-    // if (winners.length === 1) {
-    //   winners[0].winner = true
-    // }
-
     winners.forEach(option => {
       option.winner = true
     })
