@@ -116,13 +116,15 @@ export default class PollDetailPage extends React.PureComponent<
               </Header>
             ) : null}
             <div className="stats">
-              <Stats title={t('poll_detail_page.stats.token')}>
-                {poll.token.symbol === 'MANA' ? (
-                  <Mana>{poll.token.symbol}</Mana>
-                ) : (
-                  <Header>{poll.token.symbol}</Header>
-                )}
-              </Stats>
+              {poll.token.symbol === 'MANA' || poll.token.symbol === 'LAND' ? (
+                <Stats title={t('poll_detail_page.stats.token')}>
+                  {poll.token.symbol === 'MANA' ? (
+                    <Mana>{poll.token.symbol}</Mana>
+                  ) : (
+                    <Header>{poll.token.symbol}</Header>
+                  )}
+                </Stats>
+              ) : null}
               <Stats title={t('poll_detail_page.stats.total_voted')}>
                 {poll.token.symbol === 'MANA' ? (
                   <Mana>{formatNumber(poll.balance)}</Mana>
