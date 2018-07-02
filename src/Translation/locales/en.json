@@ -31,7 +31,8 @@
       "token": "Token",
       "total_voted": "Total Voted",
       "total_votes": "Total Votes",
-      "time_left": "Time Left"
+      "time_left": "Time Left",
+      "finished": "Finished"
     },
     "votes": "Votes",
     "when": "When",
