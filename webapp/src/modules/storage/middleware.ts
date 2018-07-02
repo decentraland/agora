@@ -12,6 +12,9 @@ import { STORAGE_LOAD } from 'modules/storage/types'
 import { hasLocalStorage } from 'lib/localStorage'
 import { disabledMiddleware } from 'lib/disabledMiddleware'
 
+const disabledLoad = (store: Store<any>) =>
+  setTimeout(() => store.dispatch({ type: STORAGE_LOAD, payload: {} }))
+
 export function createStorageMiddleware(storageKey: string) {
   if (!hasLocalStorage()) {
     return {
@@ -38,6 +41,3 @@ export function createStorageMiddleware(storageKey: string) {
 
   return { storageMiddleware, loadStorageMiddleware: load }
 }
-
-const disabledLoad = (store: Store<any>) =>
-  setTimeout(() => store.dispatch({ type: STORAGE_LOAD, payload: {} }))
