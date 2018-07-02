@@ -18,10 +18,12 @@ import {
   Mana,
   Table,
   Blockie,
-  Address
+  Address,
+  Responsive
 } from 'decentraland-ui'
 import './PollDetailPage.css'
 import PollProgress from 'components/PollProgress'
+import OptionBar from 'components/OptionBar'
 import OptionOrb from 'components/OptionOrb'
 
 export default class PollDetailPage extends React.PureComponent<
@@ -136,11 +138,56 @@ export default class PollDetailPage extends React.PureComponent<
               </Stats>
             </div>
 
-            <div className="row main">
-              <div className="progress">
-                <PollProgress results={currentResults} />
-              </div>
+            <Responsive minWidth={Responsive.onlyTablet.minWidth}>
+              <>
+                <div className="row main">
+                  <div className="progress">
+                    <PollProgress results={currentResults} />
+                  </div>
 
+                  {!isConnected || isFinished(poll) ? null : (
+                    <div className="vote">
+                      <Link to={locations.voteDetail(poll.id)}>
+                        <Button primary>
+                          {t('poll_detail_page.cast_vote')}
+                        </Button>
+                      </Link>
+                    </div>
+                  )}
+                </div>
+
+                <div className="row sub">
+                  <div className="options">
+                    {currentResults.map((result, index) => (
+                      <OptionOrb position={index}>
+                        {result.option.value}
+                      </OptionOrb>
+                    ))}
+                  </div>
+                  {currentVote ? (
+                    <span className="your-vote">
+                      {t('poll_detail_page.you_voted', {
+                        option: getVoteOptionValue(poll.options, currentVote)
+                      })}.{' '}
+                      <span className="time-ago">
+                        {distanceInWordsToNow(currentVote.timestamp)}.
+                      </span>
+                    </span>
+                  ) : null}
+                </div>
+              </>
+            </Responsive>
+
+            <Responsive
+              maxWidth={(Responsive.onlyTablet.minWidth as number) - 1}
+            >
+              <div className="results">
+                {currentResults.map((result, index) => (
+                  <OptionBar position={index} percentage={result.percentage}>
+                    {result.option.value}
+                  </OptionBar>
+                ))}
+              </div>
               {!isConnected || isFinished(poll) ? null : (
                 <div className="vote">
                   <Link to={locations.voteDetail(poll.id)}>
@@ -148,14 +195,6 @@ export default class PollDetailPage extends React.PureComponent<
                   </Link>
                 </div>
               )}
-            </div>
-
-            <div className="row sub">
-              <div className="options">
-                {currentResults.map((result, index) => (
-                  <OptionOrb position={index}>{result.option.value}</OptionOrb>
-                ))}
-              </div>
               {currentVote ? (
                 <span className="your-vote">
                   {t('poll_detail_page.you_voted', {
@@ -166,7 +205,7 @@ export default class PollDetailPage extends React.PureComponent<
                   </span>
                 </span>
               ) : null}
-            </div>
+            </Responsive>
 
             {noVotes ? null : (
               <div className="votes">

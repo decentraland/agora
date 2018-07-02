@@ -51,3 +51,39 @@
   margin-top: 6.8em;
   margin-bottom: 9em;
 }
+
+@media (max-width: 768px) {
+  .PollDetailPage .vote {
+    margin-left: 0px;
+    margin-top: 48px;
+    margin-bottom: 48px;
+  }
+
+  .PollDetailPage .vote .ui.button {
+    height: 48px;
+    width: 191px;
+  }
+
+  .PollDetailPage .your-vote {
+    position: fixed;
+    left: 0px;
+    bottom: 0px;
+    margin: 0px;
+    height: 64px;
+    width: 100%;
+    text-align: center;
+    background: var(--secondary);
+    padding: 24px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .PollDetailPage .votes {
+    margin-top: 0px;
+  }
+
+  .PollDetailPage .ui.basic.table thead tr {
+    display: none !important;
+  }
+}

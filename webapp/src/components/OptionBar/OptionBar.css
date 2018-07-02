@@ -1,0 +1,35 @@
+.OptionBar {
+  margin-bottom: 24px;
+}
+
+.OptionBar .bar {
+  height: 24px;
+  min-width: 16px;
+  border-radius: var(--radius);
+  margin-bottom: 4px;
+}
+
+.OptionBar .label {
+  font-size: 12px;
+  font-weight: bold;
+}
+
+.OptionBar.color-0 .bar {
+  background: var(--pale-strawberry);
+}
+
+.OptionBar.color-1 .bar {
+  background: var(--fuchsia);
+}
+
+.OptionBar.color-2 .bar {
+  background: var(--purple);
+}
+
+.OptionBar.color-3 .bar {
+  background: var(--light-blue);
+}
+
+.OptionBar.color-4 .bar {
+  background: var(--sunrise);
+}
