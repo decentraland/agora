@@ -1,6 +1,7 @@
 import * as React from 'react'
 import { Link } from 'react-router-dom'
 import { locations } from 'locations'
+import Linkify from 'react-linkify'
 import {
   PollDetailPageProps,
   Tally,
@@ -112,7 +113,7 @@ export default class PollDetailPage extends React.PureComponent<
             <Header size="large">{poll.title}</Header>
             {poll.description ? (
               <Header sub className="description">
-                {poll.description}
+                <Linkify>{poll.description}</Linkify>
               </Header>
             ) : null}
             <div className="stats">
