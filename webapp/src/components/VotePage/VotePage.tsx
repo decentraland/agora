@@ -141,16 +141,16 @@ export default class VotePage extends React.PureComponent<
             <Link className="ui button" to={locations.pollDetail(pollId)}>
               {t('vote_page.cancel')}
             </Link>
-            {balance ? null : (
-              <div className="no-balance">
-                <small>
-                  {poll.token.symbol === 'MANA'
-                    ? noContributionsText
-                    : noBalanceText}
-                </small>
-              </div>
-            )}
           </div>
+          {balance ? null : (
+            <div className="no-balance">
+              <small>
+                {poll.token.symbol === 'MANA'
+                  ? noContributionsText
+                  : noBalanceText}
+              </small>
+            </div>
+          )}
         </form>
       </div>
     )
