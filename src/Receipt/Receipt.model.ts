@@ -61,15 +61,11 @@ export class Receipt extends ModelWithCallbacks<ReceiptAttributes> {
     const message = eth.utils.toHex(
       `Decentraland Vote Receipt:\nMessage from address: ${
         vote.account_address
-      }, with hash ${
-        eth.utils.sha3(vote.message)
-      } and signature ${
+      }, with hash ${eth.utils.sha3(vote.message, 256)} and signature ${
         vote.signature
       } was received.\n\nThe vote to cast is: ${
         vote.option.value
-      }. Date: ${
-        new Date()
-      }`
+      }. Date: ${new Date()}`
     )
     const signature = eth.utils.localSign(message, serverKey)
 
