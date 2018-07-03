@@ -65,9 +65,9 @@ Do you wish to continue?`
 
 async function upsertDistrictAccountsFromContributions() {
   const districtEntries: DistrictEntry[] = await db.query(
-    SQL`SELECT D.address, D.project_id, COUNT(*) AS lands, 
-      (SELECT row_to_json(P.*) FROM projects P WHERE P.id = D.project_id) AS project 
-        FROM district_entries D 
+    SQL`SELECT D.address, D.project_id, COUNT(*) AS lands,
+      (SELECT row_to_json(P.*) FROM projects P WHERE P.id = D.project_id) AS project
+        FROM district_entries D
         GROUP BY D.address, D.project_id`
   )
 
