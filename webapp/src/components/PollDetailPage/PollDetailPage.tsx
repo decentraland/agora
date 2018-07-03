@@ -1,7 +1,7 @@
 import * as React from 'react'
 import { Link } from 'react-router-dom'
 import { locations } from 'locations'
-import Linkify from 'react-linkify'
+import * as ReactMarkdown from 'react-markdown'
 import {
   PollDetailPageProps,
   Tally,
@@ -114,7 +114,7 @@ export default class PollDetailPage extends React.PureComponent<
             <Header size="large">{poll.title}</Header>
             {poll.description ? (
               <Header sub className="description">
-                <Linkify>{poll.description}</Linkify>
+                <ReactMarkdown source={poll.description} />
               </Header>
             ) : null}
             <div className="stats">
@@ -162,10 +162,13 @@ export default class PollDetailPage extends React.PureComponent<
                     <PollProgress results={currentResults} />
                   </div>
 
-                  {!isConnected || isFinished(poll) ? null : (
+                  {isFinished(poll) ? null : (
                     <div className="vote">
-                      <Link to={locations.voteDetail(poll.id)}>
-                        <Button primary>
+                      <Link
+                        to={locations.voteDetail(poll.id)}
+                        className={!isConnected ? 'disabled' : undefined}
+                      >
+                        <Button primary disabled={!isConnected}>
                           {t('poll_detail_page.cast_vote')}
                         </Button>
                       </Link>
@@ -205,10 +208,16 @@ export default class PollDetailPage extends React.PureComponent<
                   </OptionBar>
                 ))}
               </div>
-              {!isConnected || isFinished(poll) ? null : (
+              {isFinished(poll) ? null : (
                 <div className="vote">
-                  <Link to={locations.voteDetail(poll.id)}>
-                    <Button primary>{t('poll_detail_page.cast_vote')}</Button>
+                  <Link
+                    to={locations.voteDetail(poll.id)}
+                    className={!isConnected ? 'disabled' : undefined}
+                  >
+                    >
+                    <Button primary disabled={!isConnected}>
+                      {t('poll_detail_page.cast_vote')}
+                    </Button>
                   </Link>
                 </div>
               )}

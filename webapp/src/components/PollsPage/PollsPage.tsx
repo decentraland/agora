@@ -8,6 +8,22 @@ import { formatNumber } from 'lib/utils'
 import './PollsPage.css'
 import { isDCLPoll } from 'modules/poll/utils'
 import { getBalanceInPoll } from 'modules/wallet/utils'
+import { PollWithAssociations } from 'modules/poll/types'
+import { Wallet } from 'modules/wallet/types'
+
+const sortByContributions = (wallet: Wallet) => (
+  pollA: PollWithAssociations,
+  pollB: PollWithAssociations
+) => {
+  const contribA = getBalanceInPoll(wallet, pollA) || 0
+  const contribB = getBalanceInPoll(wallet, pollB) || 0
+  if (contribA > contribB) {
+    return -1
+  } else if (contribB > contribA) {
+    return 1
+  }
+  return pollA.title > pollB.title ? 1 : -1
+}
 
 export default class PollsPage extends React.PureComponent<PollsPageProps> {
   componentWillMount() {
@@ -17,7 +33,9 @@ export default class PollsPage extends React.PureComponent<PollsPageProps> {
   render() {
     const { polls, wallet, isLoading } = this.props
 
-    const districtPolls = Object.values(polls).filter(poll => !isDCLPoll(poll))
+    const districtPolls = Object.values(polls)
+      .filter(poll => !isDCLPoll(poll))
+      .sort(sortByContributions(wallet))
     const dclPolls = Object.values(polls).filter(poll => isDCLPoll(poll))
     return (
       <div className="PollsPage">

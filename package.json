@@ -44,7 +44,6 @@
     "express": "^4.16.2",
     "flat": "^4.0.0",
     "node-pg-migrate": "^2.23.0",
-    "react-linkify": "^0.2.2",
     "uuid": "^3.2.1"
   },
   "devDependencies": {

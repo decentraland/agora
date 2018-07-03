@@ -17,6 +17,10 @@
   margin-left: 80px;
 }
 
+.PollDetailPage .vote .disabled {
+  cursor: not-allowed;
+}
+
 .PollDetailPage .progress {
   flex: 1 0 auto;
 }
