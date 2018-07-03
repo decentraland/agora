@@ -11,3 +11,19 @@ body {
   margin: 0;
   padding: 0;
 }
+
+body:before {
+  content: 'Test';
+  background: var(--primary);
+  color: white;
+  text-align: center;
+  text-transform: uppercase;
+  height: 24px;
+  width: 100%;
+  position: fixed;
+  padding-top: 2px;
+}
+
+#root {
+  padding-top: 24px;
+}
