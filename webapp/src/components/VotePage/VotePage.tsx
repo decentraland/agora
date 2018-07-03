@@ -81,6 +81,11 @@ export default class VotePage extends React.PureComponent<
     const currentSelection = this.getCurrentSelection()
     const balance = getBalanceInPoll(wallet, poll)
 
+    const noContributionsText = t('vote_page.no_balance', {
+      symbol: poll.token.symbol
+    })
+    const noBalanceText = t('vote_page.no_contributions')
+
     return (
       <div className="VotePage">
         <Header size="large">{poll.title}</Header>
@@ -140,10 +145,8 @@ export default class VotePage extends React.PureComponent<
               <div className="no-balance">
                 <small>
                   {poll.token.symbol === 'MANA'
-                    ? t('vote_page.no_balance', {
-                        symbol: poll.token.symbol
-                      })
-                    : t('vote_page.no_contributions')}
+                    ? noContributionsText
+                    : noBalanceText}
                 </small>
               </div>
             )}
