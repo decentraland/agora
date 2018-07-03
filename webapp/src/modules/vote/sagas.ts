@@ -50,7 +50,7 @@ function* handleVoteRequest(action: CreateVoteRequest) {
     const options: ReturnType<typeof getOptions> = yield select(getOptions)
     const option = options[newVote.option_id]
 
-    const payload = `==== TEST VERSION ====
+    const payload = `
 Poll Id: ${poll.id}
 Poll Title: ${poll.title}
 Poll Description: ${poll.description || ''}
