@@ -1,5 +1,7 @@
 .PollDetailPage .ui.header.sub.description {
   margin-bottom: 48px;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .PollDetailPage > .stats {
