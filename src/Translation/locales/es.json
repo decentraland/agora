@@ -14,7 +14,9 @@
     "vote": "Votar",
     "cancel": "Cancelar",
     "no_contributions": "No tienes contribuciones",
-    "contributions": "Contribuciones"
+    "no_balance": "No tienes suficiente {symbol}",
+    "contributions": "Contribuciones",
+    "voting_width": "Votando con"
   },
   "polls_page": {
     "decentraland_polls": "Encuestas de Decentraland",
