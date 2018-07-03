@@ -55,7 +55,7 @@ export default class PollsPage extends React.PureComponent<PollsPageProps> {
                         {t('polls_page.table.title')}
                       </Table.HeaderCell>
                       <Table.HeaderCell>
-                        {t('polls_page.table.contributions')}
+                        {t('global.contributions')}
                       </Table.HeaderCell>
                       <Table.HeaderCell>
                         {t('polls_page.table.total_voted')}

@@ -27,6 +27,7 @@ import PollProgress from 'components/PollProgress'
 import OptionBar from 'components/OptionBar'
 import OptionOrb from 'components/OptionOrb'
 import { getBalanceInPoll } from 'modules/wallet/utils'
+import { isDistrictToken } from 'modules/token/district_token/utils'
 
 export default class PollDetailPage extends React.PureComponent<
   PollDetailPageProps
@@ -128,7 +129,7 @@ export default class PollDetailPage extends React.PureComponent<
                 </Stats>
               ) : (
                 <Stats
-                  title={t('vote_page.contributions')}
+                  title={t('global.contributions')}
                   className="voting-with"
                 >
                   <Header>{getBalanceInPoll(wallet, poll) || 0}</Header>
@@ -246,7 +247,9 @@ export default class PollDetailPage extends React.PureComponent<
                         {t('poll_detail_page.address')}
                       </Table.HeaderCell>
                       <Table.HeaderCell>
-                        {t('poll_detail_page.amount')}
+                        {isDistrictToken(poll.token)
+                          ? t('global.contributions')
+                          : t('poll_detail_page.amount')}
                       </Table.HeaderCell>
                       <Table.HeaderCell>
                         {t('poll_detail_page.vote')}
@@ -264,8 +267,14 @@ export default class PollDetailPage extends React.PureComponent<
                           </Blockie>
                         </Table.Cell>
                         <Table.Cell>
-                          <Mana size="small" black />
-                          {formatNumber(vote.account_balance)}
+                          {poll.token.symbol === 'MANA' ? (
+                            <>
+                              <Mana size="small" black />
+                              {formatNumber(vote.account_balance)}
+                            </>
+                          ) : (
+                            formatNumber(vote.account_balance)
+                          )}
                         </Table.Cell>
                         <Table.Cell>
                           {getVoteOptionValue(poll.options, vote)}
