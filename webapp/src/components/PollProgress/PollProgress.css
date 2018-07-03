@@ -39,6 +39,7 @@
 
 .PollProgress .PollOption {
   min-width: calc(var(--radius) + var(--radius));
+  cursor: default !important;
 }
 
 .PollProgress .PollOption.color-0 .bg {

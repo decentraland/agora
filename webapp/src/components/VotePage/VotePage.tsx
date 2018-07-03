@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 import { Loader, Header, Radio, Mana, Button, Stats } from 'decentraland-ui'
 import * as uuidv4 from 'uuid/v4'
 import { locations } from 'locations'
-import Linkify from 'react-linkify'
+import * as ReactMarkdown from 'react-markdown'
 import { VotePageProps, VotePageState } from 'components/VotePage/types'
 import { NewVote } from 'modules/vote/types'
 import { formatNumber } from 'lib/utils'
@@ -91,7 +91,7 @@ export default class VotePage extends React.PureComponent<
         <Header size="large">{poll.title}</Header>
         {poll.description ? (
           <Header sub>
-            <Linkify>{poll.description}</Linkify>
+            <ReactMarkdown source={poll.description} />
           </Header>
         ) : null}
         <form
