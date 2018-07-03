@@ -48,6 +48,15 @@ export function formatDate(date: number | string, format = 'MMMM Do, YYYY') {
   })
 }
 
+export function formatDateTime(
+  date: number | string,
+  format = 'MMMM Do, YYYY - hh:mm aa'
+) {
+  return dateFnsFormat(date, format, {
+    locale: getCurrentLocale()
+  })
+}
+
 export function formatNumber(amount: number = 0, digits: number = 2) {
   return parseFloat((+amount).toFixed(digits)).toLocaleString()
 }

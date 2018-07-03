@@ -2,7 +2,8 @@
   "global": {
     "poll": "Poll",
     "polls": "Polls",
-    "contributions": "Contributions"
+    "contributions": "Contributions",
+    "your_contributions": "Your Contributions"
   },
   "languages": {
     "en": "English",

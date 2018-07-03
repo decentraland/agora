@@ -8,7 +8,12 @@ import {
   Tally,
   Result
 } from 'components/PollDetailPage/types'
-import { distanceInWordsToNow, formatDate, formatNumber } from 'lib/utils'
+import {
+  distanceInWordsToNow,
+  formatDate,
+  formatNumber,
+  formatDateTime
+} from 'lib/utils'
 import { getVoteOptionValue } from 'modules/option/utils'
 import { isFinished, isDCLPoll } from 'modules/poll/utils'
 import { t } from 'modules/translation/utils'
@@ -146,7 +151,7 @@ export default class PollDetailPage extends React.PureComponent<
                 </Stats>
               ) : (
                 <Stats
-                  title={t('global.contributions')}
+                  title={t('global.your_contributions')}
                   className="voting-with"
                 >
                   <Header>{getBalanceInPoll(wallet, poll) || 0}</Header>
@@ -280,10 +285,13 @@ export default class PollDetailPage extends React.PureComponent<
 
                   <Table.Body>
                     {poll.votes
+                      .sort((a, b) => (a.timestamp > b.timestamp ? -1 : 1))
                       .slice(pageOffset, pageOffset + VOTES_PER_PAGE)
                       .map((vote, index) => (
                         <Table.Row key={vote.id + index}>
-                          <Table.Cell>{formatDate(vote.timestamp)}</Table.Cell>
+                          <Table.Cell title={formatDateTime(vote.timestamp)}>
+                            {formatDate(vote.timestamp)}
+                          </Table.Cell>
                           <Table.Cell>
                             <Blockie scale={3} seed={vote.account_address}>
                               &nbsp;<Address value={vote.account_address} />
