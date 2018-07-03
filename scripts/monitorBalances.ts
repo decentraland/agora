@@ -101,3 +101,8 @@ if (require.main === module) {
   loadEnv()
   main().catch(error => console.error(error))
 }
+
+process.on('unhandledRejection', function(e) {
+  console.error('An error occured', e.message)
+  process.exit(1)
+})
