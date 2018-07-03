@@ -241,7 +241,6 @@ export default class PollDetailPage extends React.PureComponent<
                     to={locations.voteDetail(poll.id)}
                     className={!isConnected ? 'disabled' : undefined}
                   >
-                    >
                     <Button primary disabled={!isConnected}>
                       {t('poll_detail_page.cast_vote')}
                     </Button>
