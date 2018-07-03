@@ -90,7 +90,7 @@ export default class VotePage extends React.PureComponent<
       <div className="VotePage">
         <Header size="large">{poll.title}</Header>
         {poll.description ? (
-          <Header sub>
+          <Header sub className="description">
             <ReactMarkdown source={poll.description} />
           </Header>
         ) : null}

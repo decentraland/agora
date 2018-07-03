@@ -1,3 +1,8 @@
+.VotePage .description {
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
 .VotePage .options {
   margin-top: 40px;
 }
