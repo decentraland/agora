@@ -65,9 +65,10 @@ Do you wish to continue?`
 
 async function upsertDistrictAccountsFromContributions() {
   const districtEntries: DistrictEntry[] = await db.query(
-    SQL`SELECT d.*, row_to_json(p.*) as project
-      FROM district_entries d
-        JOIN projects p ON p.id = d.project_id`
+    SQL`SELECT D.address, D.project_id, COUNT(*) AS lands, 
+      (SELECT row_to_json(P.*) FROM projects P WHERE P.id = D.project_id) AS project 
+        FROM district_entries D 
+        GROUP BY D.address, D.project_id`
   )
 
   log.info(`Normalizing ${districtEntries.length} district_entries.`)
@@ -82,7 +83,7 @@ async function upsertDistrictAccountsFromContributions() {
     const account = new AccountBalance({
       address,
       token_address: token.get('address'),
-      balance: '1'
+      balance: districtEntry.lands.toString()
     })
     await account.upsert({ target: ['address', 'token_address'] })
   }
