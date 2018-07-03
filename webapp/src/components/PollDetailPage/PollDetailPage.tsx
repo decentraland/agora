@@ -92,14 +92,15 @@ export default class PollDetailPage extends React.PureComponent<
       option.winner = true
     })
 
-    return currentResults.map(result => ({
-      ...result,
-      percentage: +(totalVotes > 0
-        ? result.votes / totalVotes * 100
-        : 0
-      ).toFixed(1)
-    }))
-    // .sort((a, b) => (a.votes > b.votes ? -1 : 1))
+    return currentResults
+      .map(result => ({
+        ...result,
+        percentage: +(totalVotes > 0
+          ? result.votes / totalVotes * 100
+          : 0
+        ).toFixed(1)
+      }))
+      .sort((a, b) => (a.option.value > b.option.value ? 1 : -1))
   }
 
   render() {
