@@ -33,3 +33,7 @@ export interface Result {
   percentage: number
   token?: Token
 }
+
+export interface PollDetailPageState {
+  activePage: number
+}

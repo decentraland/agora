@@ -4,10 +4,16 @@ import { locations } from 'locations'
 import * as ReactMarkdown from 'react-markdown'
 import {
   PollDetailPageProps,
+  PollDetailPageState,
   Tally,
   Result
 } from 'components/PollDetailPage/types'
-import { distanceInWordsToNow, formatDate, formatNumber } from 'lib/utils'
+import {
+  distanceInWordsToNow,
+  formatDate,
+  formatNumber,
+  formatDateTime
+} from 'lib/utils'
 import { getVoteOptionValue } from 'modules/option/utils'
 import { isFinished, isDCLPoll } from 'modules/poll/utils'
 import { t } from 'modules/translation/utils'
@@ -20,7 +26,8 @@ import {
   Table,
   Blockie,
   Address,
-  Responsive
+  Responsive,
+  Pagination
 } from 'decentraland-ui'
 import './PollDetailPage.css'
 import PollProgress from 'components/PollProgress'
@@ -29,8 +36,11 @@ import OptionOrb from 'components/OptionOrb'
 import { getBalanceInPoll } from 'modules/wallet/utils'
 import { isDistrictToken } from 'modules/token/district_token/utils'
 
+const VOTES_PER_PAGE = 20
+
 export default class PollDetailPage extends React.PureComponent<
-  PollDetailPageProps
+  PollDetailPageProps,
+  PollDetailPageState
 > {
   static defaultProps = {
     poll: null
@@ -40,6 +50,9 @@ export default class PollDetailPage extends React.PureComponent<
   constructor(props: PollDetailPageProps) {
     super(props)
     this.navigatingAway = false
+    this.state = {
+      activePage: 1
+    }
   }
 
   componentWillMount() {
@@ -103,10 +116,18 @@ export default class PollDetailPage extends React.PureComponent<
       .sort((a, b) => (a.option.value > b.option.value ? 1 : -1))
   }
 
+  handlePageChange = (event: any, { activePage }: any) => {
+    console.log(event) // otherwise 'event' is declared but its value is never read...
+    this.setState({ activePage })
+  }
+
   render() {
     const { wallet, poll, currentVote, isConnected, isLoading } = this.props
     const currentResults = this.getCurrentResults()
     const noVotes = poll && poll.votes.length === 0
+    const totalPages = poll ? Math.ceil(poll.votes.length / VOTES_PER_PAGE) : 0
+    const pageOffset = (this.state.activePage - 1) * VOTES_PER_PAGE
+
     return (
       <div className="PollDetailPage">
         {isLoading || !poll ? (
@@ -130,7 +151,7 @@ export default class PollDetailPage extends React.PureComponent<
                 </Stats>
               ) : (
                 <Stats
-                  title={t('global.contributions')}
+                  title={t('global.your_contributions')}
                   className="voting-with"
                 >
                   <Header>{getBalanceInPoll(wallet, poll) || 0}</Header>
@@ -181,7 +202,7 @@ export default class PollDetailPage extends React.PureComponent<
                 <div className="row sub">
                   <div className="options">
                     {currentResults.map((result, index) => (
-                      <OptionOrb position={index}>
+                      <OptionOrb position={index} key={result.option.id}>
                         {result.option.value}
                       </OptionOrb>
                     ))}
@@ -205,7 +226,11 @@ export default class PollDetailPage extends React.PureComponent<
             >
               <div className="results">
                 {currentResults.map((result, index) => (
-                  <OptionBar position={index} percentage={result.percentage}>
+                  <OptionBar
+                    position={index}
+                    percentage={result.percentage}
+                    key={result.option.id}
+                  >
                     {result.option.value}
                   </OptionBar>
                 ))}
@@ -259,31 +284,47 @@ export default class PollDetailPage extends React.PureComponent<
                   </Table.Header>
 
                   <Table.Body>
-                    {poll.votes.map(vote => (
-                      <Table.Row key={vote.id}>
-                        <Table.Cell>{formatDate(vote.timestamp)}</Table.Cell>
-                        <Table.Cell>
-                          <Blockie scale={3} seed={vote.account_address}>
-                            &nbsp;<Address value={vote.account_address} />
-                          </Blockie>
-                        </Table.Cell>
-                        <Table.Cell>
-                          {poll.token.symbol === 'MANA' ? (
-                            <>
-                              <Mana size="small" black />
-                              {formatNumber(vote.account_balance)}
-                            </>
-                          ) : (
-                            formatNumber(vote.account_balance)
-                          )}
-                        </Table.Cell>
-                        <Table.Cell>
-                          {getVoteOptionValue(poll.options, vote)}
-                        </Table.Cell>
-                      </Table.Row>
-                    ))}
+                    {poll.votes
+                      .sort((a, b) => (a.timestamp > b.timestamp ? -1 : 1))
+                      .slice(pageOffset, pageOffset + VOTES_PER_PAGE)
+                      .map((vote, index) => (
+                        <Table.Row key={vote.id + index}>
+                          <Table.Cell title={formatDateTime(vote.timestamp)}>
+                            {formatDate(vote.timestamp)}
+                          </Table.Cell>
+                          <Table.Cell>
+                            <Blockie scale={3} seed={vote.account_address}>
+                              &nbsp;<Address value={vote.account_address} />
+                            </Blockie>
+                          </Table.Cell>
+                          <Table.Cell>
+                            {poll.token.symbol === 'MANA' ? (
+                              <>
+                                <Mana size="small" black />
+                                {formatNumber(vote.account_balance)}
+                              </>
+                            ) : (
+                              formatNumber(vote.account_balance)
+                            )}
+                          </Table.Cell>
+                          <Table.Cell>
+                            {getVoteOptionValue(poll.options, vote)}
+                          </Table.Cell>
+                        </Table.Row>
+                      ))}
                   </Table.Body>
                 </Table>
+                {totalPages > 1 ? (
+                  <div className="votes-pagination">
+                    <Pagination
+                      activePage={this.state.activePage}
+                      totalPages={totalPages}
+                      firstItem={null}
+                      lastItem={null}
+                      onPageChange={this.handlePageChange}
+                    />
+                  </div>
+                ) : null}
               </div>
             )}
           </>

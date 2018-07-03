@@ -2,7 +2,8 @@
   "global": {
     "poll": "Encuesta",
     "polls": "Encuestas",
-    "contributions": "Contribuciones"
+    "contributions": "Contribuciones",
+    "your_contributions": "Tus Contribuciones"
   },
   "languages": {
     "en": "Inglés",

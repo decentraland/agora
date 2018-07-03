@@ -117,7 +117,7 @@ export default class VotePage extends React.PureComponent<
               title={
                 poll.token.symbol === 'MANA'
                   ? t('vote_page.voting_width')
-                  : t('global.contributions')
+                  : t('global.your_contributions')
               }
               className="voting-with"
             >
