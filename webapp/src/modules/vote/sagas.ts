@@ -57,7 +57,7 @@ Poll Description: ${poll.description || ''}
 Option Id: ${option.id}
 Option Value: ${option.value}
 Current Balance: ${getBalanceInPoll(wallet, poll)}
-Token: ${poll.token.symbol}
+Symbol: ${poll.token.symbol}
 Timestamp: ${newVote.timestamp}
     `
     const { message, signature } = yield call(() => eth.sign(payload))
