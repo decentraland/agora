@@ -49,7 +49,7 @@ export class Receipt extends ModelWithCallbacks<ReceiptAttributes> {
     return attributes
   }
 
-  sign(vote: CastVoteOption): Signature | null {
+  async sign(vote: CastVoteOption): Promise<Signature | null> {
     const serverKey = env.get('SERVER_SIGNING_KEY', '')
     if (!serverKey) {
       console.warn(
@@ -61,11 +61,17 @@ export class Receipt extends ModelWithCallbacks<ReceiptAttributes> {
     const message = eth.utils.toHex(
       `Decentraland Vote Receipt:\nMessage from address: ${
         vote.account_address
-      }, with hash ${eth.utils.sha3(vote.message, 256)} and signature ${
+      }, with hash ${
+        eth.utils.sha3(vote.message, 256).toString('hex')
+      } and signature ${
         vote.signature
       } was received.\n\nThe vote to cast is: ${
         vote.option.value
-      }. Date: ${new Date()}`
+      } on poll ${vote.pollId}.\n\nDate: ${
+        new Date()
+      }\nServer nonce: ${
+        await Receipt.count()
+      }`
     )
     const signature = eth.utils.localSign(message, serverKey)
 
