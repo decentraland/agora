@@ -45,7 +45,7 @@ export class Receipt extends ModelWithCallbacks<ReceiptAttributes> {
       await receipt.create()
       await receipt.retreive()
 
-      const signResult = await receipt.sign(vote, receipt.get('nonce'))
+      const signResult = receipt.sign(vote, receipt.get('nonce'))
       receipt.assign({
         server_message: signResult.message,
         server_signature: signResult.signature
@@ -62,7 +62,7 @@ export class Receipt extends ModelWithCallbacks<ReceiptAttributes> {
     return attributes
   }
 
-  async sign(vote: CastVoteOption, nonce: number): Promise<Signature> {
+  sign(vote: CastVoteOption, nonce: number): Signature {
     const serverKey = env.get('SERVER_SIGNING_KEY', '')
     const hash = eth.utils.sha3(vote.message, 256).toString('hex')
 
