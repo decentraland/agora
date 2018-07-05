@@ -22,7 +22,11 @@ export class PollRouter extends Router {
 
   async getPolls(): Promise<PollAttributes[]> {
     // @nico we might need to measure the perf hit of returning everything here
-    const polls = await Poll.findWithAssociations()
+    let polls = await Poll.findWithAssociations()
+
+    // Filter active
+    polls = polls.filter(poll => poll.closes_at > +new Date())
+
     return utils.mapOmit(polls, blacklist.poll)
   }
 
