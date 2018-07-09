@@ -1,7 +1,4 @@
-import {
-  Poll,
-  PollWithPointers
-} from 'modules/poll/types'
+import { Poll, PollWithPointers } from 'modules/poll/types'
 import { Token } from 'modules/token/types'
 import { Vote } from 'modules/vote/types'
 import { Option } from 'modules/option/types'
