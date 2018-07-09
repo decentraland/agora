@@ -44,7 +44,7 @@ export class VoteRouter extends Router {
     const signature = server.extractFromReq(req, 'signature')
 
     const signedMessage = new SignedMessage(message, signature)
-    const [pollId, optionId, balance, timestamp] = signedMessage.extract([
+    let [pollId, optionId, balance, timestamp] = signedMessage.extract([
       'Poll Id',
       'Option Id',
       'Current Balance',
@@ -58,6 +58,16 @@ export class VoteRouter extends Router {
     if (poll.isFinished()) throw new Error('Poll already finished')
 
     const address = signedMessage.getAddress().toLowerCase()
+
+    if (poll.isDistrictPoll()) {
+      // Disallow fake contributions
+      const hasBalance = await AccountBalance.count({
+        address,
+        token_address: poll.get('token_address')
+      })
+
+      balance = hasBalance > 0 ? '1' : '0'
+    }
 
     const vote = new Vote({
       id,
