@@ -73,15 +73,21 @@ async function updateAccountBalances() {
   for (const account of accounts) {
     const { address, token_address } = account
     const contract = tokenContracts[token_address]
+    let balance = '0'
 
-    if (DistrictToken.isAddress(token_address)) continue
-    if (!contract) {
-      log.info(`No contract for address ${token_address} in account ${address}`)
-      continue
+    if (DistrictToken.isAddress(token_address)) {
+      balance = account.balance
+    } else {
+      if (!contract) {
+        log.info(
+          `No contract for address ${token_address} in account ${address}`
+        )
+        continue
+      }
+
+      const contractBalance = await contract.balanceOf(address)
+      balance = eth.utils.fromWei(contractBalance).toString()
     }
-
-    const contractBalance = await contract.balanceOf(address)
-    const balance = eth.utils.fromWei(contractBalance).toString()
 
     log.info(`Updating Accounts and votes ${address} with balance ${balance}`)
     await Promise.all([
