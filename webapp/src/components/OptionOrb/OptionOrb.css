@@ -14,6 +14,7 @@
 
 .OptionOrb .label {
   font-weight: bold;
+  color: var(--text);
 }
 
 .OptionOrb.color-0 .orb {
