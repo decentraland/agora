@@ -3,6 +3,7 @@ import { PollAttributes, PollWithPointers } from './Poll.types'
 import { PollQueries } from './Poll.queries'
 import { Vote, VoteQueries } from '../Vote'
 import { Option } from '../Option'
+import { DistrictToken } from '../Token/DistrictToken'
 import { ModelQueries } from '../lib'
 
 // If the Poll model starts to receive external inserts, we should lowercase the submitter
@@ -48,5 +49,9 @@ export class Poll extends Model<PollAttributes> {
 
   isFinished() {
     return this.get('closes_at') < Date.now()
+  }
+
+  isDistrictPoll() {
+    return DistrictToken.isAddress(this.get('token_address'))
   }
 }

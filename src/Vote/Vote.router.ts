@@ -5,7 +5,7 @@ import * as express from 'express'
 import { Router } from '../lib'
 import { Vote } from './Vote.model'
 import { CastVoteOption } from './Vote.types'
-import { AccountBalance } from '../AccountBalance'
+import { AccountBalance, AccountBalanceAttributes } from '../AccountBalance'
 import { Poll } from '../Poll'
 import { Receipt } from '../Receipt'
 import { Option } from '../Option'
@@ -44,7 +44,7 @@ export class VoteRouter extends Router {
     const signature = server.extractFromReq(req, 'signature')
 
     const signedMessage = new SignedMessage(message, signature)
-    const [pollId, optionId, balance, timestamp] = signedMessage.extract([
+    let [pollId, optionId, balance, timestamp] = signedMessage.extract([
       'Poll Id',
       'Option Id',
       'Current Balance',
@@ -58,6 +58,16 @@ export class VoteRouter extends Router {
     if (poll.isFinished()) throw new Error('Poll already finished')
 
     const address = signedMessage.getAddress().toLowerCase()
+
+    if (poll.isDistrictPoll()) {
+      // Disallow fake contributions
+      const account = await AccountBalance.findOne<AccountBalanceAttributes>({
+        address,
+        token_address: poll.get('token_address')
+      })
+
+      balance = account ? account.balance : '0'
+    }
 
     const vote = new Vote({
       id,

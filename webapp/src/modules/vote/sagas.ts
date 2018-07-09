@@ -56,7 +56,7 @@ Poll Title: ${poll.title}
 Poll Description: ${poll.description || ''}
 Option Id: ${option.id}
 Option Value: ${option.value}
-Current Balance: ${getBalanceInPoll(wallet, poll)}
+Current Balance: ${getBalanceInPoll(wallet, poll) || 0}
 Symbol: ${poll.token.symbol}
 Timestamp: ${newVote.timestamp}
     `
