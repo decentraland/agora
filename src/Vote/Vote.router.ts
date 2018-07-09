@@ -5,7 +5,7 @@ import * as express from 'express'
 import { Router } from '../lib'
 import { Vote } from './Vote.model'
 import { CastVoteOption } from './Vote.types'
-import { AccountBalance } from '../AccountBalance'
+import { AccountBalance, AccountBalanceAttributes } from '../AccountBalance'
 import { Poll } from '../Poll'
 import { Receipt } from '../Receipt'
 import { Option } from '../Option'
@@ -61,12 +61,12 @@ export class VoteRouter extends Router {
 
     if (poll.isDistrictPoll()) {
       // Disallow fake contributions
-      const hasBalance = await AccountBalance.count({
+      const account = await AccountBalance.findOne<AccountBalanceAttributes>({
         address,
         token_address: poll.get('token_address')
       })
 
-      balance = hasBalance > 0 ? '1' : '0'
+      balance = account ? account.balance : '0'
     }
 
     const vote = new Vote({
