@@ -26,6 +26,12 @@ export class Poll extends Model<PollAttributes> {
       ORDER BY p.created_at`)
   }
 
+  static async findActiveWithAssociations() {
+    return this.query<PollAttributes>(SQL`
+      ${PollQueries.findWithAssociations(SQL`WHERE closes_at > now()`)}
+      ORDER BY p.created_at`)
+  }
+
   static async findByIdWithAssociations(id: string) {
     const rows = await this.query<PollAttributes>(
       PollQueries.findWithAssociations(SQL`WHERE p.id = ${id}`)
