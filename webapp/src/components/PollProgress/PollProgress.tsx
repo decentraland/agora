@@ -1,7 +1,7 @@
 import * as React from 'react'
 import './PollProgress.css'
 import { OptionProps, PollProgressProps } from 'components/PollProgress/types'
-import { isDCLToken } from 'modules/poll/utils'
+import { isDistrictToken } from 'modules/token/district_token/utils'
 import { t } from 'modules/translation/utils'
 
 class PollOption extends React.PureComponent<OptionProps> {
@@ -12,7 +12,7 @@ class PollOption extends React.PureComponent<OptionProps> {
       classes += ' winner'
     }
 
-    const hasSymbol = token && isDCLToken(token)
+    const hasSymbol = token && !isDistrictToken(token)
 
     const symbolBallon = {
       'data-balloon': `${votes.toLocaleString()} ${token ? token.symbol : ''}`,

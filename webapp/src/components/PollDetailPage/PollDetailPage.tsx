@@ -3,21 +3,6 @@ import { Link } from 'react-router-dom'
 import { locations } from 'locations'
 import * as ReactMarkdown from 'react-markdown'
 import {
-  PollDetailPageProps,
-  PollDetailPageState,
-  Tally,
-  Result
-} from 'components/PollDetailPage/types'
-import {
-  distanceInWordsToNow,
-  formatDate,
-  formatNumber,
-  formatDateTime
-} from 'lib/utils'
-import { getVoteOptionValue } from 'modules/option/utils'
-import { isFinished, isDCLPoll } from 'modules/poll/utils'
-import { t } from 'modules/translation/utils'
-import {
   Button,
   Loader,
   Header,
@@ -33,8 +18,23 @@ import './PollDetailPage.css'
 import PollProgress from 'components/PollProgress'
 import OptionBar from 'components/OptionBar'
 import OptionOrb from 'components/OptionOrb'
+import {
+  PollDetailPageProps,
+  PollDetailPageState,
+  Tally,
+  Result
+} from 'components/PollDetailPage/types'
+import {
+  distanceInWordsToNow,
+  formatDate,
+  formatNumber,
+  formatDateTime
+} from 'lib/utils'
+import { getVoteOptionValue } from 'modules/option/utils'
+import { isFinished } from 'modules/poll/utils'
 import { getBalanceInPoll } from 'modules/wallet/utils'
 import { isDistrictToken } from 'modules/token/district_token/utils'
+import { t } from 'modules/translation/utils'
 
 const VOTES_PER_PAGE = 20
 
@@ -116,9 +116,13 @@ export default class PollDetailPage extends React.PureComponent<
       .sort((a, b) => (a.option.value > b.option.value ? 1 : -1))
   }
 
-  handlePageChange = (event: any, { activePage }: any) => {
-    console.log(event) // otherwise 'event' is declared but its value is never read...
-    this.setState({ activePage })
+  handlePageChange = (
+    _: any,
+    { activePage }: { activePage?: number | string }
+  ) => {
+    if (activePage) {
+      this.setState({ activePage: Number(activePage) })
+    }
   }
 
   render() {
@@ -141,20 +145,20 @@ export default class PollDetailPage extends React.PureComponent<
               </Header>
             ) : null}
             <div className="stats">
-              {isDCLPoll(poll) ? (
+              {isDistrictToken(poll.token) ? (
+                <Stats
+                  title={t('global.your_contributions')}
+                  className="voting-with"
+                >
+                  <Header>{getBalanceInPoll(wallet, poll) || 0}</Header>
+                </Stats>
+              ) : (
                 <Stats title={t('poll_detail_page.stats.token')}>
                   {poll.token.symbol === 'MANA' ? (
                     <Mana>{poll.token.symbol}</Mana>
                   ) : (
                     <Header>{poll.token.symbol}</Header>
                   )}
-                </Stats>
-              ) : (
-                <Stats
-                  title={t('global.your_contributions')}
-                  className="voting-with"
-                >
-                  <Header>{getBalanceInPoll(wallet, poll) || 0}</Header>
                 </Stats>
               )}
               <Stats title={t('poll_detail_page.stats.total_voted')}>

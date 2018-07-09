@@ -1,7 +1,6 @@
 import {
   Poll,
-  PollWithPointers,
-  PollWithAssociations
+  PollWithPointers
 } from 'modules/poll/types'
 import { Token } from 'modules/token/types'
 import { Vote } from 'modules/vote/types'
@@ -24,8 +23,3 @@ export function buildPoll(
     option_ids: options.map(option => option.id)
   }
 }
-
-export const isDCLToken = (token: Token) =>
-  token.symbol === 'MANA' || token.symbol === 'LAND'
-
-export const isDCLPoll = (poll: PollWithAssociations) => isDCLToken(poll.token)

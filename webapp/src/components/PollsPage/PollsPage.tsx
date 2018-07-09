@@ -3,13 +3,13 @@ import { Link } from 'react-router-dom'
 import { Header, Loader, Table, Mana } from 'decentraland-ui'
 import { locations } from 'locations'
 import { PollsPageProps } from 'components/PollsPage/types'
-import { t } from 'modules/translation/utils'
-import { formatNumber } from 'lib/utils'
-import './PollsPage.css'
-import { isDCLPoll } from 'modules/poll/utils'
-import { getBalanceInPoll } from 'modules/wallet/utils'
 import { PollWithAssociations } from 'modules/poll/types'
 import { Wallet } from 'modules/wallet/types'
+import { t } from 'modules/translation/utils'
+import { formatNumber } from 'lib/utils'
+import { isDistrictToken } from 'modules/token/district_token/utils'
+import { getBalanceInPoll } from 'modules/wallet/utils'
+import './PollsPage.css'
 
 const sortByContributions = (wallet: Wallet) => (
   pollA: PollWithAssociations,
@@ -34,9 +34,12 @@ export default class PollsPage extends React.PureComponent<PollsPageProps> {
     const { polls, wallet, isLoading } = this.props
 
     const districtPolls = Object.values(polls)
-      .filter(poll => !isDCLPoll(poll))
+      .filter(poll => isDistrictToken(poll.token))
       .sort(sortByContributions(wallet))
-    const dclPolls = Object.values(polls).filter(poll => isDCLPoll(poll))
+    const dclPolls = Object.values(polls).filter(
+      poll => !isDistrictToken(poll.token)
+    )
+
     return (
       <div className="PollsPage">
         {isLoading ? (
