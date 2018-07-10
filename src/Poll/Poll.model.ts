@@ -30,7 +30,7 @@ export class Poll extends Model<PollAttributes> {
   static async findActiveWithAssociations() {
     return this.query<PollAttributes>(SQL`
       ${PollQueries.findWithAssociations(
-        SQL`WHERE closes_at > extract(epoch from now())`
+        SQL`WHERE closes_at > extract(epoch from now()) * 1000`
       )}
       ORDER BY p.created_at`)
   }
