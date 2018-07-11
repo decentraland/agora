@@ -3,6 +3,14 @@
   text-overflow: ellipsis;
 }
 
+.VotePage .ui.header.sub.description a {
+  color: var(--primary);
+}
+
+.VotePage .ui.header.sub.description a:hover {
+  color: var(--primary-dark);
+}
+
 .VotePage .options {
   margin-top: 40px;
 }
