@@ -9,7 +9,7 @@ export default class Token extends React.PureComponent<TokenProps> {
   render() {
     const { token, amount, cell } = this.props
     const text =
-      amount == null
+      amount === undefined
         ? token.symbol
         : isDistrictToken(token) || token.symbol === 'MANA'
           ? formatNumber(amount)
