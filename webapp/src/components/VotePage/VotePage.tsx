@@ -1,17 +1,18 @@
 import * as React from 'react'
 import { Link } from 'react-router-dom'
-import { Loader, Header, Radio, Mana, Button, Stats } from 'decentraland-ui'
+import { Loader, Header, Radio, Button, Stats } from 'decentraland-ui'
 import * as uuidv4 from 'uuid/v4'
 import { locations } from 'locations'
 import * as ReactMarkdown from 'react-markdown'
 import { VotePageProps, VotePageState } from 'components/VotePage/types'
 import { NewVote } from 'modules/vote/types'
-import { formatNumber } from 'lib/utils'
 import { getBalanceInPoll } from 'modules/wallet/utils'
 import { t } from 'modules/translation/utils'
 
 import './VotePage.css'
 import { Option } from 'modules/option/types'
+import { isDistrictToken } from 'modules/token/district_token/utils'
+import Token from 'components/Token'
 
 export default class VotePage extends React.PureComponent<
   VotePageProps,
@@ -118,17 +119,13 @@ export default class VotePage extends React.PureComponent<
           {balance ? (
             <Stats
               title={
-                poll.token.symbol === 'MANA'
-                  ? t('vote_page.voting_width')
-                  : t('global.your_contributions')
+                isDistrictToken(poll.token)
+                  ? t('global.your_contributions')
+                  : t('vote_page.voting_width')
               }
               className="voting-with"
             >
-              {poll.token.symbol === 'MANA' ? (
-                <Mana>{formatNumber(balance)}</Mana>
-              ) : (
-                <Header>{formatNumber(balance)}</Header>
-              )}
+              <Token token={poll.token} amount={balance} />
             </Stats>
           ) : null}
 
@@ -148,9 +145,9 @@ export default class VotePage extends React.PureComponent<
           {balance ? null : (
             <div className="no-balance">
               <small>
-                {poll.token.symbol === 'MANA'
-                  ? noContributionsText
-                  : noBalanceText}
+                {isDistrictToken(poll.token)
+                  ? noBalanceText
+                  : noContributionsText}
               </small>
             </div>
           )}

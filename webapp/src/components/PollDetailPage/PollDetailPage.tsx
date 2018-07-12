@@ -6,7 +6,6 @@ import {
   Loader,
   Header,
   Stats,
-  Mana,
   Table,
   Blockie,
   Address,
@@ -24,18 +23,14 @@ import {
   Tally,
   Result
 } from 'components/PollDetailPage/types'
-import {
-  distanceInWordsToNow,
-  formatDate,
-  formatNumber,
-  formatDateTime
-} from 'lib/utils'
+import { distanceInWordsToNow, formatDate, formatDateTime } from 'lib/utils'
 import { getVoteOptionValue } from 'modules/option/utils'
 import { isFinished } from 'modules/poll/utils'
 import { getBalanceInPoll } from 'modules/wallet/utils'
 import { isDistrictToken } from 'modules/token/district_token/utils'
 import { t } from 'modules/translation/utils'
 import CastYourVote from './CastYourVote'
+import Token from 'components/Token'
 
 const VOTES_PER_PAGE = 20
 
@@ -155,19 +150,11 @@ export default class PollDetailPage extends React.PureComponent<
                 </Stats>
               ) : (
                 <Stats title={t('poll_detail_page.stats.token')}>
-                  {poll.token.symbol === 'MANA' ? (
-                    <Mana>{poll.token.symbol}</Mana>
-                  ) : (
-                    <Header>{poll.token.symbol}</Header>
-                  )}
+                  <Token token={poll.token} />
                 </Stats>
               )}
               <Stats title={t('poll_detail_page.stats.total_voted')}>
-                {poll.token.symbol === 'MANA' ? (
-                  <Mana>{formatNumber(poll.balance)}</Mana>
-                ) : (
-                  <Header>{formatNumber(poll.balance)}</Header>
-                )}
+                <Token token={poll.token} amount={poll.balance} />
               </Stats>
               <Stats title={t('poll_detail_page.stats.total_votes')}>
                 <Header>{poll.votes.length}</Header>
@@ -262,14 +249,11 @@ export default class PollDetailPage extends React.PureComponent<
                             </Blockie>
                           </Table.Cell>
                           <Table.Cell>
-                            {poll.token.symbol === 'MANA' ? (
-                              <>
-                                <Mana size="small" black />
-                                {formatNumber(vote.account_balance)}
-                              </>
-                            ) : (
-                              formatNumber(vote.account_balance)
-                            )}
+                            <Token
+                              token={poll.token}
+                              amount={vote.account_balance}
+                              cell
+                            />
                           </Table.Cell>
                           <Table.Cell>
                             {getVoteOptionValue(poll.options, vote)}

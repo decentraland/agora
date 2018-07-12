@@ -1,6 +1,6 @@
 import * as React from 'react'
 import { Link } from 'react-router-dom'
-import { Header, Loader, Table, Mana } from 'decentraland-ui'
+import { Header, Loader, Table } from 'decentraland-ui'
 import { locations } from 'locations'
 import { PollsPageProps } from 'components/PollsPage/types'
 import { PollWithAssociations } from 'modules/poll/types'
@@ -10,6 +10,7 @@ import { formatNumber } from 'lib/utils'
 import { isDistrictToken } from 'modules/token/district_token/utils'
 import { getBalanceInPoll } from 'modules/wallet/utils'
 import './PollsPage.css'
+import Token from 'components/Token'
 
 const sortByContributions = (wallet: Wallet) => (
   pollA: PollWithAssociations,
@@ -119,14 +120,11 @@ export default class PollsPage extends React.PureComponent<PollsPageProps> {
                               </Link>
                             </Table.Cell>
                             <Table.Cell>
-                              {poll.token.symbol === 'MANA' ? (
-                                <Mana size="small" black />
-                              ) : (
-                                <span className="symbol">
-                                  {poll.token.symbol}
-                                </span>
-                              )}
-                              {formatNumber(poll.balance)}
+                              <Token
+                                token={poll.token}
+                                amount={poll.balance}
+                                cell
+                              />
                             </Table.Cell>
                             <Table.Cell>{poll.votes.length}</Table.Cell>
                           </Table.Row>
