@@ -20,28 +20,8 @@
   display: flex;
 }
 
-.PollDetailPage .vote {
-  display: flex;
-  flex-flow: row nowrap;
-  align-items: center;
-  margin-left: 80px;
-}
-
-.PollDetailPage .vote .disabled {
-  cursor: not-allowed;
-}
-
 .PollDetailPage .progress {
   flex: 1 0 auto;
-}
-
-.PollDetailPage .your-vote {
-  display: inline-block;
-  margin-left: 1em;
-  text-transform: uppercase;
-  font-size: 12px;
-  color: var(--text);
-  font-weight: bold;
 }
 
 .PollDetailPage .main.row {
@@ -56,11 +36,6 @@
   display: flex;
 }
 
-.PollDetailPage .your-vote .time-ago {
-  color: var(--secondary-text);
-  text-transform: uppercase;
-}
-
 .PollDetailPage .votes {
   margin-top: 6.8em;
   margin-bottom: 9em;
@@ -72,33 +47,6 @@
 }
 
 @media (max-width: 768px) {
-  .PollDetailPage .vote {
-    margin-left: 0px;
-    margin-top: 48px;
-    margin-bottom: 48px;
-  }
-
-  .PollDetailPage .vote .ui.button {
-    height: 48px;
-    width: 191px;
-  }
-
-  .PollDetailPage .your-vote {
-    position: fixed;
-    left: 0px;
-    bottom: 0px;
-    margin: 0px;
-    height: 64px;
-    width: 100%;
-    text-align: center;
-    background: var(--secondary);
-    padding: 24px;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    z-index: 999;
-  }
-
   .PollDetailPage .votes {
     margin-top: 0px;
   }

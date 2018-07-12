@@ -1,8 +1,8 @@
 import * as React from 'react'
 import './PollProgress.css'
-import { OptionProps, PollProgressProps } from 'components/PollProgress/types'
 import { isDistrictToken } from 'modules/token/district_token/utils'
 import { t } from 'modules/translation/utils'
+import { OptionProps, PollProgressProps } from './types'
 
 class PollOption extends React.PureComponent<OptionProps> {
   render() {

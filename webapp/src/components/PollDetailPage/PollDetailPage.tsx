@@ -1,13 +1,11 @@
 import * as React from 'react'
-import { Link } from 'react-router-dom'
+
 import { locations } from 'locations'
 import * as ReactMarkdown from 'react-markdown'
 import {
-  Button,
   Loader,
   Header,
   Stats,
-  Mana,
   Table,
   Blockie,
   Address,
@@ -15,26 +13,24 @@ import {
   Pagination
 } from 'decentraland-ui'
 import './PollDetailPage.css'
-import PollProgress from 'components/PollProgress'
-import OptionBar from 'components/OptionBar'
-import OptionOrb from 'components/OptionOrb'
+import PollProgress from './PollProgress'
+import OptionBar from './OptionBar'
+import OptionOrb from './OptionOrb'
+import YourVote from './YourVote'
 import {
   PollDetailPageProps,
   PollDetailPageState,
   Tally,
   Result
 } from 'components/PollDetailPage/types'
-import {
-  distanceInWordsToNow,
-  formatDate,
-  formatNumber,
-  formatDateTime
-} from 'lib/utils'
+import { distanceInWordsToNow, formatDate, formatDateTime } from 'lib/utils'
 import { getVoteOptionValue } from 'modules/option/utils'
 import { isFinished } from 'modules/poll/utils'
 import { getBalanceInPoll } from 'modules/wallet/utils'
 import { isDistrictToken } from 'modules/token/district_token/utils'
 import { t } from 'modules/translation/utils'
+import CastYourVote from './CastYourVote'
+import Token from 'components/Token'
 
 const VOTES_PER_PAGE = 20
 
@@ -154,19 +150,11 @@ export default class PollDetailPage extends React.PureComponent<
                 </Stats>
               ) : (
                 <Stats title={t('poll_detail_page.stats.token')}>
-                  {poll.token.symbol === 'MANA' ? (
-                    <Mana>{poll.token.symbol}</Mana>
-                  ) : (
-                    <Header>{poll.token.symbol}</Header>
-                  )}
+                  <Token token={poll.token} />
                 </Stats>
               )}
               <Stats title={t('poll_detail_page.stats.total_voted')}>
-                {poll.token.symbol === 'MANA' ? (
-                  <Mana>{formatNumber(poll.balance)}</Mana>
-                ) : (
-                  <Header>{formatNumber(poll.balance)}</Header>
-                )}
+                <Token token={poll.token} amount={poll.balance} />
               </Stats>
               <Stats title={t('poll_detail_page.stats.total_votes')}>
                 <Header>{poll.votes.length}</Header>
@@ -189,18 +177,7 @@ export default class PollDetailPage extends React.PureComponent<
                     <PollProgress results={currentResults} />
                   </div>
 
-                  {isFinished(poll) ? null : (
-                    <div className="vote">
-                      <Link
-                        to={locations.voteDetail(poll.id)}
-                        className={!isConnected ? 'disabled' : undefined}
-                      >
-                        <Button primary disabled={!isConnected}>
-                          {t('poll_detail_page.cast_vote')}
-                        </Button>
-                      </Link>
-                    </div>
-                  )}
+                  <CastYourVote poll={poll} isConnected={isConnected} />
                 </div>
 
                 <div className="row sub">
@@ -211,16 +188,7 @@ export default class PollDetailPage extends React.PureComponent<
                       </OptionOrb>
                     ))}
                   </div>
-                  {currentVote ? (
-                    <span className="your-vote">
-                      {t('poll_detail_page.you_voted', {
-                        option: getVoteOptionValue(poll.options, currentVote)
-                      })}.{' '}
-                      <span className="time-ago">
-                        {distanceInWordsToNow(currentVote.timestamp)}.
-                      </span>
-                    </span>
-                  ) : null}
+                  <YourVote vote={currentVote} poll={poll} />
                 </div>
               </>
             </Responsive>
@@ -239,28 +207,8 @@ export default class PollDetailPage extends React.PureComponent<
                   </OptionBar>
                 ))}
               </div>
-              {isFinished(poll) ? null : (
-                <div className="vote">
-                  <Link
-                    to={locations.voteDetail(poll.id)}
-                    className={!isConnected ? 'disabled' : undefined}
-                  >
-                    <Button primary disabled={!isConnected}>
-                      {t('poll_detail_page.cast_vote')}
-                    </Button>
-                  </Link>
-                </div>
-              )}
-              {currentVote ? (
-                <span className="your-vote">
-                  {t('poll_detail_page.you_voted', {
-                    option: getVoteOptionValue(poll.options, currentVote)
-                  })}.{' '}
-                  <span className="time-ago">
-                    {distanceInWordsToNow(currentVote.timestamp)}.
-                  </span>
-                </span>
-              ) : null}
+              <CastYourVote poll={poll} isConnected={isConnected} />
+              <YourVote vote={currentVote} poll={poll} />
             </Responsive>
 
             {noVotes ? null : (
@@ -301,14 +249,11 @@ export default class PollDetailPage extends React.PureComponent<
                             </Blockie>
                           </Table.Cell>
                           <Table.Cell>
-                            {poll.token.symbol === 'MANA' ? (
-                              <>
-                                <Mana size="small" black />
-                                {formatNumber(vote.account_balance)}
-                              </>
-                            ) : (
-                              formatNumber(vote.account_balance)
-                            )}
+                            <Token
+                              token={poll.token}
+                              amount={vote.account_balance}
+                              cell
+                            />
                           </Table.Cell>
                           <Table.Cell>
                             {getVoteOptionValue(poll.options, vote)}
