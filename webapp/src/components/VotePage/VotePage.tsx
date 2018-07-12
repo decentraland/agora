@@ -83,10 +83,10 @@ export default class VotePage extends React.PureComponent<
     const currentSelection = this.getCurrentSelection()
     const balance = getBalanceInPoll(wallet, poll)
 
-    const noContributionsText = t('vote_page.no_balance', {
+    const noContributionsText = t('vote_page.no_contributions')
+    const noBalanceText = t('vote_page.no_balance', {
       symbol: poll.token.symbol
     })
-    const noBalanceText = t('vote_page.no_contributions')
 
     return (
       <div className="VotePage">
@@ -146,8 +146,8 @@ export default class VotePage extends React.PureComponent<
             <div className="no-balance">
               <small>
                 {isDistrictToken(poll.token)
-                  ? noBalanceText
-                  : noContributionsText}
+                  ? noContributionsText
+                  : noBalanceText}
               </small>
             </div>
           )}
