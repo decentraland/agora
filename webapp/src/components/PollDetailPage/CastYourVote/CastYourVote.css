@@ -1,0 +1,23 @@
+.CastYourVote {
+  display: flex;
+  flex-flow: row nowrap;
+  align-items: center;
+  margin-left: 80px;
+}
+
+.CastYourVote .disabled {
+  cursor: not-allowed;
+}
+
+@media (max-width: 768px) {
+  .CastYourVote {
+    margin-left: 0px;
+    margin-top: 48px;
+    margin-bottom: 48px;
+  }
+
+  .CastYourVote .ui.button {
+    height: 48px;
+    width: 191px;
+  }
+}
