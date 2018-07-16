@@ -1,6 +1,7 @@
 import { connect } from 'react-redux'
 import { RootState, RootDispatch } from 'types'
 import { getLocale } from 'modules/wallet/selectors'
+import { isLoading } from 'modules/storage/selectors'
 import { getData } from 'modules/translation/selectors'
 import { fetchTranslationsRequest } from 'modules/translation/actions'
 import { getPreferredLocale } from 'modules/translation/utils'
@@ -13,7 +14,8 @@ const mapState = (
   state: RootState,
   ownProps: TranslationProviderProps
 ): TranslationProviderProps => {
-  const locale = getLocale(state) || getPreferredLocale()
+  // Wait until the locale is loaded from the storage to select it
+  let locale = isLoading(state) ? '' : getLocale(state) || getPreferredLocale()
   const translations = getData(state)[locale]
 
   return {

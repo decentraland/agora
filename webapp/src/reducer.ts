@@ -7,6 +7,7 @@ import { optionReducer as option } from 'modules/option/reducer'
 import { pollReducer as poll } from 'modules/poll/reducer'
 import { tokenReducer as token } from 'modules/token/reducer'
 import { translationReducer as translation } from 'modules/translation/reducer'
+import { storageReducer as storage } from 'modules/storage/reducer'
 import { voteReducer as vote } from 'modules/vote/reducer'
 import { walletReducer as wallet } from 'modules/wallet/reducer'
 
@@ -18,6 +19,7 @@ export const rootReducer = combineReducers<RootState>({
   token,
   translation,
   router,
+  storage,
   vote,
   wallet
 })

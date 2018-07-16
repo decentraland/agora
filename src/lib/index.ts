@@ -1,5 +1,5 @@
-export * from './Router'
+export * from './blacklist'
 export * from './Model.queries'
 export * from './ModelWithCallbacks'
-export * from './blacklist'
+export * from './Router'
 export * from './types'

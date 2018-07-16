@@ -6,6 +6,7 @@ import createHistory from 'history/createBrowserHistory'
 import createSagasMiddleware from 'redux-saga'
 
 import { createAnalyticsMiddleware } from 'modules/analytics/middleware'
+import { createStorageMiddleware } from 'modules/storage/middleware'
 
 import { rootReducer } from './reducer'
 import { rootSaga } from './sagas'
@@ -25,17 +26,22 @@ const loggerMiddleware = createLogger({
 const analyticsMiddleware = createAnalyticsMiddleware(
   env.get('REACT_APP_SEGMENT_API_KEY')
 )
+const { storageMiddleware, loadStorageMiddleware } = createStorageMiddleware(
+  env.get('REACT_APP_LOCAL_STORAGE_KEY', 'decentraland-agora')
+)
 
 const middleware = applyMiddleware(
   historyMiddleware,
   sagasMiddleware,
   loggerMiddleware,
-  analyticsMiddleware
+  analyticsMiddleware,
+  storageMiddleware
 )
 const enhancer = composeEnhancers(middleware)
 const store = createStore(rootReducer, enhancer)
 
 sagasMiddleware.run(rootSaga)
+loadStorageMiddleware(store)
 
 if (env.isDevelopment()) {
   const _window = window as any
