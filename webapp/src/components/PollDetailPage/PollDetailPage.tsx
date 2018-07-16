@@ -236,7 +236,6 @@ export default class PollDetailPage extends React.PureComponent<
 
                   <Table.Body>
                     {poll.votes
-                      .sort((a, b) => (a.timestamp > b.timestamp ? -1 : 1))
                       .slice(pageOffset, pageOffset + VOTES_PER_PAGE)
                       .map((vote, index) => (
                         <Table.Row key={vote.id + index}>

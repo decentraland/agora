@@ -1,25 +1,12 @@
-import { Model, SQL, raw } from 'decentraland-server'
-import { PollAttributes, PollWithPointers } from './Poll.types'
+import { Model, SQL } from 'decentraland-server'
+import { PollAttributes } from './Poll.types'
 import { PollQueries } from './Poll.queries'
-import { Vote, VoteQueries } from '../Vote'
-import { Option } from '../Option'
+import { VoteQueries } from '../Vote'
 import { DistrictToken } from '../Token/DistrictToken'
-import { ModelQueries } from '../lib'
 
 // If the Poll model starts to receive external inserts, we should lowercase the submitter
 export class Poll extends Model<PollAttributes> {
   static tableName = 'polls'
-
-  static async findWithPointers(): Promise<PollWithPointers[]> {
-    return this.query<PollWithPointers>(SQL`
-      SELECT p.*,
-              ${ModelQueries.jsonAgg('v', 'id')} as vote_ids,
-              ${ModelQueries.jsonAgg('o', 'id')} as option_ids
-        FROM ${raw(this.tableName)} p
-          LEFT JOIN ${raw(Vote.tableName)} v ON v.poll_id = p.id
-          LEFT JOIN ${raw(Option.tableName)} o ON o.poll_id = p.id
-        GROUP BY p.id`)
-  }
 
   static async findWithAssociations() {
     return this.query<PollAttributes>(SQL`

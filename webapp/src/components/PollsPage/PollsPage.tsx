@@ -110,26 +110,23 @@ export default class PollsPage extends React.PureComponent<PollsPageProps> {
                   </Table.Header>
 
                   <Table.Body>
-                    {dclPolls.map(
-                      (poll, index) =>
-                        console.log(poll) || (
-                          <Table.Row key={index}>
-                            <Table.Cell>
-                              <Link to={locations.pollDetail(poll.id)}>
-                                {poll.title}
-                              </Link>
-                            </Table.Cell>
-                            <Table.Cell>
-                              <Token
-                                token={poll.token}
-                                amount={poll.balance}
-                                cell
-                              />
-                            </Table.Cell>
-                            <Table.Cell>{poll.votes.length}</Table.Cell>
-                          </Table.Row>
-                        )
-                    )}
+                    {dclPolls.map((poll, index) => (
+                      <Table.Row key={index}>
+                        <Table.Cell>
+                          <Link to={locations.pollDetail(poll.id)}>
+                            {poll.title}
+                          </Link>
+                        </Table.Cell>
+                        <Table.Cell>
+                          <Token
+                            token={poll.token}
+                            amount={poll.balance}
+                            cell
+                          />
+                        </Table.Cell>
+                        <Table.Cell>{poll.votes.length}</Table.Cell>
+                      </Table.Row>
+                    ))}
                   </Table.Body>
                 </Table>
               </>
