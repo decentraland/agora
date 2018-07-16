@@ -2,7 +2,7 @@ import * as React from 'react'
 import { connect } from 'react-redux'
 import { push, goBack, RouterAction } from 'react-router-redux'
 import { env } from 'decentraland-commons'
-import { Navbar, Menu } from 'decentraland-ui'
+import { Navbar, Menu, NavbarProps } from 'decentraland-ui'
 import { locations } from 'locations'
 import { RootState, RootDispatch } from 'types'
 import { Wallet } from 'modules/wallet/types'
@@ -10,18 +10,17 @@ import { getWallet, isConnected, isConnecting } from 'modules/wallet/selectors'
 import { isModalPage } from 'modules/location/selectors'
 import { t } from 'modules/translation/utils'
 
-const mapState = (state: RootState): any => {
+const mapState = (state: RootState): NavbarProps => {
   const wallet = getWallet(state) as Wallet
   const isWalletConnected = isConnected(state)
   const manaAddress = env.get('REACT_APP_MANA_TOKEN_CONTRACT_ADDRESS', '')
 
-  let mana: string | null = null
+  let mana
 
   if (isWalletConnected) {
-    const balance: number | undefined = wallet.balances[manaAddress]
-
+    const balance = wallet.balances[manaAddress]
     if (balance) {
-      mana = balance.toLocaleString()
+      mana = balance
     }
   }
 
@@ -40,4 +39,4 @@ const mapDispatch = (dispatch: RootDispatch<RouterAction>) => ({
   onClickLogo: () => dispatch(push(locations.polls()))
 })
 
-export default connect<Navbar>(mapState, mapDispatch)(Navbar)
+export default connect<NavbarProps>(mapState, mapDispatch)(Navbar)
