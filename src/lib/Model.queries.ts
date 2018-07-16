@@ -9,11 +9,7 @@ export interface JSONAggParams {
 export const ModelQueries = Object.freeze({
   jsonAgg: (tableName: string, params: JSONAggParams = {}): SQLStatement => {
     const { columnName, filterColumn, orderColumn } = Object.assign(
-      {
-        columnName: '*',
-        filterColumn: 'id',
-        orderColumn: 'id'
-      },
+      { columnName: '*', filterColumn: 'id', orderColumn: 'id' },
       params
     )
     const column = raw(`${tableName}.${columnName}`)
