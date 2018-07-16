@@ -1,8 +1,7 @@
 import { Model, SQL, raw } from 'decentraland-server'
 import { PollAttributes, PollWithPointers } from './Poll.types'
 import { PollQueries } from './Poll.queries'
-import { Vote, VoteQueries } from '../Vote'
-import { Option } from '../Option'
+import { VoteQueries } from '../Vote'
 import { DistrictToken } from '../Token/DistrictToken'
 import { ModelQueries } from '../lib'
 
@@ -13,11 +12,13 @@ export class Poll extends Model<PollAttributes> {
   static async findWithPointers(): Promise<PollWithPointers[]> {
     return this.query<PollWithPointers>(SQL`
       SELECT p.*,
-              ${ModelQueries.jsonAgg('v', 'id')} as vote_ids,
-              ${ModelQueries.jsonAgg('o', 'id')} as option_ids
+          (SELECT ${ModelQueries.jsonAgg('v', {
+            orderColumn: 'timestamp DESC'
+          })} AS vote_ids FROM votes v WHERE v.poll_id = p.id),
+          (SELECT ${ModelQueries.jsonAgg('o', {
+            orderColumn: 'value ASC'
+          })} AS option_ids FROM options o WHERE o.poll_id = p.id)
         FROM ${raw(this.tableName)} p
-          LEFT JOIN ${raw(Vote.tableName)} v ON v.poll_id = p.id
-          LEFT JOIN ${raw(Option.tableName)} o ON o.poll_id = p.id
         GROUP BY p.id`)
   }
 
