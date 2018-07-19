@@ -1,8 +1,9 @@
 import { connect } from 'react-redux'
 import { isConnected } from 'decentraland-dapps/dist/modules/wallet/selectors'
+import { navigateTo } from 'decentraland-dapps/dist/modules/location/actions'
+import { LocationActions } from 'decentraland-dapps/dist/modules/location/types'
 import { RootState, RootDispatch } from 'types'
 import { fetchPollRequest } from 'modules/poll/actions'
-import { navigateTo } from 'modules/location/actions'
 import {
   getPolls,
   isLoading as isPollLoading,
@@ -11,7 +12,6 @@ import {
 import { getWallet } from 'modules/wallet/selectors'
 import { Wallet } from 'modules/wallet/types'
 import { PollActions } from 'modules/poll/types'
-import { LocationActions } from 'modules/location/types'
 import { PollDetailPageProps } from 'components/PollDetailPage/types'
 import { findWalletVote } from 'modules/vote/utils'
 
