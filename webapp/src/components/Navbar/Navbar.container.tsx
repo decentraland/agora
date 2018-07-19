@@ -3,10 +3,7 @@ import { connect } from 'react-redux'
 import { push, goBack, RouterAction } from 'react-router-redux'
 import { env } from 'decentraland-commons'
 import { Navbar, Menu, NavbarProps } from 'decentraland-ui'
-import {
-  isConnected,
-  isConnecting
-} from '@dapps/modules/wallet/selectors'
+import { isConnected, isConnecting } from '@dapps/modules/wallet/selectors'
 import { locations } from 'locations'
 import { RootState, RootDispatch } from 'types'
 import { Wallet } from 'modules/wallet/types'
