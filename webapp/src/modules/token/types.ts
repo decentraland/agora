@@ -1,7 +1,7 @@
 import { ActionType } from 'typesafe-actions'
 import { LoadingState } from '@dapps/modules/loading/types'
 import * as actions from 'modules/token/actions'
-import { ModelByAddress } from 'lib/types'
+import { ModelByAddress } from '@dapps/lib/types'
 
 export const FETCH_TOKENS_REQUEST = '[Request] Fetch Tokens'
 export const FETCH_TOKENS_SUCCESS = '[Success] Fetch Tokens'

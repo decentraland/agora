@@ -20,7 +20,7 @@ import {
   FETCH_POLL_FAILURE,
   PollActions
 } from 'modules/poll/types'
-import { toObjectById } from 'lib/utils'
+import { toObjectById } from '@dapps/lib/utils'
 
 const INITIAL_STATE: VoteState = {
   data: {},

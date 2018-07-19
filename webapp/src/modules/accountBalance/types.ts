@@ -1,7 +1,7 @@
 import { ActionType } from 'typesafe-actions'
 import { LoadingState } from '@dapps/modules/loading/types'
 import * as actions from 'modules/accountBalance/actions'
-import { ModelById } from 'lib/types'
+import { ModelById } from '@dapps/lib/types'
 
 export const FETCH_ACCOUNT_BALANCES_REQUEST = '[Request] Fetch Account Balances'
 export const FETCH_ACCOUNT_BALANCES_SUCCESS = '[Success] Fetch Account Balances'

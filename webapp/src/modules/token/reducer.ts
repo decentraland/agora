@@ -17,7 +17,7 @@ import {
   FETCH_POLL_FAILURE,
   PollActions
 } from 'modules/poll/types'
-import { toObjectByKey } from 'lib/utils'
+import { toObjectByKey } from '@dapps/lib/utils'
 
 const INITIAL_STATE: TokenState = {
   data: {},

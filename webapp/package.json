@@ -14,7 +14,6 @@
     "@types/segment-analytics": "0.0.28",
     "@types/uuid": "^3.4.3",
     "autoprefixer": "7.1.6",
-    "axios": "^0.17.0",
     "babel-jest": "^22.1.0",
     "babel-loader": "^7.1.2",
     "babel-preset-react-app": "^3.1.1",

@@ -23,7 +23,11 @@ import {
   Tally,
   Result
 } from 'components/PollDetailPage/types'
-import { distanceInWordsToNow, formatDate, formatDateTime } from 'lib/utils'
+import {
+  distanceInWordsToNow,
+  formatDate,
+  formatDateTime
+} from '@dapps/lib/utils'
 import { getVoteOptionValue } from 'modules/option/utils'
 import { isFinished } from 'modules/poll/utils'
 import { getBalanceInPoll } from 'modules/wallet/utils'

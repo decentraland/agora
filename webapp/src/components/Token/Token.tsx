@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { formatNumber } from 'lib/utils'
+import { formatNumber } from '@dapps/lib/utils'
 import { Mana, Header, ManaProps } from 'decentraland-ui'
 import { TokenProps } from './types'
 import './Token.css'
