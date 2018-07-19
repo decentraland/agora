@@ -1,9 +1,6 @@
 import { RootState } from 'types'
 import { STATIC_PAGES } from 'locations'
-import {
-  getPathname,
-  getPathAction
-} from '@dapps/modules/location/selectors'
+import { getPathname, getPathAction } from '@dapps/modules/location/selectors'
 
 export const isStaticPage = (state: RootState) => {
   const pathname = getPathname(state)

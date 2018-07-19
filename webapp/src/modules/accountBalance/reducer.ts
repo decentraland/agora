@@ -7,8 +7,7 @@ import {
   AccountBalanceState,
   AccountBalanceActions
 } from 'modules/accountBalance/types'
-import { WalletActions } from 'modules/wallet/types'
-import { COMPUTE_BALANCES_SUCCESS } from 'modules/wallet/types'
+import { WalletActions, COMPUTE_BALANCES_SUCCESS } from 'modules/wallet/types'
 import { buildId } from 'modules/accountBalance/utils'
 
 const INITIAL_STATE: AccountBalanceState = {

@@ -1,5 +1,5 @@
-import { BaseWallet } from '@dapps/modules/wallet/types'
 import {
+  BaseWallet,
   WalletState as BaseWalletState,
   WalletActions as BaseWalletAction
 } from '@dapps/modules/wallet/types'
