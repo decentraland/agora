@@ -1,6 +1,6 @@
 import { connect } from 'react-redux'
+import { getLocale } from 'decentraland-dapps/dist/modules/wallet/selectors'
 import { RootState, RootDispatch } from 'types'
-import { getLocale } from 'modules/wallet/selectors'
 import { isLoading } from 'modules/storage/selectors'
 import { getData } from 'modules/translation/selectors'
 import { fetchTranslationsRequest } from 'modules/translation/actions'

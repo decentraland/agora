@@ -1,59 +1,34 @@
-import { call, select, takeEvery, put } from 'redux-saga/effects'
+import { call, select, takeEvery, put, all } from 'redux-saga/effects'
 import { eth, contracts } from 'decentraland-eth'
+import { env } from 'decentraland-commons'
+import { getAddress } from 'decentraland-dapps/dist/modules/wallet/selectors'
 import {
-  CONNECT_WALLET_REQUEST,
-  COMPUTE_BALANCES_REQUEST,
+  CONNECT_WALLET_SUCCESS,
   ERC20Token,
-  BaseWallet
-} from 'modules/wallet/types'
+  ConnectWalletSuccess
+} from 'decentraland-dapps/dist/modules/wallet/types'
+import { createWalletSaga } from 'decentraland-dapps/dist/modules/wallet/sagas'
+import { COMPUTE_BALANCES_REQUEST } from 'modules/wallet/types'
 import {
-  connectWalletSuccess,
-  connectWalletFailure,
   computeBalancesSuccess,
   computeBalancesFailure
 } from 'modules/wallet/actions'
 import { fetchAccountBalancesRequest } from 'modules/accountBalance/actions'
 import { fetchTokensRequest } from 'modules/token/actions'
-import { getData, getAddress } from 'modules/wallet/selectors'
 import { getContractTokens } from 'modules/token/selectors'
-import { connectEthereumWallet } from 'modules/wallet/utils'
-import { Network } from 'decentraland-eth/dist/ethereum/eth'
+const baseWalletSaga = createWalletSaga({
+  provider: env.get('REACT_APP_PROVIDER_URL'),
+  contracts: [],
+  eth
+})
 
 export function* walletSaga() {
-  yield takeEvery(CONNECT_WALLET_REQUEST, handleConnectWalletRequest)
-  yield takeEvery(COMPUTE_BALANCES_REQUEST, handleComputeBalancesRequest)
+  yield all([baseWalletSaga(), walletBalanceSaga()])
 }
 
-function* handleConnectWalletRequest() {
-  try {
-    if (!eth.isConnected()) {
-      const { address, derivationPath } = yield select(getData)
-
-      yield call(() =>
-        connectEthereumWallet({
-          address,
-          derivationPath
-        })
-      )
-    }
-
-    let address: string = yield call(() => eth.getAddress())
-    address = address.toLowerCase()
-
-    const network: Network = yield call(eth.getNetwork)
-
-    const wallet: BaseWallet = {
-      address,
-      network: network.name,
-      type: eth.wallet.type,
-      derivationPath: eth.wallet.derivationPath
-    }
-
-    yield handleConnectWalletSuccess(address)
-    yield put(connectWalletSuccess(wallet))
-  } catch (error) {
-    yield put(connectWalletFailure(error.message))
-  }
+function* walletBalanceSaga() {
+  yield takeEvery(CONNECT_WALLET_SUCCESS as any, handleConnectWalletSuccess)
+  yield takeEvery(COMPUTE_BALANCES_REQUEST, handleComputeBalancesRequest)
 }
 
 function* handleComputeBalancesRequest() {
@@ -91,7 +66,7 @@ function* handleComputeBalancesRequest() {
   }
 }
 
-function* handleConnectWalletSuccess(address: string) {
+function* handleConnectWalletSuccess(action: ConnectWalletSuccess) {
   yield put(fetchTokensRequest())
-  yield put(fetchAccountBalancesRequest(address))
+  yield put(fetchAccountBalancesRequest(action.payload.wallet.address))
 }

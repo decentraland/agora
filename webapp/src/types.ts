@@ -9,7 +9,8 @@ import { StorageState } from 'modules/storage/types'
 import { TokenState } from 'modules/token/types'
 import { TranslationState, TranslationActions } from 'modules/translation/types'
 import { VoteState, VoteActions } from 'modules/vote/types'
-import { WalletState, WalletActions } from 'modules/wallet/types'
+import { WalletState } from 'modules/wallet/types'
+import { WalletActions } from 'decentraland-dapps/dist/modules/wallet/types'
 
 export type RootState = {
   accountBalance: AccountBalanceState

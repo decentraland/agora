@@ -6,7 +6,8 @@ import {
   AccountBalanceState,
   AccountBalanceActions
 } from 'modules/accountBalance/types'
-import { COMPUTE_BALANCES_SUCCESS, WalletActions } from 'modules/wallet/types'
+import { WalletActions } from 'modules/wallet/types'
+import { COMPUTE_BALANCES_SUCCESS } from 'modules/wallet/types'
 import { loadingReducer } from 'modules/loading/reducer'
 import { buildId } from 'modules/accountBalance/utils'
 

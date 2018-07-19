@@ -3,7 +3,7 @@ import { LOCATION_CHANGE } from 'react-router-redux'
 import {
   CONNECT_WALLET_SUCCESS,
   ConnectWalletSuccess
-} from 'modules/wallet/types'
+} from 'decentraland-dapps/dist/modules/wallet/types'
 import { getAnalytics } from 'modules/analytics/utils'
 
 export function* analyticsSaga() {

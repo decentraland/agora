@@ -1,6 +1,6 @@
 import { connect } from 'react-redux'
 import { RootState, RootDispatch } from 'types'
-import { connectWalletRequest } from 'modules/wallet/actions'
+import { connectWalletRequest } from 'decentraland-dapps/dist/modules/wallet/actions'
 import { WalletActions } from 'modules/wallet/types'
 import { WalletProps } from 'components/Wallet/types'
 import Wallet from './Wallet'
