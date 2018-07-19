@@ -6,8 +6,8 @@ import { accountBalanceReducer as accountBalance } from 'modules/accountBalance/
 import { optionReducer as option } from 'modules/option/reducer'
 import { pollReducer as poll } from 'modules/poll/reducer'
 import { tokenReducer as token } from 'modules/token/reducer'
-import { translationReducer as translation } from 'modules/translation/reducer'
-import { storageReducer as storage } from 'modules/storage/reducer'
+import { translationReducer as translation } from 'decentraland-dapps/dist/modules/translation/reducer'
+import { storageReducer as storage } from 'decentraland-dapps/dist/modules/storage/reducer'
 import { voteReducer as vote } from 'modules/vote/reducer'
 import { walletReducer as wallet } from 'modules/wallet/reducer'
 

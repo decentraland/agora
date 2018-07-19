@@ -1,7 +1,7 @@
 import * as React from 'react'
 import './PollProgress.css'
 import { isDistrictToken } from 'modules/token/district_token/utils'
-import { t } from 'modules/translation/utils'
+import { t } from 'decentraland-dapps/dist/modules/translation/utils'
 import { OptionProps, PollProgressProps } from './types'
 
 class PollOption extends React.PureComponent<OptionProps> {

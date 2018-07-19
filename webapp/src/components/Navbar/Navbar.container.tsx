@@ -12,7 +12,7 @@ import { RootState, RootDispatch } from 'types'
 import { Wallet } from 'modules/wallet/types'
 import { getWallet } from 'modules/wallet/selectors'
 import { isModalPage } from 'modules/location/selectors'
-import { t } from 'modules/translation/utils'
+import { t } from 'decentraland-dapps/dist/modules/translation/utils'
 
 const mapState = (state: RootState): NavbarProps => {
   const wallet = getWallet(state) as Wallet

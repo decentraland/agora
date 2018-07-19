@@ -1,7 +1,7 @@
 import { Model, ModelById, DataByKey } from 'lib/types'
 import * as dateFnsFormat from 'date-fns/format'
 import * as dateFnsDistanceInWordsToNow from 'date-fns/distance_in_words_to_now'
-import { getCurrentLocale } from 'modules/translation/utils'
+import { getCurrentLocale } from 'decentraland-dapps/dist/modules/translation/utils'
 
 export function isMobile() {
   // WARN: Super naive mobile device check.
