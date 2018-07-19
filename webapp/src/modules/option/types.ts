@@ -1,5 +1,5 @@
 import { ActionType } from 'typesafe-actions'
-import { LoadingState } from 'modules/loading/types'
+import { LoadingState } from 'decentraland-dapps/dist/modules/loading/types'
 import * as actions from 'modules/option/actions'
 import { ModelById } from 'lib/types'
 

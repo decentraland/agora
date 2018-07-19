@@ -1,4 +1,5 @@
 import { Reducer } from 'redux'
+import { loadingReducer } from 'decentraland-dapps/dist/modules/loading/reducer'
 import {
   FETCH_POLLS_REQUEST,
   FETCH_POLLS_SUCCESS,
@@ -15,7 +16,6 @@ import {
   CREATE_VOTE_SUCCESS,
   VoteActions
 } from 'modules/vote/types'
-import { loadingReducer } from 'modules/loading/reducer'
 import { buildPoll } from 'modules/poll/utils'
 import { getBalanceInPoll } from 'modules/wallet/utils'
 

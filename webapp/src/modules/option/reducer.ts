@@ -1,4 +1,5 @@
 import { Reducer } from 'redux'
+import { loadingReducer } from 'decentraland-dapps/dist/modules/loading/reducer'
 import {
   FETCH_POLL_OPTIONS_REQUEST,
   FETCH_POLL_OPTIONS_SUCCESS,
@@ -7,7 +8,6 @@ import {
   OptionState,
   OptionActions
 } from 'modules/option/types'
-import { loadingReducer } from 'modules/loading/reducer'
 import {
   FETCH_POLLS_REQUEST,
   FETCH_POLLS_SUCCESS,

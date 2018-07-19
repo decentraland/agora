@@ -1,5 +1,5 @@
 import { Reducer } from 'redux'
-import { loadingReducer } from 'modules/loading/reducer'
+import { loadingReducer } from 'decentraland-dapps/dist/modules/loading/reducer'
 import {
   FETCH_TOKENS_REQUEST,
   FETCH_TOKENS_SUCCESS,

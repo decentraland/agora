@@ -1,4 +1,5 @@
 import { Reducer } from 'redux'
+import { loadingReducer } from 'decentraland-dapps/dist/modules/loading/reducer'
 import {
   FETCH_ACCOUNT_BALANCES_FAILURE,
   FETCH_ACCOUNT_BALANCES_SUCCESS,
@@ -8,7 +9,6 @@ import {
 } from 'modules/accountBalance/types'
 import { WalletActions } from 'modules/wallet/types'
 import { COMPUTE_BALANCES_SUCCESS } from 'modules/wallet/types'
-import { loadingReducer } from 'modules/loading/reducer'
 import { buildId } from 'modules/accountBalance/utils'
 
 const INITIAL_STATE: AccountBalanceState = {
