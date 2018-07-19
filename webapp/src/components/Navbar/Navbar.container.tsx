@@ -6,13 +6,13 @@ import { Navbar, Menu, NavbarProps } from 'decentraland-ui'
 import {
   isConnected,
   isConnecting
-} from 'decentraland-dapps/dist/modules/wallet/selectors'
+} from '@dapps/modules/wallet/selectors'
 import { locations } from 'locations'
 import { RootState, RootDispatch } from 'types'
 import { Wallet } from 'modules/wallet/types'
 import { getWallet } from 'modules/wallet/selectors'
 import { isModalPage } from 'modules/location/selectors'
-import { t } from 'decentraland-dapps/dist/modules/translation/utils'
+import { t } from '@dapps/modules/translation/utils'
 
 const mapState = (state: RootState): NavbarProps => {
   const wallet = getWallet(state) as Wallet

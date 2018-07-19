@@ -1,5 +1,5 @@
 import { Reducer } from 'redux'
-import { loadingReducer } from 'decentraland-dapps/dist/modules/loading/reducer'
+import { loadingReducer } from '@dapps/modules/loading/reducer'
 import {
   FETCH_POLL_VOTES_FAILURE,
   FETCH_POLL_VOTES_SUCCESS,

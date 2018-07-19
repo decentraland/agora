@@ -1,8 +1,8 @@
-import { BaseWallet } from 'decentraland-dapps/dist/modules/wallet/types'
+import { BaseWallet } from '@dapps/modules/wallet/types'
 import {
   WalletState as BaseWalletState,
   WalletActions as BaseWalletAction
-} from 'decentraland-dapps/dist/modules/wallet/types'
+} from '@dapps/modules/wallet/types'
 import { ActionType } from 'typesafe-actions'
 import * as actions from './actions'
 

@@ -1,6 +1,6 @@
 import { all } from 'redux-saga/effects'
-import { analyticsSaga } from 'decentraland-dapps/dist/modules/analytics/sagas'
-import { locationSaga } from 'decentraland-dapps/dist/modules/location/sagas'
+import { analyticsSaga } from '@dapps/modules/analytics/sagas'
+import { locationSaga } from '@dapps/modules/location/sagas'
 import { accountBalanceSaga } from 'modules/accountBalance/sagas'
 import { optionSaga } from 'modules/option/sagas'
 import { pollSaga } from 'modules/poll/sagas'

@@ -1,5 +1,5 @@
 import { ActionType } from 'typesafe-actions'
-import { LoadingState } from 'decentraland-dapps/dist/modules/loading/types'
+import { LoadingState } from '@dapps/modules/loading/types'
 import * as actions from 'modules/vote/actions'
 import { ModelById, Overwrite } from 'lib/types'
 

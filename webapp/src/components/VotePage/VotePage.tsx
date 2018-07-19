@@ -7,7 +7,7 @@ import * as ReactMarkdown from 'react-markdown'
 import { VotePageProps, VotePageState } from 'components/VotePage/types'
 import { NewVote } from 'modules/vote/types'
 import { getBalanceInPoll } from 'modules/wallet/utils'
-import { t } from 'decentraland-dapps/dist/modules/translation/utils'
+import { t } from '@dapps/modules/translation/utils'
 
 import './VotePage.css'
 import { isDistrictToken } from 'modules/token/district_token/utils'

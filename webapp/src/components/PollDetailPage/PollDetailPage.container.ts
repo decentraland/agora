@@ -1,7 +1,7 @@
 import { connect } from 'react-redux'
-import { isConnected } from 'decentraland-dapps/dist/modules/wallet/selectors'
-import { navigateTo } from 'decentraland-dapps/dist/modules/location/actions'
-import { LocationActions } from 'decentraland-dapps/dist/modules/location/types'
+import { isConnected } from '@dapps/modules/wallet/selectors'
+import { navigateTo } from '@dapps/modules/location/actions'
+import { LocationActions } from '@dapps/modules/location/types'
 import { RootState, RootDispatch } from 'types'
 import { fetchPollRequest } from 'modules/poll/actions'
 import {

@@ -2,8 +2,8 @@ import { AnyAction } from 'redux'
 import {
   walletReducer as baseWallerReducer,
   INITIAL_STATE as BASE_INITIAL_STATE
-} from 'decentraland-dapps/dist/modules/wallet/reducer'
-import { WalletActions } from 'decentraland-dapps/dist/modules/wallet/types'
+} from '@dapps/modules/wallet/reducer'
+import { WalletActions } from '@dapps/modules/wallet/types'
 import { WalletState } from './types'
 
 const INITIAL_STATE: WalletState = {

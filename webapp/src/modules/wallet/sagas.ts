@@ -1,13 +1,13 @@
 import { call, select, takeEvery, put, all } from 'redux-saga/effects'
 import { eth, contracts } from 'decentraland-eth'
 import { env } from 'decentraland-commons'
-import { getAddress } from 'decentraland-dapps/dist/modules/wallet/selectors'
+import { getAddress } from '@dapps/modules/wallet/selectors'
 import {
   CONNECT_WALLET_SUCCESS,
   ERC20Token,
   ConnectWalletSuccess
-} from 'decentraland-dapps/dist/modules/wallet/types'
-import { createWalletSaga } from 'decentraland-dapps/dist/modules/wallet/sagas'
+} from '@dapps/modules/wallet/types'
+import { createWalletSaga } from '@dapps/modules/wallet/sagas'
 import { COMPUTE_BALANCES_REQUEST } from 'modules/wallet/types'
 import {
   computeBalancesSuccess,

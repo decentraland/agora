@@ -1,5 +1,5 @@
 import { ActionType } from 'typesafe-actions'
-import { LoadingState } from 'decentraland-dapps/dist/modules/loading/types'
+import { LoadingState } from '@dapps/modules/loading/types'
 import * as actions from 'modules/poll/actions'
 import { Option } from 'modules/option/types'
 import { Token } from 'modules/token/types'

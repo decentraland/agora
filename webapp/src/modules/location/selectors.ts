@@ -3,7 +3,7 @@ import { STATIC_PAGES } from 'locations'
 import {
   getPathname,
   getPathAction
-} from 'decentraland-dapps/dist/modules/location/selectors'
+} from '@dapps/modules/location/selectors'
 
 export const isStaticPage = (state: RootState) => {
   const pathname = getPathname(state)
