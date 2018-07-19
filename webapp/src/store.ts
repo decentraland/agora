@@ -5,7 +5,7 @@ import { createLogger } from 'redux-logger'
 import createHistory from 'history/createBrowserHistory'
 import createSagasMiddleware from 'redux-saga'
 
-import { createAnalyticsMiddleware } from 'modules/analytics/middleware'
+import { createAnalyticsMiddleware } from 'decentraland-dapps/dist/modules/analytics/middleware'
 import { createStorageMiddleware } from 'decentraland-dapps/dist/modules/storage/middleware'
 
 import { rootReducer } from './reducer'

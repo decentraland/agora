@@ -1,4 +1,4 @@
-import { add } from 'modules/analytics/utils'
+import { add } from 'decentraland-dapps/dist/modules/analytics/utils'
 import { CREATE_VOTE_SUCCESS, CreateVoteSuccess } from 'modules/vote/types'
 
 add(CREATE_VOTE_SUCCESS, 'Vote', (action: CreateVoteSuccess) => ({
