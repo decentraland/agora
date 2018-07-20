@@ -1,6 +1,6 @@
 {
   "compilerOptions": {
-    "baseUrl": ".",
+    "baseUrl": "./",
     "outDir": "build/dist",
     "module": "commonjs",
     "target": "es5",
@@ -27,7 +27,8 @@
       "reducer": ["./src/reducer"],
       "types": ["./src/types"],
       "store": ["./src/store"],
-      "locations": ["./src/locations"]
+      "locations": ["./src/locations"],
+      "@dapps/*": ["./node_modules/decentraland-dapps/dist/*"]
     }
   },
   "exclude": [

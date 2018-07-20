@@ -1,7 +1,7 @@
 import * as React from 'react'
 
 import { Container } from 'decentraland-ui'
-import TranslationProvider from 'components/TranslationProvider'
+import TranslationProvider from '@dapps/providers/TranslationProvider'
 import Navbar from 'components/Navbar'
 
 import './Page.css'

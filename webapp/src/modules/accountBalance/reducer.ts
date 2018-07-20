@@ -1,4 +1,5 @@
 import { Reducer } from 'redux'
+import { loadingReducer } from '@dapps/modules/loading/reducer'
 import {
   FETCH_ACCOUNT_BALANCES_FAILURE,
   FETCH_ACCOUNT_BALANCES_SUCCESS,
@@ -6,8 +7,7 @@ import {
   AccountBalanceState,
   AccountBalanceActions
 } from 'modules/accountBalance/types'
-import { COMPUTE_BALANCES_SUCCESS, WalletActions } from 'modules/wallet/types'
-import { loadingReducer } from 'modules/loading/reducer'
+import { WalletActions, COMPUTE_BALANCES_SUCCESS } from 'modules/wallet/types'
 import { buildId } from 'modules/accountBalance/utils'
 
 const INITIAL_STATE: AccountBalanceState = {

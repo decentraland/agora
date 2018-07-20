@@ -3,7 +3,7 @@ import { isFinished } from 'modules/poll/utils'
 import { Link } from 'react-router-dom'
 import { locations } from 'locations'
 import { Button } from 'decentraland-ui'
-import { t } from 'modules/translation/utils'
+import { t } from '@dapps/modules/translation/utils'
 import { CastYourVoteProps } from 'components/PollDetailPage/CastYourVote/types'
 import './CastYourVote.css'
 

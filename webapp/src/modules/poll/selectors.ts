@@ -8,7 +8,7 @@ import { getData as getVotes } from 'modules/vote/selectors'
 import { OptionState } from 'modules/option/types'
 import { VoteState } from 'modules/vote/types'
 import { TokenState } from 'modules/token/types'
-import { ModelById } from 'lib/types'
+import { ModelById } from '@dapps/lib/types'
 
 export const getState: (state: RootState) => PollState = state => state.poll
 

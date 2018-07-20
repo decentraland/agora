@@ -1,4 +1,5 @@
 import { Reducer } from 'redux'
+import { loadingReducer } from '@dapps/modules/loading/reducer'
 import {
   FETCH_POLL_OPTIONS_REQUEST,
   FETCH_POLL_OPTIONS_SUCCESS,
@@ -7,7 +8,6 @@ import {
   OptionState,
   OptionActions
 } from 'modules/option/types'
-import { loadingReducer } from 'modules/loading/reducer'
 import {
   FETCH_POLLS_REQUEST,
   FETCH_POLLS_SUCCESS,
@@ -17,7 +17,7 @@ import {
   FETCH_POLL_FAILURE,
   PollActions
 } from 'modules/poll/types'
-import { toObjectById } from 'lib/utils'
+import { toObjectById } from '@dapps/lib/utils'
 
 const INITIAL_STATE: OptionState = {
   data: {},

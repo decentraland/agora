@@ -1,4 +1,5 @@
 import { Reducer } from 'redux'
+import { loadingReducer } from '@dapps/modules/loading/reducer'
 import {
   FETCH_POLL_VOTES_FAILURE,
   FETCH_POLL_VOTES_SUCCESS,
@@ -10,7 +11,6 @@ import {
   Vote,
   VoteActions
 } from 'modules/vote/types'
-import { loadingReducer } from 'modules/loading/reducer'
 import {
   FETCH_POLLS_REQUEST,
   FETCH_POLLS_SUCCESS,
@@ -20,7 +20,7 @@ import {
   FETCH_POLL_FAILURE,
   PollActions
 } from 'modules/poll/types'
-import { toObjectById } from 'lib/utils'
+import { toObjectById } from '@dapps/lib/utils'
 
 const INITIAL_STATE: VoteState = {
   data: {},

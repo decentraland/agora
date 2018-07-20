@@ -1,16 +1,17 @@
 import { connect } from 'react-redux'
+import { isConnected } from '@dapps/modules/wallet/selectors'
+import { navigateTo } from '@dapps/modules/location/actions'
+import { LocationActions } from '@dapps/modules/location/types'
 import { RootState, RootDispatch } from 'types'
 import { fetchPollRequest } from 'modules/poll/actions'
-import { navigateTo } from 'modules/location/actions'
 import {
   getPolls,
   isLoading as isPollLoading,
   getError
 } from 'modules/poll/selectors'
-import { getWallet, isConnected } from 'modules/wallet/selectors'
+import { getWallet } from 'modules/wallet/selectors'
 import { Wallet } from 'modules/wallet/types'
 import { PollActions } from 'modules/poll/types'
-import { LocationActions } from 'modules/location/types'
 import { PollDetailPageProps } from 'components/PollDetailPage/types'
 import { findWalletVote } from 'modules/vote/utils'
 

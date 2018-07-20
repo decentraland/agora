@@ -1,7 +1,7 @@
 import { ActionType } from 'typesafe-actions'
-import { LoadingState } from 'modules/loading/types'
+import { LoadingState } from '@dapps/modules/loading/types'
+import { ModelById } from '@dapps/lib/types'
 import * as actions from 'modules/option/actions'
-import { ModelById } from 'lib/types'
 
 export const FETCH_POLL_OPTIONS_REQUEST = '[Request] Fetch Poll Options'
 export const FETCH_POLL_OPTIONS_SUCCESS = '[Success] Fetch Poll Options'

@@ -1,10 +1,10 @@
 import { ActionType } from 'typesafe-actions'
-import { LoadingState } from 'modules/loading/types'
+import { LoadingState } from '@dapps/modules/loading/types'
 import * as actions from 'modules/poll/actions'
 import { Option } from 'modules/option/types'
 import { Token } from 'modules/token/types'
 import { Vote } from 'modules/vote/types'
-import { ModelById, Overwrite } from 'lib/types'
+import { ModelById, Overwrite } from '@dapps/lib/types'
 
 export const FETCH_POLLS_REQUEST = '[Request] Fetch Polls'
 export const FETCH_POLLS_SUCCESS = '[Success] Fetch Polls'

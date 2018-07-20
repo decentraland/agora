@@ -1,5 +1,5 @@
 import { Reducer } from 'redux'
-import { loadingReducer } from 'modules/loading/reducer'
+import { loadingReducer } from '@dapps/modules/loading/reducer'
 import {
   FETCH_TOKENS_REQUEST,
   FETCH_TOKENS_SUCCESS,
@@ -17,7 +17,7 @@ import {
   FETCH_POLL_FAILURE,
   PollActions
 } from 'modules/poll/types'
-import { toObjectByKey } from 'lib/utils'
+import { toObjectByKey } from '@dapps/lib/utils'
 
 const INITIAL_STATE: TokenState = {
   data: {},

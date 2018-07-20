@@ -5,8 +5,8 @@ import { createLogger } from 'redux-logger'
 import createHistory from 'history/createBrowserHistory'
 import createSagasMiddleware from 'redux-saga'
 
-import { createAnalyticsMiddleware } from 'modules/analytics/middleware'
-import { createStorageMiddleware } from 'modules/storage/middleware'
+import { createAnalyticsMiddleware } from '@dapps/modules/analytics/middleware'
+import { createStorageMiddleware } from '@dapps/modules/storage/middleware'
 
 import { rootReducer } from './reducer'
 import { rootSaga } from './sagas'

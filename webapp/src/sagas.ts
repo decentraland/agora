@@ -1,8 +1,7 @@
 import { all } from 'redux-saga/effects'
-
+import { analyticsSaga } from '@dapps/modules/analytics/sagas'
+import { locationSaga } from '@dapps/modules/location/sagas'
 import { accountBalanceSaga } from 'modules/accountBalance/sagas'
-import { analyticsSaga } from 'modules/analytics/sagas'
-import { locationSaga } from 'modules/location/sagas'
 import { optionSaga } from 'modules/option/sagas'
 import { pollSaga } from 'modules/poll/sagas'
 import { voteSaga } from 'modules/vote/sagas'
