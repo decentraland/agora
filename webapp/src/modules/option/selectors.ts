@@ -1,5 +1,5 @@
 import { RootState } from 'types'
-import { OptionState } from 'modules/option/types'
+import { OptionState } from 'modules/option/reducer'
 
 export const getState: (state: RootState) => OptionState = state => state.option
 

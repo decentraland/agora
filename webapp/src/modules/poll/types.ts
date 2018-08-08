@@ -1,25 +1,7 @@
-import { ActionType } from 'typesafe-actions'
-import { LoadingState } from '@dapps/modules/loading/types'
-import * as actions from 'modules/poll/actions'
 import { Option } from 'modules/option/types'
 import { Token } from 'modules/token/types'
 import { Vote } from 'modules/vote/types'
-import { ModelById, Overwrite } from '@dapps/lib/types'
-
-export const FETCH_POLLS_REQUEST = '[Request] Fetch Polls'
-export const FETCH_POLLS_SUCCESS = '[Success] Fetch Polls'
-export const FETCH_POLLS_FAILURE = '[Failure] Fetch Polls'
-
-export const FETCH_POLL_REQUEST = '[Request] Fetch Poll'
-export const FETCH_POLL_SUCCESS = '[Success] Fetch Poll'
-export const FETCH_POLL_FAILURE = '[Failure] Fetch Poll'
-
-// Interface and type definitions
-
-export type FetchPollsRequest = ReturnType<typeof actions.fetchPollsRequest>
-export type FetchPollRequest = ReturnType<typeof actions.fetchPollRequest>
-
-export type PollActions = ActionType<typeof actions>
+import { Overwrite } from '@dapps/lib/types'
 
 export interface Poll {
   id: string
@@ -47,9 +29,3 @@ export interface PollResponse
       PollWithAssociations,
       { balance: string; closes_at: string }
     > {}
-
-export type PollState = {
-  data: ModelById<PollWithPointers>
-  loading: LoadingState
-  error: string | null
-}

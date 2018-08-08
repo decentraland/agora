@@ -2,23 +2,25 @@ import { call, select, takeEvery, put, all } from 'redux-saga/effects'
 import { eth, contracts } from 'decentraland-eth'
 import { env } from 'decentraland-commons'
 import { getAddress } from '@dapps/modules/wallet/selectors'
-import {
-  CONNECT_WALLET_SUCCESS,
-  ERC20Token,
-  ConnectWalletSuccess
-} from '@dapps/modules/wallet/types'
+import { ERC20Token } from '@dapps/modules/wallet/types'
 import { createWalletSaga } from '@dapps/modules/wallet/sagas'
-import { COMPUTE_BALANCES_REQUEST } from 'modules/wallet/types'
 import {
+  ConnectWalletSuccessAction,
+  CONNECT_WALLET_SUCCESS
+} from '@dapps/modules/wallet/actions'
+import {
+  COMPUTE_BALANCES_REQUEST,
   computeBalancesSuccess,
   computeBalancesFailure
 } from 'modules/wallet/actions'
 import { fetchAccountBalancesRequest } from 'modules/accountBalance/actions'
 import { fetchTokensRequest } from 'modules/token/actions'
 import { getContractTokens } from 'modules/token/selectors'
+import { MANAToken } from 'contracts'
+
 const baseWalletSaga = createWalletSaga({
   provider: env.get('REACT_APP_PROVIDER_URL'),
-  contracts: [],
+  contracts: [MANAToken],
   eth
 })
 
@@ -27,7 +29,7 @@ export function* walletSaga() {
 }
 
 function* walletBalanceSaga() {
-  yield takeEvery(CONNECT_WALLET_SUCCESS as any, handleConnectWalletSuccess)
+  yield takeEvery(CONNECT_WALLET_SUCCESS, handleConnectWalletSuccess)
   yield takeEvery(COMPUTE_BALANCES_REQUEST, handleComputeBalancesRequest)
 }
 
@@ -66,7 +68,7 @@ function* handleComputeBalancesRequest() {
   }
 }
 
-function* handleConnectWalletSuccess(action: ConnectWalletSuccess) {
+function* handleConnectWalletSuccess(action: ConnectWalletSuccessAction) {
   yield put(fetchTokensRequest())
   yield put(fetchAccountBalancesRequest(action.payload.wallet.address))
 }

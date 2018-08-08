@@ -1,14 +1,27 @@
 import { Reducer } from 'redux'
-import { loadingReducer } from '@dapps/modules/loading/reducer'
+import { loadingReducer, LoadingState } from '@dapps/modules/loading/reducer'
+import { ModelById } from '@dapps/lib/types'
+import { AccountBalance } from 'modules/accountBalance/types'
 import {
-  FETCH_ACCOUNT_BALANCES_FAILURE,
-  FETCH_ACCOUNT_BALANCES_SUCCESS,
-  FETCH_ACCOUNT_BALANCES_REQUEST,
-  AccountBalanceState,
-  AccountBalanceActions
-} from 'modules/accountBalance/types'
-import { WalletActions, COMPUTE_BALANCES_SUCCESS } from 'modules/wallet/types'
+  COMPUTE_BALANCES_SUCCESS,
+  ComputeBalancesSuccessAction,
+  ComputeBalancesFailureAction
+} from 'modules/wallet/actions'
 import { buildId } from 'modules/accountBalance/utils'
+import {
+  FetchAccountBalancesFailureAction,
+  FetchAccountBalancesRequestAction,
+  FetchAccountBalancesSuccessAction,
+  FETCH_ACCOUNT_BALANCES_REQUEST,
+  FETCH_ACCOUNT_BALANCES_SUCCESS,
+  FETCH_ACCOUNT_BALANCES_FAILURE
+} from 'modules/accountBalance/actions'
+
+export type AccountBalanceState = {
+  data: ModelById<AccountBalance>
+  loading: LoadingState
+  error: string | null
+}
 
 const INITIAL_STATE: AccountBalanceState = {
   data: {},
@@ -16,9 +29,16 @@ const INITIAL_STATE: AccountBalanceState = {
   error: null
 }
 
+export type AccountBalanceReducerAction =
+  | FetchAccountBalancesRequestAction
+  | FetchAccountBalancesSuccessAction
+  | FetchAccountBalancesFailureAction
+  | ComputeBalancesSuccessAction
+  | ComputeBalancesFailureAction
+
 export const accountBalanceReducer: Reducer<AccountBalanceState> = (
   state = INITIAL_STATE,
-  action: WalletActions | AccountBalanceActions
+  action: AccountBalanceReducerAction
 ): AccountBalanceState => {
   switch (action.type) {
     case FETCH_ACCOUNT_BALANCES_REQUEST: {

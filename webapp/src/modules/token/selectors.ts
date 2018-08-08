@@ -1,7 +1,7 @@
 import { createSelector } from 'reselect'
 import { RootState } from 'types'
-import { TokenState } from 'modules/token/types'
 import { isDistrictTokenAddress } from 'modules/token/district_token/utils'
+import { TokenState } from 'modules/token/reducer'
 
 export const getState: (state: RootState) => TokenState = state => state.token
 

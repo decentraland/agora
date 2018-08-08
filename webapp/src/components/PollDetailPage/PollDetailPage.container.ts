@@ -1,9 +1,8 @@
 import { connect } from 'react-redux'
 import { isConnected } from '@dapps/modules/wallet/selectors'
-import { navigateTo } from '@dapps/modules/location/actions'
-import { LocationActions } from '@dapps/modules/location/types'
+import { navigateTo, NavigateToAction } from '@dapps/modules/location/actions'
 import { RootState, RootDispatch } from 'types'
-import { fetchPollRequest } from 'modules/poll/actions'
+import { fetchPollRequest, FetchPollRequestAction } from 'modules/poll/actions'
 import {
   getPolls,
   isLoading as isPollLoading,
@@ -11,7 +10,6 @@ import {
 } from 'modules/poll/selectors'
 import { getWallet } from 'modules/wallet/selectors'
 import { Wallet } from 'modules/wallet/types'
-import { PollActions } from 'modules/poll/types'
 import { PollDetailPageProps } from 'components/PollDetailPage/types'
 import { findWalletVote } from 'modules/vote/utils'
 
@@ -42,12 +40,13 @@ const mapState = (
 }
 
 const mapDispatch = (
-  dispatch: RootDispatch<PollActions | LocationActions>
+  dispatch: RootDispatch<FetchPollRequestAction | NavigateToAction>
 ) => ({
   onFetchPoll: (id: string) => dispatch(fetchPollRequest(id)),
   onNavigate: (url: string) => dispatch(navigateTo(url))
 })
 
-export default connect<PollDetailPageProps>(mapState, mapDispatch)(
-  PollDetailPage
-)
+export default connect<PollDetailPageProps>(
+  mapState,
+  mapDispatch
+)(PollDetailPage)

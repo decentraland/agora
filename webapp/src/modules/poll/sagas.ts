@@ -3,16 +3,12 @@ import {
   fetchPollsSuccess,
   fetchPollsFailure,
   fetchPollSuccess,
-  fetchPollFailure
-} from 'modules/poll/actions'
-import {
+  fetchPollFailure,
   FETCH_POLLS_REQUEST,
   FETCH_POLL_REQUEST,
-  FetchPollRequest,
-  Poll,
-  PollResponse,
-  PollWithAssociations
-} from 'modules/poll/types'
+  FetchPollRequestAction
+} from 'modules/poll/actions'
+import { Poll, PollResponse, PollWithAssociations } from 'modules/poll/types'
 import { api } from 'lib/api'
 
 export function* pollSaga() {
@@ -30,7 +26,7 @@ function* handlePollsRequest() {
   }
 }
 
-function* handlePollRequest(action: FetchPollRequest) {
+function* handlePollRequest(action: FetchPollRequestAction) {
   const id = action.payload.id
   try {
     const pollResponse: PollResponse = yield call(() => api.fetchPoll(id))

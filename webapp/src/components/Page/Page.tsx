@@ -1,26 +1,26 @@
 import * as React from 'react'
 
 import { Container } from 'decentraland-ui'
-import TranslationProvider from '@dapps/providers/TranslationProvider'
-import Navbar from 'components/Navbar'
+import Navbar from '@dapps/containers/Navbar'
+import { PageProps } from 'components/Page/types'
 
 import './Page.css'
 
-export default class Page extends React.PureComponent {
+export default class Page extends React.PureComponent<PageProps> {
   static defaultProps = {
     children: null
   }
 
   render() {
-    const { children } = this.props
+    const { children, onBack, onClickLogo, isModal } = this.props
 
     return (
-      <TranslationProvider>
-        <Navbar />
+      <>
+        <Navbar onBack={onBack} onClickLogo={onClickLogo} isModal={isModal} />
         <div className="Page">
           <Container>{children}</Container>
         </div>
-      </TranslationProvider>
+      </>
     )
   }
 }

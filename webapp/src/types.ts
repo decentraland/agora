@@ -1,19 +1,14 @@
 import { MiddlewareAPI, AnyAction, Reducer } from 'redux'
-import { Store } from 'react-redux'
-import { RouterState, RouterAction } from 'react-router-redux'
-
-import { AccountBalanceState } from 'modules/accountBalance/types'
-import { OptionState, OptionActions } from 'modules/option/types'
-import { PollState, PollActions } from 'modules/poll/types'
-import { StorageState } from '@dapps/modules/storage/types'
-import { TokenState } from 'modules/token/types'
-import {
-  TranslationState,
-  TranslationActions
-} from '@dapps/modules/translation/types'
-import { VoteState, VoteActions } from 'modules/vote/types'
-import { WalletState } from 'modules/wallet/types'
-import { WalletActions } from '@dapps/modules/wallet/types'
+import { Store } from 'redux'
+import { RouterState } from 'react-router-redux'
+import { AccountBalanceState } from 'modules/accountBalance/reducer'
+import { StorageState } from '@dapps/modules/storage/reducer'
+import { TranslationState } from '@dapps/modules/translation/reducer'
+import { WalletState } from 'modules/wallet/reducer'
+import { OptionState } from 'modules/option/reducer'
+import { PollState } from 'modules/poll/reducer'
+import { TokenState } from 'modules/token/reducer'
+import { VoteState } from 'modules/vote/reducer'
 
 export type RootState = {
   accountBalance: AccountBalanceState
@@ -27,17 +22,9 @@ export type RootState = {
   wallet: WalletState
 }
 
-export type RootAction =
-  | RouterAction
-  | PollActions
-  | OptionActions
-  | VoteActions
-  | TranslationActions
-  | WalletActions
-
 export type RootStore = Store<RootState>
 
-export interface RootDispatch<A = RootAction> {
+export interface RootDispatch<A = AnyAction> {
   (action: A): A
 }
 

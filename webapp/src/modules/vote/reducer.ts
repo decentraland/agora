@@ -1,26 +1,42 @@
 import { Reducer } from 'redux'
-import { loadingReducer } from '@dapps/modules/loading/reducer'
+import { loadingReducer, LoadingState } from '@dapps/modules/loading/reducer'
+import { Vote } from 'modules/vote/types'
+import { toObjectById } from '@dapps/lib/utils'
+import { ModelById } from '@dapps/lib/types'
 import {
-  FETCH_POLL_VOTES_FAILURE,
-  FETCH_POLL_VOTES_SUCCESS,
-  FETCH_POLL_VOTES_REQUEST,
+  CreateVoteRequestAction,
+  CreateVoteSuccessAction,
+  CreateVoteFailureAction,
   CREATE_VOTE_REQUEST,
   CREATE_VOTE_SUCCESS,
   CREATE_VOTE_FAILURE,
-  VoteState,
-  Vote,
-  VoteActions
-} from 'modules/vote/types'
+  FETCH_POLL_VOTES_REQUEST,
+  FETCH_POLL_VOTES_SUCCESS,
+  FETCH_POLL_VOTES_FAILURE,
+  FetchPollVotesRequestAction,
+  FetchPollVotesSuccessAction,
+  FetchPollVotesFailureAction
+} from 'modules/vote/actions'
 import {
   FETCH_POLLS_REQUEST,
-  FETCH_POLLS_SUCCESS,
-  FETCH_POLLS_FAILURE,
   FETCH_POLL_REQUEST,
+  FetchPollsRequestAction,
+  FetchPollsSuccessAction,
+  FetchPollsFailureAction,
+  FetchPollRequestAction,
+  FetchPollSuccessAction,
+  FetchPollFailureAction,
+  FETCH_POLLS_SUCCESS,
   FETCH_POLL_SUCCESS,
-  FETCH_POLL_FAILURE,
-  PollActions
-} from 'modules/poll/types'
-import { toObjectById } from '@dapps/lib/utils'
+  FETCH_POLLS_FAILURE,
+  FETCH_POLL_FAILURE
+} from 'modules/poll/actions'
+
+export type VoteState = {
+  data: ModelById<Vote>
+  loading: LoadingState
+  error: string | null
+}
 
 const INITIAL_STATE: VoteState = {
   data: {},
@@ -28,9 +44,23 @@ const INITIAL_STATE: VoteState = {
   error: null
 }
 
+export type VoteReducerAction =
+  | CreateVoteRequestAction
+  | CreateVoteSuccessAction
+  | CreateVoteFailureAction
+  | FetchPollsRequestAction
+  | FetchPollsSuccessAction
+  | FetchPollsFailureAction
+  | FetchPollRequestAction
+  | FetchPollSuccessAction
+  | FetchPollFailureAction
+  | FetchPollVotesRequestAction
+  | FetchPollVotesSuccessAction
+  | FetchPollVotesFailureAction
+
 export const voteReducer: Reducer<VoteState> = (
   state = INITIAL_STATE,
-  action: VoteActions | PollActions
+  action: VoteReducerAction
 ): VoteState => {
   switch (action.type) {
     case CREATE_VOTE_REQUEST:

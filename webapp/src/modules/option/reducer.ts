@@ -1,23 +1,36 @@
 import { Reducer } from 'redux'
-import { loadingReducer } from '@dapps/modules/loading/reducer'
+import { loadingReducer, LoadingState } from '@dapps/modules/loading/reducer'
+import { Option } from 'modules/option/types'
+import { toObjectById } from '@dapps/lib/utils'
+import { ModelById } from '@dapps/lib/types'
 import {
   FETCH_POLL_OPTIONS_REQUEST,
   FETCH_POLL_OPTIONS_SUCCESS,
   FETCH_POLL_OPTIONS_FAILURE,
-  Option,
-  OptionState,
-  OptionActions
-} from 'modules/option/types'
+  FetchPollOptionsRequestAction,
+  FetchPollOptionsSuccessAction,
+  FetchPollOptionsFailureAction
+} from 'modules/option/actions'
 import {
   FETCH_POLLS_REQUEST,
-  FETCH_POLLS_SUCCESS,
-  FETCH_POLLS_FAILURE,
   FETCH_POLL_REQUEST,
+  FetchPollsRequestAction,
+  FetchPollsSuccessAction,
+  FetchPollsFailureAction,
+  FetchPollRequestAction,
+  FetchPollSuccessAction,
+  FetchPollFailureAction,
+  FETCH_POLLS_SUCCESS,
   FETCH_POLL_SUCCESS,
-  FETCH_POLL_FAILURE,
-  PollActions
-} from 'modules/poll/types'
-import { toObjectById } from '@dapps/lib/utils'
+  FETCH_POLLS_FAILURE,
+  FETCH_POLL_FAILURE
+} from 'modules/poll/actions'
+
+export type OptionState = {
+  data: ModelById<Option>
+  loading: LoadingState
+  error: string | null
+}
 
 const INITIAL_STATE: OptionState = {
   data: {},
@@ -25,9 +38,20 @@ const INITIAL_STATE: OptionState = {
   error: null
 }
 
+export type OptionReducerAction =
+  | FetchPollOptionsRequestAction
+  | FetchPollOptionsSuccessAction
+  | FetchPollOptionsFailureAction
+  | FetchPollsRequestAction
+  | FetchPollsSuccessAction
+  | FetchPollsFailureAction
+  | FetchPollRequestAction
+  | FetchPollSuccessAction
+  | FetchPollFailureAction
+
 export const optionReducer: Reducer<OptionState> = (
   state = INITIAL_STATE,
-  action: OptionActions | PollActions
+  action: OptionReducerAction
 ): OptionState => {
   switch (action.type) {
     case FETCH_POLL_OPTIONS_REQUEST:

@@ -1,23 +1,36 @@
 import { Reducer } from 'redux'
-import { loadingReducer } from '@dapps/modules/loading/reducer'
+import { loadingReducer, LoadingState } from '@dapps/modules/loading/reducer'
+import { Token } from 'modules/token/types'
+import { toObjectByKey } from '@dapps/lib/utils'
+import { ModelByAddress } from '@dapps/lib/types'
 import {
+  FetchTokensRequestAction,
+  FetchTokensSuccessAction,
+  FetchTokensFailureAction,
   FETCH_TOKENS_REQUEST,
   FETCH_TOKENS_SUCCESS,
-  FETCH_TOKENS_FAILURE,
-  TokenActions,
-  TokenState,
-  Token
-} from 'modules/token/types'
+  FETCH_TOKENS_FAILURE
+} from 'modules/token/actions'
 import {
+  FetchPollsRequestAction,
+  FetchPollsSuccessAction,
+  FetchPollsFailureAction,
+  FetchPollRequestAction,
+  FetchPollSuccessAction,
+  FetchPollFailureAction,
   FETCH_POLLS_REQUEST,
-  FETCH_POLLS_SUCCESS,
-  FETCH_POLLS_FAILURE,
   FETCH_POLL_REQUEST,
+  FETCH_POLLS_SUCCESS,
   FETCH_POLL_SUCCESS,
-  FETCH_POLL_FAILURE,
-  PollActions
-} from 'modules/poll/types'
-import { toObjectByKey } from '@dapps/lib/utils'
+  FETCH_POLLS_FAILURE,
+  FETCH_POLL_FAILURE
+} from 'modules/poll/actions'
+
+export type TokenState = {
+  data: ModelByAddress<Token>
+  loading: LoadingState
+  error: string | null
+}
 
 const INITIAL_STATE: TokenState = {
   data: {},
@@ -25,9 +38,20 @@ const INITIAL_STATE: TokenState = {
   error: null
 }
 
+export type TokenReducerAction =
+  | FetchTokensRequestAction
+  | FetchTokensSuccessAction
+  | FetchTokensFailureAction
+  | FetchPollsRequestAction
+  | FetchPollsSuccessAction
+  | FetchPollsFailureAction
+  | FetchPollRequestAction
+  | FetchPollSuccessAction
+  | FetchPollFailureAction
+
 export const tokenReducer: Reducer<TokenState> = (
   state = INITIAL_STATE,
-  action: TokenActions | PollActions
+  action: TokenReducerAction
 ): TokenState => {
   switch (action.type) {
     case FETCH_TOKENS_REQUEST:

@@ -1,15 +1,16 @@
 import { connect } from 'react-redux'
 import { RootDispatch, RootState } from 'types'
 import { isConnected } from '@dapps/modules/wallet/selectors'
-import { navigateTo } from '@dapps/modules/location/actions'
-import { LocationActions } from '@dapps/modules/location/types'
+import { navigateTo, NavigateToAction } from '@dapps/modules/location/actions'
 import { getPolls, isLoading as isPollLoading } from 'modules/poll/selectors'
 import { getWallet } from 'modules/wallet/selectors'
-import { fetchPollRequest } from 'modules/poll/actions'
-import { createVoteRequest } from 'modules/vote/actions'
-import { PollActions } from 'modules/poll/types'
+import { fetchPollRequest, FetchPollRequestAction } from 'modules/poll/actions'
+import {
+  createVoteRequest,
+  CreateVoteRequestAction
+} from 'modules/vote/actions'
 import { Wallet } from 'modules/wallet/types'
-import { VoteActions, NewVote } from 'modules/vote/types'
+import { NewVote } from 'modules/vote/types'
 import { VotePageProps } from 'components/VotePage/types'
 import { findWalletVote } from 'modules/vote/utils'
 
@@ -36,11 +37,16 @@ const mapState = (state: RootState, ownProps: VotePageProps): VotePageProps => {
 }
 
 const mapDispatch = (
-  dispatch: RootDispatch<PollActions | VoteActions | LocationActions>
+  dispatch: RootDispatch<
+    FetchPollRequestAction | CreateVoteRequestAction | NavigateToAction
+  >
 ) => ({
   onFetchPoll: (id: string) => dispatch(fetchPollRequest(id)),
   onCreateVote: (newVote: NewVote) => dispatch(createVoteRequest(newVote)),
   onNavigate: (url: string) => dispatch(navigateTo(url))
 })
 
-export default connect<VotePageProps>(mapState, mapDispatch)(VotePage)
+export default connect<VotePageProps>(
+  mapState,
+  mapDispatch
+)(VotePage)

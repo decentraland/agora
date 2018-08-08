@@ -6,15 +6,13 @@ import {
   fetchVotesByPollIdSuccess,
   fetchVotesByPollIdFailure,
   createVoteSuccess,
-  createVoteFailure
-} from 'modules/vote/actions'
-import {
+  createVoteFailure,
   FETCH_POLL_VOTES_REQUEST,
   CREATE_VOTE_REQUEST,
-  FetchPollVotesRequest,
-  Vote,
-  CreateVoteRequest
-} from 'modules/vote/types'
+  FetchPollVotesRequestAction,
+  CreateVoteRequestAction
+} from 'modules/vote/actions'
+import { Vote } from 'modules/vote/types'
 import { Wallet } from 'modules/wallet/types'
 import { getWallet } from 'modules/wallet/selectors'
 import { getPolls } from 'modules/poll/selectors'
@@ -27,7 +25,7 @@ export function* voteSaga() {
   yield takeLatest(CREATE_VOTE_REQUEST, handleVoteRequest)
 }
 
-function* handlePollOptionsRequest(action: FetchPollVotesRequest) {
+function* handlePollOptionsRequest(action: FetchPollVotesRequestAction) {
   try {
     const pollId = action.payload.pollId
     const votes: Vote[] = yield call(() => api.fetchPollVotes(pollId))
@@ -38,7 +36,7 @@ function* handlePollOptionsRequest(action: FetchPollVotesRequest) {
   }
 }
 
-function* handleVoteRequest(action: CreateVoteRequest) {
+function* handleVoteRequest(action: CreateVoteRequestAction) {
   // TODO: We could add optimistic update before this
   try {
     const newVote = action.payload.newVote

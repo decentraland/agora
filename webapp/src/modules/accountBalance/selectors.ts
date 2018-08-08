@@ -1,5 +1,5 @@
 import { RootState } from 'types'
-import { AccountBalanceState } from 'modules/accountBalance/types'
+import { AccountBalanceState } from 'modules/accountBalance/reducer'
 
 export const getState: (state: RootState) => AccountBalanceState = state =>
   state.accountBalance
