@@ -12,7 +12,8 @@ export default class YourVote extends React.PureComponent<YourVoteProps> {
       <span className="YourVote">
         {t('poll_detail_page.you_voted', {
           option: getVoteOptionValue(poll.options, vote)
-        })}.{' '}
+        })}
+        .{' '}
         <span className="time-ago">
           {distanceInWordsToNow(vote.timestamp)}.
         </span>

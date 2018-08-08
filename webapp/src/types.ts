@@ -1,5 +1,4 @@
-import { MiddlewareAPI, AnyAction, Reducer } from 'redux'
-import { Store } from 'redux'
+import { MiddlewareAPI, AnyAction, Reducer, Store } from 'redux'
 import { RouterState } from 'react-router-redux'
 import { AccountBalanceState } from 'modules/accountBalance/reducer'
 import { StorageState } from '@dapps/modules/storage/reducer'

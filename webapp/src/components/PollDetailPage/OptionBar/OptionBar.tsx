@@ -10,7 +10,8 @@ export default class OptionBar extends React.PureComponent<OptionBarProps> {
       <div className={classes}>
         <div className="bar" style={{ width: `${percentage}%` }} />
         <div className="label">
-          {children} ({percentage}%)
+          {children} ({percentage}
+          %)
         </div>
       </div>
     )

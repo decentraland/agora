@@ -1,9 +1,7 @@
 import { AnyAction } from 'redux'
 import {
   walletReducer as baseWallerReducer,
-  INITIAL_STATE as BASE_INITIAL_STATE
-} from '@dapps/modules/wallet/reducer'
-import {
+  INITIAL_STATE as BASE_INITIAL_STATE,
   WalletState as BaseWalletState,
   WalletReducerAction as BaseWalletReducerAction
 } from '@dapps/modules/wallet/reducer'
