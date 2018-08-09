@@ -18,6 +18,6 @@ const mapDispatch = (dispatch: RootDispatch<RouterAction>) => ({
 })
 
 export default connect<PageProps>(
-  mapState as any,
+  mapState,
   mapDispatch
 )(Page as any)
