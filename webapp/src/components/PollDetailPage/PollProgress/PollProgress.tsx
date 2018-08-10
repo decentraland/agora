@@ -37,7 +37,10 @@ class PollOption extends React.PureComponent<OptionProps> {
         <div className="mask">
           <div className="bg" />
           <span className="text">
-            {option.value}&nbsp;({percentage}%)
+            {option.value}
+            &nbsp;(
+            {percentage}
+            %)
           </span>
         </div>
       </div>

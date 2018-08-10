@@ -1,23 +1,30 @@
 import { action } from 'typesafe-actions'
-import {
-  FETCH_POLLS_REQUEST,
-  FETCH_POLLS_SUCCESS,
-  FETCH_POLLS_FAILURE,
-  FETCH_POLL_REQUEST,
-  FETCH_POLL_SUCCESS,
-  FETCH_POLL_FAILURE,
-  Poll,
-  PollWithAssociations
-} from 'modules/poll/types'
+import { Poll, PollWithAssociations } from 'modules/poll/types'
 import { Token } from 'modules/token/types'
 import { Option } from 'modules/option/types'
 import { Vote } from 'modules/vote/types'
+
+// Fetch Polls
+
+export const FETCH_POLLS_REQUEST = '[Request] Fetch Polls'
+export const FETCH_POLLS_SUCCESS = '[Success] Fetch Polls'
+export const FETCH_POLLS_FAILURE = '[Failure] Fetch Polls'
 
 export const fetchPollsRequest = () => action(FETCH_POLLS_REQUEST, {})
 export const fetchPollsSuccess = (polls: PollWithAssociations[]) =>
   action(FETCH_POLLS_SUCCESS, { polls })
 export const fetchPollsFailure = (error: string) =>
   action(FETCH_POLLS_FAILURE, { error })
+
+export type FetchPollsRequestAction = ReturnType<typeof fetchPollsRequest>
+export type FetchPollsSuccessAction = ReturnType<typeof fetchPollsSuccess>
+export type FetchPollsFailureAction = ReturnType<typeof fetchPollsFailure>
+
+// Fetch Poll
+
+export const FETCH_POLL_REQUEST = '[Request] Fetch Poll'
+export const FETCH_POLL_SUCCESS = '[Success] Fetch Poll'
+export const FETCH_POLL_FAILURE = '[Failure] Fetch Poll'
 
 export const fetchPollRequest = (id: string) =>
   action(FETCH_POLL_REQUEST, { id })
@@ -29,3 +36,7 @@ export const fetchPollSuccess = (
 ) => action(FETCH_POLL_SUCCESS, { poll, token, votes, options })
 export const fetchPollFailure = (error: string) =>
   action(FETCH_POLL_FAILURE, { error })
+
+export type FetchPollRequestAction = ReturnType<typeof fetchPollRequest>
+export type FetchPollSuccessAction = ReturnType<typeof fetchPollSuccess>
+export type FetchPollFailureAction = ReturnType<typeof fetchPollFailure>

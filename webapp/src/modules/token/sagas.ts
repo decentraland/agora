@@ -1,10 +1,11 @@
 import { call, put, takeLatest } from 'redux-saga/effects'
-import { fetchTokensSuccess, fetchTokensFailure } from 'modules/token/actions'
 import {
+  fetchTokensSuccess,
+  fetchTokensFailure,
   FETCH_TOKENS_REQUEST,
-  FETCH_TOKENS_SUCCESS,
-  Token
-} from 'modules/token/types'
+  FETCH_TOKENS_SUCCESS
+} from 'modules/token/actions'
+import { Token } from 'modules/token/types'
 import { computeBalancesRequest } from 'modules/wallet/actions'
 import { api } from 'lib/api'
 

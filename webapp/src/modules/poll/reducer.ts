@@ -1,23 +1,39 @@
 import { Reducer } from 'redux'
-import { loadingReducer } from '@dapps/modules/loading/reducer'
-import {
-  FETCH_POLLS_REQUEST,
-  FETCH_POLLS_SUCCESS,
-  FETCH_POLLS_FAILURE,
-  FETCH_POLL_REQUEST,
-  FETCH_POLL_SUCCESS,
-  FETCH_POLL_FAILURE,
-  PollActions,
-  PollState
-} from 'modules/poll/types'
-import { FETCH_POLL_OPTIONS_SUCCESS, OptionActions } from 'modules/option/types'
-import {
-  FETCH_POLL_VOTES_SUCCESS,
-  CREATE_VOTE_SUCCESS,
-  VoteActions
-} from 'modules/vote/types'
+import { loadingReducer, LoadingState } from '@dapps/modules/loading/reducer'
+import { ModelById } from '@dapps/lib/types'
 import { buildPoll } from 'modules/poll/utils'
 import { getBalanceInPoll } from 'modules/wallet/utils'
+import { PollWithPointers } from 'modules/poll/types'
+import {
+  FetchPollsRequestAction,
+  FetchPollsSuccessAction,
+  FetchPollsFailureAction,
+  FetchPollRequestAction,
+  FetchPollSuccessAction,
+  FetchPollFailureAction,
+  FETCH_POLLS_REQUEST,
+  FETCH_POLL_REQUEST,
+  FETCH_POLLS_SUCCESS,
+  FETCH_POLL_SUCCESS,
+  FETCH_POLLS_FAILURE,
+  FETCH_POLL_FAILURE
+} from 'modules/poll/actions'
+import {
+  FETCH_POLL_OPTIONS_SUCCESS,
+  FetchPollOptionsSuccessAction
+} from 'modules/option/actions'
+import {
+  FETCH_POLL_VOTES_SUCCESS,
+  FetchPollVotesSuccessAction,
+  CreateVoteSuccessAction,
+  CREATE_VOTE_SUCCESS
+} from 'modules/vote/actions'
+
+export type PollState = {
+  data: ModelById<PollWithPointers>
+  loading: LoadingState
+  error: string | null
+}
 
 const INITIAL_STATE: PollState = {
   data: {},
@@ -25,9 +41,20 @@ const INITIAL_STATE: PollState = {
   error: null
 }
 
+export type PollReducerAction =
+  | FetchPollsRequestAction
+  | FetchPollsSuccessAction
+  | FetchPollsFailureAction
+  | FetchPollRequestAction
+  | FetchPollSuccessAction
+  | FetchPollFailureAction
+  | FetchPollVotesSuccessAction
+  | FetchPollOptionsSuccessAction
+  | CreateVoteSuccessAction
+
 export const pollReducer: Reducer<PollState> = (
   state = INITIAL_STATE,
-  action: PollActions | OptionActions | VoteActions
+  action: PollReducerAction
 ): PollState => {
   switch (action.type) {
     case FETCH_POLLS_REQUEST:

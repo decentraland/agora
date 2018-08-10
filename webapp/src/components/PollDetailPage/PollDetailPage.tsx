@@ -109,7 +109,7 @@ export default class PollDetailPage extends React.PureComponent<
       .map(result => ({
         ...result,
         percentage: +(totalVotes > 0
-          ? result.votes / totalVotes * 100
+          ? (result.votes / totalVotes) * 100
           : 0
         ).toFixed(1)
       }))
@@ -248,7 +248,8 @@ export default class PollDetailPage extends React.PureComponent<
                           </Table.Cell>
                           <Table.Cell>
                             <Blockie scale={3} seed={vote.account_address}>
-                              &nbsp;<Address value={vote.account_address} />
+                              &nbsp;
+                              <Address value={vote.account_address} />
                             </Blockie>
                           </Table.Cell>
                           <Table.Cell>

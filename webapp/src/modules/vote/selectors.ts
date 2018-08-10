@@ -1,5 +1,5 @@
 import { RootState } from 'types'
-import { VoteState } from 'modules/vote/types'
+import { VoteState } from 'modules/vote/reducer'
 
 export const getState: (state: RootState) => VoteState = state => state.vote
 

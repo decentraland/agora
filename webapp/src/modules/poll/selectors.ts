@@ -1,14 +1,15 @@
 import { createSelector } from 'reselect'
 import { RootState } from 'types'
 import { utils } from 'decentraland-commons'
-import { PollState, PollWithAssociations, Poll } from 'modules/poll/types'
+import { PollWithAssociations, Poll } from 'modules/poll/types'
 import { getData as getOptions } from 'modules/option/selectors'
 import { getData as getTokens } from 'modules/token/selectors'
 import { getData as getVotes } from 'modules/vote/selectors'
-import { OptionState } from 'modules/option/types'
-import { VoteState } from 'modules/vote/types'
-import { TokenState } from 'modules/token/types'
 import { ModelById } from '@dapps/lib/types'
+import { PollState } from 'modules/poll/reducer'
+import { OptionState } from 'modules/option/reducer'
+import { VoteState } from 'modules/vote/reducer'
+import { TokenState } from 'modules/token/reducer'
 
 export const getState: (state: RootState) => PollState = state => state.poll
 

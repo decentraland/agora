@@ -1,10 +1,15 @@
 import { AnyAction } from 'redux'
 import {
   walletReducer as baseWallerReducer,
-  INITIAL_STATE as BASE_INITIAL_STATE
+  INITIAL_STATE as BASE_INITIAL_STATE,
+  WalletState as BaseWalletState,
+  WalletReducerAction as BaseWalletReducerAction
 } from '@dapps/modules/wallet/reducer'
-import { WalletActions } from '@dapps/modules/wallet/types'
-import { WalletState } from './types'
+import { Wallet } from './types'
+
+export interface WalletState extends BaseWalletState {
+  data: Partial<Wallet>
+}
 
 const INITIAL_STATE: WalletState = {
   ...BASE_INITIAL_STATE
@@ -13,6 +18,6 @@ const INITIAL_STATE: WalletState = {
 export function walletReducer(state = INITIAL_STATE, action: AnyAction) {
   switch (action.type) {
     default:
-      return baseWallerReducer(state, action as WalletActions)
+      return baseWallerReducer(state, action as BaseWalletReducerAction)
   }
 }
