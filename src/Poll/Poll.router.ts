@@ -5,6 +5,7 @@ import * as express from 'express'
 import { Router, blacklist } from '../lib'
 import { Poll } from './Poll.model'
 import { PollAttributes } from './Poll.types'
+import { PollRequestFilters } from './PollRequestFilters'
 
 export class PollRouter extends Router {
   mount() {
@@ -20,10 +21,11 @@ export class PollRouter extends Router {
     this.app.get('/polls/:id', server.handleRequest(this.getPoll))
   }
 
-  async getPolls(): Promise<PollAttributes[]> {
-    // @nico we might need to measure the perf hit of returning everything here
-    const polls = await Poll.findActiveWithAssociations()
-    return utils.mapOmit(polls, blacklist.poll)
+  async getPolls(
+    req: express.Request
+  ): Promise<{ polls: PollAttributes[]; total: number }> {
+    const filters = new PollRequestFilters(req)
+    return Poll.filter(filters)
   }
 
   async getPoll(req: express.Request) {

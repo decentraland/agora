@@ -1,6 +1,7 @@
 export const locations = {
   root: () => '/',
-  polls: () => '/',
+  polls: (activePage: number = 1, expiredPage: number = 1) =>
+    `/?active=${activePage}&expired=${expiredPage}`,
 
   poll: () => '/polls/:id',
   pollDetail: (id: string) => `/polls/${id}`,

@@ -3,6 +3,13 @@ import { Token } from 'modules/token/types'
 import { Vote } from 'modules/vote/types'
 import { Overwrite } from '@dapps/lib/types'
 
+export interface PollsRequestFilters {
+  limit?: number
+  offset?: number
+  active?: boolean
+  expired?: boolean
+}
+
 export interface Poll {
   id: string
   title: string
@@ -29,3 +36,8 @@ export interface PollResponse
       PollWithAssociations,
       { balance: string; closes_at: string }
     > {}
+
+export interface PollsResponse {
+  polls: PollResponse[]
+  total: number
+}

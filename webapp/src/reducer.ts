@@ -10,6 +10,7 @@ import { translationReducer as translation } from '@dapps/modules/translation/re
 import { storageReducer as storage } from '@dapps/modules/storage/reducer'
 import { voteReducer as vote } from 'modules/vote/reducer'
 import { walletReducer as wallet } from 'modules/wallet/reducer'
+import { uiReducer as ui } from 'modules/ui/reducer'
 
 // TODO: Consider spliting individual reducers into { data, loading, error }
 export const rootReducer = combineReducers<RootState>({
@@ -21,5 +22,6 @@ export const rootReducer = combineReducers<RootState>({
   router,
   storage,
   vote,
-  wallet
+  wallet,
+  ui
 })

@@ -3,8 +3,19 @@ import { Token } from '../Token'
 import { Option } from '../Option'
 import { Vote } from '../Vote'
 import { ModelQueries } from '../lib'
+import { DEFAULT_ACTIVE, DEFAULT_EXPIRED } from './PollRequestFilters'
 
 export const PollQueries = Object.freeze({
+  whereActiveOrExpired(
+    active: boolean = DEFAULT_ACTIVE,
+    expired: boolean = DEFAULT_EXPIRED
+  ) {
+    return active
+      ? SQL`WHERE closes_at > extract(epoch from now()) * 1000`
+      : expired
+        ? SQL`WHERE closes_at <= extract(epoch from now()) * 1000`
+        : SQL``
+  },
   findWithAssociations: (whereStatement: SQLStatement = SQL``): SQLStatement =>
     SQL`
       SELECT p.*,

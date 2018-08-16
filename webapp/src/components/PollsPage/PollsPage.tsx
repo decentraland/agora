@@ -1,136 +1,125 @@
 import * as React from 'react'
-import { Link } from 'react-router-dom'
-import { Header, Loader, Table } from 'decentraland-ui'
-import { locations } from 'locations'
-import { PollsPageProps } from 'components/PollsPage/types'
-import { PollWithAssociations } from 'modules/poll/types'
-import { Wallet } from 'modules/wallet/types'
+import * as queryString from 'query-string'
+import { Loader } from 'decentraland-ui'
+import { Props } from './PollsPage.types'
 import { t } from '@dapps/modules/translation/utils'
-import { formatNumber } from '@dapps/lib/utils'
-import { isDistrictToken } from 'modules/token/district_token/utils'
-import { getBalanceInPoll } from 'modules/wallet/utils'
-import './PollsPage.css'
-import Token from 'components/Token'
+import PollsTable from './PollsTable'
 
-const sortByContributions = (wallet: Wallet) => (
-  pollA: PollWithAssociations,
-  pollB: PollWithAssociations
-) => {
-  const contribA = getBalanceInPoll(wallet, pollA) || 0
-  const contribB = getBalanceInPoll(wallet, pollB) || 0
-  if (contribA > contribB) {
-    return -1
-  } else if (contribB > contribA) {
-    return 1
-  }
-  return pollA.title > pollB.title ? 1 : -1
-}
+export default class PollsPage extends React.PureComponent<Props> {
+  activeRows: number = 10
+  expiredRows: number = 10
+  shouldFetchActivePolls: boolean = false
+  shouldFetchExpiredPolls: boolean = false
 
-export default class PollsPage extends React.PureComponent<PollsPageProps> {
   componentWillMount() {
-    this.props.onFetchPolls()
+    this.fetchActivePolls()
+    this.fetchExpiredPolls()
+  }
+
+  componentWillReceiveProps({ location: { search } }: Props) {
+    const query = queryString.parse(search)
+    const { activePage, expiredPage } = this.getPagination()
+    const newActivePage = +query.active
+    const newExpiredPage = +query.expired
+    if (!isNaN(newActivePage) && newActivePage !== activePage) {
+      this.shouldFetchActivePolls = true
+    }
+    if (!isNaN(newExpiredPage) && newExpiredPage !== expiredPage) {
+      this.shouldFetchExpiredPolls = true
+    }
+  }
+
+  componentDidUpdate() {
+    if (this.shouldFetchActivePolls) {
+      this.fetchActivePolls()
+      this.shouldFetchActivePolls = false
+    }
+    if (this.shouldFetchExpiredPolls) {
+      this.fetchExpiredPolls()
+      this.shouldFetchExpiredPolls = false
+    }
+  }
+
+  fetchActivePolls() {
+    const { onFetchPolls } = this.props
+    const { activePage } = this.getPagination()
+    onFetchPolls({
+      limit: this.activeRows,
+      offset: (activePage - 1) * this.activeRows,
+      active: true,
+      expired: false
+    })
+  }
+
+  fetchExpiredPolls() {
+    const { onFetchPolls } = this.props
+    const { expiredPage } = this.getPagination()
+    onFetchPolls({
+      limit: this.expiredRows,
+      offset: (expiredPage - 1) * this.expiredRows,
+      active: false,
+      expired: true
+    })
+  }
+
+  getQueryParams() {
+    const {
+      location: { search }
+    } = this.props
+    return queryString.parse(search)
+  }
+
+  getPagination() {
+    const queryParams = this.getQueryParams()
+    return {
+      activePage: +queryParams.active || 1,
+      expiredPage: +queryParams.expired || 1
+    }
+  }
+
+  handleActivePageChange = (page: number) => {
+    const { onPageChange } = this.props
+    const { expiredPage } = this.getPagination()
+    onPageChange(page, expiredPage)
+  }
+
+  handleExpiredPageChange = (page: number) => {
+    const { onPageChange } = this.props
+    const { activePage } = this.getPagination()
+    onPageChange(activePage, page)
   }
 
   render() {
-    const { polls, wallet, isLoading } = this.props
-
-    const districtPolls = Object.values(polls)
-      .filter(poll => isDistrictToken(poll.token))
-      .sort(sortByContributions(wallet))
-    const dclPolls = Object.values(polls).filter(
-      poll => !isDistrictToken(poll.token)
-    )
-
+    const {
+      activePolls,
+      expiredPolls,
+      isLoading,
+      totalActive,
+      totalExpired
+    } = this.props
+    const { activePage, expiredPage } = this.getPagination()
     return (
       <div className="PollsPage">
-        {isLoading ? (
+        {isLoading && activePolls.length === 0 && expiredPolls.length == 0 ? (
           <Loader active size="massive" />
         ) : (
           <>
-            {districtPolls.length > 0 ? (
-              <>
-                <Header size="large">
-                  {t('polls_page.district_plan_acceptance')}
-                </Header>
-                <Table basic>
-                  <Table.Header>
-                    <Table.Row>
-                      <Table.HeaderCell>
-                        {t('polls_page.table.title')}
-                      </Table.HeaderCell>
-                      <Table.HeaderCell>
-                        {t('global.your_contributions')}
-                      </Table.HeaderCell>
-                      <Table.HeaderCell>
-                        {t('polls_page.table.total_voted')}
-                      </Table.HeaderCell>
-                      <Table.HeaderCell>
-                        {t('polls_page.table.votes')}
-                      </Table.HeaderCell>
-                    </Table.Row>
-                  </Table.Header>
-
-                  <Table.Body>
-                    {districtPolls.map((poll, index) => (
-                      <Table.Row key={index}>
-                        <Table.Cell>
-                          <Link to={locations.pollDetail(poll.id)}>
-                            {poll.title}
-                          </Link>
-                        </Table.Cell>
-                        <Table.Cell>
-                          {getBalanceInPoll(wallet, poll) || 0}
-                        </Table.Cell>
-                        <Table.Cell>{formatNumber(poll.balance)}</Table.Cell>
-                        <Table.Cell>{poll.votes.length}</Table.Cell>
-                      </Table.Row>
-                    ))}
-                  </Table.Body>
-                </Table>
-              </>
-            ) : null}
-            {dclPolls.length > 0 ? (
-              <>
-                <Header size="large">
-                  {t('polls_page.decentraland_polls')}
-                </Header>
-                <Table basic>
-                  <Table.Header>
-                    <Table.Row>
-                      <Table.HeaderCell>
-                        {t('polls_page.table.title')}
-                      </Table.HeaderCell>
-                      <Table.HeaderCell>
-                        {t('polls_page.table.balance')}
-                      </Table.HeaderCell>
-                      <Table.HeaderCell>
-                        {t('polls_page.table.votes')}
-                      </Table.HeaderCell>
-                    </Table.Row>
-                  </Table.Header>
-
-                  <Table.Body>
-                    {dclPolls.map((poll, index) => (
-                      <Table.Row key={index}>
-                        <Table.Cell>
-                          <Link to={locations.pollDetail(poll.id)}>
-                            {poll.title}
-                          </Link>
-                        </Table.Cell>
-                        <Table.Cell>
-                          <Token
-                            token={poll.token}
-                            amount={poll.balance}
-                            cell
-                          />
-                        </Table.Cell>
-                        <Table.Cell>{poll.votes.length}</Table.Cell>
-                      </Table.Row>
-                    ))}
-                  </Table.Body>
-                </Table>
-              </>
-            ) : null}
+            <PollsTable
+              title={t('polls_page.active_polls')}
+              polls={activePolls}
+              currentPage={activePage}
+              rowsPerPage={this.activeRows}
+              totalRows={totalActive}
+              onPageChange={this.handleActivePageChange}
+            />
+            <PollsTable
+              title={t('polls_page.expired_polls')}
+              polls={expiredPolls}
+              currentPage={expiredPage}
+              rowsPerPage={this.expiredRows}
+              totalRows={totalExpired}
+              onPageChange={this.handleExpiredPageChange}
+            />
           </>
         )}
       </div>

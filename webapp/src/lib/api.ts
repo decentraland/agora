@@ -1,5 +1,6 @@
 import { env } from 'decentraland-commons'
 import { BaseAPI } from '@dapps/lib/api'
+import { PollsRequestFilters } from 'modules/poll/types'
 
 const URL = env.get('REACT_APP_API_URL', '')
 
@@ -8,8 +9,8 @@ export class API extends BaseAPI {
     return this.request('get', '/tokens', {})
   }
 
-  fetchPolls() {
-    return this.request('get', '/polls', {})
+  fetchPolls(filters: PollsRequestFilters) {
+    return this.request('get', '/polls', filters)
   }
 
   fetchPoll(id: string) {

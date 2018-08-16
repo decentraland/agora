@@ -1,0 +1,13 @@
+.PollsTable {
+  margin-bottom: 56px;
+}
+
+.PollsTable .symbol {
+  padding-right: 0.3em;
+}
+
+.PollsTable .pagination-wrapper {
+  margin: 24px;
+  display: flex;
+  justify-content: center;
+}
