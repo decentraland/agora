@@ -100,7 +100,7 @@ export default class PollsPage extends React.PureComponent<Props> {
     const { activePage, expiredPage } = this.getPagination()
     return (
       <div className="PollsPage">
-        {isLoading && activePolls.length === 0 && expiredPolls.length == 0 ? (
+        {isLoading && activePolls.length === 0 && expiredPolls.length === 0 ? (
           <Loader active size="massive" />
         ) : (
           <>
