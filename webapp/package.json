@@ -5,6 +5,7 @@
   "dependencies": {
     "@types/axios": "^0.14.0",
     "@types/node": "^10.1.2",
+    "@types/query-string": "^6.1.0",
     "@types/react": "^16.4.1",
     "@types/react-dom": "^16.0.5",
     "@types/react-redux": "^6.0.0",
@@ -74,7 +75,6 @@
     "test": "node scripts/test.js --env=jsdom"
   },
   "devDependencies": {
-    "@types/query-string": "^6.1.0",
     "dcl-tslint-config-standard": "^1.0.1",
     "prettier": "^1.10.2",
     "source-map-explorer": "^1.5.0",
