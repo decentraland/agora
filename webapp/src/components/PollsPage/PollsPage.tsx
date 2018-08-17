@@ -16,7 +16,8 @@ export default class PollsPage extends React.PureComponent<Props> {
     this.fetchExpiredPolls()
   }
 
-  componentWillReceiveProps({ location: { search } }: Props) {
+  componentWillReceiveProps({ location }: Props) {
+    const { search } = location
     const query = queryString.parse(search)
     const { activePage, expiredPage } = this.getPagination()
     const newActivePage = +query.active
@@ -63,9 +64,8 @@ export default class PollsPage extends React.PureComponent<Props> {
   }
 
   getQueryParams() {
-    const {
-      location: { search }
-    } = this.props
+    const { location } = this.props
+    const { search } = location
     return queryString.parse(search)
   }
 
