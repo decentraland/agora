@@ -7,6 +7,20 @@ export const DEFAULT_OFFSET = 0
 export const DEFAULT_ACTIVE = false
 export const DEFAULT_EXPIRED = false
 
+export const DEFAULT_FILTERS: FilterOptions = {
+  limit: DEFAULT_LIMIT,
+  offset: DEFAULT_OFFSET,
+  active: DEFAULT_ACTIVE,
+  expired: DEFAULT_EXPIRED
+}
+
+export type FilterOptions = {
+  limit?: number
+  offset?: number
+  active?: boolean
+  expired?: boolean
+}
+
 export class PollRequestFilters {
   req: Request
 

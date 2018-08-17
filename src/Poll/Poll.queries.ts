@@ -7,8 +7,10 @@ import { DEFAULT_ACTIVE, DEFAULT_EXPIRED } from './PollRequestFilters'
 
 export const PollQueries = Object.freeze({
   whereActiveOrExpired(
-    active: boolean = DEFAULT_ACTIVE,
-    expired: boolean = DEFAULT_EXPIRED
+    { active, expired }: { active?: boolean; expired?: boolean } = {
+      active: DEFAULT_ACTIVE,
+      expired: DEFAULT_EXPIRED
+    }
   ) {
     return active
       ? SQL`WHERE closes_at > extract(epoch from now()) * 1000`
