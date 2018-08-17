@@ -20,8 +20,8 @@
     "voting_width": "Votando con"
   },
   "polls_page": {
-    "decentraland_polls": "Encuestas de Decentraland",
-    "district_plan_acceptance": "Planes de Distritos",
+    "active_polls": "Encuestas Activas",
+    "expired_polls": "Encuestas Cerradas",
     "table": {
       "title": "Título",
       "balance": "Balance",

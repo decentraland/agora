@@ -8,6 +8,7 @@ import { OptionState } from 'modules/option/reducer'
 import { PollState } from 'modules/poll/reducer'
 import { TokenState } from 'modules/token/reducer'
 import { VoteState } from 'modules/vote/reducer'
+import { UIState } from 'modules/ui/reducer'
 
 export type RootState = {
   accountBalance: AccountBalanceState
@@ -19,6 +20,7 @@ export type RootState = {
   translation: TranslationState
   vote: VoteState
   wallet: WalletState
+  ui: UIState
 }
 
 export type RootStore = Store<RootState>

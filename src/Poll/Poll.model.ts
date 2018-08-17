@@ -3,6 +3,15 @@ import { PollAttributes } from './Poll.types'
 import { PollQueries } from './Poll.queries'
 import { VoteQueries } from '../Vote'
 import { DistrictToken } from '../Token/DistrictToken'
+import {
+  DEFAULT_ACTIVE,
+  DEFAULT_EXPIRED,
+  PollRequestFilters,
+  FilterOptions,
+  DEFAULT_FILTERS
+} from './PollRequestFilters'
+import { blacklist } from '../lib'
+import { utils } from 'decentraland-commons'
 
 // If the Poll model starts to receive external inserts, we should lowercase the submitter
 export class Poll extends Model<PollAttributes> {
@@ -20,6 +29,52 @@ export class Poll extends Model<PollAttributes> {
         SQL`WHERE closes_at > extract(epoch from now()) * 1000`
       )}
       ORDER BY p.created_at`)
+  }
+
+  static async findWithAssociationsWithFilters({
+    limit,
+    offset,
+    active,
+    expired
+  }: FilterOptions = DEFAULT_FILTERS) {
+    return this.query<PollAttributes>(SQL`
+      ${PollQueries.findWithAssociations(
+        PollQueries.whereActiveOrExpired({ active, expired })
+      )}
+      ORDER BY ${
+        expired
+          ? SQL`p.closes_at DESC, p.created_at DESC`
+          : SQL`p.created_at DESC, p.closes_at DESC`
+      }
+      LIMIT ${limit}
+      OFFSET ${offset}`)
+  }
+
+  static async countWithFilters(
+    { active, expired }: { active?: boolean; expired?: boolean } = {
+      active: DEFAULT_ACTIVE,
+      expired: DEFAULT_EXPIRED
+    }
+  ) {
+    const counts = await this.query<{ count: string }>(SQL`
+      SELECT COUNT(*) FROM (
+        ${PollQueries.findWithAssociations(
+          PollQueries.whereActiveOrExpired({ active, expired })
+        )}
+      ) AS total`)
+    return parseInt(counts[0].count, 10)
+  }
+
+  static async filter(filters: PollRequestFilters) {
+    const { limit, offset, active, expired } = filters.sanitize()
+    const [polls, total] = await Promise.all([
+      Poll.findWithAssociationsWithFilters({ limit, offset, active, expired }),
+      Poll.countWithFilters({ active, expired })
+    ])
+    return {
+      polls: utils.mapOmit<PollAttributes>(polls, blacklist.poll),
+      total
+    }
   }
 
   static async findByIdWithAssociations(id: string) {

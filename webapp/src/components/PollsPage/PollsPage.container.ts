@@ -1,31 +1,41 @@
 import { connect } from 'react-redux'
-import { RootState, RootDispatch } from 'types'
-import { Wallet } from 'modules/wallet/types'
-import {
-  fetchPollsRequest,
-  FetchPollsRequestAction
-} from 'modules/poll/actions'
-import { getPolls, isLoading } from 'modules/poll/selectors'
-import { getWallet } from 'modules/wallet/selectors'
-import { PollsPageProps } from 'components/PollsPage/types'
-
+import { RootState } from 'types'
+import { fetchPollsRequest } from 'modules/poll/actions'
+import { isLoading } from 'modules/poll/selectors'
 import PollsPage from './PollsPage'
+import { MapStateProps, MapDispatchProps } from './PollsPage.types'
+import { AnyAction, Dispatch } from 'redux'
+import {
+  getActivePolls,
+  getState as getActivePollsTable
+} from 'modules/ui/activePolls/selectors'
+import {
+  getExpiredPolls,
+  getState as getExpiredPollsTable
+} from 'modules/ui/expiredPolls/selectors'
+import { withRouter } from 'react-router'
+import { navigateTo } from 'decentraland-dapps/dist/modules/location/actions'
+import { locations } from 'locations'
+import { PollsRequestFilters } from 'modules/poll/types'
 
-const mapState = (
-  state: RootState,
-  ownProps: PollsPageProps
-): PollsPageProps => ({
-  ...ownProps,
+const mapState = (state: RootState): MapStateProps => ({
   isLoading: isLoading(state),
-  polls: getPolls(state),
-  wallet: getWallet(state) as Wallet
+  totalActive: getActivePollsTable(state).total,
+  totalExpired: getExpiredPollsTable(state).total,
+  activePolls: getActivePolls(state),
+  expiredPolls: getExpiredPolls(state)
 })
 
-const mapDispatch = (dispatch: RootDispatch<FetchPollsRequestAction>) => ({
-  onFetchPolls: () => dispatch(fetchPollsRequest())
+const mapDispatch = (dispatch: Dispatch<AnyAction>): MapDispatchProps => ({
+  onFetchPolls: (pagination: PollsRequestFilters) =>
+    dispatch(fetchPollsRequest(pagination)),
+  onPageChange: (activePage, expiredPage) =>
+    dispatch(navigateTo(locations.polls(activePage, expiredPage)))
 })
 
-export default connect<PollsPageProps>(
-  mapState,
-  mapDispatch
-)(PollsPage)
+export default withRouter(
+  connect(
+    mapState,
+    mapDispatch
+  )(PollsPage)
+)

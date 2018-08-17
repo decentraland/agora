@@ -1,5 +1,9 @@
 import { action } from 'typesafe-actions'
-import { Poll, PollWithAssociations } from 'modules/poll/types'
+import {
+  Poll,
+  PollWithAssociations,
+  PollsRequestFilters
+} from 'modules/poll/types'
 import { Token } from 'modules/token/types'
 import { Option } from 'modules/option/types'
 import { Vote } from 'modules/vote/types'
@@ -10,9 +14,23 @@ export const FETCH_POLLS_REQUEST = '[Request] Fetch Polls'
 export const FETCH_POLLS_SUCCESS = '[Success] Fetch Polls'
 export const FETCH_POLLS_FAILURE = '[Failure] Fetch Polls'
 
-export const fetchPollsRequest = () => action(FETCH_POLLS_REQUEST, {})
-export const fetchPollsSuccess = (polls: PollWithAssociations[]) =>
-  action(FETCH_POLLS_SUCCESS, { polls })
+export const fetchPollsRequest = ({
+  limit,
+  offset,
+  active,
+  expired
+}: PollsRequestFilters = {}) =>
+  action(FETCH_POLLS_REQUEST, {
+    limit,
+    offset,
+    active,
+    expired
+  })
+export const fetchPollsSuccess = (
+  polls: PollWithAssociations[],
+  total: number,
+  filters: PollsRequestFilters
+) => action(FETCH_POLLS_SUCCESS, { polls, total, filters })
 export const fetchPollsFailure = (error: string) =>
   action(FETCH_POLLS_FAILURE, { error })
 
