@@ -4,12 +4,10 @@ import { Link } from 'react-router-dom'
 import { locations } from 'locations'
 import { Button } from 'decentraland-ui'
 import { t } from '@dapps/modules/translation/utils'
-import { CastYourVoteProps } from 'components/PollDetailPage/CastYourVote/types'
+import { Props } from './CastYourVote.types'
 import './CastYourVote.css'
 
-export default class CastYourVote extends React.PureComponent<
-  CastYourVoteProps
-> {
+export default class CastYourVote extends React.PureComponent<Props> {
   render() {
     const { poll, isConnected } = this.props
     return isFinished(poll) ? null : (

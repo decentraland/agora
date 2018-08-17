@@ -1,8 +1,8 @@
 import * as React from 'react'
 import './OptionBar.css'
-import { OptionBarProps } from './types'
+import { Props } from './OptionBar.types'
 
-export default class OptionBar extends React.PureComponent<OptionBarProps> {
+export default class OptionBar extends React.PureComponent<Props> {
   render() {
     const { children, percentage, position } = this.props
     let classes = `OptionBar color-${position % 5}`

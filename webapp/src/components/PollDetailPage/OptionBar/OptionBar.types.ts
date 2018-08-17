@@ -1,4 +1,4 @@
-export type OptionBarProps = {
+export type Props = {
   position: number
   percentage: number
 }

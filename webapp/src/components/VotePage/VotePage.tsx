@@ -4,20 +4,16 @@ import { Loader, Header, Radio, Button, Stats } from 'decentraland-ui'
 import * as uuidv4 from 'uuid/v4'
 import { locations } from 'locations'
 import * as ReactMarkdown from 'react-markdown'
-import { VotePageProps, VotePageState } from 'components/VotePage/types'
+import { t } from '@dapps/modules/translation/utils'
 import { NewVote } from 'modules/vote/types'
 import { getBalanceInPoll } from 'modules/wallet/utils'
-import { t } from '@dapps/modules/translation/utils'
-
-import './VotePage.css'
 import { isDistrictToken } from 'modules/token/district_token/utils'
 import Token from 'components/Token'
+import { Props, State } from './VotePage.types'
+import './VotePage.css'
 
-export default class VotePage extends React.PureComponent<
-  VotePageProps,
-  VotePageState
-> {
-  constructor(props: VotePageProps) {
+export default class VotePage extends React.PureComponent<Props, State> {
+  constructor(props: Props) {
     super(props)
 
     this.state = { selectedOptionId: '' }
