@@ -3,11 +3,11 @@ import { PollWithAssociations } from 'modules/poll/types'
 import { Vote } from 'modules/vote/types'
 import { Wallet } from 'modules/wallet/types'
 
-export interface URLParams {
+export type URLParams = {
   id: string
 }
 
-export interface VotePageProps {
+export type Props = {
   match: match<URLParams>
   pollId: string
   poll: PollWithAssociations | null
@@ -20,6 +20,16 @@ export interface VotePageProps {
   onNavigate: Function
 }
 
-export interface VotePageState {
+export type State = {
   selectedOptionId: string
 }
+
+export type MapStateProps = Pick<
+  Props,
+  'pollId' | 'poll' | 'wallet' | 'currentVote' | 'isLoading' | 'isConnected'
+>
+
+export type MapDispatchProps = Pick<
+  Props,
+  'onFetchPoll' | 'onCreateVote' | 'onNavigate'
+>

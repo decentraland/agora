@@ -11,12 +11,12 @@ import {
 } from 'modules/vote/actions'
 import { Wallet } from 'modules/wallet/types'
 import { NewVote } from 'modules/vote/types'
-import { VotePageProps } from 'components/VotePage/types'
 import { findWalletVote } from 'modules/vote/utils'
+import { Props, MapStateProps, MapDispatchProps } from './VotePage.types'
 
 import VotePage from './VotePage'
 
-const mapState = (state: RootState, ownProps: VotePageProps): VotePageProps => {
+const mapState = (state: RootState, ownProps: Props): MapStateProps => {
   const pollId = ownProps.match.params.id
   const isLoading = isPollLoading(state)
   const wallet = getWallet(state) as Wallet
@@ -26,7 +26,6 @@ const mapState = (state: RootState, ownProps: VotePageProps): VotePageProps => {
   const currentVote = poll ? findWalletVote(wallet, poll.votes) : null
 
   return {
-    ...ownProps,
     pollId,
     poll,
     wallet,
@@ -40,13 +39,13 @@ const mapDispatch = (
   dispatch: RootDispatch<
     FetchPollRequestAction | CreateVoteRequestAction | NavigateToAction
   >
-) => ({
+): MapDispatchProps => ({
   onFetchPoll: (id: string) => dispatch(fetchPollRequest(id)),
   onCreateVote: (newVote: NewVote) => dispatch(createVoteRequest(newVote)),
   onNavigate: (url: string) => dispatch(navigateTo(url))
 })
 
-export default connect<VotePageProps>(
+export default connect(
   mapState,
   mapDispatch
 )(VotePage)

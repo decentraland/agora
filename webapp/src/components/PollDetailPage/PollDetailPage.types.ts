@@ -5,11 +5,23 @@ import { Vote } from 'modules/vote/types'
 import { Option } from 'modules/option/types'
 import { Token } from 'modules/token/types'
 
-export interface URLParams {
+export type URLParams = {
   id: string
 }
 
-export interface PollDetailPageProps {
+export type Tally = {
+  [optionId: string]: Result
+}
+
+export type Result = {
+  votes: number
+  option: Option
+  winner: boolean
+  percentage: number
+  token?: Token
+}
+
+export type Props = {
   match: match<URLParams>
   pollId: string
   poll: PollWithAssociations | null
@@ -22,18 +34,19 @@ export interface PollDetailPageProps {
   onNavigate: Function
 }
 
-export interface Tally {
-  [optionId: string]: Result
-}
-
-export interface Result {
-  votes: number
-  option: Option
-  winner: boolean
-  percentage: number
-  token?: Token
-}
-
-export interface PollDetailPageState {
+export type State = {
   activePage: number
 }
+
+export type MapStateProps = Pick<
+  Props,
+  | 'pollId'
+  | 'poll'
+  | 'wallet'
+  | 'currentVote'
+  | 'isLoading'
+  | 'hasError'
+  | 'isConnected'
+>
+
+export type MapDispatchProps = Pick<Props, 'onFetchPoll' | 'onNavigate'>

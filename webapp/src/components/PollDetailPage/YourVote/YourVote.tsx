@@ -1,11 +1,11 @@
 import * as React from 'react'
-import { YourVoteProps } from 'components/PollDetailPage/YourVote/types'
 import { getVoteOptionValue } from 'modules/option/utils'
 import { distanceInWordsToNow } from '@dapps/lib/utils'
 import { t } from '@dapps/modules/translation/utils'
+import { Props } from './YourVote.types'
 import './YourVote.css'
 
-export default class YourVote extends React.PureComponent<YourVoteProps> {
+export default class YourVote extends React.PureComponent<Props> {
   render() {
     const { vote, poll } = this.props
     return vote ? (

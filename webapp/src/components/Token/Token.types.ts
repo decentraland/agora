@@ -1,6 +1,6 @@
 import { Token } from 'modules/token/types'
 
-export type TokenProps = {
+export type Props = {
   token: Token
   amount?: number
   cell?: boolean

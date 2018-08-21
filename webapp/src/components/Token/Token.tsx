@@ -1,11 +1,11 @@
 import * as React from 'react'
 import { formatNumber } from '@dapps/lib/utils'
 import { Mana, Header, ManaProps } from 'decentraland-ui'
-import { TokenProps } from './types'
+import { Props } from './Token.types'
 import './Token.css'
 import { isDistrictToken } from 'modules/token/district_token/utils'
 
-export default class Token extends React.PureComponent<TokenProps> {
+export default class Token extends React.PureComponent<Props> {
   render() {
     const { token, amount, cell } = this.props
     const text =

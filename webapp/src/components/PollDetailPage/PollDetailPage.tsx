@@ -12,42 +12,34 @@ import {
   Responsive,
   Pagination
 } from 'decentraland-ui'
-import './PollDetailPage.css'
-import PollProgress from './PollProgress'
-import OptionBar from './OptionBar'
-import OptionOrb from './OptionOrb'
-import YourVote from './YourVote'
-import {
-  PollDetailPageProps,
-  PollDetailPageState,
-  Tally,
-  Result
-} from 'components/PollDetailPage/types'
 import {
   distanceInWordsToNow,
   formatDate,
   formatDateTime
 } from '@dapps/lib/utils'
+import { t } from '@dapps/modules/translation/utils'
 import { getVoteOptionValue } from 'modules/option/utils'
 import { isFinished } from 'modules/poll/utils'
 import { getBalanceInPoll } from 'modules/wallet/utils'
 import { isDistrictToken } from 'modules/token/district_token/utils'
-import { t } from '@dapps/modules/translation/utils'
-import CastYourVote from './CastYourVote'
 import Token from 'components/Token'
+import PollProgress from './PollProgress'
+import OptionBar from './OptionBar'
+import OptionOrb from './OptionOrb'
+import YourVote from './YourVote'
+import CastYourVote from './CastYourVote'
+import { Props, State, Tally, Result } from './PollDetailPage.types'
+import './PollDetailPage.css'
 
 const VOTES_PER_PAGE = 20
 
-export default class PollDetailPage extends React.PureComponent<
-  PollDetailPageProps,
-  PollDetailPageState
-> {
+export default class PollDetailPage extends React.PureComponent<Props, State> {
   static defaultProps = {
     poll: null
   }
   navigatingAway: boolean
 
-  constructor(props: PollDetailPageProps) {
+  constructor(props: Props) {
     super(props)
     this.navigatingAway = false
     this.state = {
@@ -60,7 +52,7 @@ export default class PollDetailPage extends React.PureComponent<
     onFetchPoll(pollId)
   }
 
-  componentWillReceiveProps(nextProps: PollDetailPageProps) {
+  componentWillReceiveProps(nextProps: Props) {
     if (nextProps.hasError && !this.navigatingAway) {
       this.props.onNavigate(locations.polls())
       this.navigatingAway = true
