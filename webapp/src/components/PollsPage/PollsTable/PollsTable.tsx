@@ -39,12 +39,26 @@ export default class PollsTable extends React.PureComponent<Props> {
             {polls.map((poll, index) => (
               <Table.Row key={index}>
                 <Table.Cell>
+                  <span className="mobile-header">
+                    {t('polls_page.table.title')}
+                    :&nbsp;
+                  </span>
                   <Link to={locations.pollDetail(poll.id)}>{poll.title}</Link>
                 </Table.Cell>
                 <Table.Cell>
+                  <span className="mobile-header">
+                    {t('polls_page.table.total_voted')}
+                    :&nbsp;
+                  </span>
                   <Token token={poll.token} amount={poll.balance} cell />
                 </Table.Cell>
-                <Table.Cell>{poll.votes.length}</Table.Cell>
+                <Table.Cell>
+                  <span className="mobile-header">
+                    {t('polls_page.table.votes')}
+                    :&nbsp;
+                  </span>
+                  {poll.votes.length}
+                </Table.Cell>
               </Table.Row>
             ))}
           </Table.Body>

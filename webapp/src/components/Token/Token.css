@@ -3,4 +3,5 @@
 .Token.cell.ui.header.small {
   font-size: 14px;
   font-weight: normal;
+  display: inline;
 }
