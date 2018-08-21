@@ -11,3 +11,24 @@
   display: flex;
   justify-content: center;
 }
+
+.PollsTable .mobile-header {
+  display: none;
+  font-weight: bold;
+}
+
+@media (max-width: 768px) {
+  .PollsTable .ui.basic.table thead tr {
+    display: none !important;
+  }
+
+  .PollsTable .mobile-header {
+    display: inline;
+  }
+
+  .PollsTable .ui.pagination.menu .item {
+    margin-left: 8px;
+    min-width: 15px;
+    padding: 12px;
+  }
+}

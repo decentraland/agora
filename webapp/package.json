@@ -75,7 +75,7 @@
     "test": "node scripts/test.js --env=jsdom"
   },
   "devDependencies": {
-    "dcl-tslint-config-standard": "^1.0.1",
+    "dcl-tslint-config-standard": "^1.1.0",
     "prettier": "^1.10.2",
     "source-map-explorer": "^1.5.0",
     "tslint-language-service": "^0.9.9",
