@@ -18,7 +18,9 @@ export function activePollsReducer(
 ) {
   switch (action.type) {
     case FETCH_POLLS_SUCCESS: {
-      return action.payload.filters.active ? tableReducer(state, action) : state
+      return action.payload.filters.status === 'active'
+        ? tableReducer(state, action)
+        : state
     }
     default: {
       return state

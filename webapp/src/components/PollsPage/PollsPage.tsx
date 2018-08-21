@@ -47,8 +47,7 @@ export default class PollsPage extends React.PureComponent<Props> {
     onFetchPolls({
       limit: this.activeRows,
       offset: (activePage - 1) * this.activeRows,
-      active: true,
-      expired: false
+      status: 'active'
     })
   }
 
@@ -58,8 +57,7 @@ export default class PollsPage extends React.PureComponent<Props> {
     onFetchPolls({
       limit: this.expiredRows,
       offset: (expiredPage - 1) * this.expiredRows,
-      active: false,
-      expired: true
+      status: 'expired'
     })
   }
 
