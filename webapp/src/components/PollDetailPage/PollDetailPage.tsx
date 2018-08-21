@@ -166,7 +166,9 @@ export default class PollDetailPage extends React.PureComponent<Props, State> {
               )}
             </div>
 
-            <Responsive minWidth={Responsive.onlyTablet.minWidth}>
+            <Responsive
+              minWidth={(Responsive.onlyTablet.minWidth as number) + 1}
+            >
               <>
                 <div className="row main">
                   <div className="progress">
@@ -189,9 +191,7 @@ export default class PollDetailPage extends React.PureComponent<Props, State> {
               </>
             </Responsive>
 
-            <Responsive
-              maxWidth={(Responsive.onlyTablet.minWidth as number) - 1}
-            >
+            <Responsive maxWidth={Responsive.onlyTablet.minWidth}>
               <div className="results">
                 {currentResults.map((result, index) => (
                   <OptionBar
