@@ -1,8 +1,8 @@
 {
   "extends": [
-    "dcl-tslint-config-standard",
     "tslint-react",
-    "tslint-plugin-prettier"
+    "tslint-plugin-prettier",
+    "dcl-tslint-config-standard"
   ],
   "rules": {
     "no-commented-out-code": false,
@@ -12,8 +12,7 @@
       true,
       { "printWidth": 80, "singleQuote": true, "semi": false }
     ],
-    "quotemark": [true, "single", "jsx-double"],
-    "jsx-boolean-value": [false]
+    "quotemark": [true, "single", "jsx-double"]
   },
   "linterOptions": {
     "exclude": ["config/**/*.js", "node_modules/**/*.ts", "./**/*.js"]
