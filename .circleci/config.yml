@@ -15,7 +15,7 @@ jobs:
           command: sudo apt-get update && sudo apt install -y libusb-1.0-0 libusb-1.0-0-dev
       - restore_cache:
           keys:
-          - backend-dependencies-{{ checksum "package-lock.json" }}
+            - backend-dependencies-{{ checksum "package-lock.json" }}
       - run:
           name: (backend) Install packages
           command: npm install
@@ -30,7 +30,7 @@ jobs:
             CONNECTION_STRING: 'postgres://agora@localhost:5432/agora'
       - restore_cache:
           keys:
-          - frontend-dependencies-{{ checksum "webapp/package-lock.json" }}
+            - frontend-dependencies-{{ checksum "webapp/package-lock.json" }}
       - run:
           name: (frontend) Install packages
           command: cd webapp && npm install
@@ -59,8 +59,8 @@ jobs:
     steps:
       - restore_cache:
           keys:
-          - build-{{ .Branch }}-{{ .Revision }}
-      - run: 
+            - build-{{ .Branch }}-{{ .Revision }}
+      - run:
           name: Install system dependencies
           command: sudo apt-get -y -qq install python-setuptools python-dev build-essential && sudo easy_install pip && pip install awscli --upgrade --user
       - run:
@@ -97,23 +97,11 @@ workflows:
           context: agora-stg
           requires:
             - build
-  build-deploy-master:
-    jobs:
-      - build:
-          context: agora-dev
-          filters:
-            branches:
-              only: master
-      - deploy:
-          context: agora-dev
-          requires:
-            - build
   build-branch:
     jobs:
       - build:
           filters:
             branches:
               ignore:
-                - master
                 - release
                 - staging
