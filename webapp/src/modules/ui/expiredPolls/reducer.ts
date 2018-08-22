@@ -18,7 +18,7 @@ export function expiredPollsReducer(
 ) {
   switch (action.type) {
     case FETCH_POLLS_SUCCESS: {
-      return action.payload.filters.expired
+      return action.payload.filters.status === 'expired'
         ? tableReducer(state, action)
         : state
     }

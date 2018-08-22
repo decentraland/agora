@@ -1,11 +1,16 @@
 import { Request } from 'express'
-import { getNumber, getBoolean } from '../lib/extractFromReq'
+import { getNumber, getString } from '../lib/extractFromReq'
 
 export const DEFAULT_LIMIT = 20
 export const MAX_LIMIT = 100
 export const DEFAULT_OFFSET = 0
 export const DEFAULT_ACTIVE = false
 export const DEFAULT_EXPIRED = false
+
+export const FILTER_STATUS = {
+  active: 'active',
+  expired: 'expired'
+}
 
 export const DEFAULT_FILTERS: FilterOptions = {
   limit: DEFAULT_LIMIT,
@@ -29,14 +34,12 @@ export class PollRequestFilters {
   }
 
   sanitize() {
+    const status = getString(this.req, 'status', 'all')
     const filters = {
       limit: getNumber(this.req, 'limit', DEFAULT_LIMIT, 0, MAX_LIMIT),
       offset: getNumber(this.req, 'offset', DEFAULT_OFFSET, 0),
-      active: getBoolean(this.req, 'active', DEFAULT_ACTIVE),
-      expired: getBoolean(this.req, 'expired', DEFAULT_EXPIRED)
-    }
-    if (filters.active && filters.expired) {
-      throw new Error("Parameters `active` and `expired` can't both be true")
+      active: status === FILTER_STATUS.active,
+      expired: status === FILTER_STATUS.expired
     }
     return filters
   }
