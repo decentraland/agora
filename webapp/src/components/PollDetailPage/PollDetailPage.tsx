@@ -236,15 +236,29 @@ export default class PollDetailPage extends React.PureComponent<Props, State> {
                       .map((vote, index) => (
                         <Table.Row key={vote.id + index}>
                           <Table.Cell title={formatDateTime(vote.timestamp)}>
+                            <span className="mobile-header">
+                              {t('poll_detail_page.when')}
+                              :&nbsp;
+                            </span>
                             {formatDate(vote.timestamp)}
                           </Table.Cell>
                           <Table.Cell>
+                            <span className="mobile-header">
+                              {t('poll_detail_page.address')}
+                              :&nbsp;
+                            </span>
                             <Blockie scale={3} seed={vote.account_address}>
                               &nbsp;
                               <Address value={vote.account_address} />
                             </Blockie>
                           </Table.Cell>
                           <Table.Cell>
+                            <span className="mobile-header">
+                              {isDistrictToken(poll.token)
+                                ? t('global.contributions')
+                                : t('poll_detail_page.amount')}
+                              :&nbsp;
+                            </span>
                             <Token
                               token={poll.token}
                               amount={vote.account_balance}
@@ -252,6 +266,10 @@ export default class PollDetailPage extends React.PureComponent<Props, State> {
                             />
                           </Table.Cell>
                           <Table.Cell>
+                            <span className="mobile-header">
+                              {t('poll_detail_page.vote')}
+                              :&nbsp;
+                            </span>
                             {getVoteOptionValue(poll.options, vote)}
                           </Table.Cell>
                         </Table.Row>

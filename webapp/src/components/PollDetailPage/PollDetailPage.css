@@ -46,6 +46,11 @@
   margin-top: 40px;
 }
 
+.PollDetailPage .mobile-header {
+  display: none;
+  font-weight: bold;
+}
+
 @media (max-width: 768px) {
   .PollDetailPage .votes {
     margin-top: 0px;
@@ -59,5 +64,14 @@
     margin-left: 8px;
     min-width: 15px;
     padding: 12px;
+  }
+
+  .PollDetailPage .mobile-header {
+    display: inline;
+  }
+
+  .ui.table:not(.unstackable) td:first-child,
+  .ui.table:not(.unstackable) th:first-child {
+    font-weight: normal;
   }
 }
