@@ -54,7 +54,7 @@ export default class PollDetailPage extends React.PureComponent<Props, State> {
 
   componentWillReceiveProps(nextProps: Props) {
     if (nextProps.hasError && !this.navigatingAway) {
-      this.props.onNavigate(locations.polls())
+      this.props.onNavigate(locations.root())
       this.navigatingAway = true
     }
   }
