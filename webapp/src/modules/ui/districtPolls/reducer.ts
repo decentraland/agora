@@ -12,13 +12,13 @@ const tableReducer = createTableReducer(
   (action: FetchPollsSuccessAction) => action.payload.polls
 )
 
-export function expiredPollsReducer(
+export function districtPollsReducer(
   state: TableState = INITIAL_STATE,
   action: FetchPollsSuccessAction
 ) {
   switch (action.type) {
     case FETCH_POLLS_SUCCESS: {
-      return action.payload.filters.status === 'expired'
+      return action.payload.filters.type === 'district'
         ? tableReducer(state, action)
         : state
     }

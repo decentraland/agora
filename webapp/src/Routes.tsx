@@ -7,18 +7,16 @@ import Page from 'components/Page'
 import HomePage from 'components/HomePage'
 import PollDetailPage from 'components/PollDetailPage'
 import VotePage from 'components/VotePage'
+import PollsTable from 'components/PollsTable'
 
 export default class Routes extends React.Component {
   renderRoutes() {
     return (
       <Switch>
-        <Route exact={true} path={locations.root()} component={HomePage} />
-        <Route
-          exact={true}
-          path={locations.poll()}
-          component={PollDetailPage}
-        />
-        <Route exact={true} path={locations.vote()} component={VotePage} />
+        <Route exact path={locations.root()} component={HomePage} />
+        <Route exact path={locations.poll()} component={PollDetailPage} />
+        <Route exact path={locations.vote()} component={VotePage} />
+        <Route exact path={locations.polls()} component={PollsTable} />
         <Redirect to={locations.root()} />
       </Switch>
     )

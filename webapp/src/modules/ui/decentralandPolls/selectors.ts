@@ -5,8 +5,8 @@ import { TableState } from 'modules/ui/table/reducer'
 import { PollWithAssociations } from 'modules/poll/types'
 import { ModelById } from '@dapps/lib/types'
 
-export const getState = (state: RootState) => state.ui.expiredPolls
-export const getExpiredPolls = createSelector<
+export const getState = (state: RootState) => state.ui.decentralandPolls
+export const getDecentralandPolls = createSelector<
   RootState,
   TableState,
   ModelById<PollWithAssociations>,

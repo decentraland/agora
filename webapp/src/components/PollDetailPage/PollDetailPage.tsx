@@ -132,9 +132,15 @@ export default class PollDetailPage extends React.PureComponent<Props, State> {
           <>
             <Header size="large">{poll.title}</Header>
             {poll.description ? (
-              <Header sub className="description">
-                <ReactMarkdown source={poll.description} />
-              </Header>
+              <div className="description-wrapper">
+                <Header sub className="description-header">
+                  {t('global.description')}
+                </Header>
+                <ReactMarkdown
+                  className="description"
+                  source={poll.description}
+                />
+              </div>
             ) : null}
             <div className="stats">
               {isDistrictToken(poll.token) ? (
@@ -209,8 +215,8 @@ export default class PollDetailPage extends React.PureComponent<Props, State> {
 
             {noVotes ? null : (
               <div className="votes">
-                <Header>{t('poll_detail_page.votes')}</Header>
-                <Table basic>
+                <Header sub>{t('poll_detail_page.votes')}</Header>
+                <Table basic="very">
                   <Table.Header>
                     <Table.Row>
                       <Table.HeaderCell>

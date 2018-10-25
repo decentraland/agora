@@ -1,7 +1,14 @@
+import { FilterType, FilterStatus } from 'modules/poll/types'
+
 export const locations = {
   root: () => '/',
-  polls: (activePage: number = 1, expiredPage: number = 1) =>
-    `/?active=${activePage}&expired=${expiredPage}`,
+
+  polls: () => '/polls',
+  pollsTable: (
+    page: number = 1,
+    type: FilterType = 'decentraland',
+    status: FilterStatus = 'all'
+  ) => `/polls?page=${page}&type=${type}&status=${status}`,
 
   poll: () => '/polls/:id',
   pollDetail: (id: string) => `/polls/${id}`,

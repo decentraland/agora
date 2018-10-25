@@ -74,4 +74,5 @@
   text-overflow: ellipsis;
   text-align: center;
   color: var(--background);
+  text-transform: uppercase;
 }

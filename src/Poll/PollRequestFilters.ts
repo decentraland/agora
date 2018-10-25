@@ -4,26 +4,24 @@ import { getNumber, getString } from '../lib/extractFromReq'
 export const DEFAULT_LIMIT = 20
 export const MAX_LIMIT = 100
 export const DEFAULT_OFFSET = 0
-export const DEFAULT_ACTIVE = false
-export const DEFAULT_EXPIRED = false
+export const DEFAULT_STATUS = 'all'
+export const DEFAULT_TYPE = 'all'
 
-export const FILTER_STATUS = {
-  active: 'active',
-  expired: 'expired'
-}
+export type FilterStatus = 'active' | 'expired' | 'all'
+export type FilterType = 'district' | 'decentraland' | 'all'
 
 export const DEFAULT_FILTERS: FilterOptions = {
   limit: DEFAULT_LIMIT,
   offset: DEFAULT_OFFSET,
-  active: DEFAULT_ACTIVE,
-  expired: DEFAULT_EXPIRED
+  status: DEFAULT_STATUS,
+  type: DEFAULT_TYPE
 }
 
 export type FilterOptions = {
   limit?: number
   offset?: number
-  active?: boolean
-  expired?: boolean
+  status?: FilterStatus
+  type?: FilterType
 }
 
 export class PollRequestFilters {
@@ -34,13 +32,11 @@ export class PollRequestFilters {
   }
 
   sanitize() {
-    const status = getString(this.req, 'status', 'all')
-    const filters = {
+    return {
       limit: getNumber(this.req, 'limit', DEFAULT_LIMIT, 0, MAX_LIMIT),
       offset: getNumber(this.req, 'offset', DEFAULT_OFFSET, 0),
-      active: status === FILTER_STATUS.active,
-      expired: status === FILTER_STATUS.expired
+      status: getString(this.req, 'status', 'all'),
+      type: getString(this.req, 'type', 'all')
     }
-    return filters
   }
 }

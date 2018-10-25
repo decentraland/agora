@@ -1,20 +1,28 @@
 import { connect } from 'react-redux'
-import { goBack, push } from 'react-router-redux'
 import { RootState, RootDispatch } from 'types'
-import { locations } from 'locations'
 import { MapStateProps, MapDispatchProps } from './Page.types'
-import { isModalPage } from 'modules/location/selectors'
+import { isHomePage } from 'modules/location/selectors'
+import { connectWalletRequest } from '@dapps/modules/wallet/actions'
 import Page from './Page'
+import {
+  getAddress,
+  isConnected,
+  isConnecting,
+  getData
+} from '@dapps/modules/wallet/selectors'
 
 const mapState = (state: RootState): MapStateProps => {
   return {
-    isModal: isModalPage(state)
+    isHomePage: isHomePage(state),
+    address: getAddress(state),
+    isConnected: isConnected(state),
+    isConnecting: isConnecting(state),
+    mana: getData(state).mana
   }
 }
 
 const mapDispatch = (dispatch: RootDispatch): MapDispatchProps => ({
-  onBack: () => dispatch(goBack()),
-  onClickLogo: () => dispatch(push(locations.polls()))
+  onSignIn: () => dispatch(connectWalletRequest())
 })
 
 export default connect(

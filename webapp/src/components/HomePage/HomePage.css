@@ -1,0 +1,21 @@
+.HomePage .cards .card .meta .Token,
+.HomePage .cards .card .meta .Token .symbol {
+  font-size: 15px;
+  line-height: 24px;
+  font-weight: normal;
+  font-style: normal;
+  font-stretch: normal;
+  letter-spacing: normal;
+  color: var(--secondary-text);
+  font-family: var(--font-family);
+  display: inline;
+}
+
+.HomePage .cards .card:hover .meta .Token,
+.HomePage .cards .card:hover .meta .Token .symbol {
+  color: var(--primary);
+}
+
+.HomePage .ui.loader:before {
+  border-color: white !important;
+}

@@ -17,6 +17,29 @@
   font-weight: bold;
 }
 
+.PollsTable .empty {
+  color: var(--secondary-text);
+  margin: 20px;
+  text-align: center;
+}
+
+.PollsTable .finished .title a {
+  color: var(--disabled-text);
+}
+
+.PollsTable .finished td,
+.PollsTable .finished td div {
+  color: var(--disabled-text) !important;
+}
+
+.PollsTable .finished:hover {
+  cursor: pointer;
+}
+
+.PollsTable .finished:hover .title a {
+  color: var(--primary);
+}
+
 @media (max-width: 768px) {
   .PollsTable .ui.basic.table thead tr {
     display: none !important;
