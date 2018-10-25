@@ -14,7 +14,7 @@ export default class Token extends React.PureComponent<Props> {
         : isDistrictToken(token) || token.symbol === 'MANA'
           ? formatNumber(amount)
           : `${formatNumber(amount)} ${token.symbol}`
-    const className = cell ? 'Token cell' : 'Token'
+    const className = cell ? 'Token cell' : 'Token text'
     const manaProps = cell ? ({ size: 'small', text: true } as ManaProps) : {}
     return token.symbol === 'MANA' ? (
       <Mana className={className} {...manaProps}>
