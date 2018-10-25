@@ -5,6 +5,7 @@ import { t } from '@dapps/modules/translation/utils'
 import './HomePage.css'
 import { locations } from 'locations'
 import PollCards from './PollCards'
+import { PollWithAssociations } from 'modules/poll/types'
 
 const CARDS = 6
 
@@ -30,13 +31,23 @@ export default class HomePage extends React.PureComponent<Props> {
     })
   }
 
+  handleClick = (poll: PollWithAssociations) => {
+    const { onNavigate } = this.props
+    onNavigate(locations.pollDetail(poll.id))
+  }
+
+  redirectToDecentralandPolls = () => {
+    const { onNavigate } = this.props
+    onNavigate(locations.pollsTable(1, 'decentraland', 'all'))
+  }
+
+  redirectToDistrictPolls = () => {
+    const { onNavigate } = this.props
+    onNavigate(locations.pollsTable(1, 'district', 'all'))
+  }
+
   render() {
-    const {
-      decentralandPolls,
-      districtPolls,
-      isLoading,
-      onNavigate
-    } = this.props
+    const { decentralandPolls, districtPolls, isLoading } = this.props
     return (
       <div className="HomePage">
         {isLoading &&
@@ -49,19 +60,15 @@ export default class HomePage extends React.PureComponent<Props> {
               polls={decentralandPolls.filter((_, index) => index < CARDS)}
               title={t('homepage.decentraland_polls')}
               meta={t('homepage.cards.weight')}
-              onClick={poll => onNavigate(locations.pollDetail(poll.id))}
-              onViewMore={() =>
-                onNavigate(locations.pollsTable(1, 'decentraland', 'all'))
-              }
+              onClick={this.handleClick}
+              onViewMore={this.redirectToDecentralandPolls}
             />
             <PollCards
               polls={districtPolls.filter((_, index) => index < CARDS)}
               title={t('homepage.district_polls')}
               meta={t('homepage.cards.votes')}
-              onClick={poll => onNavigate(locations.pollDetail(poll.id))}
-              onViewMore={() =>
-                onNavigate(locations.pollsTable(1, 'district', 'all'))
-              }
+              onClick={this.handleClick}
+              onViewMore={this.redirectToDistrictPolls}
             />
           </>
         )}

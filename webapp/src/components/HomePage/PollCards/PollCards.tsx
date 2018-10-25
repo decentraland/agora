@@ -6,8 +6,11 @@ import { Props } from './PollCards.types'
 import './PollCards.css'
 import { isFinished } from 'modules/poll/utils'
 import { distanceInWordsToNow } from '@dapps/lib/utils'
+import { PollWithAssociations } from 'modules/poll/types'
 
 export default class PollCards extends React.PureComponent<Props> {
+  getHandler = (poll: PollWithAssociations, onClick: Function) => () =>
+    onClick(poll)
   render() {
     const { polls, title, meta, onClick, onViewMore } = this.props
     return (
@@ -27,7 +30,7 @@ export default class PollCards extends React.PureComponent<Props> {
           {polls.map(poll => (
             <Card
               link
-              onClick={() => onClick(poll)}
+              onClick={this.getHandler(poll, onClick)}
               className={isFinished(poll) ? 'finished' : 'ongoing'}
             >
               <Card.Content>

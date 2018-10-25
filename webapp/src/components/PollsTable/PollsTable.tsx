@@ -13,7 +13,11 @@ import { locations } from 'locations'
 import Token from 'components/Token'
 import { t } from '@dapps/modules/translation/utils'
 import './PollsTable.css'
-import { FilterStatus, FilterType } from 'modules/poll/types'
+import {
+  FilterStatus,
+  FilterType,
+  PollWithAssociations
+} from 'modules/poll/types'
 import { isFinished } from 'modules/poll/utils'
 
 export default class PollsTable extends React.PureComponent<Props> {
@@ -59,16 +63,14 @@ export default class PollsTable extends React.PureComponent<Props> {
     onStatusChange(value)
   }
 
+  handleClick = (poll: PollWithAssociations) => {
+    const { onNavigate } = this.props
+    onNavigate(locations.pollDetail(poll.id))
+  }
+
   render() {
     const { polls } = this.props
-    const {
-      status,
-      type,
-      totalRows,
-      page,
-      rowsPerPage,
-      onNavigate
-    } = this.props
+    const { status, type, totalRows, page, rowsPerPage } = this.props
     const totalPages = Math.ceil(totalRows / rowsPerPage)
 
     const statusFilters: FilterStatus[] = ['all', 'active', 'expired']
@@ -113,7 +115,7 @@ export default class PollsTable extends React.PureComponent<Props> {
               <Table.Row
                 key={index}
                 className={isFinished(poll) ? 'finished' : 'ongoing'}
-                onClick={() => onNavigate(locations.pollDetail(poll.id))}
+                onClick={this.handleClick}
               >
                 <Table.Cell className="title">
                   <span className="mobile-header">

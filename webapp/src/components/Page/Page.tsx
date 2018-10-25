@@ -1,6 +1,5 @@
 import * as React from 'react'
-import { Container, Footer } from 'decentraland-ui'
-import { Hero, Navbar, Parallax } from 'decentraland-ui'
+import { Hero, Navbar, Parallax, Container, Footer } from 'decentraland-ui'
 import { Props } from './Page.types'
 
 import './Page.css'
