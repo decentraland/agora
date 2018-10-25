@@ -63,7 +63,7 @@ export default class PollsTable extends React.PureComponent<Props> {
     onStatusChange(value)
   }
 
-  handleClick = (poll: PollWithAssociations) => {
+  getHandler = (poll: PollWithAssociations) => () => {
     const { onNavigate } = this.props
     onNavigate(locations.pollDetail(poll.id))
   }
@@ -115,7 +115,7 @@ export default class PollsTable extends React.PureComponent<Props> {
               <Table.Row
                 key={index}
                 className={isFinished(poll) ? 'finished' : 'ongoing'}
-                onClick={this.handleClick}
+                onClick={this.getHandler(poll)}
               >
                 <Table.Cell className="title">
                   <span className="mobile-header">
