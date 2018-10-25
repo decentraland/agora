@@ -2,6 +2,8 @@
   "global": {
     "poll": "Encuesta",
     "polls": "Encuestas",
+    "view_more": "Ver más",
+    "description": "Descripción",
     "contributions": "Contribuciones",
     "your_contributions": "Tus Contribuciones"
   },
@@ -9,40 +11,52 @@
     "en": "Inglés",
     "es": "Español"
   },
-  "navbar": {
-    "connecting": "Connectando wallet..."
-  },
   "vote_page": {
     "vote": "Votar",
     "cancel": "Cancelar",
-    "no_contributions": "No tienes contribuciones",
     "no_balance": "No tienes suficiente {symbol}",
-    "voting_width": "Votando con"
+    "voting_width": "Votando con",
+    "no_contributions": "No tienes contribuciones"
   },
-  "polls_page": {
-    "active_polls": "Encuestas Activas",
-    "expired_polls": "Encuestas Cerradas",
-    "table": {
-      "title": "Título",
-      "balance": "Balance",
-      "total_voted": "Total Votado",
-      "votes": "Votos"
-    }
+  "polls_table": {
+    "title": "Título",
+    "empty": "Vaya... no hay nada aquí.",
+    "votes": "Votos",
+    "weight": "Peso",
+    "all_polls": "Todas las encuestas",
+    "total_voted": "Total votado",
+    "active_polls": "Encuestas en curso",
+    "expired_polls": "Encuestas cerradas",
+    "district_polls": "Encuestas de distrito",
+    "decentraland_polls": "Decentraland encuestas"
+  },
+  "navbar": {
+    "connecting": "Connectando..."
+  },
+  "homepage": {
+    "cards": {
+      "votes": "Votos",
+      "closed": "Cerrado hace {time}",
+      "weight": "Peso",
+      "time_left": "Quedan {time}"
+    },
+    "district_polls": "Distrit encuestas",
+    "decentraland_polls": "Decentraland encuestas"
   },
   "poll_detail_page": {
+    "vote": "Voto",
+    "when": "Fecha",
+    "votes": "Votos",
+    "amount": "Cantidad",
+    "address": "Dirección",
+    "cast_vote": "Emitir voto",
+    "you_voted": "Has votado {option}",
     "stats": {
       "token": "Token",
-      "total_voted": "Total Votado",
-      "total_votes": "Votos",
+      "finished": "Finalizada",
       "time_left": "Tiempo disponible",
-      "finished": "Finalizada"
-    },
-    "votes": "Votos",
-    "when": "Fecha",
-    "address": "Dirección",
-    "amount": "Cantidad",
-    "vote": "Voto",
-    "cast_vote": "Emitir voto",
-    "you_voted": "Has votado {option}"
+      "total_votes": "Votos",
+      "total_voted": "Total Votado"
+    }
   }
 }
