@@ -1,15 +1,14 @@
 .Page {
   padding: 10px 20px;
-  min-height: 40vh;
+  min-height: calc(100vh - 244px);
 }
 
 .Page + .dcl.footer {
   margin-top: 96px;
-  margin-bottom: 80px;
 }
 
 .Page.is-homepage {
-  margin-top: 422px;
+  margin-top: 302px;
 }
 
 .pyramid {
@@ -21,14 +20,15 @@
 .pyramid.small {
   width: 400px;
   height: 400px;
-  margin-top: 250px;
+  margin-left: 150px;
+  margin-top: 100px;
 }
 
 .pyramid.large {
   width: 1000px;
   height: 1000px;
   margin-top: -200px;
-  margin-left: 500px;
+  margin-left: 550px;
 }
 
 .dcl.navbar .dcl.hero {
@@ -38,5 +38,13 @@
 @media (max-width: 768px) {
   .Page {
     padding: 0px 0px 48px 0px;
+  }
+
+  .pyramid.small {
+    margin-left: 0px;
+  }
+
+  .dcl.footer {
+    height: auto;
   }
 }

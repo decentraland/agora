@@ -32,12 +32,25 @@
   color: var(--disabled-text) !important;
 }
 
-.PollsTable .finished:hover {
+.PollsTable .ui.basic.table tbody tr:hover {
   cursor: pointer;
+  background-color: var(--hover);
 }
 
-.PollsTable .finished:hover .title a {
-  color: var(--primary);
+.PollsTable .ui.basic.table tbody tr td:first-child {
+  transition: padding 0.2s ease-in-out;
+}
+
+.PollsTable .ui.basic.table tbody tr:hover td:first-child {
+  padding-left: 16px;
+}
+
+.PollsTable .ongoing:hover .title a {
+  color: var(--text);
+}
+
+.PollsTable .finished .title a {
+  font-weight: normal;
 }
 
 @media (max-width: 768px) {

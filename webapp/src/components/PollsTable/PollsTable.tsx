@@ -19,6 +19,7 @@ import {
   PollWithAssociations
 } from 'modules/poll/types'
 import { isFinished } from 'modules/poll/utils'
+import { isMobile } from '@dapps/lib/utils'
 
 export default class PollsTable extends React.PureComponent<Props> {
   static defaultProps = {
@@ -79,13 +80,13 @@ export default class PollsTable extends React.PureComponent<Props> {
 
     return (
       <div className="PollsTable">
-        <HeaderMenu>
+        <HeaderMenu stackable>
           <HeaderMenu.Left>
             <Header size="large">{t(`polls_table.${type}_polls`)}</Header>
           </HeaderMenu.Left>
           <HeaderMenu.Right>
             <Dropdown
-              direction="left"
+              direction={isMobile() ? 'right' : 'left'}
               value={status}
               options={statusFilters.map(option => ({
                 key: option,
@@ -102,11 +103,7 @@ export default class PollsTable extends React.PureComponent<Props> {
               <Table.HeaderCell width={12}>
                 {t('polls_table.title')}
               </Table.HeaderCell>
-              <Table.HeaderCell>
-                {type === 'district'
-                  ? t('polls_table.total_voted')
-                  : t('polls_table.weight')}
-              </Table.HeaderCell>
+              <Table.HeaderCell>{t('global.weight')}</Table.HeaderCell>
               <Table.HeaderCell>{t('polls_table.votes')}</Table.HeaderCell>
             </Table.Row>
           </Table.Header>

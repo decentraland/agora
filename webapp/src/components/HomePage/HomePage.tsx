@@ -58,15 +58,15 @@ export default class HomePage extends React.PureComponent<Props> {
           <>
             <PollCards
               polls={decentralandPolls.filter((_, index) => index < CARDS)}
-              title={t('homepage.decentraland_polls')}
-              meta={t('homepage.cards.weight')}
+              title={t('polls_table.decentraland_polls')}
+              meta={t('global.weight')}
               onClick={this.handleClick}
               onViewMore={this.redirectToDecentralandPolls}
             />
             <PollCards
               polls={districtPolls.filter((_, index) => index < CARDS)}
-              title={t('homepage.district_polls')}
-              meta={t('homepage.cards.votes')}
+              title={t('polls_table.district_polls')}
+              meta={t('global.weight')}
               onClick={this.handleClick}
               onViewMore={this.redirectToDistrictPolls}
             />

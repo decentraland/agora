@@ -4,6 +4,7 @@ import { Mana, Header, ManaProps } from 'decentraland-ui'
 import { Props } from './Token.types'
 import './Token.css'
 import { isDistrictToken } from 'modules/token/district_token/utils'
+import { t } from '@dapps/modules/translation/utils'
 
 export default class Token extends React.PureComponent<Props> {
   render() {
@@ -11,9 +12,11 @@ export default class Token extends React.PureComponent<Props> {
     const text =
       amount === undefined
         ? token.symbol
-        : isDistrictToken(token) || token.symbol === 'MANA'
-          ? formatNumber(amount)
-          : `${formatNumber(amount)} ${token.symbol}`
+        : isDistrictToken(token)
+          ? `${formatNumber(amount)} ${t('global.contributions')}`
+          : token.symbol === 'MANA'
+            ? formatNumber(amount)
+            : `${formatNumber(amount)} ${token.symbol}`
     const className = cell ? 'Token cell' : 'Token text'
     const manaProps = cell ? ({ size: 'small', text: true } as ManaProps) : {}
     return token.symbol === 'MANA' ? (

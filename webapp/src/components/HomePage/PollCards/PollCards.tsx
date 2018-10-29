@@ -38,7 +38,7 @@ export default class PollCards extends React.PureComponent<Props> {
                 <Card.Meta>
                   <div className="poll-meta">
                     <div className="total">
-                      {meta} <Token amount={poll.balance} token={poll.token} />
+                      {meta}: <Token amount={poll.balance} token={poll.token} />
                     </div>
                     <div className="date">
                       {t(
