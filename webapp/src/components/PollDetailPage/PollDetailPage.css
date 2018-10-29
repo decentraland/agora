@@ -1,14 +1,21 @@
-.PollDetailPage .ui.header.sub.description {
+.PollDetailPage .description {
+  font-size: 17px;
+  line-height: 26px;
+  letter-spacing: -0.2px;
+  margin-top: 8px;
+}
+
+.PollDetailPage .description-wrapper {
   margin-bottom: 48px;
   overflow: hidden;
   text-overflow: ellipsis;
 }
 
-.PollDetailPage .ui.header.sub.description a {
+.PollDetailPage .description-wrapper a {
   color: var(--primary);
 }
 
-.PollDetailPage .ui.header.sub.description a:hover {
+.PollDetailPage .description-wrapper a:hover {
   color: var(--primary-dark);
 }
 
@@ -37,8 +44,8 @@
 }
 
 .PollDetailPage .votes {
-  margin-top: 6.8em;
-  margin-bottom: 9em;
+  margin-top: 80px;
+  margin-bottom: 40px;
 }
 
 .PollDetailPage .votes-pagination {

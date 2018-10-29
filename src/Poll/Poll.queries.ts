@@ -1,22 +1,46 @@
 import { SQL, SQLStatement, raw } from 'decentraland-server'
-import { Token } from '../Token'
+import { Token, DISTRICT_TOKEN } from '../Token'
 import { Option } from '../Option'
 import { Vote } from '../Vote'
 import { ModelQueries } from '../lib'
-import { DEFAULT_ACTIVE, DEFAULT_EXPIRED } from './PollRequestFilters'
+import {
+  FilterStatus,
+  FilterType,
+  DEFAULT_STATUS,
+  DEFAULT_TYPE
+} from './PollRequestFilters'
 
 export const PollQueries = Object.freeze({
-  whereActiveOrExpired(
-    { active, expired }: { active?: boolean; expired?: boolean } = {
-      active: DEFAULT_ACTIVE,
-      expired: DEFAULT_EXPIRED
+  whereStatusAndType(
+    { status, type }: { status?: FilterStatus; type?: FilterType } = {
+      status: DEFAULT_STATUS,
+      type: DEFAULT_TYPE
     }
   ) {
-    return active
-      ? SQL`WHERE closes_at > extract(epoch from now()) * 1000`
-      : expired
-        ? SQL`WHERE closes_at <= extract(epoch from now()) * 1000`
-        : SQL``
+    let statusQuery
+    let typeQuery
+
+    if (status === 'active') {
+      statusQuery = SQL`closes_at > extract(epoch from now()) * 1000`
+    } else if (status === 'expired') {
+      statusQuery = SQL`closes_at <= extract(epoch from now()) * 1000`
+    }
+
+    if (type === 'district') {
+      typeQuery = SQL`token_address LIKE '${SQL.raw(DISTRICT_TOKEN.address)}-%'`
+    } else if (type === 'decentraland') {
+      typeQuery = SQL`token_address LIKE '0x%'`
+    }
+
+    if (statusQuery && typeQuery) {
+      return SQL`WHERE ${statusQuery} AND ${typeQuery}`
+    } else if (statusQuery) {
+      return SQL`WHERE ${statusQuery}`
+    } else if (typeQuery) {
+      return SQL`WHERE ${typeQuery}`
+    } else {
+      return SQL``
+    }
   },
   findWithAssociations: (whereStatement: SQLStatement = SQL``): SQLStatement =>
     SQL`

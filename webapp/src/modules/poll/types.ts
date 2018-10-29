@@ -3,12 +3,14 @@ import { Token } from 'modules/token/types'
 import { Vote } from 'modules/vote/types'
 import { Overwrite } from '@dapps/lib/types'
 
-export type PollsRequestFiltersStatus = 'active' | 'expired'
+export type FilterStatus = 'active' | 'expired' | 'all'
+export type FilterType = 'decentraland' | 'district' | 'all'
 
 export interface PollsRequestFilters {
   limit?: number
   offset?: number
-  status?: PollsRequestFiltersStatus
+  status?: FilterStatus
+  type?: FilterType
 }
 
 export interface Poll {

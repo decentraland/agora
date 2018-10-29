@@ -5,8 +5,8 @@ import { TableState } from 'modules/ui/table/reducer'
 import { PollWithAssociations } from 'modules/poll/types'
 import { ModelById } from '@dapps/lib/types'
 
-export const getState = (state: RootState) => state.ui.activePolls
-export const getActivePolls = createSelector<
+export const getState = (state: RootState) => state.ui.districtPolls
+export const getDistrictPolls = createSelector<
   RootState,
   TableState,
   ModelById<PollWithAssociations>,

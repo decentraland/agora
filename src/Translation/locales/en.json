@@ -1,16 +1,31 @@
 {
+  "@dapps": {
+    "navbar": {
+      "account": {
+        "connecting": "Connecting...",
+        "signIn": "Sign In"
+      },
+      "menu": {
+        "agora": "Agora",
+        "marketplace": "Marketplace",
+        "developers": "Developers",
+        "blog": "Blog"
+      }
+    }
+  },
   "global": {
     "poll": "Poll",
     "polls": "Polls",
     "contributions": "Contributions",
-    "your_contributions": "Your Contributions"
+    "your_contributions": "Your Contributions",
+    "view_more": "View more",
+    "description": "Description",
+    "weight": "Weight",
+    "votes": "Votes"
   },
   "languages": {
     "en": "English",
     "es": "Spanish"
-  },
-  "navbar": {
-    "connecting": "Connecting wallet..."
   },
   "vote_page": {
     "vote": "Vote now",
@@ -19,21 +34,25 @@
     "no_balance": "You don't have any {symbol}",
     "voting_width": "Voting with"
   },
-  "polls_page": {
-    "active_polls": "Active Polls",
-    "expired_polls": "Closed Polls",
-    "table": {
-      "title": "Title",
-      "balance": "Balance",
-      "total_voted": "Total Voted",
-      "votes": "Votes"
+  "homepage": {
+    "cards": {
+      "time_left": "{time} left",
+      "closed": "closed"
     }
+  },
+  "polls_table": {
+    "all_polls": "All polls",
+    "decentraland_polls": "Decentraland polls",
+    "district_polls": "District polls",
+    "expired_polls": "Closed polls",
+    "active_polls": "Ongoing polls",
+    "title": "Title",
+    "votes": "Votes",
+    "empty": "Oops... nothing found here."
   },
   "poll_detail_page": {
     "stats": {
       "token": "Token",
-      "total_voted": "Total Voted",
-      "total_votes": "Total Votes",
       "time_left": "Time Left",
       "finished": "Finished"
     },

@@ -12,15 +12,13 @@ const tableReducer = createTableReducer(
   (action: FetchPollsSuccessAction) => action.payload.polls
 )
 
-export function activePollsReducer(
+export function pollsReducer(
   state: TableState = INITIAL_STATE,
   action: FetchPollsSuccessAction
 ) {
   switch (action.type) {
     case FETCH_POLLS_SUCCESS: {
-      return action.payload.filters.status === 'active'
-        ? tableReducer(state, action)
-        : state
+      return tableReducer(state, action)
     }
     default: {
       return state

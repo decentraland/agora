@@ -4,11 +4,13 @@ import { PollQueries } from './Poll.queries'
 import { VoteQueries } from '../Vote'
 import { DistrictToken } from '../Token/DistrictToken'
 import {
-  DEFAULT_ACTIVE,
-  DEFAULT_EXPIRED,
   PollRequestFilters,
   FilterOptions,
-  DEFAULT_FILTERS
+  DEFAULT_FILTERS,
+  DEFAULT_STATUS,
+  DEFAULT_TYPE,
+  FilterStatus,
+  FilterType
 } from './PollRequestFilters'
 import { blacklist } from '../lib'
 import { utils } from 'decentraland-commons'
@@ -34,15 +36,15 @@ export class Poll extends Model<PollAttributes> {
   static async findWithAssociationsWithFilters({
     limit,
     offset,
-    active,
-    expired
+    status,
+    type
   }: FilterOptions = DEFAULT_FILTERS) {
     return this.query<PollAttributes>(SQL`
       ${PollQueries.findWithAssociations(
-        PollQueries.whereActiveOrExpired({ active, expired })
+        PollQueries.whereStatusAndType({ status, type })
       )}
       ORDER BY ${
-        expired
+        status === 'expired'
           ? SQL`p.closes_at DESC, p.created_at DESC`
           : SQL`p.created_at DESC, p.closes_at DESC`
       }
@@ -51,25 +53,25 @@ export class Poll extends Model<PollAttributes> {
   }
 
   static async countWithFilters(
-    { active, expired }: { active?: boolean; expired?: boolean } = {
-      active: DEFAULT_ACTIVE,
-      expired: DEFAULT_EXPIRED
+    { status, type }: { status?: FilterStatus; type?: FilterType } = {
+      status: DEFAULT_STATUS,
+      type: DEFAULT_TYPE
     }
   ) {
     const counts = await this.query<{ count: string }>(SQL`
       SELECT COUNT(*) FROM (
         ${PollQueries.findWithAssociations(
-          PollQueries.whereActiveOrExpired({ active, expired })
+          PollQueries.whereStatusAndType({ status, type })
         )}
       ) AS total`)
     return parseInt(counts[0].count, 10)
   }
 
   static async filter(filters: PollRequestFilters) {
-    const { limit, offset, active, expired } = filters.sanitize()
+    const { limit, offset, status, type } = filters.sanitize()
     const [polls, total] = await Promise.all([
-      Poll.findWithAssociationsWithFilters({ limit, offset, active, expired }),
-      Poll.countWithFilters({ active, expired })
+      Poll.findWithAssociationsWithFilters({ limit, offset, status, type }),
+      Poll.countWithFilters({ status, type })
     ])
     return {
       polls: utils.mapOmit<PollAttributes>(polls, blacklist.poll),

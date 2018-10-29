@@ -87,9 +87,12 @@ export default class VotePage extends React.PureComponent<Props, State> {
       <div className="VotePage">
         <Header size="large">{poll.title}</Header>
         {poll.description ? (
-          <Header sub className="description">
-            <ReactMarkdown source={poll.description} />
-          </Header>
+          <>
+            <Header sub>{t('global.description')}</Header>
+            <Header className="description">
+              <ReactMarkdown source={poll.description} />
+            </Header>
+          </>
         ) : null}
         <form
           action="/votes"

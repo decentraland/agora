@@ -1,14 +1,17 @@
 import { combineReducers } from 'redux'
-import { activePollsReducer as activePolls } from 'modules/ui/activePolls/reducer'
-import { expiredPollsReducer as expiredPolls } from 'modules/ui/expiredPolls/reducer'
+import { decentralandPollsReducer as decentralandPolls } from 'modules/ui/decentralandPolls/reducer'
+import { districtPollsReducer as districtPolls } from 'modules/ui/districtPolls/reducer'
+import { pollsReducer as polls } from 'modules/ui/polls/reducer'
 import { TableState } from 'modules/ui/table/reducer'
 
 export type UIState = {
-  activePolls: TableState
-  expiredPolls: TableState
+  decentralandPolls: TableState
+  districtPolls: TableState
+  polls: TableState
 }
 
 export const uiReducer = combineReducers<UIState>({
-  activePolls,
-  expiredPolls
+  decentralandPolls,
+  districtPolls,
+  polls
 })

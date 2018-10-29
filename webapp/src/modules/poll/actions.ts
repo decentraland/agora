@@ -17,12 +17,14 @@ export const FETCH_POLLS_FAILURE = '[Failure] Fetch Polls'
 export const fetchPollsRequest = ({
   limit,
   offset,
-  status
+  status,
+  type
 }: PollsRequestFilters = {}) =>
   action(FETCH_POLLS_REQUEST, {
     limit,
     offset,
-    status
+    status,
+    type
   })
 export const fetchPollsSuccess = (
   polls: PollWithAssociations[],

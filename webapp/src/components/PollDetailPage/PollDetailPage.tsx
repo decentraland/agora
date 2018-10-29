@@ -54,7 +54,7 @@ export default class PollDetailPage extends React.PureComponent<Props, State> {
 
   componentWillReceiveProps(nextProps: Props) {
     if (nextProps.hasError && !this.navigatingAway) {
-      this.props.onNavigate(locations.polls())
+      this.props.onNavigate(locations.root())
       this.navigatingAway = true
     }
   }
@@ -132,9 +132,15 @@ export default class PollDetailPage extends React.PureComponent<Props, State> {
           <>
             <Header size="large">{poll.title}</Header>
             {poll.description ? (
-              <Header sub className="description">
-                <ReactMarkdown source={poll.description} />
-              </Header>
+              <div className="description-wrapper">
+                <Header sub className="description-header">
+                  {t('global.description')}
+                </Header>
+                <ReactMarkdown
+                  className="description"
+                  source={poll.description}
+                />
+              </div>
             ) : null}
             <div className="stats">
               {isDistrictToken(poll.token) ? (
@@ -149,10 +155,10 @@ export default class PollDetailPage extends React.PureComponent<Props, State> {
                   <Token token={poll.token} />
                 </Stats>
               )}
-              <Stats title={t('poll_detail_page.stats.total_voted')}>
+              <Stats title={t('global.weight')}>
                 <Token token={poll.token} amount={poll.balance} />
               </Stats>
-              <Stats title={t('poll_detail_page.stats.total_votes')}>
+              <Stats title={t('global.votes')}>
                 <Header>{poll.votes.length}</Header>
               </Stats>
               {isFinished(poll) ? (
@@ -209,8 +215,8 @@ export default class PollDetailPage extends React.PureComponent<Props, State> {
 
             {noVotes ? null : (
               <div className="votes">
-                <Header>{t('poll_detail_page.votes')}</Header>
-                <Table basic>
+                <Header sub>{t('poll_detail_page.votes')}</Header>
+                <Table basic="very">
                   <Table.Header>
                     <Table.Row>
                       <Table.HeaderCell>
@@ -219,11 +225,7 @@ export default class PollDetailPage extends React.PureComponent<Props, State> {
                       <Table.HeaderCell>
                         {t('poll_detail_page.address')}
                       </Table.HeaderCell>
-                      <Table.HeaderCell>
-                        {isDistrictToken(poll.token)
-                          ? t('global.contributions')
-                          : t('poll_detail_page.amount')}
-                      </Table.HeaderCell>
+                      <Table.HeaderCell>{t('global.weight')}</Table.HeaderCell>
                       <Table.HeaderCell>
                         {t('poll_detail_page.vote')}
                       </Table.HeaderCell>
@@ -254,9 +256,7 @@ export default class PollDetailPage extends React.PureComponent<Props, State> {
                           </Table.Cell>
                           <Table.Cell>
                             <span className="mobile-header">
-                              {isDistrictToken(poll.token)
-                                ? t('global.contributions')
-                                : t('poll_detail_page.amount')}
+                              {t('global.weight')}
                               :&nbsp;
                             </span>
                             <Token

@@ -1,7 +1,7 @@
 import { Token } from '../Token.model'
 import { TokenAttributes } from '../Token.types'
 
-const DISTRICT_TOKEN: TokenAttributes = Object.freeze({
+export const DISTRICT_TOKEN: TokenAttributes = Object.freeze({
   address: 'district-token-address',
   name: 'DistrictToken',
   symbol: 'DT'

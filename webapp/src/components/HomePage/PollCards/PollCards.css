@@ -1,0 +1,18 @@
+.PollCards + .PollCards {
+  margin-top: 36px;
+}
+
+.PollCards .ui.cards > .card.finished > .content > .header:not(.ui) {
+  color: var(--secondary-text);
+  font-weight: normal;
+  letter-spacing: 0px;
+}
+
+.PollCards .ui.cards > .card.finished:hover > .content > .header:not(.ui) {
+  color: var(--text);
+}
+
+.PollCards .ui.cards > .card .meta .poll-meta {
+  display: flex;
+  justify-content: space-between;
+}

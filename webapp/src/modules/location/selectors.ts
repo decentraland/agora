@@ -1,6 +1,6 @@
 import { RootState } from 'types'
-import { STATIC_PAGES } from 'locations'
-import { getPathname, getPathAction } from '@dapps/modules/location/selectors'
+import { STATIC_PAGES, locations } from 'locations'
+import { getPathname } from '@dapps/modules/location/selectors'
 
 export const isStaticPage = (state: RootState) => {
   const pathname = getPathname(state)
@@ -10,12 +10,7 @@ export const isStaticPage = (state: RootState) => {
   return STATIC_PAGES.includes(pathname)
 }
 
-export const isModalPage = (state: RootState) => {
-  const lastPartOfUrl = getPathAction(state)
-  switch (lastPartOfUrl) {
-    case 'vote':
-      return true
-    default:
-      return false
-  }
+export const isHomePage = (state: RootState) => {
+  const pathname = getPathname(state)
+  return pathname === locations.root()
 }
