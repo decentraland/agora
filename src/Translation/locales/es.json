@@ -1,11 +1,27 @@
 {
+  "@dapps": {
+    "navbar": {
+      "account": {
+        "connecting": "Connecting...",
+        "signIn": "Sign In"
+      },
+      "menu": {
+        "agora": "Agora",
+        "marketplace": "Marketplace",
+        "developers": "Developers",
+        "blog": "Blog"
+      }
+    }
+  },
   "global": {
     "poll": "Encuesta",
     "polls": "Encuestas",
     "view_more": "Ver más",
     "description": "Descripción",
     "contributions": "Contribuciones",
-    "your_contributions": "Tus Contribuciones"
+    "your_contributions": "Tus Contribuciones",
+    "weight": "Peso",
+    "votes": "Votos"
   },
   "languages": {
     "en": "Inglés",
@@ -22,26 +38,17 @@
     "title": "Título",
     "empty": "Vaya... no hay nada aquí.",
     "votes": "Votos",
-    "weight": "Peso",
     "all_polls": "Todas las encuestas",
-    "total_voted": "Total votado",
     "active_polls": "Encuestas en curso",
     "expired_polls": "Encuestas cerradas",
-    "district_polls": "Encuestas de distrito",
-    "decentraland_polls": "Decentraland encuestas"
-  },
-  "navbar": {
-    "connecting": "Connectando..."
+    "district_polls": "Encuestas de distritos",
+    "decentraland_polls": "Encuestas de Decentraland"
   },
   "homepage": {
     "cards": {
-      "votes": "Votos",
-      "closed": "Cerrado hace {time}",
-      "weight": "Peso",
+      "closed": "Cerrado",
       "time_left": "Quedan {time}"
-    },
-    "district_polls": "Distrit encuestas",
-    "decentraland_polls": "Decentraland encuestas"
+    }
   },
   "poll_detail_page": {
     "vote": "Voto",
@@ -54,9 +61,7 @@
     "stats": {
       "token": "Token",
       "finished": "Finalizada",
-      "time_left": "Tiempo disponible",
-      "total_votes": "Votos",
-      "total_voted": "Total Votado"
+      "time_left": "Tiempo disponible"
     }
   }
 }
