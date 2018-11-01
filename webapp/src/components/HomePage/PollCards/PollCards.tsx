@@ -9,10 +9,12 @@ import { distanceInWordsToNow } from '@dapps/lib/utils'
 import { PollWithAssociations } from 'modules/poll/types'
 
 export default class PollCards extends React.PureComponent<Props> {
-  getHandler = (poll: PollWithAssociations, onClick: Function) => () =>
-    onClick(poll)
+  getPollClickHandler = (poll: PollWithAssociations) => {
+    const { onClick } = this.props
+    return () => onClick(poll)
+  }
   render() {
-    const { polls, title, meta, onClick, onViewMore } = this.props
+    const { polls, title, meta, onViewMore } = this.props
     return (
       <div className="PollCards">
         <HeaderMenu>
@@ -30,7 +32,7 @@ export default class PollCards extends React.PureComponent<Props> {
           {polls.map(poll => (
             <Card
               link
-              onClick={this.getHandler(poll, onClick)}
+              onClick={this.getPollClickHandler(poll)}
               className={isFinished(poll) ? 'finished' : 'ongoing'}
             >
               <Card.Content>

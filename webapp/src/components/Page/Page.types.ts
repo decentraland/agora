@@ -2,6 +2,7 @@ import { NavbarProps } from 'decentraland-ui'
 
 export type Props = NavbarProps & {
   isHomePage: boolean
+  isSignIn: boolean
   address: string | undefined
   mana: number | undefined
   isConnected: boolean
@@ -10,6 +11,11 @@ export type Props = NavbarProps & {
 
 export type MapStateProps = Pick<
   Props,
-  'isHomePage' | 'address' | 'isConnected' | 'isConnecting' | 'mana'
+  | 'isHomePage'
+  | 'isSignIn'
+  | 'address'
+  | 'isConnected'
+  | 'isConnecting'
+  | 'mana'
 >
 export type MapDispatchProps = Pick<Props, 'onSignIn'>

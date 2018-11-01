@@ -26,9 +26,9 @@ const loggerMiddleware = createLogger({
 const analyticsMiddleware = createAnalyticsMiddleware(
   env.get('REACT_APP_SEGMENT_API_KEY')
 )
-const { storageMiddleware, loadStorageMiddleware } = createStorageMiddleware(
-  env.get('REACT_APP_LOCAL_STORAGE_KEY', 'decentraland-agora')
-)
+const { storageMiddleware, loadStorageMiddleware } = createStorageMiddleware({
+  storageKey: env.get('REACT_APP_LOCAL_STORAGE_KEY', 'decentraland-agora')
+})
 
 const middleware = applyMiddleware(
   historyMiddleware,

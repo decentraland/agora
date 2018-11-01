@@ -63,5 +63,18 @@
     "vote": "Vote",
     "cast_vote": "Cast your vote",
     "you_voted": "You voted {option}"
+  },
+  "sign_in": {
+    "get_started": "Get Started",
+    "options": {
+      "desktop":
+        "You can use the {metamask_link} extension or a hardware wallet like {ledger_nano_link}.",
+      "mobile":
+        "You can use mobile browsers such as {coinbase_link} or {imtoken_link}."
+    },
+    "connect": "Connect",
+    "connecting": "Connecting...",
+    "connected": "Connected",
+    "error": "Could not connect to wallet."
   }
 }

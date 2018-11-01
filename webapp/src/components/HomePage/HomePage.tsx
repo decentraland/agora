@@ -7,7 +7,7 @@ import { locations } from 'locations'
 import PollCards from './PollCards'
 import { PollWithAssociations } from 'modules/poll/types'
 
-const CARDS = 6
+const CARDS_AMOUNT = 6
 
 export default class HomePage extends React.PureComponent<Props> {
   componentWillMount() {
@@ -18,7 +18,7 @@ export default class HomePage extends React.PureComponent<Props> {
   fetchDecentralandPolls() {
     const { onFetchPolls } = this.props
     onFetchPolls({
-      limit: CARDS,
+      limit: CARDS_AMOUNT,
       type: 'decentraland'
     })
   }
@@ -26,7 +26,7 @@ export default class HomePage extends React.PureComponent<Props> {
   fetchDistrictPolls() {
     const { onFetchPolls } = this.props
     onFetchPolls({
-      limit: CARDS,
+      limit: CARDS_AMOUNT,
       type: 'district'
     })
   }
@@ -57,14 +57,16 @@ export default class HomePage extends React.PureComponent<Props> {
         ) : (
           <>
             <PollCards
-              polls={decentralandPolls.filter((_, index) => index < CARDS)}
+              polls={decentralandPolls.filter(
+                (_, index) => index < CARDS_AMOUNT
+              )}
               title={t('polls_table.decentraland_polls')}
               meta={t('global.weight')}
               onClick={this.handleClick}
               onViewMore={this.redirectToDecentralandPolls}
             />
             <PollCards
-              polls={districtPolls.filter((_, index) => index < CARDS)}
+              polls={districtPolls.filter((_, index) => index < CARDS_AMOUNT)}
               title={t('polls_table.district_polls')}
               meta={t('global.weight')}
               onClick={this.handleClick}

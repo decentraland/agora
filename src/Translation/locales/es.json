@@ -1,31 +1,44 @@
 {
   "@dapps": {
     "navbar": {
-      "account": {
-        "connecting": "Connecting...",
-        "signIn": "Sign In"
-      },
       "menu": {
+        "blog": "Blog",
         "agora": "Agora",
-        "marketplace": "Marketplace",
         "developers": "Developers",
-        "blog": "Blog"
+        "marketplace": "Marketplace"
+      },
+      "account": {
+        "signIn": "Sign In",
+        "connecting": "Connecting..."
       }
     }
   },
   "global": {
     "poll": "Encuesta",
+    "votes": "Votos",
     "polls": "Encuestas",
+    "weight": "Peso",
     "view_more": "Ver más",
     "description": "Descripción",
     "contributions": "Contribuciones",
-    "your_contributions": "Tus Contribuciones",
-    "weight": "Peso",
-    "votes": "Votos"
+    "your_contributions": "Tus Contribuciones"
   },
   "languages": {
-    "en": "Inglés",
-    "es": "Español"
+    "es": "Español",
+    "en": "Inglés"
+  },
+  "sign_in": {
+    "error": "No se pudo conectar a la billetera.",
+    "connect": "Conectar",
+    "connected": "Conectado",
+    "connecting": "Conectando ...",
+    "get_started": "Comenzar",
+    "options": {
+      "mobile":
+        "Puede utilizar navegadores móviles como {coinbase_link} o {imtoken_link}.",
+      "desktop":
+        "Puede usar la extensión {metamask_link} o una billetera de hardware como {ledger_nano_link}."
+    }
   },
   "vote_page": {
     "vote": "Votar",
@@ -36,8 +49,8 @@
   },
   "polls_table": {
     "title": "Título",
-    "empty": "Vaya... no hay nada aquí.",
     "votes": "Votos",
+    "empty": "Vaya... no hay nada aquí.",
     "all_polls": "Todas las encuestas",
     "active_polls": "Encuestas en curso",
     "expired_polls": "Encuestas cerradas",
@@ -51,13 +64,13 @@
     }
   },
   "poll_detail_page": {
-    "vote": "Voto",
     "when": "Fecha",
+    "vote": "Voto",
     "votes": "Votos",
     "amount": "Cantidad",
     "address": "Dirección",
-    "cast_vote": "Emitir voto",
     "you_voted": "Has votado {option}",
+    "cast_vote": "Emitir voto",
     "stats": {
       "token": "Token",
       "finished": "Finalizada",

@@ -1,3 +1,7 @@
+.HomePage {
+  margin-bottom: 96px;
+}
+
 .HomePage .cards .card .meta .Token,
 .HomePage .cards .card .meta .Token .symbol {
   font-size: 15px;
@@ -18,4 +22,36 @@
 
 .HomePage .ui.loader:before {
   border-color: white !important;
+}
+
+/* Pyramids */
+
+.pyramid {
+  background: url('../../assets/pyramid.svg');
+  background-size: contain;
+  background-repeat: no-repeat;
+}
+
+.pyramid.small {
+  width: 400px;
+  height: 400px;
+  margin-left: 10%;
+  margin-top: 100px;
+}
+
+.pyramid.large {
+  width: 1000px;
+  height: 1000px;
+  margin-top: -200px;
+  margin-left: 55%;
+}
+
+.dcl.navbar .dcl.hero {
+  background-color: #f2f2f5;
+}
+
+@media (max-width: 768px) {
+  .pyramid.small {
+    margin-left: 0px;
+  }
 }
