@@ -28,6 +28,7 @@ export default class Page extends React.PureComponent<Props> {
   render() {
     const {
       isHomePage,
+      isSignIn,
       children,
       address,
       mana,
@@ -42,6 +43,7 @@ export default class Page extends React.PureComponent<Props> {
           activePage="agora"
           address={address}
           mana={mana}
+          isSignIn={isSignIn}
           isConnected={isConnected}
           isConnecting={isConnecting}
           onSignIn={onSignIn}
@@ -54,7 +56,7 @@ export default class Page extends React.PureComponent<Props> {
               agora: 'Agora',
               marketplace: 'Marketplace',
               blog: 'Blog',
-              developers: 'Developers'
+              docs: 'Docs'
             }
           }}
         >

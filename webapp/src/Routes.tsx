@@ -8,6 +8,7 @@ import HomePage from 'components/HomePage'
 import PollDetailPage from 'components/PollDetailPage'
 import VotePage from 'components/VotePage'
 import PollsTable from 'components/PollsTable'
+import SignIn from 'components/SignIn'
 
 export default class Routes extends React.Component {
   renderRoutes() {
@@ -17,6 +18,7 @@ export default class Routes extends React.Component {
         <Route exact path={locations.poll()} component={PollDetailPage} />
         <Route exact path={locations.vote()} component={VotePage} />
         <Route exact path={locations.polls()} component={PollsTable} />
+        <Route exact path={locations.signIn()} component={SignIn} />
         <Redirect to={locations.root()} />
       </Switch>
     )

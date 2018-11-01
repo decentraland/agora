@@ -14,7 +14,9 @@ export const locations = {
   pollDetail: (id: string) => `/polls/${id}`,
 
   vote: () => '/polls/:id/vote',
-  voteDetail: (id: string) => `/polls/${id}/vote`
+  voteDetail: (id: string) => `/polls/${id}/vote`,
+
+  signIn: () => '/sign-in'
 }
 
 export const STATIC_PAGES: string[] = []

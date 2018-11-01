@@ -14,3 +14,8 @@ export const isHomePage = (state: RootState) => {
   const pathname = getPathname(state)
   return pathname === locations.root()
 }
+
+export const isSignIn = (state: RootState) => {
+  const pathname = getPathname(state)
+  return pathname === locations.signIn()
+}

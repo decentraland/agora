@@ -36,10 +36,13 @@
 }
 
 @media (max-width: 768px) {
+  .VotePage {
+    margin-bottom: 16px;
+  }
+
   .VotePage .vote {
     display: flex;
     flex-flow: row nowrap;
-    margin-bottom: 16px;
   }
 
   .VotePage .vote .ui.button {
