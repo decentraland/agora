@@ -34,6 +34,11 @@
   margin-top: 40px;
 }
 
+.SignIn .message {
+  padding: 0px 38px;
+  text-align: center;
+}
+
 .SignIn .ui.button {
   margin-top: 40px;
 }
