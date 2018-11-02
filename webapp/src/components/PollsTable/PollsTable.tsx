@@ -123,7 +123,7 @@ export default class PollsTable extends React.PureComponent<Props> {
                 </Table.Cell>
                 <Table.Cell>
                   <span className="mobile-header">
-                    {t('polls_table.total_voted')}
+                    {t('global.weight')}
                     :&nbsp;
                   </span>
                   <Token token={poll.token} amount={poll.balance} cell />

@@ -31,6 +31,7 @@ export default class PollCards extends React.PureComponent<Props> {
         <Card.Group>
           {polls.map(poll => (
             <Card
+              key={poll.id}
               link
               onClick={this.getPollClickHandler(poll)}
               className={isFinished(poll) ? 'finished' : 'ongoing'}
