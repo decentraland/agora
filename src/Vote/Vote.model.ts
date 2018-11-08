@@ -31,6 +31,7 @@ export class Vote extends Model<VoteAttributes> {
       FROM ${raw(Poll.tableName)} p
         WHERE v.account_address = ${account.address}
           AND v.poll_id = p.id
-          AND p.token_address = ${account.token_address}`)
+          AND p.token_address = ${account.token_address}
+          AND p.closes_at > extract(epoch from now()) * 1000`)
   }
 }
