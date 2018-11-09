@@ -1,6 +1,6 @@
 import { Model, SQL, raw } from 'decentraland-server'
 import { VoteAttributes, CastVote } from './Vote.types'
-import { Poll } from '../Poll'
+import { Poll, PollQueries } from '../Poll'
 import { Option } from '../Option'
 import { Token } from '../Token'
 import { AccountBalanceAttributes } from '../AccountBalance'
@@ -29,9 +29,11 @@ export class Vote extends Model<VoteAttributes> {
       UPDATE ${raw(this.tableName)} v
         SET account_balance = ${balance}
       FROM ${raw(Poll.tableName)} p
-        WHERE v.account_address = ${account.address}
-          AND v.poll_id = p.id
-          AND p.token_address = ${account.token_address}
-          AND p.closes_at > extract(epoch from now()) * 1000`)
+        ${PollQueries.whereStatusAndType({
+          status: 'active'
+        })}
+        AND v.account_address = ${account.address}
+        AND v.poll_id = p.id
+        AND p.token_address = ${account.token_address}`)
   }
 }
