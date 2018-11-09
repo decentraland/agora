@@ -73,21 +73,25 @@ async function updateAccountBalances() {
   for (const account of accounts) {
     const { address, token_address } = account
     const contract = tokenContracts[token_address]
-    let balance = '0'
 
+    /*
+      Perf improvement to avoid updating contributors account balances
+      as they are fixed and only set once. It's important that a proper
+      row exist before using the app that map a contributor address to
+      it's contributions for each district
+      ref: https://github.com/decentraland/agora/pull/126
+    */
     if (DistrictToken.isAddress(token_address)) {
-      balance = account.balance
-    } else {
-      if (!contract) {
-        log.info(
-          `No contract for address ${token_address} in account ${address}`
-        )
-        continue
-      }
-
-      const contractBalance = await contract.balanceOf(address)
-      balance = eth.utils.fromWei(contractBalance).toString()
+      continue
     }
+
+    if (!contract) {
+      log.info(`No contract for address ${token_address} in account ${address}`)
+      continue
+    }
+
+    const contractBalance = await contract.balanceOf(address)
+    const balance = eth.utils.fromWei(contractBalance).toString()
 
     log.info(`Updating Accounts and votes ${address} with balance ${balance}`)
     await Promise.all([
