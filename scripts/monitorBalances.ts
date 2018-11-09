@@ -74,6 +74,13 @@ async function updateAccountBalances() {
     const { address, token_address } = account
     const contract = tokenContracts[token_address]
 
+    /*
+      Perf improvement to avoid updating contributors account balances
+      as they are fixed and only set once. It's important that a proper
+      row exist before using the app that map a contributor address to
+      it's contributions for each district
+      ref: https://github.com/decentraland/agora/pull/126
+    */
     if (DistrictToken.isAddress(token_address)) {
       continue
     }
