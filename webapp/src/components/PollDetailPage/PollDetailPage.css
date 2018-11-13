@@ -61,6 +61,10 @@
   font-weight: bold;
 }
 
+.PollDetailPage .sign-in-message {
+  color: var(--secondary-text);
+}
+
 @media (max-width: 768px) {
   .PollDetailPage .votes {
     margin-top: 0px;

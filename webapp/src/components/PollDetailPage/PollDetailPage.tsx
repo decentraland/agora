@@ -17,7 +17,7 @@ import {
   formatDate,
   formatDateTime
 } from '@dapps/lib/utils'
-import { t } from '@dapps/modules/translation/utils'
+import { t, T } from '@dapps/modules/translation/utils'
 import { getVoteOptionValue } from 'modules/option/utils'
 import { isFinished } from 'modules/poll/utils'
 import { getBalanceInPoll } from 'modules/wallet/utils'
@@ -30,6 +30,7 @@ import YourVote from './YourVote'
 import CastYourVote from './CastYourVote'
 import { Props, State, Tally, Result } from './PollDetailPage.types'
 import './PollDetailPage.css'
+import { Link } from 'react-router-dom'
 
 const VOTES_PER_PAGE = 20
 
@@ -192,7 +193,22 @@ export default class PollDetailPage extends React.PureComponent<Props, State> {
                       </OptionOrb>
                     ))}
                   </div>
-                  <YourVote vote={currentVote} poll={poll} />
+                  {isConnected ? (
+                    <YourVote vote={currentVote} poll={poll} />
+                  ) : (
+                    <p className="sign-in-message">
+                      <T
+                        id="poll_detail_page.sign_in_message"
+                        values={{
+                          sign_in_link: (
+                            <Link to={locations.signIn()}>
+                              {t('poll_detail_page.sign_in_link')}
+                            </Link>
+                          )
+                        }}
+                      />
+                    </p>
+                  )}
                 </div>
               </>
             </Responsive>

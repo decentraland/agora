@@ -75,6 +75,8 @@
       "token": "Token",
       "finished": "Finalizada",
       "time_left": "Tiempo disponible"
-    }
+    },
+    "sign_in_message": "Tienes que estar {sign_in_link} para votar",
+    "sign_in_link": "conectado"
   }
 }
