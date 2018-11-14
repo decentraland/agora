@@ -1,0 +1,53 @@
+{
+  "global": {
+    "poll": "世論調査",
+    "votes": "投票",
+    "polls": "投票",
+    "weight": "重量",
+    "view_more": "もっと見る",
+    "description": "説明",
+    "contributions": "貢献",
+    "your_contributions": "あなたの貢献"
+  },
+  "homepage": {
+    "title": "Decentralandを構築するのに役立ちます",
+    "subtitle": "ディスカッションに参加する",
+    "cards": {
+      "closed": "閉まっている",
+      "time_left": "左に{time}"
+    }
+  },
+  "vote_page": {
+    "vote": "今投票する",
+    "cancel": "キャンセル",
+    "no_balance": "あなたは{symbol}を持っていません",
+    "voting_width": "投票",
+    "no_contributions": "あなたは貢献していません"
+  },
+  "polls_table": {
+    "title": "タイトル",
+    "votes": "投票",
+    "empty": "おっと...ここには何も見つかりません。",
+    "all_polls": "すべての世論調査",
+    "active_polls": "進行中の世論調査",
+    "expired_polls": "閉鎖投票",
+    "district_polls": "地区投票",
+    "decentraland_polls": "Decentraland世論調査"
+  },
+  "poll_detail_page": {
+    "vote": "投票",
+    "when": "いつ",
+    "votes": "投票",
+    "amount": "量",
+    "address": "住所",
+    "cast_vote": "投票してください",
+    "you_voted": "あなたは{option}に投票しました",
+    "stats": {
+      "token": "トークン",
+      "finished": "完成した",
+      "time_left": "残り時間"
+    },
+    "sign_in_link": "サインインしました",
+    "sign_in_message": "投票するには{sign_in_link}にする必要があります"
+  }
+}

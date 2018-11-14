@@ -147,6 +147,8 @@ export default class PollsTable extends React.PureComponent<Props> {
               totalPages={totalPages}
               firstItem={null}
               lastItem={null}
+              prevItem={null}
+              nextItem={null}
               onPageChange={this.handlePageChange}
             />
           </div>

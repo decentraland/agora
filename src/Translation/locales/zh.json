@@ -1,0 +1,53 @@
+{
+  "global": {
+    "poll": "轮询",
+    "votes": "投票",
+    "polls": "民意调查",
+    "weight": "重量",
+    "view_more": "查看更多",
+    "description": "描述",
+    "contributions": "捐款",
+    "your_contributions": "你的贡献"
+  },
+  "homepage": {
+    "title": "帮助我们建立Decentraland",
+    "subtitle": "加入讨论",
+    "cards": {
+      "closed": "关闭",
+      "time_left": "{time}离开了"
+    }
+  },
+  "vote_page": {
+    "vote": "现在投票",
+    "cancel": "取消",
+    "no_balance": "你没有任何{symbol}",
+    "voting_width": "投票",
+    "no_contributions": "你没有任何贡献"
+  },
+  "polls_table": {
+    "title": "标题",
+    "votes": "投票",
+    "empty": "糟糕...这里找不到任何东西。",
+    "all_polls": "所有民意调查",
+    "active_polls": "正在进行的民意调查",
+    "expired_polls": "封闭民意调查",
+    "district_polls": "地区民意调查",
+    "decentraland_polls": "Decentraland民意调查"
+  },
+  "poll_detail_page": {
+    "vote": "投票",
+    "when": "什么时候",
+    "votes": "投票",
+    "amount": "量",
+    "address": "地址",
+    "cast_vote": "投你的票",
+    "you_voted": "你投了{option}",
+    "stats": {
+      "token": "代币",
+      "finished": "成品",
+      "time_left": "剩下的时间"
+    },
+    "sign_in_link": "登录",
+    "sign_in_message": "你需要投票才能投票"
+  }
+}

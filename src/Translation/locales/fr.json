@@ -1,0 +1,53 @@
+{
+  "global": {
+    "poll": "Scrutin",
+    "votes": "Votes",
+    "polls": "Les scrutins",
+    "weight": "Poids",
+    "view_more": "Afficher plus",
+    "description": "La description",
+    "contributions": "Contributions",
+    "your_contributions": "Vos contributions"
+  },
+  "homepage": {
+    "title": "Aidez-nous à construire Decentraland",
+    "subtitle": "Rejoignez la discussion",
+    "cards": {
+      "closed": "fermé",
+      "time_left": "{time} à gauche"
+    }
+  },
+  "vote_page": {
+    "vote": "Votez maintenant",
+    "cancel": "Annuler",
+    "no_balance": "Vous n'avez pas de {symbol}",
+    "voting_width": "Voter avec",
+    "no_contributions": "Vous n'avez aucune contribution"
+  },
+  "polls_table": {
+    "title": "Titre",
+    "votes": "Votes",
+    "empty": "Oups ... rien trouvé ici.",
+    "all_polls": "Tous les scrutins",
+    "active_polls": "Scrutins en cours",
+    "expired_polls": "Scrutins fermés",
+    "district_polls": "Scrutins de district",
+    "decentraland_polls": "Scrutins de Decentraland"
+  },
+  "poll_detail_page": {
+    "vote": "Vote",
+    "when": "Quand",
+    "votes": "Votes",
+    "amount": "Montant",
+    "address": "Adresse",
+    "cast_vote": "Votez",
+    "you_voted": "Vous avez voté {option}",
+    "stats": {
+      "token": "Jeton",
+      "finished": "Fini",
+      "time_left": "Temps restant"
+    },
+    "sign_in_link": "connecté dans",
+    "sign_in_message": "Vous devez être {sign_in_link} pour voter"
+  }
+}

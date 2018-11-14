@@ -299,6 +299,8 @@ export default class PollDetailPage extends React.PureComponent<Props, State> {
                       totalPages={totalPages}
                       firstItem={null}
                       lastItem={null}
+                      nextItem={null}
+                      prevItem={null}
                       onPageChange={this.handlePageChange}
                     />
                   </div>
