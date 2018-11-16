@@ -128,7 +128,7 @@ function restoreTextKeys(text: string, replacedKeys: TranslationData): string {
   // restore non-translatable words
   for (const [index] of nonTranslatable.entries()) {
     text = text.replace(
-      new RegExp(`${NON_TRANSLATABLE_KEY}${index}`, 'g'),
+      new RegExp(`${NON_TRANSLATABLE_KEY}${index}`, 'gi'),
       nonTranslatable[index]
     )
   }

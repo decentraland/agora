@@ -1,18 +1,4 @@
 {
-  "@dapps": {
-    "navbar": {
-      "account": {
-        "connecting": "Connecting...",
-        "signIn": "Sign In"
-      },
-      "menu": {
-        "agora": "Agora",
-        "marketplace": "Marketplace",
-        "developers": "Developers",
-        "blog": "Blog"
-      }
-    }
-  },
   "global": {
     "poll": "Poll",
     "polls": "Polls",
@@ -23,10 +9,6 @@
     "weight": "Weight",
     "votes": "Votes"
   },
-  "languages": {
-    "en": "English",
-    "es": "Spanish"
-  },
   "vote_page": {
     "vote": "Vote now",
     "cancel": "Cancel",
@@ -35,6 +17,8 @@
     "voting_width": "Voting with"
   },
   "homepage": {
+    "title": "Help us build Decentraland",
+    "subtitle": "Join the discussion",
     "cards": {
       "time_left": "{time} left",
       "closed": "closed"
@@ -65,18 +49,5 @@
     "you_voted": "You voted {option}",
     "sign_in_message": "You need to be {sign_in_link} to vote",
     "sign_in_link": "signed in"
-  },
-  "sign_in": {
-    "get_started": "Get Started",
-    "options": {
-      "desktop":
-        "You can use the {metamask_link} extension or a hardware wallet like {ledger_nano_link}.",
-      "mobile":
-        "You can use mobile browsers such as {coinbase_link} or {imtoken_link}."
-    },
-    "connect": "Connect",
-    "connecting": "Connecting...",
-    "connected": "Connected",
-    "error": "Could not connect to wallet."
   }
 }

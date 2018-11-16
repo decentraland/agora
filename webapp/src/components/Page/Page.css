@@ -3,9 +3,6 @@
   min-height: calc(100vh - 165px);
 }
 
-.Page .ui.container {
-}
-
 .Page.is-homepage {
   margin-top: 302px;
 }

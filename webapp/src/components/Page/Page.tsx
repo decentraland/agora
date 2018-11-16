@@ -1,16 +1,19 @@
 import * as React from 'react'
-import { Hero, Navbar, Parallax, Container, Footer } from 'decentraland-ui'
-import { Props } from './Page.types'
 
+import { Hero, Parallax, Container } from 'decentraland-ui'
+import Navbar from '@dapps/containers/Navbar'
+import Footer from '@dapps/containers/Footer'
+import { t } from '@dapps/modules/translation/utils'
+
+import { Props } from './Page.types'
 import './Page.css'
-import { t } from 'decentraland-dapps/dist/modules/translation/utils'
 
 export default class Page extends React.PureComponent<Props> {
   renderHero() {
     return (
       <Hero
-        title="Help us build Decentraland"
-        subtitle="Join the discussion"
+        title={t('homepage.title')}
+        subtitle={t('homepage.subtitle')}
         height={320}
       >
         <Parallax>
@@ -26,46 +29,16 @@ export default class Page extends React.PureComponent<Props> {
   }
 
   render() {
-    const {
-      isHomePage,
-      isSignIn,
-      children,
-      address,
-      mana,
-      isConnected,
-      isConnecting,
-      onSignIn
-    } = this.props
-
+    const { isHomePage, children, onSignIn, isSignIn } = this.props
     return (
       <>
-        <Navbar
-          activePage="agora"
-          address={address}
-          mana={mana}
-          isSignIn={isSignIn}
-          isConnected={isConnected}
-          isConnecting={isConnecting}
-          onSignIn={onSignIn}
-          i18n={{
-            account: {
-              connecting: t('@dapps.navbar.account.connecting'),
-              signIn: t('@dapps.navbar.account.signIn')
-            },
-            menu: {
-              agora: 'Agora',
-              marketplace: 'Marketplace',
-              blog: 'Blog',
-              docs: 'Docs'
-            }
-          }}
-        >
+        <Navbar activePage="agora" isSignIn={isSignIn} onSignIn={onSignIn}>
           {isHomePage ? this.renderHero() : null}
         </Navbar>
         <div className={`Page ${isHomePage ? 'is-homepage' : ''}`}>
           <Container>{children}</Container>
         </div>
-        <Footer locale="en" locales={['en']} />
+        <Footer />
       </>
     )
   }

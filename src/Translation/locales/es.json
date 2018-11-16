@@ -1,43 +1,20 @@
 {
-  "@dapps": {
-    "navbar": {
-      "menu": {
-        "blog": "Blog",
-        "agora": "Agora",
-        "developers": "Developers",
-        "marketplace": "Marketplace"
-      },
-      "account": {
-        "signIn": "Sign In",
-        "connecting": "Connecting..."
-      }
-    }
-  },
   "global": {
     "poll": "Encuesta",
-    "votes": "Votos",
     "polls": "Encuestas",
+    "votes": "Votos",
     "weight": "Peso",
     "view_more": "Ver más",
     "description": "Descripción",
     "contributions": "Contribuciones",
     "your_contributions": "Tus Contribuciones"
   },
-  "languages": {
-    "es": "Español",
-    "en": "Inglés"
-  },
-  "sign_in": {
-    "error": "No se pudo conectar a la billetera.",
-    "connect": "Conectar",
-    "connected": "Conectado",
-    "connecting": "Conectando ...",
-    "get_started": "Comenzar",
-    "options": {
-      "mobile":
-        "Puede utilizar navegadores móviles como {coinbase_link} o {imtoken_link}.",
-      "desktop":
-        "Puede usar la extensión {metamask_link} o una billetera de hardware como {ledger_nano_link}."
+  "homepage": {
+    "title": "Ayúdanos a construir Decentraland",
+    "subtitle": "Únete a la discusión",
+    "cards": {
+      "closed": "Cerrado",
+      "time_left": "Quedan {time}"
     }
   },
   "vote_page": {
@@ -48,20 +25,14 @@
     "no_contributions": "No tienes contribuciones"
   },
   "polls_table": {
-    "title": "Título",
-    "votes": "Votos",
     "empty": "Vaya... no hay nada aquí.",
+    "votes": "Votos",
+    "title": "Título",
     "all_polls": "Todas las encuestas",
     "active_polls": "Encuestas en curso",
     "expired_polls": "Encuestas cerradas",
     "district_polls": "Encuestas de distritos",
     "decentraland_polls": "Encuestas de Decentraland"
-  },
-  "homepage": {
-    "cards": {
-      "closed": "Cerrado",
-      "time_left": "Quedan {time}"
-    }
   },
   "poll_detail_page": {
     "when": "Fecha",
@@ -76,7 +47,7 @@
       "finished": "Finalizada",
       "time_left": "Tiempo disponible"
     },
-    "sign_in_message": "Tienes que estar {sign_in_link} para votar",
-    "sign_in_link": "conectado"
+    "sign_in_link": "conectado",
+    "sign_in_message": "Tienes que estar {sign_in_link} para votar"
   }
 }

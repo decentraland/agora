@@ -1,0 +1,53 @@
+{
+  "global": {
+    "poll": "투표",
+    "votes": "투표 수",
+    "polls": "투표소",
+    "weight": "무게",
+    "view_more": "더보기",
+    "description": "기술",
+    "contributions": "기고",
+    "your_contributions": "귀하의 기고 물"
+  },
+  "homepage": {
+    "title": "Decentraland 빌드 도와주세요.",
+    "subtitle": "토론에 참여하십시오.",
+    "cards": {
+      "closed": "닫은",
+      "time_left": "왼쪽으로 {time}"
+    }
+  },
+  "vote_page": {
+    "vote": "지금 투표하십시오.",
+    "cancel": "취소",
+    "no_balance": "당신은 어떤 {symbol}도 가지고 있지 않습니다.",
+    "voting_width": "투표",
+    "no_contributions": "너는 어떤 기여도 없어."
+  },
+  "polls_table": {
+    "title": "표제",
+    "votes": "투표 수",
+    "empty": "죄송합니다. 여기에는 아무것도 없습니다.",
+    "all_polls": "모든 여론 조사",
+    "active_polls": "진행중인 여론 조사",
+    "expired_polls": "닫힌 설문 조사",
+    "district_polls": "지구 투표",
+    "decentraland_polls": "Decentraland 설문 조사"
+  },
+  "poll_detail_page": {
+    "vote": "투표",
+    "when": "언제",
+    "votes": "투표 수",
+    "amount": "양",
+    "address": "주소",
+    "cast_vote": "투표하세요",
+    "you_voted": "투표 한 사람은 {option}입니다.",
+    "stats": {
+      "token": "토큰",
+      "finished": "끝마친",
+      "time_left": "남은 시간"
+    },
+    "sign_in_link": "로그인",
+    "sign_in_message": "투표하려면 {sign_in_link}해야합니다."
+  }
+}
