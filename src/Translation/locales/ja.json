@@ -22,7 +22,7 @@
     "cancel": "キャンセル",
     "no_balance": "あなたは{symbol}を持っていません",
     "voting_width": "投票する",
-    "no_contributions": "あなたは貢献していません"
+    "no_contributions": "あなたの貢献はありません"
   },
   "polls_table": {
     "title": "タイトル",
