@@ -1,53 +1,53 @@
 {
   "global": {
-    "poll": "世論調査",
+    "poll": "公共投票",
     "votes": "投票",
     "polls": "投票",
-    "weight": "重量",
+    "weight": "ウエイト",
     "view_more": "もっと見る",
     "description": "説明",
-    "contributions": "貢献",
-    "your_contributions": "あなたの貢献"
+    "contributions": "貢献区",
+    "your_contributions": "あなたの貢献区"
   },
   "homepage": {
-    "title": "Decentralandを構築するのに役立ちます",
-    "subtitle": "ディスカッションに参加する",
+    "title": "Decentralandの構築に参加しましょう",
+    "subtitle": "ディスカッションに参加できます。",
     "cards": {
-      "closed": "閉まっている",
-      "time_left": "左に{time}"
+      "closed": "締切済",
+      "time_left": "残り時間{time}"
     }
   },
   "vote_page": {
-    "vote": "今投票する",
+    "vote": "投票する",
     "cancel": "キャンセル",
     "no_balance": "あなたは{symbol}を持っていません",
-    "voting_width": "投票",
+    "voting_width": "投票する",
     "no_contributions": "あなたは貢献していません"
   },
   "polls_table": {
     "title": "タイトル",
     "votes": "投票",
-    "empty": "おっと...ここには何も見つかりません。",
-    "all_polls": "すべての世論調査",
-    "active_polls": "進行中の世論調査",
-    "expired_polls": "閉鎖投票",
-    "district_polls": "地区投票",
-    "decentraland_polls": "Decentraland世論調査"
+    "empty": "おっと...ここには何もありません。",
+    "all_polls": "すべての投票",
+    "active_polls": "受付中の投票",
+    "expired_polls": "締切済の投票",
+    "district_polls": "ディストリクト投票",
+    "decentraland_polls": "Decentraland公共投票"
   },
   "poll_detail_page": {
     "vote": "投票",
-    "when": "いつ",
+    "when": "日時",
     "votes": "投票",
     "amount": "量",
-    "address": "住所",
-    "cast_vote": "投票してください",
+    "address": "アドレス",
+    "cast_vote": "投票する",
     "you_voted": "あなたは{option}に投票しました",
     "stats": {
       "token": "トークン",
-      "finished": "完成した",
+      "finished": "終了",
       "time_left": "残り時間"
     },
-    "sign_in_link": "サインインしました",
-    "sign_in_message": "投票するには{sign_in_link}にする必要があります"
+    "sign_in_link": "サインイン済み",
+    "sign_in_message": "投票するには{sign_in_link}する必要があります"
   }
 }
