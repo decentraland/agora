@@ -1,7 +1,7 @@
 {
   "global": {
     "poll": "公共投票",
-    "votes": "投票",
+    "votes": "票数",
     "polls": "投票",
     "weight": "ウエイト",
     "view_more": "もっと見る",
@@ -26,7 +26,7 @@
   },
   "polls_table": {
     "title": "タイトル",
-    "votes": "投票",
+    "votes": "票数",
     "empty": "おっと...ここには何もありません。",
     "all_polls": "すべての投票",
     "active_polls": "受付中の投票",
@@ -36,7 +36,7 @@
   },
   "poll_detail_page": {
     "vote": "投票",
-    "when": "日時",
+    "when": "投票日",
     "votes": "投票",
     "amount": "量",
     "address": "アドレス",
