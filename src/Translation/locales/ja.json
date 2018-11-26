@@ -11,7 +11,7 @@
   },
   "homepage": {
     "title": "Decentralandの構築に参加しましょう",
-    "subtitle": "ディスカッションに参加できます。",
+    "subtitle": "投票を通じてディスカッションに参加できます。",
     "cards": {
       "closed": "締切済",
       "time_left": "残り時間{time}"
