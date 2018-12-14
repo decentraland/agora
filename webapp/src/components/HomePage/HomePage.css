@@ -20,30 +20,8 @@
   color: var(--primary);
 }
 
-.HomePage .ui.loader:before {
-  border-color: white !important;
-}
-
-/* Pyramids */
-
-.pyramid {
-  background: url('../../assets/pyramid.svg');
-  background-size: contain;
-  background-repeat: no-repeat;
-}
-
-.pyramid.small {
-  width: 400px;
-  height: 400px;
-  margin-left: 10%;
-  margin-top: 100px;
-}
-
-.pyramid.large {
-  width: 1000px;
-  height: 1000px;
-  margin-top: -200px;
-  margin-left: 55%;
+.HomePage .ui.loader {
+  margin-top: 128px;
 }
 
 .dcl.navbar .dcl.hero {

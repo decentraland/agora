@@ -1,3 +1,4 @@
+import '@babel/polyfill'
 import * as React from 'react'
 import * as ReactDOM from 'react-dom'
 import 'decentraland-ui/lib/styles.css'
