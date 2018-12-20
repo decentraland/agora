@@ -1,14 +1,15 @@
 import * as React from 'react'
 import { Switch, Route, Redirect } from 'react-router-dom'
 
-import { locations } from 'locations'
+import App from '@dapps/containers/App'
+import SignInPage from '@dapps/containers/SignInPage'
 
-import Page from 'components/Page'
+import { locations } from 'locations'
+import Hero from 'components/Hero'
 import HomePage from 'components/HomePage'
 import PollDetailPage from 'components/PollDetailPage'
 import VotePage from 'components/VotePage'
 import PollsTable from 'components/PollsTable'
-import SignInPage from '@dapps/containers/SignInPage'
 
 export default class Routes extends React.Component {
   renderRoutes() {
@@ -25,6 +26,14 @@ export default class Routes extends React.Component {
   }
 
   render() {
-    return <Page>{this.renderRoutes()}</Page>
+    return (
+      <App
+        activePage="agora"
+        hero={<Hero />}
+        locales={['en', 'es', 'fr', 'zh', 'ko', 'ja']}
+      >
+        {this.renderRoutes()}
+      </App>
+    )
   }
 }
