@@ -27,7 +27,11 @@ export default class Routes extends React.Component {
 
   render() {
     return (
-      <App activePage="agora" hero={<Hero />}>
+      <App
+        activePage="agora"
+        hero={<Hero />}
+        locales={['en', 'es', 'fr', 'zh', 'ko', 'ja']}
+      >
         {this.renderRoutes()}
       </App>
     )
