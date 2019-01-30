@@ -43,11 +43,10 @@ function* handleComputeBalancesRequest() {
 
     for (const tokenAddress in contractTokens) {
       const token = contractTokens[tokenAddress]
-      const tokenContract = Object.create(
-        new contracts.ERC20Token(token.address)
-      )
+      const tokenContract = new contracts.ERC20Token(token.address)
+
       tokenContract.getContractName = () => token.name
-      tokenContracts.push(tokenContract)
+      tokenContracts.push(tokenContract as any)
     }
 
     yield call(() => eth.setContracts(tokenContracts))

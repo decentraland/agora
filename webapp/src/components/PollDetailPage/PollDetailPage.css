@@ -33,6 +33,7 @@
 
 .PollDetailPage .progress {
   flex: 1 0 auto;
+  max-width: calc(100% - 262px);
 }
 
 .PollDetailPage .main.row {
