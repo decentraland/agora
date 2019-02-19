@@ -1,6 +1,13 @@
 import * as React from 'react'
 import { Link } from 'react-router-dom'
-import { Loader, Header, Radio, Button, Stats } from 'decentraland-ui'
+import {
+  Loader,
+  Header,
+  Radio,
+  Button,
+  Stats,
+  CheckboxProps
+} from 'decentraland-ui'
 import * as uuidv4 from 'uuid/v4'
 import { locations } from 'locations'
 import * as ReactMarkdown from 'react-markdown'
@@ -30,8 +37,11 @@ export default class VotePage extends React.PureComponent<Props, State> {
     }
   }
 
-  selectOption = (event: React.FormEvent<HTMLInputElement>) => {
-    this.setState({ selectedOptionId: event.currentTarget.value })
+  selectOption = (
+    _: React.FormEvent<HTMLInputElement>,
+    data: CheckboxProps
+  ) => {
+    this.setState({ selectedOptionId: data.value as string })
   }
 
   createVote = (event: React.FormEvent<HTMLFormElement>) => {
