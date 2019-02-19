@@ -197,16 +197,20 @@ export default class PollDetailPage extends React.PureComponent<Props, State> {
                     <YourVote vote={currentVote} poll={poll} />
                   ) : (
                     <p className="sign-in-message">
-                      <T
-                        id="poll_detail_page.sign_in_message"
-                        values={{
-                          sign_in_link: (
-                            <Link to={locations.signIn()}>
-                              {t('poll_detail_page.sign_in_link')}
-                            </Link>
-                          )
-                        }}
-                      />
+                      {isFinished(poll) ? (
+                        <T id="poll_detail_page.poll_closed" />
+                      ) : (
+                        <T
+                          id="poll_detail_page.sign_in_message"
+                          values={{
+                            sign_in_link: (
+                              <Link to={locations.signIn()}>
+                                {t('poll_detail_page.sign_in_link')}
+                              </Link>
+                            )
+                          }}
+                        />
+                      )}
                     </p>
                   )}
                 </div>

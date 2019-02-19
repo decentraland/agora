@@ -1,8 +1,8 @@
 {
   "global": {
     "poll": "Encuesta",
-    "polls": "Encuestas",
     "votes": "Votos",
+    "polls": "Encuestas",
     "weight": "Peso",
     "view_more": "Ver más",
     "description": "Descripción",
@@ -25,9 +25,9 @@
     "no_contributions": "No tienes contribuciones"
   },
   "polls_table": {
-    "empty": "Vaya... no hay nada aquí.",
-    "votes": "Votos",
     "title": "Título",
+    "votes": "Votos",
+    "empty": "Vaya... no hay nada aquí.",
     "all_polls": "Todas las encuestas",
     "active_polls": "Encuestas en curso",
     "expired_polls": "Encuestas cerradas",
@@ -40,8 +40,9 @@
     "votes": "Votos",
     "amount": "Cantidad",
     "address": "Dirección",
-    "you_voted": "Has votado {option}",
     "cast_vote": "Emitir voto",
+    "you_voted": "Has votado {option}",
+    "poll_closed": "Esta encuesta esta cerrada",
     "stats": {
       "token": "Token",
       "finished": "Finalizada",

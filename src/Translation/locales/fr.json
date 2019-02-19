@@ -2,12 +2,12 @@
   "global": {
     "poll": "Sondage",
     "polls": "Sondages",
+    "votes": "Votes",
     "weight": "Poids",
     "view_more": "Voir plus",
     "description": "Description",
     "contributions": "Contributions",
-    "your_contributions": "Vos contributions",
-    "votes": "Votes"
+    "your_contributions": "Vos contributions"
   },
   "homepage": {
     "title": "Aidez à construire Decentraland",
@@ -21,12 +21,12 @@
     "vote": "Votez maintenant",
     "cancel": "Annuler",
     "no_balance": "Vous n'avez pas de {symbol}",
-    "no_contributions": "Vous n'avez aucune contribution",
-    "voting_width": "Voter avec"
+    "voting_width": "Voter avec",
+    "no_contributions": "Vous n'avez aucune contribution"
   },
   "polls_table": {
-    "title": "Titre",
     "votes": "Votes",
+    "title": "Titre",
     "empty": "Oups ... rien n'a été trouvé ici.",
     "all_polls": "Tous les sondages",
     "active_polls": "Sondages en cours",
@@ -40,8 +40,9 @@
     "votes": "Votes",
     "amount": "Montant",
     "address": "Adresse",
-    "cast_vote": "Voter",
     "you_voted": "Vous avez voté {option}",
+    "cast_vote": "Voter",
+    "poll_closed": "Ce sondage est fermé",
     "stats": {
       "token": "Jeton",
       "finished": "Fini",

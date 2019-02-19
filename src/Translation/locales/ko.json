@@ -1,8 +1,8 @@
 {
   "global": {
     "poll": "설문조사",
-    "votes": "투표들",
     "polls": "설문조사들",
+    "votes": "투표들",
     "weight": "가중치",
     "view_more": "더보기",
     "description": "상세 내용",
@@ -25,9 +25,9 @@
     "no_contributions": "당신은 기부한 내역이 없습니다."
   },
   "polls_table": {
-    "title": "제목",
-    "votes": "투표들",
     "empty": "죄송합니다. 아무것도 없습니다.",
+    "votes": "투표들",
+    "title": "제목",
     "all_polls": "모든 설문조사",
     "active_polls": "진행중인 설문조사",
     "expired_polls": "종료된 설문조사",
@@ -40,8 +40,9 @@
     "votes": "진행한 투표들",
     "amount": "양",
     "address": "주소",
-    "cast_vote": "투표하기",
     "you_voted": "당신은 이미 투표 하셨습니다 {option}.",
+    "cast_vote": "투표하기",
+    "poll_closed": "이 설문 조사는 마감되었습니다.",
     "stats": {
       "token": "토큰",
       "finished": "종료된 투표날짜.",
