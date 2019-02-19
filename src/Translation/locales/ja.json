@@ -1,8 +1,8 @@
 {
   "global": {
     "poll": "公共投票",
-    "votes": "票数",
     "polls": "投票",
+    "votes": "票数",
     "weight": "ウエイト",
     "view_more": "もっと見る",
     "description": "説明",
@@ -25,9 +25,9 @@
     "no_contributions": "あなたの貢献はありません"
   },
   "polls_table": {
-    "title": "タイトル",
-    "votes": "票数",
     "empty": "おっと...ここには何もありません。",
+    "votes": "票数",
+    "title": "タイトル",
     "all_polls": "すべての投票",
     "active_polls": "受付中の投票",
     "expired_polls": "締切済の投票",
@@ -40,8 +40,9 @@
     "votes": "投票",
     "amount": "量",
     "address": "アドレス",
-    "cast_vote": "投票する",
     "you_voted": "あなたは{option}に投票しました",
+    "cast_vote": "投票する",
+    "poll_closed": "この投票は締め切りました",
     "stats": {
       "token": "トークン",
       "finished": "終了",

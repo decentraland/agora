@@ -1,8 +1,8 @@
 {
   "global": {
     "poll": "投票",
-    "votes": "投票",
     "polls": "投票",
+    "votes": "投票",
     "weight": "权重",
     "view_more": "查看更多",
     "description": "说明",
@@ -25,9 +25,9 @@
     "no_contributions": "您没有小区地块"
   },
   "polls_table": {
-    "title": "标题",
-    "votes": "投票数",
     "empty": "尚无内容",
+    "votes": "投票数",
+    "title": "标题",
     "all_polls": "所有投票",
     "active_polls": "正在进行的投票",
     "expired_polls": "已关闭的投票",
@@ -40,8 +40,9 @@
     "votes": "投票",
     "amount": "量",
     "address": "地址",
-    "cast_vote": "开始投票",
     "you_voted": "您投了 {option}",
+    "cast_vote": "开始投票",
+    "poll_closed": "此民意调查已结束",
     "stats": {
       "token": "通证",
       "finished": "已结束",

@@ -48,6 +48,7 @@
     "cast_vote": "Cast your vote",
     "you_voted": "You voted {option}",
     "sign_in_message": "You need to be {sign_in_link} to vote",
-    "sign_in_link": "signed in"
+    "sign_in_link": "signed in",
+    "poll_closed": "This poll is closed"
   }
 }
