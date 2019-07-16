@@ -19,3 +19,9 @@
   margin-top: -200px;
   margin-left: 55%;
 }
+
+.dcl.hero .dcl.parallax {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+}

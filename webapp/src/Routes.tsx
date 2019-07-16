@@ -10,30 +10,61 @@ import HomePage from 'components/HomePage'
 import PollDetailPage from 'components/PollDetailPage'
 import VotePage from 'components/VotePage'
 import PollsTable from 'components/PollsTable'
+import { Container } from 'decentraland-ui'
 
 export default class Routes extends React.Component {
-  renderRoutes() {
-    return (
-      <Switch>
-        <Route exact path={locations.root()} component={HomePage} />
-        <Route exact path={locations.poll()} component={PollDetailPage} />
-        <Route exact path={locations.vote()} component={VotePage} />
-        <Route exact path={locations.polls()} component={PollsTable} />
-        <Route exact path={locations.signIn()} component={SignInPage} />
-        <Redirect to={locations.root()} />
-      </Switch>
-    )
-  }
+  withApp = (Component: React.ComponentType<any>) => (props: any) => (
+    <App activePage="agora" locales={['en', 'es', 'fr', 'zh', 'ko', 'ja']}>
+      <Container>
+        <Component {...props} />
+      </Container>
+    </App>
+  )
+
+  withHero = (Component: React.ComponentType<any>) => (props: any) => (
+    <App
+      activePage="agora"
+      locales={['en', 'es', 'fr', 'zh', 'ko', 'ja']}
+      isFullscreen
+      isOverlay
+    >
+      <Hero />
+      <Container>
+        <Component {...props} />
+      </Container>
+    </App>
+  )
 
   render() {
     return (
-      <App
-        activePage="agora"
-        hero={<Hero />}
-        locales={['en', 'es', 'fr', 'zh', 'ko', 'ja']}
-      >
-        {this.renderRoutes()}
-      </App>
+      <Switch>
+        <Route
+          exact
+          path={locations.root()}
+          component={this.withHero(HomePage)}
+        />
+        <Route
+          exact
+          path={locations.poll()}
+          component={this.withApp(PollDetailPage)}
+        />
+        <Route
+          exact
+          path={locations.vote()}
+          component={this.withApp(VotePage)}
+        />
+        <Route
+          exact
+          path={locations.polls()}
+          component={this.withApp(PollsTable)}
+        />
+        <Route
+          exact
+          path={locations.signIn()}
+          component={this.withApp(SignInPage)}
+        />
+        <Redirect to={locations.root()} />
+      </Switch>
     )
   }
 }

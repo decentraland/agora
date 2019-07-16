@@ -52,7 +52,7 @@
     "chai-as-promised": "^7.1.1",
     "dcl-tslint-config-standard": "^1.0.1",
     "decentraland-commons": "^5.1.0",
-    "decentraland-eth": "^4.2.0",
+    "decentraland-eth": "^8.16.0",
     "decentraland-server": "^2.0.1",
     "express": "^4.16.2",
     "flat": "^4.0.0",

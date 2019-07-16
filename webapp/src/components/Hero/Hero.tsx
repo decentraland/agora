@@ -8,11 +8,11 @@ import './Hero.css'
 export default class Hero extends React.PureComponent {
   render() {
     return (
-      <HeroComponent
-        title={t('homepage.title')}
-        subtitle={t('homepage.subtitle')}
-        height={320}
-      >
+      <HeroComponent centered height={320}>
+        <HeroComponent.Header>{t('homepage.title')}</HeroComponent.Header>
+        <HeroComponent.Description>
+          {t('homepage.subtitle')}
+        </HeroComponent.Description>
         <Parallax>
           <Parallax.Layer depth={0.2}>
             <div className="pyramid small" />
