@@ -33,9 +33,9 @@ export async function main() {
   for (const token of tokens) {
     if (DistrictToken.isValid(token)) continue
 
-    const tokenContract = Object.create(new contracts.ERC20Token(token.address))
+    const tokenContract = new contracts.ERC20Token(token.address)
     tokenContract.getContractName = () => token.name
-    tokenContracts[token.address] = tokenContract
+    tokenContracts[token.address] = tokenContract as any
   }
 
   try {

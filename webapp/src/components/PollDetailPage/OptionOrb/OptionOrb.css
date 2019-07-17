@@ -18,21 +18,21 @@
 }
 
 .OptionOrb.color-0 .orb {
-  background: var(--pale-strawberry);
+  background: var(--night-time);
 }
 
 .OptionOrb.color-1 .orb {
-  background: var(--fuchsia);
+  background: var(--luisxvi-violet);
 }
 
 .OptionOrb.color-2 .orb {
-  background: var(--purple);
+  background: var(--candy-purple);
 }
 
 .OptionOrb.color-3 .orb {
-  background: var(--light-blue);
+  background: var(--summer-red);
 }
 
 .OptionOrb.color-4 .orb {
-  background: var(--sunrise);
+  background: var(--oj-not-simpson);
 }
