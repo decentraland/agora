@@ -1,6 +1,6 @@
 {
   "name": "agora",
-  "version": "0.1.0",
+  "version": "2.6.1",
   "description": "A place for the Decentraland community to vote on important topics",
   "main": "src/server.js",
   "scripts": {
