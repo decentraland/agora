@@ -1,0 +1,8 @@
+.PollRanking {
+  display: flex;
+  width: 100%;
+}
+
+.PollRanking .ui.table td.ranking {
+  padding-right: 1em;
+}
