@@ -123,7 +123,10 @@ export default class PollDetailPage extends React.PureComponent<Props, State> {
 
   render() {
     const { wallet, poll, currentVote, isConnected, isLoading } = this.props
-    const currentResults = this.getCurrentResults()
+    const currentResults = [
+      ...this.getCurrentResults(),
+      ...this.getCurrentResults()
+    ]
     const noVotes = poll && poll.votes.length === 0
     const totalPages = poll ? Math.ceil(poll.votes.length / VOTES_PER_PAGE) : 0
     const pageOffset = (this.state.activePage - 1) * VOTES_PER_PAGE
