@@ -17,6 +17,7 @@ import { getBalanceInPoll } from 'modules/wallet/utils'
 import { isDistrictToken } from 'modules/token/district_token/utils'
 import Token from 'components/Token'
 import { Props, State } from './VotePage.types'
+import VoteLabel from './VoteLabel'
 import './VotePage.css'
 
 export default class VotePage extends React.PureComponent<Props, State> {
@@ -106,14 +107,14 @@ export default class VotePage extends React.PureComponent<Props, State> {
           action="/votes"
           method="POST"
           onSubmit={this.createVote}
-          className="options"
+          className={'options' + (poll.options.length > 5 ? ' many' : '')}
         >
           {poll.options.map(option => (
             <Radio
               id={`option-${option.id}`}
               key={option.id}
               name="vote-option"
-              label={option.value}
+              label={VoteLabel(option.value)}
               value={option.id}
               checked={currentSelection === option.id}
               onChange={this.selectOption}
