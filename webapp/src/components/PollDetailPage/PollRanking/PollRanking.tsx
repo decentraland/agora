@@ -1,5 +1,5 @@
 import * as React from 'react'
-import * as Markdown from 'react-markdown'
+import * as ReactMarkdown from 'react-markdown'
 import { Table, Pagination, PaginationProps } from 'decentraland-ui'
 import Token from 'components/Token'
 import './PollRanking.css'
@@ -63,9 +63,9 @@ export default class PollRanking extends React.Component<Props, State> {
                     {offset + index + 1}
                   </Table.Cell>
                   <Table.Cell>
-                    <Markdown
+                    <ReactMarkdown
                       source={option.value}
-                      allowedTypes={['text', 'paragraph', 'link']}
+                      allowedTypes={['paragraph', 'link']}
                     />
                   </Table.Cell>
                   <Table.Cell>
