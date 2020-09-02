@@ -19,6 +19,10 @@
   margin-top: 40px;
 }
 
+.VotePage .options.many .ui.radio.checkbox {
+  width: 100%;
+}
+
 .VotePage .voting-with {
   margin-top: 40px;
   display: block;

@@ -29,6 +29,7 @@
 
 .PollDetailPage .row {
   display: flex;
+  align-items: flex-start;
 }
 
 .PollDetailPage .progress {
@@ -46,6 +47,7 @@
 
 .PollDetailPage .options {
   display: flex;
+  flex-wrap: wrap;
 }
 
 .PollDetailPage .votes {

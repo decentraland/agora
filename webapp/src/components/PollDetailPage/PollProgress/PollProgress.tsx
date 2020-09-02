@@ -6,6 +6,7 @@ import PollOption from './PollOption'
 export default class PollProgress extends React.PureComponent<Props> {
   render() {
     const { results } = this.props
+
     return (
       <div className="PollProgress">
         {results.map((result, index) => (
