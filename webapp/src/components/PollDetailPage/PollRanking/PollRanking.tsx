@@ -1,15 +1,33 @@
 import * as React from 'react'
-import { Table } from 'decentraland-ui'
+import { Table, Pagination, PaginationProps } from 'decentraland-ui'
 import Token from 'components/Token'
 import './PollRanking.css'
-import { Props } from './PollRanking.types'
+import { Props, State } from './PollRanking.types'
 
-export default class PollRanking extends React.PureComponent<Props> {
+const VOTES_PER_PAGE = 10
+
+export default class PollRanking extends React.Component<Props, State> {
+  state: State = {
+    activePage: 1
+  }
+
+  getTotalPages() {
+    return Math.ceil(this.props.results.length / VOTES_PER_PAGE)
+  }
+
+  handlePageChange = (_: React.MouseEvent<any>, props: PaginationProps) => {
+    const activePage = Math.max(1, Math.min(props.totalPages as number, props.activePage as number))
+    this.setState({ activePage })
+  }
+
   render() {
-    const results = this.props.results.sort((resultA, resultB) => {
-      return resultB.percentage - resultA.percentage
-    })
-    console.log(results)
+    const { activePage } = this.state
+    const offset = VOTES_PER_PAGE * (activePage - 1)
+    const results = this.props.results
+      .sort((resultA, resultB) => {
+        return resultB.percentage - resultA.percentage
+      })
+      .slice(offset, offset + VOTES_PER_PAGE)
 
     return (
       <div className="PollRanking">
@@ -26,7 +44,7 @@ export default class PollRanking extends React.PureComponent<Props> {
           <Table.Body>
             {results.map(({ option, votes, percentage, token }, index) => {
               return <Table.Row key={index}>
-                <Table.Cell className="ranking">{index + 1}</Table.Cell>
+                <Table.Cell className="ranking">{offset + index + 1}</Table.Cell>
                 <Table.Cell>{option.value}</Table.Cell>
                 <Table.Cell>
                   <Token token={token!} amount={votes} cell />
@@ -57,6 +75,16 @@ export default class PollRanking extends React.PureComponent<Props> {
             })} */}
           </Table.Body>
         </Table>
+        {this.props.results.length > VOTES_PER_PAGE && <div className="RankingPagination">
+          <Pagination
+            activePage={this.state.activePage}
+            totalPages={this.getTotalPages()}
+            firstItem={null}
+            lastItem={null}
+            nextItem={null}
+            prevItem={null}
+            onPageChange={this.handlePageChange} />
+        </div>}
       </div>
     )
   }
