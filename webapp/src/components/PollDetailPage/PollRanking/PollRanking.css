@@ -10,3 +10,11 @@
   text-align: center;
   margin-top: 40px;
 }
+
+.PollRanking .ui.table td a {
+  color: var(--primary);
+}
+
+.PollRanking .ui.table td a:hover {
+  color: var(--primary-dark);
+}
