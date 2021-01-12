@@ -25,6 +25,7 @@
     "date-fns": "^1.29.0",
     "dcl-tslint-config-standard": "^1.1.0",
     "decentraland-dapps": "^5.2.1",
+    "decentraland-commons": "5.1.0",
     "decentraland-eth": "^8.16.0",
     "decentraland-ui": "^2.6.0",
     "dotenv": "4.0.0",
