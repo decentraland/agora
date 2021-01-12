@@ -1,7 +1,7 @@
 encryptionsalt: v1:3dnmscRFvUE=:v1:WHqX1oGzexFtwlX5:XHwiRG1VN+LOHVYGvWDAuTmG/3/q0w==
 config:
   webiste-agora:CONNECTION_STRING:
-    secure: v1:1fqStmNqkGFoWfN5:SsMbWujFOQp+U2R5cCrX6Ke8VuuREKH4moQn7Z7mbQL9SU3BqXtxgLGQI9XQLW+/jSRfMZ/te/yXiGCfbQxJ/Wqye+awI72IQbVCNcsWtU2czh+ig2hJbDxcEScwwgrX+keoqqXfXJxPTsOiRUXEkuddpZo=
+    secure: v1:d2CguypU/XKOM5nC:z4glPAip3LKqvgV9nUUS4L8q+uI/nfacyPsw2a+kS/0v+OBnDDf0Mh3dUpG9k57Nu9jK795zncSMTghsOSYpa/cLvS5iJE4J+SviTufRwisP4QN7B4iZRUc7q11rHPg1RSI+AcP2Ojg4gnU5fonP+GDVu6c=
   webiste-agora:RPC_URL:
     secure: v1:YUpeJizWefBvZicC:CPsftc3zNxY9r16z45HgOwG/B0ccyZniS5cbczgkdcDUl+7kBCRYca3h7Oh6jZ39W4hmRrG6jjPhcpIe4Z4qzdiN/7H6P0IvNjwaA0s=
   webiste-agora:SERVER_SIGNING_KEY:

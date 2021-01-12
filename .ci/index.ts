@@ -1,8 +1,6 @@
-import * as aws from '@pulumi/aws'
 import * as pulumi from '@pulumi/pulumi'
-import { createBucketWithUser } from 'dcl-ops-lib/createBucketWithUser'
 import { createFargateTask } from 'dcl-ops-lib/createFargateTask'
-import { env, envTLD, publicTLD } from 'dcl-ops-lib/domain'
+import { env, envTLD } from 'dcl-ops-lib/domain'
 import { acceptDbSecurityGroup } from 'dcl-ops-lib/acceptDb'
 import { buildStatic } from 'dcl-ops-lib/buildStatic'
 
