@@ -54,9 +54,6 @@ build:docker:
   services:
     - docker:dind
   before_script:
-    - source dcl-env
-    - apk add --no-cache python3 py3-pip
-    - pip install awscli
     - docker login -u "$CI_REGISTRY_USER" -p "$CI_REGISTRY_PASSWORD" $CI_REGISTRY
   script:
     - DOCKER_BUILDKIT=1 docker build --pull -t "$CI_REGISTRY_IMAGE:$CI_COMMIT_SHA" .
