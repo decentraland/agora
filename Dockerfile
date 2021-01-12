@@ -10,7 +10,7 @@ COPY tsconfig.json /app/tsconfig.json
 
 RUN apt-get update
 RUN apt-get -y -qq install python-setuptools python-dev build-essential
-RUN npm ci
+RUN npm install
 
 COPY . /app
 
