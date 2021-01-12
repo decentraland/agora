@@ -77,6 +77,7 @@ deploy:
     - dcl-lock-sync
     - dcl-up website-agora
     - cd ..
+    - dcl-up webapp/build
     - dcl-sync-release
     - dcl-announce-docker-build
 
