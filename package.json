@@ -21,7 +21,7 @@
     "init-db": "./scripts/initDb.ts",
     "premonitor-balances": "npm run build:tsc",
     "monitor-balances": "./scripts/monitorBalances.ts",
-    "start": "npm run build:tsc && cd src && node server.js"
+    "start": "cd src && node server.js"
   },
   "repository": {
     "type": "git",
