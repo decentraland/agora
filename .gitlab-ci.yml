@@ -1,0 +1,83 @@
+stages:
+  - install
+  - build
+  - deploy
+
+services:
+  - docker:dind
+
+# Cache modules in between jobs
+cache:
+  key: ${CI_COMMIT_REF_SLUG}
+  key: ${CI_COMMIT_REF_NAME}
+  paths:
+    - .npm/
+
+build:code:
+  stage: install
+  image: decentraland/ci-node:latest
+  only:
+    - master
+    - staging
+    - release
+  artifacts:
+    paths:
+      - lib
+      - public
+      - static
+      - src
+      - package.json
+      - webapp/build
+    when: on_success
+    expire_in: 30 days
+  script:
+    - source dcl-env
+    # Build Front
+    - cd webapp
+    - cp ../.ci/.env.${ENVIRONMENT} .env
+    - npm install --cache .npm --prefer-offline
+    - npm run build
+    # Build Backend
+    - cd ..
+    - npm install --cache .npm --prefer-offline
+    - npm run build:tsc
+
+build:docker:
+  stage: build
+  image: docker:latest
+  dependencies:
+    - build:code
+  only:
+    - master
+    - staging
+    - release
+  services:
+    - docker:dind
+  before_script:
+    - docker login -u "$CI_REGISTRY_USER" -p "$CI_REGISTRY_PASSWORD" $CI_REGISTRY
+  script:
+    - DOCKER_BUILDKIT=1 docker build --pull -t "$CI_REGISTRY_IMAGE:$CI_COMMIT_SHA" .
+    - DOCKER_BUILDKIT=1 docker build --pull -t "$CI_REGISTRY_IMAGE:$CI_COMMIT_REF_SLUG" .
+    - DOCKER_BUILDKIT=1 docker push "$CI_REGISTRY_IMAGE:$CI_COMMIT_SHA"
+    - DOCKER_BUILDKIT=1 docker push "$CI_REGISTRY_IMAGE:$CI_COMMIT_REF_SLUG"
+
+deploy:
+  stage: deploy
+  image: decentraland/ci-node:latest
+  dependencies:
+    - build:code
+    - build:docker
+  only:
+    - master
+    - staging
+    - release
+  script:
+    - source dcl-env
+    - cd .ci && npm install --cache ../.npm --prefer-offline
+    - dcl-lock-sync
+    - dcl-up website-agora
+    - cd ..
+    - dcl-upload webapp/build
+    - dcl-sync-release
+    - dcl-announce-docker-build
+
