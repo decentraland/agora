@@ -76,6 +76,7 @@ deploy:
     - cd .ci && npm install --cache ../.npm --prefer-offline
     - dcl-lock-sync
     - dcl-up website-agora
+    - cd ..
     - dcl-sync-release
-    - cd .. && dcl-upload public
-    - cd .ci && dcl-cache-invalidation
+    - dcl-announce-docker-build
+
