@@ -44,7 +44,7 @@ build:code:
 
 build:docker:
   stage: build
-  image: docker:latest
+  image: decentraland/ci-node:latest
   dependencies:
     - build:code
   only:
