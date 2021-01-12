@@ -10,7 +10,7 @@ export = async function main() {
   const config = new pulumi.Config()
 
   const revision = process.env['CI_COMMIT_SHA']
-  const image = `decentraland/agora-server:${revision}`
+  const image = `decentraland/agora:${revision}`
 
 
   const hostname = 'agora-api.decentraland.' + envTLD
@@ -20,8 +20,8 @@ export = async function main() {
     image,
     5000,
     [
-      { name: 'hostname', value: `agora-server-${env}` },
-      { name: 'name', value: `agora-server-${env}` },
+      { name: 'hostname', value: `agora-api-${env}` },
+      { name: 'name', value: `agora-api-${env}` },
       { name: 'NODE_ENV', value: 'development' },
       { name: 'MONITOR_BALANCES_DELAY', value: '100000' },
       { name: 'SERVER_PORT', value: '5000' },
