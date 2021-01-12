@@ -8,7 +8,7 @@ services:
 
 # Cache modules in between jobs
 cache:
-  # key: ${CI_COMMIT_REF_SLUG}
+  key: ${CI_COMMIT_REF_SLUG}
   key: ${CI_COMMIT_REF_NAME}
   paths:
     - .npm/
@@ -44,7 +44,7 @@ build:code:
 
 build:docker:
   stage: build
-  image: decentraland/ci-node:latest
+  image: docker:latest
   dependencies:
     - build:code
   only:
