@@ -9,7 +9,7 @@
     "test": "npx mocha -r ts-node/register -r specs/specs_setup.ts specs/setup.ts src/**{/**,/}/*.spec.ts",
     "test:watch": "npm run test -- --watch",
     "migrate": "./scripts/migrate.ts",
-    "build": "npm run lint && npm run test && npm run build:tsc",
+    "build": "npm run lint && npm run build:tsc",
     "build:ci": "npm run migrate up && npm run build",
     "build:tests": "tsc -p /tsconfig.json",
     "build:scripts": "npm run build:tsc && tsc -p scripts/tsconfig.json",
