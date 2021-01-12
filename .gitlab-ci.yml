@@ -25,9 +25,9 @@ build:code:
       - lib
       - public
       - static
-      - build
       - src
       - package.json
+      - webapp/build
     when: on_success
     expire_in: 30 days
   script:
