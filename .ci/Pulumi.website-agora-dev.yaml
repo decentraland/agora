@@ -1,8 +1,8 @@
 encryptionsalt: v1:3dnmscRFvUE=:v1:WHqX1oGzexFtwlX5:XHwiRG1VN+LOHVYGvWDAuTmG/3/q0w==
 config:
-  service-builder:CONNECTION_STRING:
-    secure: v1:5YffjiD/HVbeKtLa:VFcA8G19mwXhaKwQ3ZyAo+wu/Eq35SVpxBACrLHg2/+rFUmO1DApjtlZCZAlYAbhridyoxcE7ihIFQxwq1lga8ypFtIobcj/F3p5d8bidUkN/jpE7GMR9dkCyjZq+OomRiFJpw/ZGRoowKiEDl4Jbdi/wXA=
-  service-builder:RPC_URL:
-    secure: v1:INU63C6Y0ArfcUC9:EBOGREzGihlSv0O31E/hxGNuWZOHcqc6MGd+jKt0JUABaN6TPFnZ5T9kSTaEta3i1iAyH4qoUQm3MmfKK0k3UEwTSDcSwa8do6ZjoDk=
-  service-builder:SERVER_SIGNING_KEY:
-    secure: v1:vGI94v0BSp7ZX6GM:V8rPhBaTZ4booozqMSSnyNJpVJ5Zn05umjMoY06hgeL0LsB2dVdFonxWHbHgJ7fVapyrJhx8CapH2GOFuc2uKCyooCiPsgyqKt+dB+5XZE8=
+  webiste-agora:CONNECTION_STRING:
+    secure: v1:1fqStmNqkGFoWfN5:SsMbWujFOQp+U2R5cCrX6Ke8VuuREKH4moQn7Z7mbQL9SU3BqXtxgLGQI9XQLW+/jSRfMZ/te/yXiGCfbQxJ/Wqye+awI72IQbVCNcsWtU2czh+ig2hJbDxcEScwwgrX+keoqqXfXJxPTsOiRUXEkuddpZo=
+  webiste-agora:RPC_URL:
+    secure: v1:YUpeJizWefBvZicC:CPsftc3zNxY9r16z45HgOwG/B0ccyZniS5cbczgkdcDUl+7kBCRYca3h7Oh6jZ39W4hmRrG6jjPhcpIe4Z4qzdiN/7H6P0IvNjwaA0s=
+  webiste-agora:SERVER_SIGNING_KEY:
+    secure: v1:AhWIUu/ibe7Ub5B9:+japaTVpcGNKgGNBObxYKL7muF4LZ5d3aMjojqwY7pjZsYWwgMFQH2BW1rAmXCm6kxbzbzhdK1+4cDrdUmby4YbdY3wNGjgc2LgaDXOtLL0=
