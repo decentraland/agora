@@ -55,7 +55,7 @@
     "decentraland-eth": "^8.16.0",
     "decentraland-server": "^2.0.1",
     "express": "^4.16.2",
-    "flat": "^4.0.0",
+    "flat": "^5.0.1",
     "mocha": "^4.0.1",
     "node-pg-migrate": "^2.23.0",
     "pluralize": "^7.0.0",
